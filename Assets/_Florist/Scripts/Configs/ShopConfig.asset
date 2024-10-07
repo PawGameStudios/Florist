@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ab0d4731c934f4c937fd956ed2644a, type: 3}
+  m_Name: ShopConfig
+  m_EditorClassIdentifier: 
+  FlowerItems:
+  - Name: White Rose
+    Price: 10
+    Icon: {fileID: 21300000, guid: 6eb3a060718ba5741b0a97a450598859, type: 3}
+  - Name: Red Rose
+    Price: 100
+    Icon: {fileID: 21300000, guid: 64af6759094dbe542bbccf6fc4f45586, type: 3}
+  - Name: Pink Rose
+    Price: 0
+    Icon: {fileID: 21300000, guid: 9f089b12895872a4c906ed48eddf7520, type: 3}
+  - Name: Yellow Rose
+    Price: 0
+    Icon: {fileID: 21300000, guid: 0e9b6edb66c53254aad36eccf50a3276, type: 3}
+  - Name: White Clove
+    Price: 0
+    Icon: {fileID: 21300000, guid: 68653c9dae5ed1b4788a125f998979a2, type: 3}
+  - Name: Red Clove
+    Price: 0
+    Icon: {fileID: 21300000, guid: 2b804b58d0c7ff649a023ee87d1ef34d, type: 3}
+  - Name: Pink Clove
+    Price: 0
+    Icon: {fileID: 21300000, guid: ce4cd09af825d2a449d9f02bad096e38, type: 3}
+  - Name: Yellow Clove
+    Price: 0
+    Icon: {fileID: 21300000, guid: 1e963ef771581c446825ef237bfa5ff0, type: 3}
+  - Name: White Tulip
+    Price: 0
+    Icon: {fileID: 21300000, guid: 465626ebe89956049834b51aed0d09f1, type: 3}
+  - Name: Red Tulip
+    Price: 0
+    Icon: {fileID: 21300000, guid: e31e781395dd95843b734174819d499a, type: 3}
+  - Name: Pink Tulip
+    Price: 0
+    Icon: {fileID: 21300000, guid: d367b69a49d736d4a97c89235f94408a, type: 3}
+  - Name: Yellow Tulip
+    Price: 0
+    Icon: {fileID: 21300000, guid: 5cd88679041d73c4596301784bac5f1a, type: 3}
+  WrapperItems:
+  - Name: Wallpaper 1
+    Price: 0
+    Icon: {fileID: 21300000, guid: 68453a04a4e20ab45997797daf21c5f1, type: 3}
+  - Name: Wallpaper 2
+    Price: 0
+    Icon: {fileID: 21300000, guid: 3c7384eed5364164d81deb1638aaf672, type: 3}
+  - Name: Wallpaper 3
+    Price: 0
+    Icon: {fileID: 21300000, guid: 9d18f82b4be68d34d93d5081cc291498, type: 3}
+  - Name: Wallpaper 4
+    Price: 0
+    Icon: {fileID: 21300000, guid: f69b593c235aa754ca5167914a4db779, type: 3}
+  - Name: Wallpaper 5
+    Price: 0
+    Icon: {fileID: 21300000, guid: b12a16a1da402c947a6e978f077549ba, type: 3}
+  - Name: Wallpaper 6
+    Price: 0
+    Icon: {fileID: 21300000, guid: 306951f76791fc14eaeb78109e109911, type: 3}
+  - Name: Wallpaper 7
+    Price: 0
+    Icon: {fileID: 21300000, guid: ba97ab076c9281c4c91c012946c50e1d, type: 3}
+  - Name: Wallpaper 8
+    Price: 0
+    Icon: {fileID: 21300000, guid: 9ab046f10a6292243bf4598311d334ef, type: 3}
+  - Name: Wallpaper 9
+    Price: 0
+    Icon: {fileID: 21300000, guid: 42881da6683b42a41bc78011a18f0307, type: 3}
+  - Name: Wallpaper 10
+    Price: 0
+    Icon: {fileID: 21300000, guid: 760d7cfb7a895c3498e4bd927fe930ed, type: 3}
+  - Name: Wallpaper 11
+    Price: 0
+    Icon: {fileID: 21300000, guid: dae72a82079fc294ebdc45f7e47826e3, type: 3}
+  - Name: Wallpaper 12
+    Price: 0
+    Icon: {fileID: 21300000, guid: 23e1f6b470753dd4e8de3c8c2bb64261, type: 3}
+  RibbonItems:
+  - Name: Ribbon 1
+    Price: 0
+    Icon: {fileID: 21300000, guid: bdea666e3183f014ebe41c13d4755760, type: 3}
+  - Name: Ribbon 2
+    Price: 0
+    Icon: {fileID: 21300000, guid: 0c99f93b7ba19d243b29664528003df5, type: 3}
+  - Name: Ribbon 3
+    Price: 0
+    Icon: {fileID: 21300000, guid: c8fa2d4f48d8d6949bd9bf438ffc95dc, type: 3}
+  - Name: Ribbon 4
+    Price: 0
+    Icon: {fileID: 21300000, guid: 452517cc7780625408d7c89eed1955e0, type: 3}
+  - Name: Ribbon 5
+    Price: 0
+    Icon: {fileID: 21300000, guid: 211900e9107ff3d4dbdbf47b0a6fb60c, type: 3}
+  - Name: Ribbon 6
+    Price: 0
+    Icon: {fileID: 21300000, guid: 9d3a2804bfaa4c24c905fa6d46cc983f, type: 3}
+  - Name: Ribbon 7
+    Price: 0
+    Icon: {fileID: 21300000, guid: 4c5ec4321cb0ff845b06a3766d6b69f5, type: 3}
+  - Name: Ribbon 8
+    Price: 0
+    Icon: {fileID: 21300000, guid: d215f74870fae8e4b86b173c0f3dd5a1, type: 3}
+  UpgradeItems: []
+  AccessoryItems: []
+  WallpaperItems:
+  - Name: Wallpaper 1
+    Price: 0
+    Icon: {fileID: 21300000, guid: b78031a191fadfc40ad0bb4af5b24728, type: 3}
+  - Name: Wallpaper 2
+    Price: 0
+    Icon: {fileID: 21300000, guid: e1514477ef43f894e861e78bce0f9601, type: 3}
+  FloorItems:
+  - Name: Floor 1
+    Price: 0
+    Icon: {fileID: 21300000, guid: 289a4e36d97f1f34bafd59c400305bd0, type: 3}
+  - Name: Floor 2
+    Price: 0
+    Icon: {fileID: 21300000, guid: bbb084be346d19646b7bed2e6a0559d6, type: 3}
+  SignItems: []
+  CounterItems: []
+  SpeechBubbleItems: []
