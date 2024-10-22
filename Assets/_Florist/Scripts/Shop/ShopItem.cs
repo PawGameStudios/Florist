@@ -8,29 +8,112 @@ public class ShopItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _buttonText;
     [SerializeField] private Image _icon;
+    [SerializeField] private GameObject _lock;
     [SerializeField] private Button _button;
-    private string _itemName;
+    private ShopItemInfo _shopItemInfo;
+    private ShopScroll _shopScroll;
+    private int _index;
 
-    public void Init(ShopItemInfo shopItemInfo)
+    public void Init(ShopItemInfo shopItemInfo, ShopScroll shopScroll, int index)
     {
-        _itemName = shopItemInfo.Name;
+        _shopScroll = shopScroll;
+        _index = index;
+        _shopItemInfo = shopItemInfo;
         _nameText.text = shopItemInfo.Name;
         _icon.sprite = shopItemInfo.Icon;
 
-        if (SaveSystem.Inst.ShopData.HasItem(_itemName))
+        ShopData.ItemState itemState = SaveSystem.Inst.ShopData.GetItemState(_shopItemInfo.Id);
+        long money = SaveSystem.Inst.GeneralData.Money;
+
+        if (shopItemInfo.IsSelectable)
         {
-            _button.interactable = false;
-            _buttonText.text = "Owned";
+            switch (itemState)
+            {
+                case ShopData.ItemState.Locked:
+                    _lock.SetActive(true);
+                    _button.interactable = false;
+                    _buttonText.text = "Locked";
+                    break;
+                case ShopData.ItemState.Purchasable:
+                    _lock.SetActive(false);
+                    _button.interactable = money >= shopItemInfo.Price;
+                    _buttonText.text = shopItemInfo.Price.ToString();
+                    break;
+                case ShopData.ItemState.Purchased:
+                    _lock.SetActive(false);
+                    _button.interactable = true;
+                    _buttonText.text = "Select";
+                    break;
+                case ShopData.ItemState.Selected:
+                    _lock.SetActive(false);
+                    _button.interactable = false;
+                    _buttonText.text = "Selected";
+                    break;
+            }
         }
         else
         {
-            _button.interactable = true;
-            _buttonText.text = shopItemInfo.Price.ToString();
+            switch (itemState)
+            {
+                case ShopData.ItemState.Locked:
+                    _lock.SetActive(true);
+                    _button.interactable = false;
+                    _buttonText.text = "Locked";
+                    break;
+                case ShopData.ItemState.Purchasable:
+                    _lock.SetActive(false);
+                    _button.interactable = money >= shopItemInfo.Price;
+                    _buttonText.text = shopItemInfo.Price.ToString();
+                    break;
+                case ShopData.ItemState.Purchased:
+                    _lock.SetActive(false);
+                    _button.interactable = false;
+                    _buttonText.text = "Owned";
+                    break;
+            }
         }
     }
 
-    public void OnBuyClicked()
+    public void SetSelected(bool isSelected)
     {
-        SaveSystem.Inst.ShopData.AddItem(_itemName);
+        ShopData.ItemState itemState = SaveSystem.Inst.ShopData.GetItemState(_shopItemInfo.Id);
+        if (itemState == ShopData.ItemState.Purchased)
+        {
+            if (isSelected)
+            {
+                _button.interactable = false;
+                _buttonText.text = "Selected";
+                SaveSystem.Inst.ShopData.SetSelectedState(_shopItemInfo.Id);
+            }
+            else
+            {
+                _button.interactable = true;
+                _buttonText.text = "Select";
+                SaveSystem.Inst.ShopData.SetPurchasedState(_shopItemInfo.Id);
+            }
+        }
+        else if (itemState == ShopData.ItemState.Selected)
+        {
+            _button.interactable = true;
+            _buttonText.text = "Select";
+            SaveSystem.Inst.ShopData.SetPurchasedState(_shopItemInfo.Id);
+        }
+    }
+
+    public void OnButtonClicked()
+    {
+        ShopData.ItemState itemState = SaveSystem.Inst.ShopData.GetItemState(_shopItemInfo.Id);
+        switch (itemState)
+        {
+            case ShopData.ItemState.Purchasable:
+                SaveSystem.Inst.GeneralData.ChangeMoney(-_shopItemInfo.Price);
+                SaveSystem.Inst.ShopData.SetPurchasedState(_shopItemInfo.Id);
+                break;
+            case ShopData.ItemState.Purchased:
+                _shopScroll.OnItemSelected(_index);
+                break;
+        }
+
+        Init(_shopItemInfo, _shopScroll, _index);
     }
 }

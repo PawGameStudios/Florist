@@ -15,13 +15,13 @@ public class GeneralData
         Diamonds = 0;
     }
 
-    public void AddMoney(long amount)
+    public void ChangeMoney(long amount)
     {
         Money += amount;
         MoneyAmountChanged?.Invoke();
     }
 
-    public void AddDiamonds(long amount)
+    public void ChangeDiamonds(long amount)
     {
         Diamonds += amount;
         DiamondAmountChanged?.Invoke();

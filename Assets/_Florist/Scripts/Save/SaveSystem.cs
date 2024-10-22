@@ -1,6 +1,4 @@
 using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 [DefaultExecutionOrder(-500)]
@@ -32,6 +30,11 @@ public class SaveSystem : MonoBehaviour
         QualitySettings.vSyncCount = 0;
     }
 
+    private void Start()
+    {
+        ShopData.Initialize();
+    }
+
 
     public void Load()
     {
@@ -40,13 +43,13 @@ public class SaveSystem : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("FirstTime") == 0)
             {
+                FileManager.FirstTime();
                 FirstTime();
                 return;
             }
 
-            BinaryFormatter bf = new();
-            GeneralData = LoadSingleFile<GeneralData>(_generalDataKey, bf);
-            ShopData = LoadSingleFile<ShopData>(_shopDataKey, bf);
+            GeneralData = FileManager.Load<GeneralData>(_generalDataKey);
+            ShopData = FileManager.Load<ShopData>(_shopDataKey);
         }
         catch (Exception ex)
         {
@@ -59,12 +62,10 @@ public class SaveSystem : MonoBehaviour
         Debug.Log("#save# SaveSystem.Save");
         try
         {
-            BinaryFormatter bf = new();
-
             GeneralData.IsFirstSession = false;
 
-            SaveSingleFile(_generalDataKey, bf, GeneralData);
-            SaveSingleFile(_shopDataKey, bf, ShopData);
+            FileManager.Save(_generalDataKey, GeneralData);
+            FileManager.Save(_shopDataKey, ShopData);
         }
         catch (Exception ex)
         {
@@ -78,27 +79,6 @@ public class SaveSystem : MonoBehaviour
         GeneralData = new();
         ShopData = new();
         PlayerPrefs.SetInt("FirstTime", 1);
-    }
-
-    private T LoadSingleFile<T>(string dataKey, BinaryFormatter bf)
-    {
-        T data = default;
-        string path = $"{Application.persistentDataPath}/{dataKey}";
-        bool fileExists = File.Exists(path);
-        if (fileExists)
-        {
-            FileStream file = File.Open(path, FileMode.Open);
-            data = (T)bf.Deserialize(file);
-            file.Close();
-        }
-        return data;
-    }
-
-    private void SaveSingleFile<T>(string dataKey, BinaryFormatter bf, T data)
-    {
-        FileStream file = File.Create($"{Application.persistentDataPath}/{dataKey}");
-        bf.Serialize(file, data);
-        file.Close();
     }
 
     private void PrintErrorLog(Exception ex, string msg)

@@ -8,8 +8,9 @@ public class ShopConfig : ScriptableObject
     public class ShopItemInfo
     {
         public string Name;
-        public int Id;
+        public string Id;
         public long Price;
+        public bool IsSelectable;
         public Sprite Icon;
     }
 
@@ -23,4 +24,5 @@ public class ShopConfig : ScriptableObject
     public List<ShopItemInfo> SignItems;
     public List<ShopItemInfo> CounterItems;
     public List<ShopItemInfo> SpeechBubbleItems;
+
 }
