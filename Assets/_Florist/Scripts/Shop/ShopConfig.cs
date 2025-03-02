@@ -24,5 +24,12 @@ public class ShopConfig : ScriptableObject
     public List<ShopItemInfo> SignItems;
     public List<ShopItemInfo> CounterItems;
     public List<ShopItemInfo> SpeechBubbleItems;
+    public List<ShopItemInfo> SpeechBubbleButtonItems;
+    public List<ShopItemInfo> OutsideDukkanItems;
+    public List<ShopItemInfo> DoorItems;
+    public List<ShopItemInfo> FlowerStandItems;
+    public List<ShopItemInfo> DecorItems;
+    public List<ShopItemInfo> PcItems;
+    public List<ShopItemInfo> PosItems;
 
 }

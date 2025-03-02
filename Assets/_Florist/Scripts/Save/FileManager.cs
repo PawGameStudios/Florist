@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
 public static class FileManager
 {
@@ -33,6 +34,19 @@ public static class FileManager
                 return JsonUtility.FromJson<T>(File.ReadAllText(path));
         }
         return default;
+    }
+
+    public static T DeserializeObject<T>(string jsonString)
+    {
+        try
+        {
+            return JsonConvert.DeserializeObject<T>(jsonString);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError(e);
+            return default;
+        }
     }
 
     private static string XOREncryptDecrypt(string textToEncrypt)

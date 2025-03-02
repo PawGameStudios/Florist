@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class MainUIController : MonoBehaviour
 {
-    [SerializeField] private Page _shopPage;
+    [SerializeField] private GameObject _bg;
+    [SerializeField] private ShopPage _shopPage;
+    [SerializeField] private DukkanPage _dukkanPage;
 
     public void OnPlayClicked()
     {
-        Debug.Log("Play clicked");
+        gameObject.SetActive(false);
+        _bg.SetActive(false);
+        _dukkanPage.Open();
     }
 
     public void OnShopClicked()

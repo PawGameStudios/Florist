@@ -23,7 +23,7 @@ public class ShopItem : MonoBehaviour
         _icon.sprite = shopItemInfo.Icon;
 
         ShopData.ItemState itemState = SaveSystem.Inst.ShopData.GetItemState(_shopItemInfo.Id);
-        long money = SaveSystem.Inst.GeneralData.Money;
+        float money = SaveSystem.Inst.GeneralData.Money;
 
         if (shopItemInfo.IsSelectable)
         {

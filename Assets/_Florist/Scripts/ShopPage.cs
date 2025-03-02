@@ -155,11 +155,11 @@ public class ShopPage : Page
 
     private void OnMoneyAmountChanged()
     {
-        _moneyAmount.text = SaveSystem.Inst.GeneralData.Money.ToString();
+        _moneyAmount.text = $"{SaveSystem.Inst.GeneralData.Money:0.##}";
     }
 
     private void OnDiamondAmountChanged()
     {
-        _diamondAmount.text = SaveSystem.Inst.GeneralData.Diamonds.ToString();
+        _diamondAmount.text = $"{SaveSystem.Inst.GeneralData.Diamonds:0.##}";
     }
 }

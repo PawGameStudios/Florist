@@ -35,7 +35,6 @@ public class SaveSystem : MonoBehaviour
         ShopData.Initialize();
     }
 
-
     public void Load()
     {
         Debug.Log("#save# SaveSystem.Load");

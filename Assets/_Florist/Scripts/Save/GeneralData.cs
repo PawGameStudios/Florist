@@ -5,8 +5,9 @@ public class GeneralData
 {
     public static Action MoneyAmountChanged, DiamondAmountChanged;
     public bool IsFirstSession;
-    public long Money;
-    public long Diamonds;
+    public float Money;
+    public float Diamonds;
+    public int CurrentDayIndex;
 
     public GeneralData()
     {
@@ -16,6 +17,12 @@ public class GeneralData
     }
 
     public void ChangeMoney(long amount)
+    {
+        Money += amount;
+        MoneyAmountChanged?.Invoke();
+    }
+
+    public void ChangeMoney(float amount)
     {
         Money += amount;
         MoneyAmountChanged?.Invoke();
