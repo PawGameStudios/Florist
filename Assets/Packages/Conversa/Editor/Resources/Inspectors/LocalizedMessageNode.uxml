@@ -1,0 +1,11 @@
+<UXML xmlns:ui="UnityEngine.UIElements" xmlns:conversa="Conversa.Editor">
+    <Style src="./LocalizedMessageNode.uss" />
+
+    <ui:Label text="Localized Message" class="h1 mb-s" />
+    <ui:TextField label="Key" name="key" multiline="false" class="text-wrap" />
+    <ui:TextField label="Message" name="body" multiline="true" class="text-wrap" />
+
+    <ui:Label text="Choices" class="mb-xs bold" />
+    <ui:VisualElement class="option-list" />
+    <ui:Button text="+ Add new option" class="add-option" />
+</UXML>

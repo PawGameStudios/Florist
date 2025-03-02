@@ -1,0 +1,21 @@
+<UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:conversa="Conversa.Runtime" >
+    <Style src="./MultiMessageNode.uss" />
+
+    <ui:VisualElement class="container">
+        <ui:Label text="Multi Message" class="h1 mb-10" />
+
+        <uie:ObjectField label="Actor" name="actor" class="mb-20" />
+
+        <!-- <ui:TextField label="Message" name="body" multiline="true" class="text-wrap" /> -->
+
+        <!-- Label -->
+        <ui:VisualElement class="label text-center mb-10">
+            <ui:Label text="Messages" class="h3" />
+        </ui:VisualElement>
+
+        <ui:VisualElement class="messages mb-20" />
+
+        <ui:Button text="+ Add new message" class="add-option py-10" />
+
+    </ui:VisualElement>
+</UXML>

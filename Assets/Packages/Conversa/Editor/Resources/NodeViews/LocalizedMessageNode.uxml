@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Packages/Conversa/Editor/Resources/NodeViews/LocalizedMessageNode.uss?fileID=7433441132597879392&amp;guid=c9698aceb1f7e1e4dbf64a2072d9e976&amp;type=3#LocalizedMessageNode" />
+    <ui:VisualElement name="main">
+        <ui:Label text="Key" name="key" />
+        <ui:Label text="Message" name="message" class="text-wrap" />
+    </ui:VisualElement>
+
+     <VisualElement name="choice-node">
+        <VisualElement class="option-list" />
+    </VisualElement>
+</ui:UXML>

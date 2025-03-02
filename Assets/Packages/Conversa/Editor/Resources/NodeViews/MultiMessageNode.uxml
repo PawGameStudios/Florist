@@ -1,0 +1,8 @@
+<UXML xmlns="UnityEngine.UIElements">
+    <Style src="./MultiMessageNode.uss" />
+
+    <VisualElement name="main">
+        <Label text="Actor" name="actor" class="mb-5" />
+        <VisualElement name="messages" class="my-10" />
+    </VisualElement>
+</UXML>

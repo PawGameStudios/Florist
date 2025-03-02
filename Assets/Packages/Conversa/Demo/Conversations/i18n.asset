@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e373d802544f3b90f235c7efebe5e1, type: 3}
+  m_Name: i18n
+  m_EditorClassIdentifier: 
+  version: 1.0
+  startNode:
+    <Guid>k__BackingField: 889f6752-34cf-4c37-8ee3-bf73376c33b7
+    <NodeRect>k__BackingField:
+      serializedVersion: 2
+      x: 100
+      y: 100
+      width: 100
+      height: 100
+    name: Start
+  nodes:
+  - rid: 5233200958049616300
+  - rid: 5233200958049616301
+  - rid: 5233200958049616302
+  edges:
+  - rid: 5233200958049616303
+  - rid: 5233200958049616304
+  - rid: 5233200958049616305
+  properties: []
+  stickyNotes: []
+  groups: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 5233200958049616300
+      type: {class: I18nNode, ns: Conversa.Demo, asm: Assembly-CSharp}
+      data:
+        <Guid>k__BackingField: 9896bd71-6a18-494d-a02c-8af00844441e
+        <NodeRect>k__BackingField:
+          serializedVersion: 2
+          x: 245
+          y: 126
+          width: 187
+          height: 192
+        actor: {fileID: 0}
+        messageKey: hello
+    - rid: 5233200958049616301
+      type: {class: I18nNode, ns: Conversa.Demo, asm: Assembly-CSharp}
+      data:
+        <Guid>k__BackingField: 37bedb87-bac3-4196-9a2f-1bc81f3e040b
+        <NodeRect>k__BackingField:
+          serializedVersion: 2
+          x: 566
+          y: 140
+          width: 187
+          height: 192
+        actor: {fileID: 11400000, guid: 8c653dd01be65eef79f7babd88d0b75c, type: 2}
+        messageKey: hello-back
+    - rid: 5233200958049616302
+      type: {class: I18nNode, ns: Conversa.Demo, asm: Assembly-CSharp}
+      data:
+        <Guid>k__BackingField: 7acbfebe-2dc2-4f35-badc-8b7c30753c25
+        <NodeRect>k__BackingField:
+          serializedVersion: 2
+          x: 897
+          y: 239
+          width: NaN
+          height: NaN
+        actor: {fileID: 11400000, guid: fe97e098c603595fa8f6eca494da6f12, type: 2}
+        messageKey: im-fine
+    - rid: 5233200958049616303
+      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
+      data:
+        output:
+          node: 889f6752-34cf-4c37-8ee3-bf73376c33b7
+          port: next
+        input:
+          node: 9896bd71-6a18-494d-a02c-8af00844441e
+          port: previous
+    - rid: 5233200958049616304
+      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
+      data:
+        output:
+          node: 9896bd71-6a18-494d-a02c-8af00844441e
+          port: next
+        input:
+          node: 37bedb87-bac3-4196-9a2f-1bc81f3e040b
+          port: previous
+    - rid: 5233200958049616305
+      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
+      data:
+        output:
+          node: 37bedb87-bac3-4196-9a2f-1bc81f3e040b
+          port: next
+        input:
+          node: 7acbfebe-2dc2-4f35-badc-8b7c30753c25
+          port: previous

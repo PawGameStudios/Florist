@@ -1,0 +1,12 @@
+#main {
+    width: 200px;
+    padding: 10px;
+}
+
+#main Label#actor {
+    font-size: 14px;
+    -unity-font-style: bold;
+    color: #fff;
+    margin-bottom: 10px;
+}
+

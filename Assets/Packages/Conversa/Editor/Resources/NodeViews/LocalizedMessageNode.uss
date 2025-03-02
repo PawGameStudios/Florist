@@ -1,0 +1,22 @@
+#main {
+    width: 200px;
+    padding: 10px;
+}
+
+#main Label#key {
+    font-size: 12px;
+    color: #ccc;
+}
+
+#main Label#message {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #ccc;
+}
+
+ChoiceNodeView .option-list {
+    margin-top: 10px;
+    border-top-width: 1px;
+    padding-top: 6px;
+    border-top-color: #fff;
+}
