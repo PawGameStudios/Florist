@@ -1,26 +1,63 @@
 using TMPro;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Conversa.Runtime;
 using Conversa.Runtime.Interfaces;
 using Conversa.Runtime.Events;
-using static LevelConfig;
 using Sirenix.OdinInspector;
 using FlowerDeliveredInfo = Customer.FlowerDeliveredInfo;
+using System.Collections.Generic;
+using System;
+using Config;
+
+[Serializable]
+public class EarningsInfo
+{
+    public float Earnings;
+    public float Tip;
+    public float Rent;
+    public float Refund;
+    public float Cost;
+    public float Profit;
+
+    public void Reset()
+    {
+        Earnings = 0;
+        Tip = 0;
+        Rent = 0;
+        Refund = 0;
+        Cost = 0;
+        Profit = 0;
+    }
+
+    public void CalculateProfit()
+    {
+        Profit = Earnings + Tip - Rent - Refund - Cost;
+    }
+}
+
+[Serializable]
+public struct OrderInfo
+{
+    public List<BouquetModel> BouquetModels;
+}
 
 public class DukkanPage : Page
 {
     [SerializeField] private TextMeshProUGUI _moneyAmount, _diamondAmount;
-    [SerializeField] private DayTimeManager _dayTimeManager;
-    [SerializeField] private HappinessMeter _happinessMeter;
+    [SerializeField] private Image _fadeImage;
     [SerializeField] private RectTransform _flowerDeliveryArea;
     [SerializeField] private Customer _customer;
     [SerializeField] private Bouquet _bouquet;
     [SerializeField] private PosController _posController;
+    [SerializeField] private GameObject _contentObjects, _topObjects;
     private DayInfo _dayInfo;
     private ConversationRunner _convoRunner;
-    // private Conversation _currentConversation;
     private int _currentCustomerIndex;
+    private Sequence _sequence;
+    public EarningsInfo _earningsInfo = new();
+    public FlowerDeliveredInfo _flowerDeliveredInfo = new();
 
 
     #region Decorations
@@ -39,9 +76,6 @@ public class DukkanPage : Page
 
     private void OnEnable()
     {
-        // TODO: delete this line
-        Open();
-
         GeneralData.MoneyAmountChanged += OnMoneyAmountChanged;
         GeneralData.DiamondAmountChanged += OnDiamondAmountChanged;
         OnMoneyAmountChanged();
@@ -51,19 +85,48 @@ public class DukkanPage : Page
 
     private void OnDisable()
     {
+        _sequence?.Kill();
+
         GeneralData.MoneyAmountChanged -= OnMoneyAmountChanged;
         GeneralData.DiamondAmountChanged -= OnDiamondAmountChanged;
         CancelInvoke();
     }
 
-    public override void Close()
+    public override void Close(Action onCompleted = null)
     {
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
+        _contentObjects.SetActive(true);
+        _topObjects.SetActive(true);
+
+        _sequence?.Kill();
+        _sequence = DOTween.Sequence();
+        _sequence.Append(_fadeImage.DOFade(endValue: .95f, duration: .3f).SetEase(Ease.OutSine).OnComplete(() =>
+        {
+            // gameObject.SetActive(false);
+            _fadeImage.color = new Color(0, 0, 0, 0);
+            onCompleted?.Invoke();
+        }));
+
     }
 
-    public override void Open()
+    public override void Open(Action onCompleted = null)
     {
         gameObject.SetActive(true);
+        _contentObjects.SetActive(false);
+        _topObjects.SetActive(false);
+
+        _earningsInfo ??= new EarningsInfo();
+        _earningsInfo.Reset();
+
+        _sequence?.Kill();
+        _sequence = DOTween.Sequence();
+        _sequence.Append(_fadeImage.DOFade(endValue: .95f, duration: .3f).SetEase(Ease.OutSine).OnComplete(() =>
+        {
+            _contentObjects.SetActive(true);
+            _topObjects.SetActive(true);
+        }));
+        _sequence.Append(_fadeImage.DOFade(endValue: 0, duration: .3f).SetEase(Ease.InSine));
+
         _currentCustomerIndex = 0;
         _dayInfo = Configs.LevelConfig.Days[SaveSystem.Inst.GeneralData.CurrentDayIndex];
         _customer.gameObject.SetActive(false);
@@ -77,12 +140,26 @@ public class DukkanPage : Page
         EndDay();
     }
 
-    public void OnFlowerReady(BouquetModel bouquetModel)
+    public void OnFlowerReady(OrderInfo orderInfo)
     {
         Debug.Log("Flower Ready");
         _posController.ResetPos();
-        _bouquet.SetModel(bouquetModel);
+        _bouquet.SetOrder(orderInfo);
         _bouquet.gameObject.SetActive(true);
+
+        // calculate the cost of the bouquet
+        float cost = 0;
+        foreach (var bouquet in orderInfo.BouquetModels)
+        {
+            foreach (var flower in bouquet.Flowers)
+            {
+                cost += flower.Value * Configs.WorkshopConfig.GetFlowerCost(flower.Key);
+            }
+
+            cost += Configs.WorkshopConfig.GetRibbonCost(bouquet.RibbonType);
+            cost += Configs.WorkshopConfig.GetWrappingPaperCost(bouquet.WrappingPaperType);
+        }
+        _earningsInfo.Cost += cost;
     }
 
     public void OnFlowerDelivered()
@@ -102,18 +179,22 @@ public class DukkanPage : Page
         {
             // this means a generic goodbye conversation will be used
 
-            FlowerDeliveredInfo flowerDeliveredInfo = _customer.GetOrderInfo(_bouquet.Model);
+            FlowerDeliveredInfo flowerDeliveredInfo = _customer.GetOrderInfo(_bouquet.Order.BouquetModels);
+            _flowerDeliveredInfo = flowerDeliveredInfo;
             // TODO: check if order is correct
             // decrease happiness if not
             // increase happiness if correct
             // decrease money with bouquet price
             // increase money with tip
             // start dialogue with goodbye conversation based on happiness
+
+            float tip = flowerDeliveredInfo.Tip;
+            _earningsInfo.Tip += tip;
         }
 
         // TODO: call later when the conversation is over
         _customer.PlayExitAnimation();
-        _happinessMeter.StopCountdown();
+        References.HappinessMeter.StopCountdown();
 
         Invoke(nameof(NextCustomer), 1);
     }
@@ -214,8 +295,8 @@ public class DukkanPage : Page
         if (_currentCustomerIndex < _dayInfo.Customers.Count)
         {
             CustomerType customerType = _dayInfo.Customers[_currentCustomerIndex];
-            CustomerInfo customer = Configs.LevelConfig.Customers[customerType];
-            Conversation initialConversation = customer.GetInitialConversation();
+            CustomerInfo customer = Configs.LevelConfig.GetCustomer(customerType);
+            Conversation initialConversation = Configs.LevelConfig.GetInitialConvo(customer);
 
             _customer.SetCustomer(customer);
             _customer.PlayEnterAnimation(onComplete: () =>
@@ -224,7 +305,7 @@ public class DukkanPage : Page
                 _convoRunner = new ConversationRunner(initialConversation);
                 _convoRunner.OnConversationEvent.AddListener(HandleConversationEvent);
                 _convoRunner.Begin();
-                _happinessMeter.StartCountdown();
+                References.HappinessMeter.StartCountdown();
             });
             _currentCustomerIndex++;
         }
@@ -237,6 +318,12 @@ public class DukkanPage : Page
     private void EndDay()
     {
         Debug.Log("#dukkan# EndDay");
+        Close(onCompleted: () =>
+        {
+            _earningsInfo.CalculateProfit();
+            References.EndDayPage.SetData(_earningsInfo);
+            References.EndDayPage.Open();
+        });
     }
 
     private void StartSpecialEvent()
@@ -249,18 +336,14 @@ public class DukkanPage : Page
         Debug.Log("#dukkan# GoToWorkshop");
         _convoRunner.OnConversationEvent.RemoveAllListeners();
         _customer.StopTalking();
-        float payment = _customer.GetOrderPayment();
-        _posController.ReceivePayment(payment);
 
-        // TODO: delete this line
-        // below must be called a bouquet is ready in the workshop
-        BouquetModel bouquetModel = new();
+        float payment = _customer.GetOrderPayment();
+        _earningsInfo.Earnings += payment;
+
+        _posController.ReceivePayment(payment, () =>
         {
-            bouquetModel.Flowers.Add(FlowerType.Gypsum, 4);
-            bouquetModel.Flowers.Add(FlowerType.Eucalyptus, 4);
-            bouquetModel.Flowers.Add(FlowerType.Daisy, 4);
-        }
-        OnFlowerReady(bouquetModel);
+            References.WorkshopPage.Open();
+        });
     }
 
 
@@ -299,4 +382,17 @@ public class DukkanPage : Page
         Debug.Log("OnCustomerButtonClicked");
     }
     #endregion
+
+
+    [Button("OpenPage")]
+    public void OpenPage()
+    {
+        Open();
+    }
+
+    [Button("ClosePage")]
+    public void ClosePage()
+    {
+        Close();
+    }
 }

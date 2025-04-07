@@ -1,4 +1,5 @@
 using TMPro;
+using System;
 using UnityEngine;
 
 public class ShopPage : Page
@@ -40,13 +41,13 @@ public class ShopPage : Page
         GeneralData.DiamondAmountChanged -= OnDiamondAmountChanged;
     }
 
-    public override void Close()
+    public override void Close(Action onCompleted = null)
     {
         gameObject.SetActive(false);
         _mainMenu.SetActive(true);
     }
 
-    public override void Open()
+    public override void Open(Action onCompleted = null)
     {
         gameObject.SetActive(true);
     }

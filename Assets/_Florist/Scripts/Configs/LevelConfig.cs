@@ -1,32 +1,15 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using AYellowpaper.SerializedCollections;
 using Sirenix.OdinInspector;
 using Conversa.Runtime;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "LevelConfig", menuName = "Paw/Configs/Level")]
-public class LevelConfig : ScriptableObject
+namespace Config
 {
     public enum CustomerType
     {
         Regular, Random, Opponent
-    }
-
-    public enum FlowerType
-    {
-        Gypsum, Eucalyptus, Daisy, Rose
-    }
-
-    public enum BouquetType
-    {
-        None, Custom, Daisy, Rose,
-    }
-
-    public enum ConversationType
-    {
-        FirstCustomer, Type1
     }
 
     public enum Gender
@@ -42,35 +25,39 @@ public class LevelConfig : ScriptableObject
     [Serializable]
     public class CustomerInfo
     {
-        public List<Sprite> Sprites;
+        [TableColumnWidth(100, Resizable = false)]
+        [PreviewField(Height = 150, Alignment = ObjectFieldAlignment.Center)]
+        public Sprite Sprite;
+
+        [VerticalGroup("Info")]
+        public CustomerType CustomerType;
+        [VerticalGroup("Info")]
         public string Name;
+        [VerticalGroup("Info")]
         public Gender Gender;
+
+        [VerticalGroup("Flowers")]
         public List<BouquetType> BouquetTypes;
-        [Tooltip("Flower types are only used when BouquetType is Custom")]
+        [VerticalGroup("Flowers")]
+        [ShowIf("@this.BouquetTypes.Contains(BouquetType.Custom)")]
         public List<FlowerType> FlowerTypes;
-        public List<Conversation> InitialConversations;
-        [Tooltip("When GoodbyeConversation is null, a conversation will be selected based on customer happiness")]
+
+        [VerticalGroup("Conversations")]
+        public bool UseCustomConvo;
+        [VerticalGroup("Conversations")]
+        [ShowIf("UseCustomConvo")]
+        public Conversation InitialConversation = null;
+        [VerticalGroup("Conversations")]
+        [ShowIf("UseCustomConvo")]
         public Conversation GoodbyeConversation = null;
-        public int BouquetCount = 1;
-        [Tooltip("How much money will be gained (in %) based on the cost of flower bouquet")]
-        public Vector2 ProfitPercentage = new(10, 50);
-        [Tooltip("Between 1 and 100")][Range(0, 100)] public float TipGiveRatio;
+
+        [VerticalGroup("Money")]
+        [Tooltip("Between 1 and 100")]
+        [Range(0, 100)]
+        public float TipGiveRatio;
+
+        [VerticalGroup("Money")]
         public Vector2 TipPercentage = new(10, 50);
-
-        public Conversation GetInitialConversation()
-        {
-            return InitialConversations[Random.Range(0, InitialConversations.Count)];
-        }
-
-        public Sprite GetRandomSprite()
-        {
-            return Sprites[Random.Range(0, Sprites.Count)];
-        }
-
-        public float GetProfitPercentage()
-        {
-            return Random.Range(ProfitPercentage.x, ProfitPercentage.y);
-        }
 
         public float GetTipPercentage()
         {
@@ -88,7 +75,7 @@ public class LevelConfig : ScriptableObject
     }
 
     [Serializable]
-    public class StaticDayInfo
+    public class DayTimeInfo
     {
         public int DayStartTime;
         public int DayEndTime;
@@ -105,42 +92,40 @@ public class LevelConfig : ScriptableObject
         public List<Conversation> MoreFlowers;
     }
 
-    [Serializable]
-    public class FlowerCount
+    [CreateAssetMenu(fileName = "LevelConfig", menuName = "Paw/Configs/Level")]
+    public class LevelConfig : SerializedScriptableObject
     {
-        public FlowerType FlowerType;
-        public int Count;
+        [TableList(ShowIndexLabels = true)]
+        public List<CustomerInfo> Customers;
+        public DayTimeInfo DayTimeInfo;
+        public GoodbyeConversationsInfo GoodbyeConversations;
+        public List<Conversation> InitialConversations;
+        public List<DayInfo> Days;
 
-        public FlowerCount(FlowerType flowerType, int count)
+        public CustomerInfo GetCustomer(CustomerType customerType)
         {
-            FlowerType = flowerType;
-            Count = count;
+            List<CustomerInfo> customerList = new();
+            foreach (var customer in Customers)
+            {
+                if (customer.CustomerType == customerType)
+                {
+                    customerList.Add(customer);
+                }
+            }
+            return customerList[Random.Range(0, customerList.Count)];
+        }
+
+        public Conversation GetInitialConvo(CustomerInfo customerInfo)
+        {
+            foreach (var customer in Customers)
+            {
+                if (customer.CustomerType == customerInfo.CustomerType && customer.Name == customerInfo.Name && customer.UseCustomConvo)
+                {
+                    return customer.InitialConversation;
+                }
+            }
+
+            return InitialConversations[Random.Range(0, InitialConversations.Count)];
         }
     }
-
-    [Serializable]
-    public class Recipe
-    {
-        public List<FlowerCount> Flowers;
-    }
-
-    public SerializedDictionary<CustomerType, CustomerInfo> Customers;
-    public SerializedDictionary<FlowerType, float> FlowerPrices;
-    public SerializedDictionary<FlowerType, float> FlowerCosts;
-    public SerializedDictionary<BouquetType, Recipe> BouquetRecipes;
-    public StaticDayInfo DayTimeInfo;
-    public GoodbyeConversationsInfo GoodbyeConversations;
-    public List<DayInfo> Days;
-
-    public float GetFlowerCost(FlowerType flowerType)
-    {
-        return FlowerCosts[flowerType];
-    }
-
-    public float GetFlowerPrice(FlowerType flowerType)
-    {
-        return FlowerPrices[flowerType];
-    }
-
 }
-

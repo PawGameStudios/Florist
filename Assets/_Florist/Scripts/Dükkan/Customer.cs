@@ -6,17 +6,29 @@ using DG.Tweening;
 using TMPro;
 using Conversa.Runtime.Events;
 using Febucci.UI.Core;
-using static LevelConfig;
 using Random = UnityEngine.Random;
 using Conversa.Runtime;
+using Config;
+using AYellowpaper.SerializedCollections;
 
 public class Customer : MonoBehaviour
 {
+    [Serializable]
     public struct FlowerDeliveredInfo
     {
         public Conversation Conversation;
         public float Tip;
         public int HappinessChange;
+        public OrderContentResult OrderContentResult;
+    }
+
+    [Serializable]
+    public struct OrderContentResult
+    {
+        public float OrderSimilarity;
+        public float OrderBeauty;
+        public SerializedDictionary<FlowerType, int> ExtraFlowers;
+        public SerializedDictionary<FlowerType, int> MissingFlowers;
     }
 
     public CustomerInfo CustomerInfo => _customerInfo;
@@ -31,6 +43,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> _speechBubbleButtonTexts;
     [SerializeField] private Image _customerImage;
     [SerializeField] private TypewriterCore _typeWriter;
+    [SerializeField] private List<BouquetModel> _bouquetsToOrder = new();
     private const float LINE_HEIGHT = 42;
     private const float ENTER_SCALE_Y = 1.06f;
     private const float IDLE_SCALE_Y = 1.015f;
@@ -38,9 +51,6 @@ public class Customer : MonoBehaviour
     private const float IDLE_DURATION = 1;
     private Sequence _sequence, _idleSequence;
     private CustomerInfo _customerInfo;
-    private List<BouquetType> _bouquetsToOrder = new();
-    private BouquetType _bouquetTypeToOrder;
-    private List<FlowerCount> _order;
 
     private void OnDisable()
     {
@@ -65,7 +75,7 @@ public class Customer : MonoBehaviour
     {
         // Set customer info to UI
         _customerInfo = customerInfo;
-        _customerImage.sprite = _customerInfo.GetRandomSprite();
+        _customerImage.sprite = _customerInfo.Sprite;
         _speechBubbleObjects.SetActive(false);
         DetermineOrder();
     }
@@ -105,7 +115,7 @@ public class Customer : MonoBehaviour
         }));
     }
 
-    public void Talk(string localizationKey, string defaultMessage, List<Option> answerOptions, List<StringPaseOptions> parseOptions)
+    public void Talk(string localizationKey, string defaultMessage, List<Option> answerOptions, List<StringParseOptions> parseOptions)
     {
         _speechBubbleObjects.SetActive(true);
 
@@ -114,59 +124,82 @@ public class Customer : MonoBehaviour
         string message = string.IsNullOrEmpty(localizedMessage) ? defaultMessage : localizedMessage;
 
         // parse text
-        int orderIndex = 0, bouquetIndex = 0;
+        int orderIndex = 0;
         int argCount = 0;
         for (int i = 0; i < parseOptions.Count; i++)
         {
-            if (parseOptions[i] == StringPaseOptions.None)
+            if (parseOptions[i] == StringParseOptions.None)
                 break;
             argCount++;
         }
+
         // TODO: localization
         string[] parseArgs = new string[argCount];
         for (int i = 0; i < parseOptions.Count; i++)
         {
-            if (parseOptions[i] == StringPaseOptions.None)
+            if (parseOptions[i] == StringParseOptions.None)
                 break;
 
-            if (parseOptions[i] == StringPaseOptions.Count)
+            if (parseOptions[i] == StringParseOptions.Count)
             {
-                parseArgs[i] = _order[orderIndex].Count.ToString();
-            }
-            else if (parseOptions[i] == StringPaseOptions.FlowerType)
-            {
-                parseArgs[i] = _order[orderIndex].FlowerType.ToString();
-                orderIndex++;
-            }
-            else if (parseOptions[i] == StringPaseOptions.FlowerCountAndType)
-            {
-                string type = _order[orderIndex].FlowerType.ToString();
-                int count = _order[orderIndex].Count;
-                // TODO: make localization adjustments
-                parseArgs[i] = $"{count} {type}";
-                orderIndex++;
-            }
-            else if (parseOptions[i] == StringPaseOptions.BouquetType)
-            {
-                // TODO: localization
-                parseArgs[i] = _bouquetsToOrder[bouquetIndex].ToString();
-                bouquetIndex++;
-            }
-            else if (parseOptions[i] == StringPaseOptions.BouquetContent)
-            {
-                Recipe recipe = Configs.LevelConfig.BouquetRecipes[_bouquetsToOrder[bouquetIndex]];
-                string recipeString = "";
-                for (int j = 0; j < recipe.Flowers.Count; j++)
+                foreach (var flower in _bouquetsToOrder[orderIndex].Flowers)
                 {
-                    // TODO: localization
-                    recipeString += $"{recipe.Flowers[j].Count} {recipe.Flowers[j].FlowerType}";
-                    if (j != recipe.Flowers.Count - 1)
+                    parseArgs[i] = flower.Value.ToString();
+                }
+            }
+            else if (parseOptions[i] == StringParseOptions.FlowerType)
+            {
+                foreach (var flower in _bouquetsToOrder[orderIndex].Flowers)
+                {
+                    parseArgs[i] = LocalizationManager.GetLocalizedText(flower.Key.ToString().ToLower());
+                }
+                orderIndex++;
+            }
+            else if (parseOptions[i] == StringParseOptions.FlowerCountAndType)
+            {
+                foreach (var flower in _bouquetsToOrder[orderIndex].Flowers)
+                {
+                    string type = LocalizationManager.GetLocalizedText(flower.Key.ToString().ToLower());
+                    int count = flower.Value;
+                    parseArgs[i] = $"{count} {type}";
+                }
+                orderIndex++;
+            }
+            else if (parseOptions[i] == StringParseOptions.BouquetType)
+            {
+                parseArgs[i] = LocalizationManager.GetLocalizedText(_bouquetsToOrder[orderIndex].BouquetType.ToString().ToLower());
+                orderIndex++;
+            }
+            else if (parseOptions[i] == StringParseOptions.BouquetContent)
+            {
+                string recipeString = "";
+                int flowerCountInBouqet = _bouquetsToOrder[orderIndex].Flowers.Count;
+                int j = 0;
+                foreach (var flower in _bouquetsToOrder[orderIndex].Flowers)
+                {
+                    string flowerType = LocalizationManager.GetLocalizedText(flower.Key.ToString().ToLower());
+                    int flowerCount = flower.Value;
+
+                    recipeString += $"{flowerCount} {flowerType}";
+                    if (j != flowerCountInBouqet - 1)
                         recipeString += ", ";
+
+                    j++;
                 }
                 parseArgs[i] = recipeString;
-                bouquetIndex++;
+                orderIndex++;
+            }
+            else if (parseOptions[i] == StringParseOptions.WrappingPaper)
+            {
+                parseArgs[i] = _bouquetsToOrder[orderIndex].BeautyPercentage.ToString("0.00");
+                orderIndex++;
+            }
+            else if (parseOptions[i] == StringParseOptions.Ribbon)
+            {
+                parseArgs[i] = LocalizationManager.GetLocalizedText(_customerInfo.Name);
             }
         }
+
         message = string.Format(message, parseArgs);
         _speechBubbleTextForLineCount.text = message;
         _speechBubbleText.text = message;
@@ -185,8 +218,7 @@ public class Customer : MonoBehaviour
                                                                         _speechBubbleBgImage.transform.position.y - height - 30,
                                                                         _speechBubbleButtonImages[i].transform.position.z);
             _speechBubbleButtonTexts[i].gameObject.SetActive(true);
-            // TODO: localization
-            _speechBubbleButtonTexts[i].text = answerOptions[i].Message;
+            _speechBubbleButtonTexts[i].text = LocalizationManager.GetLocalizedText(answerOptions[i].Message);
 
             _speechBubbleButtons[i].onClick.RemoveAllListeners();
             Action action = answerOptions[i].Advance;
@@ -209,30 +241,35 @@ public class Customer : MonoBehaviour
 
     public float GetOrderPayment()
     {
-        // Pay for flower
-        float profitPercentage = _customerInfo.GetProfitPercentage();
+        // calculate flower price
+        float price = 0;
 
-        // calculate flower cost
-        float flowerCost = 0;
-
-        // add cost of each flower type
-        foreach (var orderPair in _order)
+        // add price of each flower type
+        foreach (var bouquet in _bouquetsToOrder)
         {
-            flowerCost += orderPair.Count * Configs.LevelConfig.GetFlowerPrice(orderPair.FlowerType);
+            foreach (var flowers in bouquet.Flowers)
+            {
+                price += flowers.Value * Configs.WorkshopConfig.GetFlowerPrice(flowers.Key);
+            }
+            price += Configs.WorkshopConfig.GetRibbonPrice(bouquet.RibbonType);
+            price += Configs.WorkshopConfig.GetWrappingPaperPrice(bouquet.WrappingPaperType);
         }
-        Debug.Log($"Flower cost: {flowerCost}, profit percentage: {profitPercentage}");
-        return flowerCost * (100 + profitPercentage) / 100f;
+
+        Debug.Log($"Flower price: {price}");
+        return price;
     }
 
-    public FlowerDeliveredInfo GetOrderInfo(BouquetModel bouquetModel)
+    public FlowerDeliveredInfo GetOrderInfo(List<BouquetModel> bouquetModels)
     {
+        OrderContentResult orderContentResult = CheckOrderContent(bouquetModels);
+
         return new FlowerDeliveredInfo()
         {
             Conversation = _customerInfo.GoodbyeConversation,
             Tip = Random.Range(_customerInfo.TipPercentage.x, _customerInfo.TipPercentage.y),
-            HappinessChange = 0
+            HappinessChange = 0,
+            OrderContentResult = orderContentResult,
         };
-        // return _customerInfo.GoodbyeConversation;
     }
 
     public void OnSkipClicked()
@@ -259,101 +296,123 @@ public class Customer : MonoBehaviour
 
     private void DetermineOrder()
     {
-        _order ??= new List<FlowerCount>();
-        _order.Clear();
+        _bouquetsToOrder ??= new List<BouquetModel>();
+        _bouquetsToOrder.Clear();
 
         // Determine order
-        int bouquetCount = _customerInfo.BouquetCount;
+        int bouquetCount = _customerInfo.BouquetTypes.Count;
         for (int k = 0; k < bouquetCount; k++)
         {
-            _bouquetTypeToOrder = _customerInfo.BouquetTypes[Random.Range(0, _customerInfo.BouquetTypes.Count)];
-            if (_bouquetTypeToOrder == BouquetType.Custom)
+            var bouquetTypeToOrder = _customerInfo.BouquetTypes[Random.Range(0, _customerInfo.BouquetTypes.Count)];
+            if (bouquetTypeToOrder == BouquetType.Custom)
             {
+                var bouquetModel = new BouquetModel()
+                {
+                    BeautyPercentage = 0,
+                    BouquetType = bouquetTypeToOrder
+                };
                 int flowerCount = _customerInfo.FlowerTypes.Count;
                 for (int i = 0; i < flowerCount; i++)
                 {
                     FlowerType flowerType = _customerInfo.FlowerTypes[i];
-                    int orderIndex = _order.FindIndex(x => x.FlowerType == flowerType);
-                    if (orderIndex != -1)
+                    if (bouquetModel.Flowers.ContainsKey(flowerType))
                     {
-                        _order[orderIndex].Count++;
+                        bouquetModel.Flowers[flowerType]++;
                     }
                     else
                     {
-                        _order.Add(new FlowerCount(flowerType, 1));
+                        bouquetModel.Flowers.Add(flowerType, 1);
                     }
                 }
+
+                _bouquetsToOrder.Add(bouquetModel);
             }
             else
             {
-                Recipe recipe = Configs.LevelConfig.BouquetRecipes[_bouquetTypeToOrder];
-                for (int i = 0; i < recipe.Flowers.Count; i++)
+                Recipe recipe = Configs.WorkshopConfig.BouquetRecipes[bouquetTypeToOrder];
+                var bouquetModel = new BouquetModel()
                 {
-                    FlowerType flowerType = recipe.Flowers[i].FlowerType;
-                    int orderIndex = _order.FindIndex(x => x.FlowerType == flowerType);
-                    if (orderIndex != -1)
-                    {
-                        _order[orderIndex].Count += recipe.Flowers[i].Count;
-                    }
-                    else
-                    {
-                        _order.Add(new FlowerCount(flowerType, recipe.Flowers[i].Count));
-                    }
-                }
+                    Flowers = recipe.Bouquet.Flowers,
+                    BeautyPercentage = 0,
+                    BouquetType = bouquetTypeToOrder
+                };
+                _bouquetsToOrder.Add(bouquetModel);
             }
-
-            _bouquetsToOrder.Add(_bouquetTypeToOrder);
         }
-
     }
 
-    private bool CheckOrderContent(BouquetModel bouquetModel)
+    private OrderContentResult CheckOrderContent(List<BouquetModel> receivedBouquetModels)
     {
-        // Check if the delivered bouquet matches the order
-        List<FlowerCount> deliveredFlowers = new();
-        foreach (var flower in bouquetModel.Flowers)
+        OrderContentResult result = new()
         {
-            int orderIndex = deliveredFlowers.FindIndex(x => x.FlowerType == flower.Key);
-            if (orderIndex != -1)
+            ExtraFlowers = new(),
+            MissingFlowers = new()
+        };
+        float totalSimilarity = 0;
+        float totalBeauty = 0;
+
+        for (int k = 0; k < _bouquetsToOrder.Count; k++)
+        {
+            BouquetModel orderedBouqet = _bouquetsToOrder[k];
+            int mostSimilarIndex = 0;
+            float mostSimilarPercentage = 0;
+
+            int flowerCountInOrder = orderedBouqet.Flowers.Count;
+            float flowerContributionToSimilarity = 100f / flowerCountInOrder;
+
+            for (int i = 0; i < receivedBouquetModels.Count; i++)
             {
-                deliveredFlowers[orderIndex].Count += flower.Value;
+                BouquetModel receivedBouqet = receivedBouquetModels[i];
+                float orderSimilarityPercentage = 0;
+
+                foreach (var orderedFlower in orderedBouqet.Flowers)
+                {
+                    FlowerType orderedFlowerType = orderedFlower.Key;
+                    int orderedFlowerCount = orderedFlower.Value;
+
+                    if (receivedBouqet.Flowers.ContainsKey(orderedFlowerType))
+                    {
+                        int receivedFlowerCount = receivedBouqet.Flowers[orderedFlowerType];
+                        orderSimilarityPercentage += flowerContributionToSimilarity / orderedFlowerCount * receivedFlowerCount;
+                    }
+                }
+
+                if (orderSimilarityPercentage > mostSimilarPercentage)
+                {
+                    mostSimilarPercentage = orderSimilarityPercentage;
+                    mostSimilarIndex = i;
+                }
             }
-            else
+
+            totalSimilarity += mostSimilarPercentage;
+            totalBeauty += receivedBouquetModels[mostSimilarIndex].BeautyPercentage;
+
+            foreach (var orderedFlower in orderedBouqet.Flowers)
             {
-                deliveredFlowers.Add(new FlowerCount(flower.Key, flower.Value));
+                FlowerType orderedFlowerType = orderedFlower.Key;
+                int orderedFlowerCount = orderedFlower.Value;
+
+                if (receivedBouquetModels[mostSimilarIndex].Flowers.ContainsKey(orderedFlowerType))
+                {
+                    int receivedFlowerCount = receivedBouquetModels[mostSimilarIndex].Flowers[orderedFlowerType];
+                    if (receivedFlowerCount > orderedFlowerCount)
+                    {
+                        result.ExtraFlowers.Add(orderedFlowerType, receivedFlowerCount - orderedFlowerCount);
+                    }
+                    else if (receivedFlowerCount < orderedFlowerCount)
+                    {
+                        result.MissingFlowers.Add(orderedFlowerType, orderedFlowerCount - receivedFlowerCount);
+                    }
+                }
+                else
+                {
+                    result.MissingFlowers.Add(orderedFlowerType, orderedFlowerCount);
+                }
             }
         }
 
-        if (_bouquetsToOrder.Count != bouquetModel.Flowers.Count)
-            return false;
-
-        for (int i = 0; i < _bouquetsToOrder.Count; i++)
-        {
-            if (_bouquetsToOrder[i] == BouquetType.Custom)
-            {
-                if (deliveredFlowers.Count != _order.Count)
-                    return false;
-
-                for (int j = 0; j < deliveredFlowers.Count; j++)
-                {
-                    if (deliveredFlowers[j].Count != _order[j].Count)
-                        return false;
-                }
-            }
-            else
-            {
-                Recipe recipe = Configs.LevelConfig.BouquetRecipes[_bouquetsToOrder[i]];
-                if (deliveredFlowers.Count != recipe.Flowers.Count)
-                    return false;
-
-                for (int j = 0; j < deliveredFlowers.Count; j++)
-                {
-                    if (deliveredFlowers[j].Count != recipe.Flowers[j].Count)
-                        return false;
-                }
-            }
-        }
-
-        return true;
+        result.OrderSimilarity = totalSimilarity / _bouquetsToOrder.Count;
+        result.OrderBeauty = totalBeauty / _bouquetsToOrder.Count;
+        return result;
     }
 }

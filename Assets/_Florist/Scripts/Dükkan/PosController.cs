@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -19,12 +20,13 @@ public class PosController : MonoBehaviour
         _posText.text = "";
     }
 
-    public void ReceivePayment(float payment)
+    public void ReceivePayment(float payment, Action onCompleted)
     {
+        SaveSystem.Inst.GeneralData.ChangeMoney(payment);
+
         _posText.color = payment < 0 ? _red : _green;
         _posText.text = $"${payment:0. ##}";
         _tween?.Kill();
-        _tween = transform.DOPunchScale(Vector3.one * 0.15f, .7f, vibrato: 1, elasticity: 1);
-        SaveSystem.Inst.GeneralData.ChangeMoney(payment);
+        _tween = transform.DOPunchScale(Vector3.one * 0.15f, .7f, vibrato: 1, elasticity: 1).OnComplete(() => onCompleted?.Invoke());
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-[System.Serializable]
+[Serializable]
 public class GeneralData
 {
     public static Action MoneyAmountChanged, DiamondAmountChanged;

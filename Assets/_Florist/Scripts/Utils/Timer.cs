@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
-using UnityEngine;
+using System.Collections.Generic;
+using MEC;
 
 public class Timer : MonoSingleton<Timer>
 {
@@ -14,19 +14,18 @@ public class Timer : MonoSingleton<Timer>
     }
     public static Action TimeTickSeconds;
     public static Action TimeTickMiliseconds;
-    private WaitForSeconds _waitMs = new(.1f);
 
     private void OnEnable()
     {
-        StartCoroutine(Tick());
+        Timing.RunCoroutine(Tick().CancelWith(gameObject));
     }
 
-    private IEnumerator Tick()
+    private IEnumerator<float> Tick()
     {
         int time = 0;
         while (true)
         {
-            yield return _waitMs;
+            yield return Timing.WaitForSeconds(.1f);
             time++;
             if (time % 10 == 0)
             {

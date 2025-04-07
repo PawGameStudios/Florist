@@ -13,25 +13,16 @@ public class HappinessMeter : MonoBehaviour
 
     private void OnEnable()
     {
-        // Timer.TimeTickMiliseconds += TimeTickHandler;
-
         int currentday = SaveSystem.Inst.GeneralData.CurrentDayIndex;
         int customerCount = Configs.LevelConfig.Days[currentday].Customers.Count;
-        float ticksPerCustomer = Configs.LevelConfig.DayTimeInfo.DayDuration * 600f / Configs.LevelConfig.Days[currentday].Customers.Count;
+        float totalTickCount = Configs.LevelConfig.DayTimeInfo.DayDuration * 60 * 10f;
+        float ticksPerCustomer = totalTickCount / customerCount;
         _totalTicksForCustomer = (int)(ticksPerCustomer * 10);
     }
 
     private void OnDisable()
     {
         Timer.TimeTickMiliseconds -= TimeTickHandler;
-    }
-
-    public void SetHappiness(int value)
-    {
-        // int demominator = 100 / _emojiSprites.Count;
-        // int index = value / demominator;
-        // _emojiImage.sprite = _emojiSprites[index];
-        _happinessText.text = $"{value}%";
     }
 
     public void StartCountdown()

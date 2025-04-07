@@ -20,7 +20,7 @@ public class DayTimeManager : MonoBehaviour
 
         _totalMinutesInDay = (Configs.LevelConfig.DayTimeInfo.DayEndTime - Configs.LevelConfig.DayTimeInfo.DayStartTime) * 60;
 
-        _timeTickInGameTime = _totalMinutesInDay / Configs.LevelConfig.DayTimeInfo.DayDuration / 600f;
+        _timeTickInGameTime = _totalMinutesInDay / (Configs.LevelConfig.DayTimeInfo.DayDuration * 60 * 10f);
         _totalTimePassed = 0;
 
         SetDay(SaveSystem.Inst.GeneralData.CurrentDayIndex);
@@ -40,7 +40,6 @@ public class DayTimeManager : MonoBehaviour
     private void SetTime(int hour, int minutes)
     {
         _timeText.text = $"{hour:D2}:{minutes:D2}";
-        // _timeIcon.sprite = icon;
     }
 
     private void TimeTickHandler()

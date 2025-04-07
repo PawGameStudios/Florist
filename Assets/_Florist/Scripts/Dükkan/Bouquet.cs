@@ -2,30 +2,36 @@ using System;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using FlowerType = LevelConfig.FlowerType;
+using Config;
+using Sirenix.OdinInspector;
 
 [Serializable]
 public class BouquetModel
 {
     public SerializedDictionary<FlowerType, int> Flowers;
+    [ReadOnly] public RibbonType RibbonType;
+    [ReadOnly] public WrappingPaperType WrappingPaperType;
+    [ReadOnly] public float BeautyPercentage;
+    [ReadOnly] public BouquetType BouquetType;
 
     public BouquetModel()
     {
         Flowers = new SerializedDictionary<FlowerType, int>();
+        BeautyPercentage = 1;
     }
 }
 
 public class Bouquet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public BouquetModel Model => _model;
+    public OrderInfo Order => _order;
     [SerializeField] private DukkanPage _dukkan;
     private Vector2 _offset;
     private Vector3 _startPosition;
-    private BouquetModel _model;
+    private OrderInfo _order;
 
-    public void SetModel(BouquetModel model)
+    public void SetOrder(OrderInfo order)
     {
-        _model = model;
+        _order = order;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
