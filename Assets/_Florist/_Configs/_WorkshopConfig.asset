@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7396f45fac46d4b9858bc039283365, type: 3}
+  m_Name: _WorkshopConfig
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  BouquetRecipes:
+    _serializedList:
+    - Key: 0
+      Value:
+        Bouquet:
+          Flowers:
+            _serializedList:
+            - Key: 0
+              Value: 0
+          RibbonType: 0
+          WrappingPaperType: 0
+          BeautyPercentage: 0
+          BouquetType: 0
+  FlowerInfo:
+  - Sprite: {fileID: 21300000, guid: 86c1aea95aa146a49ad1505f616afa70, type: 3}
+    FlowerType: 0
+    Cost: 5
+    Price: 8
+  - Sprite: {fileID: 21300000, guid: b4f0222d7ca32674ebcefa98df5930b6, type: 3}
+    FlowerType: 1
+    Cost: 6
+    Price: 9
+  - Sprite: {fileID: 21300000, guid: 5c10d07ac2ef17a46b27b6a3a9757050, type: 3}
+    FlowerType: 2
+    Cost: 10
+    Price: 15
+  - Sprite: {fileID: 21300000, guid: 57101f17d4957424f8dbdae64f34f7b5, type: 3}
+    FlowerType: 3
+    Cost: 10
+    Price: 15
+  - Sprite: {fileID: 21300000, guid: 55e842a05eb2a8348a115b77d4a8cab0, type: 3}
+    FlowerType: 4
+    Cost: 10
+    Price: 15
+  - Sprite: {fileID: 21300000, guid: f6f8e1c6b3303694a935b2df528b1558, type: 3}
+    FlowerType: 5
+    Cost: 10
+    Price: 15
+  - Sprite: {fileID: 21300000, guid: 1178f160c16cbb6489b837740490bba1, type: 3}
+    FlowerType: 6
+    Cost: 10
+    Price: 15
+  - Sprite: {fileID: 21300000, guid: fd2de75049f73c64385490001c9b0cb8, type: 3}
+    FlowerType: 7
+    Cost: 10
+    Price: 15
+  RibbonInfo:
+  - Sprite: {fileID: 21300000, guid: bdea666e3183f014ebe41c13d4755760, type: 3}
+    RibbonType: 1
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 0c99f93b7ba19d243b29664528003df5, type: 3}
+    RibbonType: 2
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: c8fa2d4f48d8d6949bd9bf438ffc95dc, type: 3}
+    RibbonType: 3
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 452517cc7780625408d7c89eed1955e0, type: 3}
+    RibbonType: 4
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 211900e9107ff3d4dbdbf47b0a6fb60c, type: 3}
+    RibbonType: 5
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 9d3a2804bfaa4c24c905fa6d46cc983f, type: 3}
+    RibbonType: 6
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 4c5ec4321cb0ff845b06a3766d6b69f5, type: 3}
+    RibbonType: 7
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: d215f74870fae8e4b86b173c0f3dd5a1, type: 3}
+    RibbonType: 8
+    Cost: 0
+    Price: 0
+  WrappingPaperInfo:
+  - Sprite: {fileID: 21300000, guid: 68453a04a4e20ab45997797daf21c5f1, type: 3}
+    WrappingPaperType: 1
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 3c7384eed5364164d81deb1638aaf672, type: 3}
+    WrappingPaperType: 2
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 9d18f82b4be68d34d93d5081cc291498, type: 3}
+    WrappingPaperType: 3
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: f69b593c235aa754ca5167914a4db779, type: 3}
+    WrappingPaperType: 4
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: b12a16a1da402c947a6e978f077549ba, type: 3}
+    WrappingPaperType: 5
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 306951f76791fc14eaeb78109e109911, type: 3}
+    WrappingPaperType: 6
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: ba97ab076c9281c4c91c012946c50e1d, type: 3}
+    WrappingPaperType: 7
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 9ab046f10a6292243bf4598311d334ef, type: 3}
+    WrappingPaperType: 8
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 42881da6683b42a41bc78011a18f0307, type: 3}
+    WrappingPaperType: 9
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 760d7cfb7a895c3498e4bd927fe930ed, type: 3}
+    WrappingPaperType: 10
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: dae72a82079fc294ebdc45f7e47826e3, type: 3}
+    WrappingPaperType: 11
+    Cost: 0
+    Price: 0
+  - Sprite: {fileID: 21300000, guid: 23e1f6b470753dd4e8de3c8c2bb64261, type: 3}
+    WrappingPaperType: 12
+    Cost: 0
+    Price: 0

@@ -12,60 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7828c32f1ac41164fa91ef928b8c36d2, type: 3}
   m_Name: _LevelConfig
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   Customers:
-    _serializedList:
-    - Key: 0
-      Value:
-        Sprites:
-        - {fileID: 21300000, guid: d1ec1061db05a454aa04db5d54136152, type: 3}
-        - {fileID: 21300000, guid: 02a037f3f1b28c445943650324fa9f30, type: 3}
-        - {fileID: 21300000, guid: 9364b6fdc3203284f9ab7a4347992576, type: 3}
-        - {fileID: 21300000, guid: 0c1bf4986addab642a804aea0bde4e14, type: 3}
-        - {fileID: 21300000, guid: 16dd4f327d844f04ebf55d84c74b457d, type: 3}
-        - {fileID: 21300000, guid: 20bdc080a02b4c141bd604b891be28cd, type: 3}
-        - {fileID: 21300000, guid: d759ea81d9705d74bb7454db2b180fac, type: 3}
-        Name: 
-        Gender: 3
-        BouquetTypes: 02000000
-        FlowerTypes: 
-        InitialConversations:
-        - {fileID: 11400000, guid: 8a3f9885c3635c344b7b9667cd598621, type: 2}
-        GoodbyeConversation: {fileID: 0}
-        BouquetCount: 1
-        ProfitPercentage: {x: 10, y: 50}
-        TipGiveRatio: 50
-        TipPercentage: {x: 1, y: 20}
-  FlowerPrices:
-    _serializedList:
-    - Key: 0
-      Value: 5
-    - Key: 1
-      Value: 5
-    - Key: 2
-      Value: 10
-    - Key: 3
-      Value: 20
-  FlowerCosts:
-    _serializedList:
-    - Key: 0
-      Value: 2
-    - Key: 1
-      Value: 3
-    - Key: 2
-      Value: 5
-    - Key: 3
-      Value: 10
-  BouquetRecipes:
-    _serializedList:
-    - Key: 2
-      Value:
-        Flowers:
-        - FlowerType: 0
-          Count: 4
-        - FlowerType: 1
-          Count: 4
-        - FlowerType: 2
-          Count: 2
+  - Sprite: {fileID: 21300000, guid: d1ec1061db05a454aa04db5d54136152, type: 3}
+    CustomerType: 0
+    Name: Sophie
+    Gender: 2
+    BouquetTypes: 02000000
+    FlowerTypes: 
+    UseCustomConvo: 0
+    InitialConversation: {fileID: 0}
+    GoodbyeConversation: {fileID: 0}
+    TipGiveRatio: 10
+    TipPercentage: {x: 10, y: 50}
   DayTimeInfo:
     DayStartTime: 7
     DayEndTime: 16
@@ -76,7 +43,9 @@ MonoBehaviour:
     MissingFlowers: []
     DifferentFlowers: []
     MoreFlowers: []
+  InitialConversations:
+  - {fileID: 11400000, guid: 8a3f9885c3635c344b7b9667cd598621, type: 2}
   Days:
-  - Customers: 000000000000000000000000
+  - Customers: 00000000
     SpecialEvent: 0
     IsSpecialEventOnDayStart: 0

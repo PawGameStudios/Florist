@@ -193,7 +193,7 @@ MonoBehaviour:
     Id: fl_1
     Price: 0
     IsSelectable: 1
-    Icon: {fileID: 21300000, guid: 289a4e36d97f1f34bafd59c400305bd0, type: 3}
+    Icon: {fileID: 21300000, guid: 8a25ff2dba7c00143b76204a7a0e8bbb, type: 3}
   - Name: Floor 2
     Id: fl_2
     Price: 0
@@ -202,3 +202,10 @@ MonoBehaviour:
   SignItems: []
   CounterItems: []
   SpeechBubbleItems: []
+  SpeechBubbleButtonItems: []
+  OutsideDukkanItems: []
+  DoorItems: []
+  FlowerStandItems: []
+  DecorItems: []
+  PcItems: []
+  PosItems: []
