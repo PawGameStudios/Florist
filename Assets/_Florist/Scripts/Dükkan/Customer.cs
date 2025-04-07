@@ -19,7 +19,7 @@ public class Customer : MonoBehaviour
         public Conversation Conversation;
         public float Tip;
         public int HappinessChange;
-        public OrderContentResult OrderContentResult;
+        public List<OrderContentResult> OrderContentResults;
     }
 
     [Serializable]
@@ -27,6 +27,8 @@ public class Customer : MonoBehaviour
     {
         public float OrderSimilarity;
         public float OrderBeauty;
+        public bool IsRibbonCorrect;
+        public bool IsWrappingPaperCorrect;
         public SerializedDictionary<FlowerType, int> ExtraFlowers;
         public SerializedDictionary<FlowerType, int> MissingFlowers;
     }
@@ -133,35 +135,40 @@ public class Customer : MonoBehaviour
             argCount++;
         }
 
-        // TODO: localization
         string[] parseArgs = new string[argCount];
         for (int i = 0; i < parseOptions.Count; i++)
         {
             if (parseOptions[i] == StringParseOptions.None)
                 break;
 
-            if (parseOptions[i] == StringParseOptions.Count)
+            if (parseOptions[i] == StringParseOptions.FlowerType)
             {
                 foreach (var flower in _bouquetsToOrder[orderIndex].Flowers)
                 {
-                    parseArgs[i] = flower.Value.ToString();
-                }
-            }
-            else if (parseOptions[i] == StringParseOptions.FlowerType)
-            {
-                foreach (var flower in _bouquetsToOrder[orderIndex].Flowers)
-                {
-                    parseArgs[i] = LocalizationManager.GetLocalizedText(flower.Key.ToString().ToLower());
+                    parseArgs[i] = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
                 }
                 orderIndex++;
             }
             else if (parseOptions[i] == StringParseOptions.FlowerCountAndType)
             {
-                foreach (var flower in _bouquetsToOrder[orderIndex].Flowers)
+                for (int k = 0; k < _bouquetsToOrder[orderIndex].Flowers.Count; k++)
                 {
-                    string type = LocalizationManager.GetLocalizedText(flower.Key.ToString().ToLower());
-                    int count = flower.Value;
+                    var flower = _bouquetsToOrder[orderIndex].Flowers[k];
+                    string type = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
+                    int count = flower.Count;
                     parseArgs[i] = $"{count} {type}";
+                }
+                orderIndex++;
+            }
+            else if (parseOptions[i] == StringParseOptions.FlowerCountColorType)
+            {
+                for (int k = 0; k < _bouquetsToOrder[orderIndex].Flowers.Count; k++)
+                {
+                    var flower = _bouquetsToOrder[orderIndex].Flowers[k];
+                    string type = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
+                    int count = flower.Count;
+                    FlowerColor flowerColor = flower.FlowerColor;
+                    parseArgs[i] += $"{count} {LocalizationManager.GetLocalizedText(flowerColor.ToString().ToLower())} {type}";
                 }
                 orderIndex++;
             }
@@ -174,29 +181,37 @@ public class Customer : MonoBehaviour
             {
                 string recipeString = "";
                 int flowerCountInBouqet = _bouquetsToOrder[orderIndex].Flowers.Count;
-                int j = 0;
-                foreach (var flower in _bouquetsToOrder[orderIndex].Flowers)
+                for (int k = 0; k < flowerCountInBouqet; k++)
                 {
-                    string flowerType = LocalizationManager.GetLocalizedText(flower.Key.ToString().ToLower());
-                    int flowerCount = flower.Value;
+                    var flower = _bouquetsToOrder[orderIndex].Flowers[k];
+                    string flowerType = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
+                    int flowerCount = flower.Count;
+                    FlowerColor flowerColor = flower.FlowerColor;
 
-                    recipeString += $"{flowerCount} {flowerType}";
-                    if (j != flowerCountInBouqet - 1)
+                    if (flowerColor == FlowerColor.None)
+                        recipeString += $"{flowerCount} {flowerType}";
+                    else
+                        recipeString += $"{flowerCount} {LocalizationManager.GetLocalizedText(flowerColor.ToString().ToLower())} {flowerType}";
+
+                    if (k != flowerCountInBouqet - 1)
                         recipeString += ", ";
-
-                    j++;
                 }
                 parseArgs[i] = recipeString;
                 orderIndex++;
             }
             else if (parseOptions[i] == StringParseOptions.WrappingPaper)
             {
-                parseArgs[i] = _bouquetsToOrder[orderIndex].BeautyPercentage.ToString("0.00");
+                orderIndex--;
+                var paper = _bouquetsToOrder[orderIndex].WrappingPaperType;
+                parseArgs[i] = $"{LocalizationManager.GetLocalizedText(paper.ToString().ToLower())}";
                 orderIndex++;
             }
             else if (parseOptions[i] == StringParseOptions.Ribbon)
             {
-                parseArgs[i] = LocalizationManager.GetLocalizedText(_customerInfo.Name);
+                orderIndex--;
+                var ribbon = _bouquetsToOrder[orderIndex].RibbonType;
+                parseArgs[i] = $"{LocalizationManager.GetLocalizedText(ribbon.ToString().ToLower())}";
+                orderIndex++;
             }
         }
 
@@ -249,7 +264,7 @@ public class Customer : MonoBehaviour
         {
             foreach (var flowers in bouquet.Flowers)
             {
-                price += flowers.Value * Configs.WorkshopConfig.GetFlowerPrice(flowers.Key);
+                price += flowers.Count * Configs.WorkshopConfig.GetFlowerPrice(flowers.FlowerType);
             }
             price += Configs.WorkshopConfig.GetRibbonPrice(bouquet.RibbonType);
             price += Configs.WorkshopConfig.GetWrappingPaperPrice(bouquet.WrappingPaperType);
@@ -261,14 +276,14 @@ public class Customer : MonoBehaviour
 
     public FlowerDeliveredInfo GetOrderInfo(List<BouquetModel> bouquetModels)
     {
-        OrderContentResult orderContentResult = CheckOrderContent(bouquetModels);
+        List<OrderContentResult> orderContentResults = CheckOrderContent(bouquetModels);
 
         return new FlowerDeliveredInfo()
         {
             Conversation = _customerInfo.GoodbyeConversation,
             Tip = Random.Range(_customerInfo.TipPercentage.x, _customerInfo.TipPercentage.y),
             HappinessChange = 0,
-            OrderContentResult = orderContentResult,
+            OrderContentResults = orderContentResults,
         };
     }
 
@@ -306,23 +321,18 @@ public class Customer : MonoBehaviour
             var bouquetTypeToOrder = _customerInfo.BouquetTypes[Random.Range(0, _customerInfo.BouquetTypes.Count)];
             if (bouquetTypeToOrder == BouquetType.Custom)
             {
+                BouquetFlowerInfo flowerInfo = new();
                 var bouquetModel = new BouquetModel()
                 {
-                    BeautyPercentage = 0,
                     BouquetType = bouquetTypeToOrder
                 };
-                int flowerCount = _customerInfo.FlowerTypes.Count;
+                int flowerCount = _customerInfo.CustomFlowers.Count;
                 for (int i = 0; i < flowerCount; i++)
                 {
-                    FlowerType flowerType = _customerInfo.FlowerTypes[i];
-                    if (bouquetModel.Flowers.ContainsKey(flowerType))
-                    {
-                        bouquetModel.Flowers[flowerType]++;
-                    }
-                    else
-                    {
-                        bouquetModel.Flowers.Add(flowerType, 1);
-                    }
+                    flowerInfo.FlowerType = _customerInfo.CustomFlowers[i].FlowerType;
+                    flowerInfo.Count = _customerInfo.CustomFlowers[i].Count;
+                    flowerInfo.FlowerColor = _customerInfo.CustomFlowers[i].FlowerColor;
+                    bouquetModel.AddNewFlowers(flowerInfo);
                 }
 
                 _bouquetsToOrder.Add(bouquetModel);
@@ -333,7 +343,6 @@ public class Customer : MonoBehaviour
                 var bouquetModel = new BouquetModel()
                 {
                     Flowers = recipe.Bouquet.Flowers,
-                    BeautyPercentage = 0,
                     BouquetType = bouquetTypeToOrder
                 };
                 _bouquetsToOrder.Add(bouquetModel);
@@ -341,18 +350,17 @@ public class Customer : MonoBehaviour
         }
     }
 
-    private OrderContentResult CheckOrderContent(List<BouquetModel> receivedBouquetModels)
+    private List<OrderContentResult> CheckOrderContent(List<BouquetModel> receivedBouquetModels)
     {
-        OrderContentResult result = new()
-        {
-            ExtraFlowers = new(),
-            MissingFlowers = new()
-        };
-        float totalSimilarity = 0;
-        float totalBeauty = 0;
+        List<OrderContentResult> results = new();
 
         for (int k = 0; k < _bouquetsToOrder.Count; k++)
         {
+            OrderContentResult result = new()
+            {
+                ExtraFlowers = new SerializedDictionary<FlowerType, int>(),
+                MissingFlowers = new SerializedDictionary<FlowerType, int>(),
+            };
             BouquetModel orderedBouqet = _bouquetsToOrder[k];
             int mostSimilarIndex = 0;
             float mostSimilarPercentage = 0;
@@ -367,12 +375,14 @@ public class Customer : MonoBehaviour
 
                 foreach (var orderedFlower in orderedBouqet.Flowers)
                 {
-                    FlowerType orderedFlowerType = orderedFlower.Key;
-                    int orderedFlowerCount = orderedFlower.Value;
+                    FlowerType orderedFlowerType = orderedFlower.FlowerType;
+                    FlowerColor orderedFlowerColor = orderedFlower.FlowerColor;
+                    int orderedFlowerCount = orderedFlower.Count;
 
-                    if (receivedBouqet.Flowers.ContainsKey(orderedFlowerType))
+                    BouquetFlowerInfo receivedFlowers = receivedBouqet.GetFlowersWithType(orderedFlowerType, orderedFlowerColor);
+                    if (receivedFlowers != null)
                     {
-                        int receivedFlowerCount = receivedBouqet.Flowers[orderedFlowerType];
+                        int receivedFlowerCount = receivedFlowers.Count;
                         orderSimilarityPercentage += flowerContributionToSimilarity / orderedFlowerCount * receivedFlowerCount;
                     }
                 }
@@ -384,17 +394,17 @@ public class Customer : MonoBehaviour
                 }
             }
 
-            totalSimilarity += mostSimilarPercentage;
-            totalBeauty += receivedBouquetModels[mostSimilarIndex].BeautyPercentage;
-
+            // check flower similarity
             foreach (var orderedFlower in orderedBouqet.Flowers)
             {
-                FlowerType orderedFlowerType = orderedFlower.Key;
-                int orderedFlowerCount = orderedFlower.Value;
+                FlowerType orderedFlowerType = orderedFlower.FlowerType;
+                FlowerColor orderedFlowerColor = orderedFlower.FlowerColor;
+                int orderedFlowerCount = orderedFlower.Count;
 
-                if (receivedBouquetModels[mostSimilarIndex].Flowers.ContainsKey(orderedFlowerType))
+                BouquetFlowerInfo receivedFlowers = receivedBouquetModels[mostSimilarIndex].GetFlowersWithType(orderedFlowerType, orderedFlowerColor);
+                if (receivedFlowers != null)
                 {
-                    int receivedFlowerCount = receivedBouquetModels[mostSimilarIndex].Flowers[orderedFlowerType];
+                    int receivedFlowerCount = receivedFlowers.Count;
                     if (receivedFlowerCount > orderedFlowerCount)
                     {
                         result.ExtraFlowers.Add(orderedFlowerType, receivedFlowerCount - orderedFlowerCount);
@@ -409,10 +419,20 @@ public class Customer : MonoBehaviour
                     result.MissingFlowers.Add(orderedFlowerType, orderedFlowerCount);
                 }
             }
+
+            // check ribbon similarity
+            result.IsRibbonCorrect = orderedBouqet.RibbonType == receivedBouquetModels[mostSimilarIndex].RibbonType;
+
+            // check wrapping paper similarity
+            result.IsWrappingPaperCorrect = orderedBouqet.WrappingPaperType == receivedBouquetModels[mostSimilarIndex].WrappingPaperType;
+
+            // add similarity percentage to result
+            result.OrderSimilarity = mostSimilarPercentage;
+
+            // add result to list
+            results.Add(result);
         }
 
-        result.OrderSimilarity = totalSimilarity / _bouquetsToOrder.Count;
-        result.OrderBeauty = totalBeauty / _bouquetsToOrder.Count;
-        return result;
+        return results;
     }
 }

@@ -12,6 +12,11 @@ namespace Config
         public BouquetModel Bouquet;
     }
 
+    public enum FlowerColor
+    {
+        None, Red, Pink, White, Yellow, Blue, Purple, Orange,
+    }
+
     public enum FlowerType
     {
         Gypsum, Eucalyptus, Daisy, Rose, Anemone,

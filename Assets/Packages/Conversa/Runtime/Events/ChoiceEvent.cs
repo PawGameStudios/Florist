@@ -6,8 +6,8 @@ namespace Conversa.Runtime.Events
 {
 	public enum StringParseOptions
 	{
-		None, Count, FlowerType, FlowerCountAndType, BouquetType, BouquetContent,
-		FlowerColor, Ribbon, WrappingPaper
+		None, FlowerType, FlowerCountAndType, FlowerCountColorType, BouquetType,
+		BouquetContent, FlowerColor, Ribbon, WrappingPaper
 	}
 
 	public class Option

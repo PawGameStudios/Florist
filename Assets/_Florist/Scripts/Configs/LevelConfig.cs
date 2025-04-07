@@ -40,7 +40,7 @@ namespace Config
         public List<BouquetType> BouquetTypes;
         [VerticalGroup("Flowers")]
         [ShowIf("@this.BouquetTypes.Contains(BouquetType.Custom)")]
-        public List<FlowerType> FlowerTypes;
+        public List<BouquetFlowerInfo> CustomFlowers;
 
         [VerticalGroup("Conversations")]
         public bool UseCustomConvo;
@@ -61,6 +61,7 @@ namespace Config
 
         public float GetTipPercentage()
         {
+            // TODO:
             return Random.Range(TipPercentage.x, TipPercentage.y);
         }
     }

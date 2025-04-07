@@ -31,11 +31,11 @@ public class WorkshopPage : Page
         {
             new BouquetModel
             {
-                Flowers = new SerializedDictionary<FlowerType, int>
+                Flowers = new List<BouquetFlowerInfo>
                 {
-                    { FlowerType.Gypsum, 4 },
-                    { FlowerType.Eucalyptus, 4 },
-                    { FlowerType.Daisy, 2 }
+                    new() { FlowerType = FlowerType.Gypsum, Count = 4, FlowerColor = FlowerColor.None },
+                    new() { FlowerType = FlowerType.Eucalyptus, Count = 4, FlowerColor = FlowerColor.None },
+                    new() { FlowerType = FlowerType.Daisy, Count = 2, FlowerColor = FlowerColor.White },
                 },
                 RibbonType = RibbonType.Grid,
                 WrappingPaperType = WrappingPaperType.Rainbow,

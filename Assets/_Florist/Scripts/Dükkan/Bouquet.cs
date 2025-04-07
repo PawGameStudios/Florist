@@ -1,23 +1,57 @@
 using System;
-using AYellowpaper.SerializedCollections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Config;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
+
+
+[Serializable]
+public class BouquetFlowerInfo
+{
+    public FlowerType FlowerType;
+    public int Count;
+    public FlowerColor FlowerColor;
+}
 
 [Serializable]
 public class BouquetModel
 {
-    public SerializedDictionary<FlowerType, int> Flowers;
+    public List<BouquetFlowerInfo> Flowers;
     [ReadOnly] public RibbonType RibbonType;
     [ReadOnly] public WrappingPaperType WrappingPaperType;
-    [ReadOnly] public float BeautyPercentage;
     [ReadOnly] public BouquetType BouquetType;
 
     public BouquetModel()
     {
-        Flowers = new SerializedDictionary<FlowerType, int>();
-        BeautyPercentage = 1;
+        Flowers = new();
+    }
+
+    public void AddNewFlowers(BouquetFlowerInfo flowerInfo)
+    {
+        if (flowerInfo.Count <= 0) return;
+
+        foreach (var flower in Flowers)
+        {
+            if (flower.FlowerType == flowerInfo.FlowerType && flower.FlowerColor == flowerInfo.FlowerColor)
+            {
+                flower.Count += flowerInfo.Count;
+                return;
+            }
+        }
+        Flowers.Add(flowerInfo);
+    }
+
+    public BouquetFlowerInfo GetFlowersWithType(FlowerType flowerType, FlowerColor flowerColor)
+    {
+        foreach (var flower in Flowers)
+        {
+            if (flower.FlowerType == flowerType && flower.FlowerColor == flowerColor)
+            {
+                return flower;
+            }
+        }
+        return null;
     }
 }
 

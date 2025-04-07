@@ -153,7 +153,7 @@ public class DukkanPage : Page
         {
             foreach (var flower in bouquet.Flowers)
             {
-                cost += flower.Value * Configs.WorkshopConfig.GetFlowerCost(flower.Key);
+                cost += flower.Count * Configs.WorkshopConfig.GetFlowerCost(flower.FlowerType);
             }
 
             cost += Configs.WorkshopConfig.GetRibbonCost(bouquet.RibbonType);
