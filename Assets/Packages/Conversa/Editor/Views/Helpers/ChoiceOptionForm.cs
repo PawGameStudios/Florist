@@ -1,6 +1,4 @@
-using System;
 using Conversa.Runtime;
-using Conversa.Runtime.Events;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -30,27 +28,4 @@ namespace Conversa.Editor
 			button.clickable.clicked += OnDelete.Invoke;
 		}
 	}
-
-	// public class ParseOptionForm : VisualElement
-	// {
-	// 	public UnityEvent OnDelete { get; } = new UnityEvent();
-	// 	public StringPaseOptions stringPaseOptions;
-
-	// 	public ParseOptionForm(StringPaseOptions stringPaseOptions)
-	// 	{
-	// 		this.stringPaseOptions = stringPaseOptions;
-
-	// 		var option = Resources.Load<VisualTreeAsset>("Helpers/ChoiceOptionForm");
-	// 		option.CloneTree(this);
-
-	// 		var textField = this.Q<TextField>();
-	// 		textField.isDelayed = true;
-	// 		textField.name = stringPaseOptions.ToString();
-	// 		textField.RegisterValueChangedCallback(evt => portDefinition.Label = evt.newValue);
-	// 		textField.SetValueWithoutNotify(portDefinition.Label);
-
-	// 		var button = this.Q<Button>();
-	// 		button.clickable.clicked += OnDelete.Invoke;
-	// 	}
-	// }
 }

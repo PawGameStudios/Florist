@@ -21,9 +21,9 @@ namespace Conversa.Runtime.Nodes
 		[SerializeField] private bool useActorProfile;
 		[SerializeField] private string message = DefaultMessage;
 		[SerializeField] private string key = DefaultKey;
-		[SerializeField] private StringPaseOptions parseOption1 = StringPaseOptions.None;
-		[SerializeField] private StringPaseOptions parseOption2 = StringPaseOptions.None;
-		[SerializeField] private StringPaseOptions parseOption3 = StringPaseOptions.None;
+		[SerializeField] private StringParseOptions parseOption1 = StringParseOptions.None;
+		[SerializeField] private StringParseOptions parseOption2 = StringParseOptions.None;
+		[SerializeField] private StringParseOptions parseOption3 = StringParseOptions.None;
 		[SerializeField]
 		private List<PortDefinition<BaseNode>> options = new()
 		{
@@ -61,17 +61,17 @@ namespace Conversa.Runtime.Nodes
 			get => options;
 			set => options = value;
 		}
-		public StringPaseOptions ParseOption1
+		public StringParseOptions ParseOption1
 		{
 			get => parseOption1;
 			set => parseOption1 = value;
 		}
-		public StringPaseOptions ParseOption2
+		public StringParseOptions ParseOption2
 		{
 			get => parseOption2;
 			set => parseOption2 = value;
 		}
-		public StringPaseOptions ParseOption3
+		public StringParseOptions ParseOption3
 		{
 			get => parseOption3;
 			set => parseOption3 = value;
@@ -97,7 +97,8 @@ namespace Conversa.Runtime.Nodes
 			{
 				var nextNode = conversation.GetOppositeNodes(GetNodePort(portDefinition.Guid)).FirstOrDefault();
 				conversation.Process(nextNode, conversationEvents);
-			};
+			}
+			;
 
 			Option NodePortToOption(PortDefinition<BaseNode> portDefinition) => new Option(portDefinition.Label, () => HandleClickOption(portDefinition));
 
@@ -108,7 +109,7 @@ namespace Conversa.Runtime.Nodes
 			}
 			else
 			{
-				var choiceEvent = new ChoiceEvent(actor, key, message, options.Select(NodePortToOption).ToList(), new List<StringPaseOptions> { parseOption1, parseOption2, parseOption3 });
+				var choiceEvent = new ChoiceEvent(actor, key, message, options.Select(NodePortToOption).ToList(), new List<StringParseOptions> { parseOption1, parseOption2, parseOption3 });
 				conversationEvents.OnChoice.Invoke(choiceEvent); // Deprecated
 				conversationEvents.OnConversationEvent.Invoke(choiceEvent);
 			}

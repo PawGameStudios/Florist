@@ -3,9 +3,10 @@
     <ui:Label text="Choice" class="h1 mb-s" />
     <Conversa.Editor.ActorField />
     <ui:TextField label="Message" name="message" multiline="true" class="text-wrap" style="align-items: stretch;" />
-    <ui:EnumField label="Parse Type 1 (optional)" name="type1" type="Conversa.Runtime.Events.StringPaseOptions, Conversa.Runtime" value="None" style="align-items: auto; justify-content: center;" />
-    <ui:EnumField label="Parse Type 2 (optional)" name="type2" type="Conversa.Runtime.Events.StringPaseOptions, Conversa.Runtime" value="None" style="align-items: auto; justify-content: flex-start;" />
-    <ui:EnumField label="Parse Type 3 (optional)" name="type3" type="Conversa.Runtime.Events.StringPaseOptions, Conversa.Runtime" value="None" style="margin-bottom: 26px; align-items: auto; justify-content: flex-start;" />
+    <ui:VisualElement class="parse-option-list" />
+    <ui:EnumField label="Parse Type 1 (optional)" name="type1" type="Conversa.Runtime.Events.StringParseOptions, Conversa.Runtime" value="None" style="align-items: auto; justify-content: center;" />
+    <ui:EnumField label="Parse Type 2 (optional)" name="type2" type="Conversa.Runtime.Events.StringParseOptions, Conversa.Runtime" value="None" style="align-items: auto; justify-content: flex-start;" />
+    <ui:EnumField label="Parse Type 3 (optional)" name="type3" type="Conversa.Runtime.Events.StringParseOptions, Conversa.Runtime" value="None" style="margin-bottom: 26px; align-items: auto; justify-content: flex-start;" />
     <ui:TextField label="Key" name="key" multiline="false" class="text-wrap" />
     <ui:Label text="Choices" class="mb-xs bold" style="height: 31px; margin-top: 12px;" />
     <ui:Button text="+ Add new option" class="add-option" style="margin-top: 0;" />

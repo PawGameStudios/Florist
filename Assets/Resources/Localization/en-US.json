@@ -1,5 +1,22 @@
 {
     "items": {
-        "missingTextString": "NoTxt"
+        "missingTextString": "NoTxt",
+        "revenue": "Revenue",
+        "total_profit": "Total Profit",
+        "flower_cost": "Flower Cost",
+        "refunds": "Refunds",
+        "tips": "Tips",
+        "rent": "Rent",
+        "next_day": "Next Day",
+        "day": "Day",
+        "gypsum": "Gypsum",
+        "eucalyptus": "Eucalyptus",
+        "daisy": "Daisy",
+        "rose": "Rose",
+        "okay": "Okay",
+        "sure": "Sure",
+        "what?": "What?",
+        "got_it": "Got It",
+        "hint": "Hint"
     }
 }

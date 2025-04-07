@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Conversa.Runtime;
+using Conversa.Runtime.Events;
 using Conversa.Runtime.Nodes;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -58,7 +59,6 @@ namespace Conversa.Editor
 		private void RemoveOldEntries()
 		{
 			var optionElements = bodyContainer.Query<ChoiceOption>().ToList();
-
 			var optionElementsToRemove = optionElements
 				.Where(x => Data.Options.ToList().All(y => y.Guid != x.portDefinition.Guid));
 
@@ -84,7 +84,6 @@ namespace Conversa.Editor
 		private void AddNewEntries()
 		{
 			var optionElements = bodyContainer.Query<ChoiceOption>().ToList();
-
 			Data.Options
 				.Where(x => optionElements.TrueForAll(y => y.portDefinition.Guid != x.Guid))
 				.ToList()

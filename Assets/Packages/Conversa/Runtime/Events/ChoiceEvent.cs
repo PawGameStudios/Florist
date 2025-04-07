@@ -4,9 +4,10 @@ using Conversa.Runtime.Interfaces;
 
 namespace Conversa.Runtime.Events
 {
-	public enum StringPaseOptions
+	public enum StringParseOptions
 	{
-		None, Count, FlowerType, FlowerCountAndType, BouquetType, BouquetContent
+		None, Count, FlowerType, FlowerCountAndType, BouquetType, BouquetContent,
+		FlowerColor, Ribbon, WrappingPaper
 	}
 
 	public class Option
@@ -26,10 +27,10 @@ namespace Conversa.Runtime.Events
 		public string Actor { get; }
 		public string Message { get; }
 		public string Key { get; }
-		public List<StringPaseOptions> ParseOptions { get; }
+		public List<StringParseOptions> ParseOptions { get; }
 		public List<Option> Options { get; }
 
-		public ChoiceEvent(string actor, string key, string message, List<Option> options, List<StringPaseOptions> parseOptions)
+		public ChoiceEvent(string actor, string key, string message, List<Option> options, List<StringParseOptions> parseOptions)
 		{
 			Actor = actor;
 			Key = key;

@@ -1,0 +1,4 @@
+<UXML xmlns="UnityEngine.UIElements">
+    <Style src="./ParseChoiceOption.uss" />
+    <Label name="name"/>
+</UXML>

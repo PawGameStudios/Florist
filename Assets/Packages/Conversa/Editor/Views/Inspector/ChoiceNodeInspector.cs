@@ -42,7 +42,6 @@ namespace Conversa.Editor
             type3.SetValueWithoutNotify(data.ParseOption3);
 
             data.Options.ForEach(SetOption);
-            // data.ParseOptions.ForEach(SetParseOption);
 
             this.Q<Button>(classes: "add-option").clickable.clicked += HandleAddOption;
         }
@@ -78,8 +77,8 @@ namespace Conversa.Editor
 
         private void HandleUpdateMessage(ChangeEvent<string> evt) => data.Message = evt.newValue;
         private void HandleUpdateKey(ChangeEvent<string> evt) => data.Key = evt.newValue;
-        private void HandleUpdatePaseOption1(ChangeEvent<System.Enum> evt) => data.ParseOption1 = (StringPaseOptions)evt.newValue;
-        private void HandleUpdatePaseOption2(ChangeEvent<System.Enum> evt) => data.ParseOption2 = (StringPaseOptions)evt.newValue;
-        private void HandleUpdatePaseOption3(ChangeEvent<System.Enum> evt) => data.ParseOption3 = (StringPaseOptions)evt.newValue;
+        private void HandleUpdatePaseOption1(ChangeEvent<System.Enum> evt) => data.ParseOption1 = (StringParseOptions)evt.newValue;
+        private void HandleUpdatePaseOption2(ChangeEvent<System.Enum> evt) => data.ParseOption2 = (StringParseOptions)evt.newValue;
+        private void HandleUpdatePaseOption3(ChangeEvent<System.Enum> evt) => data.ParseOption3 = (StringParseOptions)evt.newValue;
     }
 }

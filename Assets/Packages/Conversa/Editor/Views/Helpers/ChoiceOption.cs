@@ -22,7 +22,7 @@ namespace Conversa.Editor
 
 			label = this.Q<Label>("name");
 			label.text = portDefinition.Label;
-			
+
 			port = General.OutputFlowPort();
 			port.portName = "";
 			Add(port);

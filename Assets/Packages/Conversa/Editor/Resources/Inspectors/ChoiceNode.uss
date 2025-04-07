@@ -8,3 +8,10 @@ ChoiceNodeInspector Button.add-option {
     padding: 10px;
     -unity-font-style: bold;
 }
+
+ChoiceNodeInspector Button.add-parse-option {
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding: 1px;
+    -unity-font-style: bold;
+}
