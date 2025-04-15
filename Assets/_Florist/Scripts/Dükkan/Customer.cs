@@ -10,6 +10,8 @@ using Random = UnityEngine.Random;
 using Conversa.Runtime;
 using Config;
 using AYellowpaper.SerializedCollections;
+using System.Linq;
+using MEC;
 
 public class Customer : MonoBehaviour
 {
@@ -17,7 +19,8 @@ public class Customer : MonoBehaviour
     public struct FlowerDeliveredInfo
     {
         public Conversation Conversation;
-        public float Tip;
+        public HappinessState HappinessState;
+        public float TipPercentage;
         public int HappinessChange;
         public List<OrderContentResult> OrderContentResults;
     }
@@ -26,7 +29,6 @@ public class Customer : MonoBehaviour
     public struct OrderContentResult
     {
         public float OrderSimilarity;
-        public float OrderBeauty;
         public bool IsRibbonCorrect;
         public bool IsWrappingPaperCorrect;
         public SerializedDictionary<FlowerType, int> ExtraFlowers;
@@ -34,6 +36,7 @@ public class Customer : MonoBehaviour
     }
 
     public CustomerInfo CustomerInfo => _customerInfo;
+    [SerializeField] private Transform _customerTransform;
     [SerializeField] private Transform _initialPositionRef;
     [SerializeField] private Transform _finalPositionRef;
     [SerializeField] private GameObject _speechBubbleObjects;
@@ -43,6 +46,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private List<Image> _speechBubbleButtonImages;
     [SerializeField] private List<Button> _speechBubbleButtons;
     [SerializeField] private List<TextMeshProUGUI> _speechBubbleButtonTexts;
+    [SerializeField] private HorizontalLayoutGroup _speechBubbleButtonsLayoutGroup;
     [SerializeField] private Image _customerImage;
     [SerializeField] private TypewriterCore _typeWriter;
     [SerializeField] private List<BouquetModel> _bouquetsToOrder = new();
@@ -51,11 +55,16 @@ public class Customer : MonoBehaviour
     private const float IDLE_SCALE_Y = 1.015f;
     private const float IDLE_SCALE_X = .985f;
     private const float IDLE_DURATION = 1;
+    private const int ORDER_SIMILARITY_LIMIT = 60;
     private Sequence _sequence, _idleSequence;
     private CustomerInfo _customerInfo;
+    private float _waitingStartTime = 0;
+    private Action _onTalkEnd;
+    private bool _isWaitingForSpeechEnd = false;
 
     private void OnDisable()
     {
+        _typeWriter.onTextShowed.RemoveAllListeners();
         _sequence?.Kill();
         _idleSequence?.Kill();
     }
@@ -85,16 +94,16 @@ public class Customer : MonoBehaviour
     public void PlayEnterAnimation(Action onComplete)
     {
         // Play enter animation
-        transform.localPosition = _initialPositionRef.localPosition;
+        _customerTransform.localPosition = _initialPositionRef.localPosition;
         gameObject.SetActive(true);
 
         _sequence?.Kill();
         _sequence = DOTween.Sequence();
-        _sequence.Append(transform.DOLocalMoveY(_initialPositionRef.localPosition.y, 0));
-        _sequence.Append(transform.DOLocalMoveY(_finalPositionRef.localPosition.y, .5f));
-        _sequence.Join(transform.DOScaleY(ENTER_SCALE_Y, .1f));
-        _sequence.Append(transform.DOScaleY(1, .2f).SetEase(Ease.OutQuad));
-        _sequence.Append(transform.DOScaleY(1, 0).OnComplete(() =>
+        _sequence.Append(_customerTransform.DOLocalMoveY(_initialPositionRef.localPosition.y, 0));
+        _sequence.Append(_customerTransform.DOLocalMoveY(_finalPositionRef.localPosition.y, .5f));
+        _sequence.Join(_customerTransform.DOScaleY(ENTER_SCALE_Y, .1f));
+        _sequence.Append(_customerTransform.DOScaleY(1, .2f).SetEase(Ease.OutQuad));
+        _sequence.Append(_customerTransform.DOScaleY(1, 0).OnComplete(() =>
         {
             onComplete?.Invoke();
             PlayIdleAnimation();
@@ -108,10 +117,10 @@ public class Customer : MonoBehaviour
         // Play exit animation
         _sequence?.Kill();
         _sequence = DOTween.Sequence();
-        _sequence.Append(transform.DOScaleY(ENTER_SCALE_Y, .1f));
-        _sequence.Append(transform.DOScaleY(1, .2f).SetEase(Ease.OutQuad));
-        _sequence.Join(transform.DOLocalMoveY(_initialPositionRef.localPosition.y, .5f));
-        _sequence.Append(transform.DOScaleY(1, 0).OnComplete(() =>
+        _sequence.Append(_customerTransform.DOScaleY(ENTER_SCALE_Y, .1f));
+        _sequence.Append(_customerTransform.DOScaleY(1, .2f).SetEase(Ease.OutQuad));
+        _sequence.Join(_customerTransform.DOLocalMoveY(_initialPositionRef.localPosition.y, .5f));
+        _sequence.Append(_customerTransform.DOScaleY(1, 0).OnComplete(() =>
         {
             onComplete?.Invoke();
         }));
@@ -119,11 +128,14 @@ public class Customer : MonoBehaviour
 
     public void Talk(string localizationKey, string defaultMessage, List<Option> answerOptions, List<StringParseOptions> parseOptions)
     {
-        _speechBubbleObjects.SetActive(true);
+        Debug.Log($"#customer# Talk called with localizationKey: {localizationKey} and defaultMessage: {defaultMessage}");
+        _typeWriter.onTextShowed.RemoveListener(OnSpeechEnd);
 
         // set text
         string localizedMessage = LocalizationManager.GetLocalizedText(localizationKey);
         string message = string.IsNullOrEmpty(localizedMessage) ? defaultMessage : localizedMessage;
+        List<int> indexes = message.AllIndexesOf("_");
+        message = message.RemoveIndexIndicators("_");
 
         // parse text
         int orderIndex = 0;
@@ -141,117 +153,142 @@ public class Customer : MonoBehaviour
             if (parseOptions[i] == StringParseOptions.None)
                 break;
 
+            int bouquetIndex = indexes[orderIndex];
             if (parseOptions[i] == StringParseOptions.FlowerType)
             {
-                foreach (var flower in _bouquetsToOrder[orderIndex].Flowers)
+                foreach (var flower in _bouquetsToOrder[bouquetIndex].Flowers)
                 {
                     parseArgs[i] = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
                 }
-                orderIndex++;
             }
             else if (parseOptions[i] == StringParseOptions.FlowerCountAndType)
             {
-                for (int k = 0; k < _bouquetsToOrder[orderIndex].Flowers.Count; k++)
+                int count = _bouquetsToOrder[bouquetIndex].Flowers.Count;
+                for (int k = 0; k < count; k++)
                 {
-                    var flower = _bouquetsToOrder[orderIndex].Flowers[k];
-                    string type = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
-                    int count = flower.Count;
-                    parseArgs[i] = $"{count} {type}";
+                    var flower = _bouquetsToOrder[bouquetIndex].Flowers[k];
+                    int flowerCount = flower.Count;
+                    string type;
+                    if (flowerCount > 1)
+                        type = LocalizationManager.GetLocalizedText($"{flower.FlowerType.ToString().ToLower()}_s");
+                    else
+                        type = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
+
+                    if (k == count - 1)
+                        parseArgs[i] += $"{flowerCount} {type}";
+                    else if (k == count - 2)
+                        parseArgs[i] += $"{flowerCount} {type} {LocalizationManager.GetLocalizedText("and", LocalizationManager.TextType.LOWER)} ";
+                    else
+                        parseArgs[i] += $"{flowerCount} {type}, ";
                 }
-                orderIndex++;
             }
             else if (parseOptions[i] == StringParseOptions.FlowerCountColorType)
             {
-                for (int k = 0; k < _bouquetsToOrder[orderIndex].Flowers.Count; k++)
+                int count = _bouquetsToOrder[bouquetIndex].Flowers.Count;
+                for (int k = 0; k < count; k++)
                 {
-                    var flower = _bouquetsToOrder[orderIndex].Flowers[k];
-                    string type = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
-                    int count = flower.Count;
+                    var flower = _bouquetsToOrder[bouquetIndex].Flowers[k];
                     FlowerColor flowerColor = flower.FlowerColor;
-                    parseArgs[i] += $"{count} {LocalizationManager.GetLocalizedText(flowerColor.ToString().ToLower())} {type}";
+                    int flowerCount = flower.Count;
+                    string type;
+                    if (flowerCount > 1)
+                        type = LocalizationManager.GetLocalizedText($"{flower.FlowerType.ToString().ToLower()}_s");
+                    else
+                        type = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
+
+                    if (flowerColor != FlowerColor.None)
+                    {
+                        if (k == count - 1)
+                            parseArgs[i] += $"{flowerCount} {LocalizationManager.GetLocalizedText(flowerColor.ToString().ToLower())} {type}";
+                        else if (k == count - 2)
+                            parseArgs[i] += $"{flowerCount} {LocalizationManager.GetLocalizedText(flowerColor.ToString().ToLower())} {type} {LocalizationManager.GetLocalizedText("and", LocalizationManager.TextType.LOWER)}";
+                        else
+                            parseArgs[i] += $"{flowerCount} {LocalizationManager.GetLocalizedText(flowerColor.ToString().ToLower())} {type}, ";
+                    }
+                    else
+                    {
+                        if (k == count - 1)
+                            parseArgs[i] += $"{flowerCount} {type}";
+                        else if (k == count - 2)
+                            parseArgs[i] += $"{flowerCount} {type} {LocalizationManager.GetLocalizedText("and", LocalizationManager.TextType.LOWER)} ";
+                        else
+                            parseArgs[i] += $"{flowerCount} {type}, ";
+                    }
+
                 }
-                orderIndex++;
             }
             else if (parseOptions[i] == StringParseOptions.BouquetType)
             {
-                parseArgs[i] = LocalizationManager.GetLocalizedText(_bouquetsToOrder[orderIndex].BouquetType.ToString().ToLower());
-                orderIndex++;
+                parseArgs[i] = LocalizationManager.GetLocalizedText(_bouquetsToOrder[bouquetIndex].BouquetType.ToString().ToLower());
             }
             else if (parseOptions[i] == StringParseOptions.BouquetContent)
             {
                 string recipeString = "";
-                int flowerCountInBouqet = _bouquetsToOrder[orderIndex].Flowers.Count;
+                int flowerCountInBouqet = _bouquetsToOrder[bouquetIndex].Flowers.Count;
                 for (int k = 0; k < flowerCountInBouqet; k++)
                 {
-                    var flower = _bouquetsToOrder[orderIndex].Flowers[k];
-                    string flowerType = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
-                    int flowerCount = flower.Count;
+                    var flower = _bouquetsToOrder[bouquetIndex].Flowers[k];
                     FlowerColor flowerColor = flower.FlowerColor;
+                    int flowerCount = flower.Count;
+                    string type;
+                    if (flowerCount > 1)
+                        type = LocalizationManager.GetLocalizedText($"{flower.FlowerType.ToString().ToLower()}_s");
+                    else
+                        type = LocalizationManager.GetLocalizedText(flower.FlowerType.ToString().ToLower());
 
                     if (flowerColor == FlowerColor.None)
-                        recipeString += $"{flowerCount} {flowerType}";
+                        recipeString += $"{flowerCount} {type}";
                     else
-                        recipeString += $"{flowerCount} {LocalizationManager.GetLocalizedText(flowerColor.ToString().ToLower())} {flowerType}";
+                        recipeString += $"{flowerCount} {LocalizationManager.GetLocalizedText(flowerColor.ToString().ToLower())} {type}";
 
                     if (k != flowerCountInBouqet - 1)
                         recipeString += ", ";
                 }
                 parseArgs[i] = recipeString;
-                orderIndex++;
             }
             else if (parseOptions[i] == StringParseOptions.WrappingPaper)
             {
-                orderIndex--;
-                var paper = _bouquetsToOrder[orderIndex].WrappingPaperType;
+                var paper = _bouquetsToOrder[bouquetIndex].WrappingPaperType;
                 parseArgs[i] = $"{LocalizationManager.GetLocalizedText(paper.ToString().ToLower())}";
-                orderIndex++;
             }
             else if (parseOptions[i] == StringParseOptions.Ribbon)
             {
-                orderIndex--;
-                var ribbon = _bouquetsToOrder[orderIndex].RibbonType;
+                var ribbon = _bouquetsToOrder[bouquetIndex].RibbonType;
                 parseArgs[i] = $"{LocalizationManager.GetLocalizedText(ribbon.ToString().ToLower())}";
-                orderIndex++;
             }
+            orderIndex++;
         }
 
         message = string.Format(message, parseArgs);
         _speechBubbleTextForLineCount.text = message;
-        _speechBubbleText.text = message;
 
         // set speech bubble size
-        int lineCount = _speechBubbleTextForLineCount.textInfo.lineCount;
-        float height = lineCount * LINE_HEIGHT + LINE_HEIGHT * 1.5f;
-        _speechBubbleBgImage.rectTransform.sizeDelta = new Vector2(_speechBubbleBgImage.rectTransform.sizeDelta.x,
-                                                                    height);
+        Timing.RunCoroutine(SetSpeechBubbleOptions(message, answerOptions).CancelWith(gameObject));
+    }
 
-        int answerCount = answerOptions.Count;
-        for (int i = 0; i < answerCount; i++)
-        {
-            _speechBubbleButtonImages[i].gameObject.SetActive(true);
-            _speechBubbleButtonImages[i].transform.position = new Vector3(_speechBubbleButtonImages[i].transform.position.x,
-                                                                        _speechBubbleBgImage.transform.position.y - height - 30,
-                                                                        _speechBubbleButtonImages[i].transform.position.z);
-            _speechBubbleButtonTexts[i].gameObject.SetActive(true);
-            _speechBubbleButtonTexts[i].text = LocalizationManager.GetLocalizedText(answerOptions[i].Message);
+    public void Talk(string localizationKey, string defaultMessage, Action onCompleted)
+    {
+        Debug.Log($"#customer# Talk called with localizationKey: {localizationKey} and defaultMessage: {defaultMessage}");
 
-            _speechBubbleButtons[i].onClick.RemoveAllListeners();
-            Action action = answerOptions[i].Advance;
-            _speechBubbleButtons[i].onClick.AddListener(() =>
-            {
-                action?.Invoke();
-            });
-        }
-        for (int i = answerCount; i < _speechBubbleButtonImages.Count; i++)
-        {
-            _speechBubbleButtonImages[i].gameObject.SetActive(false);
-            _speechBubbleButtonTexts[i].gameObject.SetActive(false);
-        }
+        _isWaitingForSpeechEnd = true;
+        _typeWriter.onTextShowed.RemoveListener(OnSpeechEnd);
+
+        // set text
+        string localizedMessage = LocalizationManager.GetLocalizedText(localizationKey);
+        string message = string.IsNullOrEmpty(localizedMessage) ? defaultMessage : localizedMessage;
+
+        _speechBubbleTextForLineCount.text = message;
+
+        _onTalkEnd = onCompleted;
+        Timing.RunCoroutine(SetSpeechBubbleOptions(message, null).CancelWith(gameObject));
     }
 
     public void StopTalking()
     {
+        Debug.LogError("StopTalking called");
         _speechBubbleObjects.SetActive(false);
+        _speechBubbleText.text = string.Empty;
+        _typeWriter.SkipTypewriter();
     }
 
     public float GetOrderPayment()
@@ -274,15 +311,65 @@ public class Customer : MonoBehaviour
         return price;
     }
 
+    public void StartTimer()
+    {
+        _waitingStartTime = Time.time;
+    }
+
     public FlowerDeliveredInfo GetOrderInfo(List<BouquetModel> bouquetModels)
     {
         List<OrderContentResult> orderContentResults = CheckOrderContent(bouquetModels);
 
+        int happinessChange = 0;
+        HappinessState happinessState = HappinessState.None;
+        for (int i = 0; i < orderContentResults.Count; i++)
+        {
+            OrderContentResult result = orderContentResults[i];
+
+            // TODO: similarity value is hardcoded, change later
+            if (result.OrderSimilarity >= ORDER_SIMILARITY_LIMIT && result.IsRibbonCorrect && result.IsWrappingPaperCorrect)
+            {
+                happinessState |= HappinessState.SameOrder;
+                happinessChange += _customerInfo.HappinessChange[HappinessState.SameOrder];
+            }
+            else
+            {
+                happinessState |= HappinessState.DifferentOrder;
+                happinessChange += _customerInfo.HappinessChange[HappinessState.DifferentOrder];
+            }
+
+            if (result.ExtraFlowers.Count > 0)
+            {
+                happinessState |= HappinessState.MoreFlowers;
+                happinessChange += _customerInfo.HappinessChange[HappinessState.MoreFlowers];
+            }
+
+            if (result.MissingFlowers.Count > 0)
+            {
+                happinessState |= HappinessState.MissingFlowers;
+                happinessChange += _customerInfo.HappinessChange[HappinessState.MissingFlowers];
+            }
+        }
+
+        float totalWaitTimeInSeconds = Time.time - _waitingStartTime;
+        if (_customerInfo.AcceptableWaitTime > totalWaitTimeInSeconds)
+        {
+            happinessState |= HappinessState.WaitedLong;
+            happinessChange += _customerInfo.HappinessChange[HappinessState.WaitedLong];
+        }
+
+        float tip = 0;
+        if (happinessChange > _customerInfo.HappinessTipLimit)
+        {
+            tip = Random.Range(_customerInfo.TipPercentage.x, _customerInfo.TipPercentage.y);
+        }
+
         return new FlowerDeliveredInfo()
         {
-            Conversation = _customerInfo.GoodbyeConversation,
-            Tip = Random.Range(_customerInfo.TipPercentage.x, _customerInfo.TipPercentage.y),
-            HappinessChange = 0,
+            Conversation = Configs.LevelConfig.GetGoodbyeConvo(_customerInfo, happinessState),
+            TipPercentage = tip,
+            HappinessChange = happinessChange,
+            HappinessState = happinessState,
             OrderContentResults = orderContentResults,
         };
     }
@@ -292,15 +379,26 @@ public class Customer : MonoBehaviour
         _typeWriter.SkipTypewriter();
     }
 
+    public void OnSpeechEnd()
+    {
+        if (_isWaitingForSpeechEnd)
+        {
+            Debug.LogError("OnSpeechEnd called 22222");
+            _onTalkEnd?.Invoke();
+            _onTalkEnd = null;
+            _typeWriter.onTextShowed.RemoveListener(OnSpeechEnd);
+        }
+    }
+
     private void PlayIdleAnimation()
     {
         _sequence?.Kill();
         _idleSequence?.Kill();
         _idleSequence = DOTween.Sequence();
-        _idleSequence.Append(transform.DOScaleY(IDLE_SCALE_Y, IDLE_DURATION).SetEase(Ease.Linear));
-        _idleSequence.Join(transform.DOScaleX(IDLE_SCALE_X, IDLE_DURATION).SetEase(Ease.Linear));
-        _idleSequence.Append(transform.DOScaleY(1, IDLE_DURATION).SetEase(Ease.Linear));
-        _idleSequence.Join(transform.DOScaleX(1, IDLE_DURATION).SetEase(Ease.Linear));
+        _idleSequence.Append(_customerTransform.DOScaleY(IDLE_SCALE_Y, IDLE_DURATION).SetEase(Ease.Linear));
+        _idleSequence.Join(_customerTransform.DOScaleX(IDLE_SCALE_X, IDLE_DURATION).SetEase(Ease.Linear));
+        _idleSequence.Append(_customerTransform.DOScaleY(1, IDLE_DURATION).SetEase(Ease.Linear));
+        _idleSequence.Join(_customerTransform.DOScaleX(1, IDLE_DURATION).SetEase(Ease.Linear));
         _idleSequence.OnComplete(PlayIdleAnimation);
     }
 
@@ -315,10 +413,39 @@ public class Customer : MonoBehaviour
         _bouquetsToOrder.Clear();
 
         // Determine order
-        int bouquetCount = _customerInfo.BouquetTypes.Count;
+        List<int> orderIndices = new();
+        bool choseRandomOrder = _customerInfo.ChoseOrderRandomly;
+        if (choseRandomOrder)
+        {
+            int safe = 0;
+            int orderCount = Random.Range(1, _customerInfo.MaxOrderCount + 1);
+            while (orderCount > 0)
+            {
+                if (safe++ > 100)
+                {
+                    Debug.LogError("Infinite loop detected in DetermineOrder. Exiting loop.");
+                    break;
+                }
+
+                int bouquetTypeIndex = Random.Range(0, _customerInfo.Orders.Count);
+                if (!orderIndices.Contains(bouquetTypeIndex))
+                {
+                    orderIndices.Add(bouquetTypeIndex);
+                    orderCount--;
+                }
+            }
+        }
+        else
+        {
+            orderIndices = Enumerable.Range(0, _customerInfo.Orders.Count).ToList();
+        }
+
+        int bouquetCount = orderIndices.Count;
         for (int k = 0; k < bouquetCount; k++)
         {
-            var bouquetTypeToOrder = _customerInfo.BouquetTypes[Random.Range(0, _customerInfo.BouquetTypes.Count)];
+            Order order = _customerInfo.Orders[orderIndices[k]];
+
+            BouquetType bouquetTypeToOrder = order.BouquetType;
             if (bouquetTypeToOrder == BouquetType.Custom)
             {
                 BouquetFlowerInfo flowerInfo = new();
@@ -326,14 +453,17 @@ public class Customer : MonoBehaviour
                 {
                     BouquetType = bouquetTypeToOrder
                 };
-                int flowerCount = _customerInfo.CustomFlowers.Count;
+                int flowerCount = order.CustomFlowers.Count;
                 for (int i = 0; i < flowerCount; i++)
                 {
-                    flowerInfo.FlowerType = _customerInfo.CustomFlowers[i].FlowerType;
-                    flowerInfo.Count = _customerInfo.CustomFlowers[i].Count;
-                    flowerInfo.FlowerColor = _customerInfo.CustomFlowers[i].FlowerColor;
+                    flowerInfo.FlowerType = order.CustomFlowers[i].FlowerType;
+                    flowerInfo.Count = order.CustomFlowers[i].Count;
+                    flowerInfo.FlowerColor = order.CustomFlowers[i].FlowerColor;
                     bouquetModel.AddNewFlowers(flowerInfo);
                 }
+
+                bouquetModel.RibbonType = order.RibbonType;
+                bouquetModel.WrappingPaperType = order.WrappingPaperType;
 
                 _bouquetsToOrder.Add(bouquetModel);
             }
@@ -343,7 +473,9 @@ public class Customer : MonoBehaviour
                 var bouquetModel = new BouquetModel()
                 {
                     Flowers = recipe.Bouquet.Flowers,
-                    BouquetType = bouquetTypeToOrder
+                    BouquetType = bouquetTypeToOrder,
+                    RibbonType = order.RibbonType,
+                    WrappingPaperType = order.WrappingPaperType,
                 };
                 _bouquetsToOrder.Add(bouquetModel);
             }
@@ -434,5 +566,47 @@ public class Customer : MonoBehaviour
         }
 
         return results;
+    }
+
+    private IEnumerator<float> SetSpeechBubbleOptions(string message, List<Option> answerOptions = null)
+    {
+        yield return Timing.WaitForOneFrame;
+
+        _speechBubbleObjects.SetActive(true);
+        _typeWriter.ShowText(message);
+        _typeWriter.onTextShowed.AddListener(OnSpeechEnd);
+
+        int lineCount = _speechBubbleTextForLineCount.textInfo.lineCount;
+        float height = lineCount * LINE_HEIGHT + LINE_HEIGHT * 2f;
+        _speechBubbleBgImage.rectTransform.sizeDelta = new Vector2(_speechBubbleBgImage.rectTransform.sizeDelta.x,
+                                                                    height);
+
+        var buttonsParentTransform = _speechBubbleButtonsLayoutGroup.transform;
+        buttonsParentTransform.position = new Vector3(buttonsParentTransform.position.x,
+                                            _speechBubbleBgImage.transform.position.y - height - 100,
+                                            buttonsParentTransform.position.z);
+
+        int answerCount = answerOptions == null ? 0 : answerOptions.Count;
+        for (int i = 0; i < answerCount; i++)
+        {
+            _speechBubbleButtonImages[i].gameObject.SetActive(true);
+            _speechBubbleButtonTexts[i].gameObject.SetActive(true);
+            _speechBubbleButtonTexts[i].text = LocalizationManager.GetLocalizedText(answerOptions[i].Message);
+
+            _speechBubbleButtons[i].onClick.RemoveAllListeners();
+            Action action = answerOptions[i].Advance;
+            _speechBubbleButtons[i].onClick.AddListener(() =>
+            {
+                action?.Invoke();
+            });
+        }
+        for (int i = answerCount; i < _speechBubbleButtonImages.Count; i++)
+        {
+            _speechBubbleButtonImages[i].gameObject.SetActive(false);
+            _speechBubbleButtonTexts[i].gameObject.SetActive(false);
+        }
+        _speechBubbleButtonsLayoutGroup.enabled = false;
+        _speechBubbleButtonsLayoutGroup.enabled = true;
+        yield return Timing.WaitForOneFrame;
     }
 }

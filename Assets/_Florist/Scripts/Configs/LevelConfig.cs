@@ -4,12 +4,25 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Conversa.Runtime;
 using Random = UnityEngine.Random;
+using AYellowpaper.SerializedCollections;
 
 namespace Config
 {
     public enum CustomerType
     {
         Regular, Random, Opponent
+    }
+
+    [Flags]
+    public enum HappinessState
+    {
+        None = 0,
+        Happy = 1 << 0,
+        WaitedLong = 1 << 1,
+        MissingFlowers = 1 << 2,
+        DifferentOrder = 1 << 3,
+        MoreFlowers = 1 << 4,
+        SameOrder = 1 << 5,
     }
 
     public enum Gender
@@ -20,6 +33,14 @@ namespace Config
     public enum SpecialEvents
     {
         None, InroduceRose, IntroduceDaisy, IntroduceBoy, IntroduceGirl, GiveReward, OpenMezat
+    }
+
+    [Serializable]
+    public class DayEvent
+    {
+        public bool IsEvent;
+        [ShowIf("IsEvent")] public SpecialEvents EventType;
+        [HideIf("IsEvent")] public CustomerType CustomerType;
     }
 
     [Serializable]
@@ -37,10 +58,11 @@ namespace Config
         public Gender Gender;
 
         [VerticalGroup("Flowers")]
-        public List<BouquetType> BouquetTypes;
+        public bool ChoseOrderRandomly;
         [VerticalGroup("Flowers")]
-        [ShowIf("@this.BouquetTypes.Contains(BouquetType.Custom)")]
-        public List<BouquetFlowerInfo> CustomFlowers;
+        [ShowIf("ChoseOrderRandomly")] public int MaxOrderCount;
+        [VerticalGroup("Flowers")]
+        public List<Order> Orders;
 
         [VerticalGroup("Conversations")]
         public bool UseCustomConvo;
@@ -51,28 +73,20 @@ namespace Config
         [ShowIf("UseCustomConvo")]
         public Conversation GoodbyeConversation = null;
 
-        [VerticalGroup("Money")]
-        [Tooltip("Between 1 and 100")]
-        [Range(0, 100)]
-        public float TipGiveRatio;
-
-        [VerticalGroup("Money")]
+        [VerticalGroup("Happiness")]
+        public SerializedDictionary<HappinessState, int> HappinessChange;
+        [VerticalGroup("Happiness")]
+        public int HappinessTipLimit;
+        [VerticalGroup("Happiness")]
         public Vector2 TipPercentage = new(10, 50);
-
-        public float GetTipPercentage()
-        {
-            // TODO:
-            return Random.Range(TipPercentage.x, TipPercentage.y);
-        }
+        [VerticalGroup("Happiness")]
+        public int AcceptableWaitTime = 60;
     }
 
     [Serializable]
     public class DayInfo
     {
-        public List<CustomerType> Customers;
-        public SpecialEvents SpecialEvent;
-        [HideIf(nameof(SpecialEvent), SpecialEvents.None)]
-        public bool IsSpecialEventOnDayStart;
+        public List<DayEvent> Events;
     }
 
     [Serializable]
@@ -83,23 +97,13 @@ namespace Config
         [Tooltip("In minutes")] public float DayDuration;
     }
 
-    [Serializable]
-    public class GoodbyeConversationsInfo
-    {
-        public List<Conversation> Happy;
-        public List<Conversation> WaitedLong;
-        public List<Conversation> MissingFlowers;
-        public List<Conversation> DifferentFlowers;
-        public List<Conversation> MoreFlowers;
-    }
-
     [CreateAssetMenu(fileName = "LevelConfig", menuName = "Paw/Configs/Level")]
     public class LevelConfig : SerializedScriptableObject
     {
         [TableList(ShowIndexLabels = true)]
         public List<CustomerInfo> Customers;
         public DayTimeInfo DayTimeInfo;
-        public GoodbyeConversationsInfo GoodbyeConversations;
+        public Dictionary<HappinessState, Conversation> GoodbyeConversations;
         public List<Conversation> InitialConversations;
         public List<DayInfo> Days;
 
@@ -127,6 +131,18 @@ namespace Config
             }
 
             return InitialConversations[Random.Range(0, InitialConversations.Count)];
+        }
+
+        public Conversation GetGoodbyeConvo(CustomerInfo customerInfo, HappinessState happinessState)
+        {
+            foreach (var customer in Customers)
+            {
+                if (customer.CustomerType == customerInfo.CustomerType && customer.Name == customerInfo.Name && customer.UseCustomConvo)
+                    return customer.GoodbyeConversation;
+            }
+
+            // TODO:
+            return GoodbyeConversations[HappinessState.Happy];
         }
     }
 }

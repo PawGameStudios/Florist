@@ -16,7 +16,6 @@ namespace Conversa.Runtime.Nodes
 		public const string DefaultKey = "Localization Key";
 		public const string DefaultMessage = "Enter your message here";
 
-		[SerializeField] private string actor;
 		[SerializeField] private Actor actorProfile;
 		[SerializeField] private bool useActorProfile;
 		[SerializeField] private string message = DefaultMessage;
@@ -31,11 +30,6 @@ namespace Conversa.Runtime.Nodes
 			new PortDefinition<BaseNode>("no", "No")
 		};
 
-		public string Actor
-		{
-			get => actor;
-			set => actor = value;
-		}
 		public Actor ActorProfile
 		{
 			get => actorProfile;
@@ -109,7 +103,7 @@ namespace Conversa.Runtime.Nodes
 			}
 			else
 			{
-				var choiceEvent = new ChoiceEvent(actor, key, message, options.Select(NodePortToOption).ToList(), new List<StringParseOptions> { parseOption1, parseOption2, parseOption3 });
+				var choiceEvent = new ChoiceEvent(key, message, options.Select(NodePortToOption).ToList(), new List<StringParseOptions> { parseOption1, parseOption2, parseOption3 });
 				conversationEvents.OnChoice.Invoke(choiceEvent); // Deprecated
 				conversationEvents.OnConversationEvent.Invoke(choiceEvent);
 			}

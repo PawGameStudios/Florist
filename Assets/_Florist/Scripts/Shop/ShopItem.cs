@@ -19,7 +19,7 @@ public class ShopItem : MonoBehaviour
         _shopScroll = shopScroll;
         _index = index;
         _shopItemInfo = shopItemInfo;
-        _nameText.text = shopItemInfo.Name;
+        _nameText.text = LocalizationManager.GetLocalizedText(shopItemInfo.Name);
         _icon.sprite = shopItemInfo.Icon;
 
         ShopData.ItemState itemState = SaveSystem.Inst.ShopData.GetItemState(_shopItemInfo.Id);
@@ -32,7 +32,7 @@ public class ShopItem : MonoBehaviour
                 case ShopData.ItemState.Locked:
                     _lock.SetActive(true);
                     _button.interactable = false;
-                    _buttonText.text = "Locked";
+                    _buttonText.text = LocalizationManager.GetLocalizedText("locked");
                     break;
                 case ShopData.ItemState.Purchasable:
                     _lock.SetActive(false);
@@ -42,12 +42,12 @@ public class ShopItem : MonoBehaviour
                 case ShopData.ItemState.Purchased:
                     _lock.SetActive(false);
                     _button.interactable = true;
-                    _buttonText.text = "Select";
+                    _buttonText.text = LocalizationManager.GetLocalizedText("select");
                     break;
                 case ShopData.ItemState.Selected:
                     _lock.SetActive(false);
                     _button.interactable = false;
-                    _buttonText.text = "Selected";
+                    _buttonText.text = LocalizationManager.GetLocalizedText("selected");
                     break;
             }
         }
@@ -58,7 +58,7 @@ public class ShopItem : MonoBehaviour
                 case ShopData.ItemState.Locked:
                     _lock.SetActive(true);
                     _button.interactable = false;
-                    _buttonText.text = "Locked";
+                    _buttonText.text = LocalizationManager.GetLocalizedText("locked");
                     break;
                 case ShopData.ItemState.Purchasable:
                     _lock.SetActive(false);
@@ -68,7 +68,7 @@ public class ShopItem : MonoBehaviour
                 case ShopData.ItemState.Purchased:
                     _lock.SetActive(false);
                     _button.interactable = false;
-                    _buttonText.text = "Owned";
+                    _buttonText.text = LocalizationManager.GetLocalizedText("owned");
                     break;
             }
         }
@@ -82,20 +82,20 @@ public class ShopItem : MonoBehaviour
             if (isSelected)
             {
                 _button.interactable = false;
-                _buttonText.text = "Selected";
+                _buttonText.text = LocalizationManager.GetLocalizedText("selected");
                 SaveSystem.Inst.ShopData.SetSelectedState(_shopItemInfo.Id);
             }
             else
             {
                 _button.interactable = true;
-                _buttonText.text = "Select";
+                _buttonText.text = LocalizationManager.GetLocalizedText("select");
                 SaveSystem.Inst.ShopData.SetPurchasedState(_shopItemInfo.Id);
             }
         }
         else if (itemState == ShopData.ItemState.Selected)
         {
             _button.interactable = true;
-            _buttonText.text = "Select";
+            _buttonText.text = LocalizationManager.GetLocalizedText("select");
             SaveSystem.Inst.ShopData.SetPurchasedState(_shopItemInfo.Id);
         }
     }

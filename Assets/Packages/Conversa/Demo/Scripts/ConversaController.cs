@@ -110,7 +110,7 @@ namespace Conversa.Demo.Scripts
 		private void HandleChoice(ChoiceEvent e)
 		{
 			Debug.Log("HandleChoice");
-			uiController.ShowChoice(e.Actor, e.Message, null, e.Options);
+			// uiController.ShowChoice(e.Actor, e.Message, null, e.Options);
 		}
 
 		private static void HandleUserEvent(UserEvent userEvent)

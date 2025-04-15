@@ -15,7 +15,7 @@ namespace Conversa.Runtime.Events
             StopsFlow = stopsFlow;
             Advance = advance;
         }
-        
+
         public UserEvent(string name, bool stopsFlow)
         {
             Name = name;

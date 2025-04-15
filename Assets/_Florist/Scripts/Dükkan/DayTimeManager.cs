@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class DayTimeManager : MonoBehaviour
 {
-    [SerializeField] private DukkanPage _dukkan;
+    public float TotalTimePassed => _totalTimePassed;
     [SerializeField] private TextMeshProUGUI _dayText;
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private Image _timeIcon;
@@ -49,7 +49,7 @@ public class DayTimeManager : MonoBehaviour
         {
             Timer.TimeTickMiliseconds -= TimeTickHandler;
             _totalTimePassed = _totalMinutesInDay;
-            _dukkan.OnDayTimeEnded();
+            References.DukkanPage.OnDayTimeEnded();
         }
 
         int hour = Configs.LevelConfig.DayTimeInfo.DayStartTime + (int)(_totalTimePassed / 60);

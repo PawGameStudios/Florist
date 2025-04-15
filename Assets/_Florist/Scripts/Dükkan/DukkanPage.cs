@@ -1,4 +1,3 @@
-using TMPro;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,21 +42,37 @@ public struct OrderInfo
     public List<BouquetModel> BouquetModels;
 }
 
+public enum DukkanState
+{
+    None,
+    WaitingForCustomer,
+    CustomerArrived,
+    CustomerTalking,
+    CustomerLeaving,
+    FlowerReady,
+    FlowerDelivered
+}
+
 public class DukkanPage : Page
 {
-    [SerializeField] private TextMeshProUGUI _moneyAmount, _diamondAmount;
+    public DukkanState DukkanState => _dukkanState;
+    public EarningsInfo EarningsInfo => _earningsInfo;
+    public int CurrentCustomerIndex => _currentCustomerIndex;
     [SerializeField] private Image _fadeImage;
     [SerializeField] private RectTransform _flowerDeliveryArea;
     [SerializeField] private Customer _customer;
     [SerializeField] private Bouquet _bouquet;
     [SerializeField] private PosController _posController;
-    [SerializeField] private GameObject _contentObjects, _topObjects;
+    [SerializeField] private GameObject _contentObjects;
     private DayInfo _dayInfo;
     private ConversationRunner _convoRunner;
     private int _currentCustomerIndex;
     private Sequence _sequence;
     public EarningsInfo _earningsInfo = new();
     public FlowerDeliveredInfo _flowerDeliveredInfo = new();
+    private DukkanState _dukkanState = DukkanState.None;
+    private const string GO_TO_WORKSHOP = "GoToWorkshop";
+    private const string END_CONVO = "EndConvo";
 
 
     #region Decorations
@@ -76,44 +91,37 @@ public class DukkanPage : Page
 
     private void OnEnable()
     {
-        GeneralData.MoneyAmountChanged += OnMoneyAmountChanged;
-        GeneralData.DiamondAmountChanged += OnDiamondAmountChanged;
-        OnMoneyAmountChanged();
-        OnDiamondAmountChanged();
         SetItems();
     }
 
     private void OnDisable()
     {
         _sequence?.Kill();
-
-        GeneralData.MoneyAmountChanged -= OnMoneyAmountChanged;
-        GeneralData.DiamondAmountChanged -= OnDiamondAmountChanged;
         CancelInvoke();
     }
 
-    public override void Close(Action onCompleted = null)
+    public override void Close(PageData pageData = null, Action onCompleted = null)
     {
-        // gameObject.SetActive(false);
         _contentObjects.SetActive(true);
-        _topObjects.SetActive(true);
+        References.TopCanvas.Open();
 
         _sequence?.Kill();
         _sequence = DOTween.Sequence();
         _sequence.Append(_fadeImage.DOFade(endValue: .95f, duration: .3f).SetEase(Ease.OutSine).OnComplete(() =>
         {
-            // gameObject.SetActive(false);
             _fadeImage.color = new Color(0, 0, 0, 0);
             onCompleted?.Invoke();
         }));
 
     }
 
-    public override void Open(Action onCompleted = null)
+    public override void Open(PageData pageData = null, Action onCompleted = null)
     {
+        base.Open(pageData, onCompleted);
+
         gameObject.SetActive(true);
         _contentObjects.SetActive(false);
-        _topObjects.SetActive(false);
+        References.TopCanvas.Close();
 
         _earningsInfo ??= new EarningsInfo();
         _earningsInfo.Reset();
@@ -123,7 +131,7 @@ public class DukkanPage : Page
         _sequence.Append(_fadeImage.DOFade(endValue: .95f, duration: .3f).SetEase(Ease.OutSine).OnComplete(() =>
         {
             _contentObjects.SetActive(true);
-            _topObjects.SetActive(true);
+            References.TopCanvas.Open();
         }));
         _sequence.Append(_fadeImage.DOFade(endValue: 0, duration: .3f).SetEase(Ease.InSine));
 
@@ -131,7 +139,7 @@ public class DukkanPage : Page
         _dayInfo = Configs.LevelConfig.Days[SaveSystem.Inst.GeneralData.CurrentDayIndex];
         _customer.gameObject.SetActive(false);
         _posController.ResetPos();
-        Invoke(nameof(StartDay), 1);
+        Invoke(nameof(StartNextEvent), 1);
     }
 
     public void OnDayTimeEnded()
@@ -167,36 +175,21 @@ public class DukkanPage : Page
         Debug.Log("Flower Delivered");
         _bouquet.gameObject.SetActive(false);
 
-        if (_customer.CustomerInfo.GoodbyeConversation != null)
-        {
-            // this means a special goodbye conversation is set for this customer
-            _convoRunner?.OnConversationEvent.RemoveAllListeners();
-            _convoRunner = new ConversationRunner(_customer.CustomerInfo.GoodbyeConversation);
-            _convoRunner.OnConversationEvent.AddListener(HandleConversationEvent);
-            _convoRunner.Begin();
-        }
-        else
-        {
-            // this means a generic goodbye conversation will be used
+        _flowerDeliveredInfo = _customer.GetOrderInfo(_bouquet.Order.BouquetModels);
 
-            FlowerDeliveredInfo flowerDeliveredInfo = _customer.GetOrderInfo(_bouquet.Order.BouquetModels);
-            _flowerDeliveredInfo = flowerDeliveredInfo;
-            // TODO: check if order is correct
-            // decrease happiness if not
-            // increase happiness if correct
-            // decrease money with bouquet price
-            // increase money with tip
-            // start dialogue with goodbye conversation based on happiness
+        _convoRunner?.OnConversationEvent.RemoveAllListeners();
+        _convoRunner?.OnEnd.RemoveAllListeners();
+        _convoRunner = new ConversationRunner(_flowerDeliveredInfo.Conversation);
+        _convoRunner.OnConversationEvent.AddListener(HandleConversationEvent);
+        _convoRunner.OnEnd.AddListener(HandleEndEvent);
+        _convoRunner.Begin();
 
-            float tip = flowerDeliveredInfo.Tip;
-            _earningsInfo.Tip += tip;
-        }
+        // TODO: tip animation
+        float tip = _earningsInfo.Earnings * _flowerDeliveredInfo.TipPercentage / 100f;
+        _earningsInfo.Tip += tip;
 
-        // TODO: call later when the conversation is over
-        _customer.PlayExitAnimation();
-        References.HappinessMeter.StopCountdown();
-
-        Invoke(nameof(NextCustomer), 1);
+        References.HappinessMeter.ChangeHappinessAfterOrderReceived(_flowerDeliveredInfo.HappinessChange);
+        References.HappinessMeter.StopHappinessCountdown();
     }
 
     public bool CheckIfInCustomerArea(Vector2 pos)
@@ -276,37 +269,32 @@ public class DukkanPage : Page
         _customer.SetSpeechBubbleSprites();
     }
 
-    private void StartDay()
+    private void StartNextEvent()
     {
-        Debug.Log("#dukkan# StartDay");
-        if (_dayInfo.SpecialEvent != SpecialEvents.None && _dayInfo.IsSpecialEventOnDayStart)
+        Debug.Log($"#dukkan# StartNextEvent, _currentCustomerIndex: {_currentCustomerIndex}, _dayInfo.Events.Count: {_dayInfo.Events.Count}");
+        if (_currentCustomerIndex < _dayInfo.Events.Count)
         {
-            StartSpecialEvent();
-        }
-        else
-        {
-            NextCustomer();
-        }
-    }
-
-    private void NextCustomer()
-    {
-        Debug.Log("#dukkan# NextCustomer");
-        if (_currentCustomerIndex < _dayInfo.Customers.Count)
-        {
-            CustomerType customerType = _dayInfo.Customers[_currentCustomerIndex];
-            CustomerInfo customer = Configs.LevelConfig.GetCustomer(customerType);
-            Conversation initialConversation = Configs.LevelConfig.GetInitialConvo(customer);
-
-            _customer.SetCustomer(customer);
-            _customer.PlayEnterAnimation(onComplete: () =>
+            DayEvent dayEvent = _dayInfo.Events[_currentCustomerIndex];
+            if (dayEvent.IsEvent)
             {
-                _convoRunner?.OnConversationEvent.RemoveAllListeners();
-                _convoRunner = new ConversationRunner(initialConversation);
-                _convoRunner.OnConversationEvent.AddListener(HandleConversationEvent);
-                _convoRunner.Begin();
-                References.HappinessMeter.StartCountdown();
-            });
+                SpecialEvents specialEvent = dayEvent.EventType;
+            }
+            else
+            {
+                CustomerType customerType = dayEvent.CustomerType;
+                CustomerInfo customer = Configs.LevelConfig.GetCustomer(customerType);
+                Conversation initialConversation = Configs.LevelConfig.GetInitialConvo(customer);
+
+                _customer.SetCustomer(customer);
+                _customer.PlayEnterAnimation(onComplete: () =>
+                {
+                    _convoRunner?.OnConversationEvent.RemoveAllListeners();
+                    _convoRunner = new ConversationRunner(initialConversation);
+                    _convoRunner.OnConversationEvent.AddListener(HandleConversationEvent);
+                    _convoRunner.Begin();
+                    References.HappinessMeter.StartNewHappinessCountdown();
+                });
+            }
             _currentCustomerIndex++;
         }
         else
@@ -326,11 +314,6 @@ public class DukkanPage : Page
         });
     }
 
-    private void StartSpecialEvent()
-    {
-        Debug.Log("#dukkan# StartSpecialEvent");
-    }
-
     private void GoToWorkshop()
     {
         Debug.Log("#dukkan# GoToWorkshop");
@@ -348,16 +331,6 @@ public class DukkanPage : Page
 
 
     #region Event Listeners
-    private void OnMoneyAmountChanged()
-    {
-        _moneyAmount.text = $"{SaveSystem.Inst.GeneralData.Money:0.##}";
-    }
-
-    private void OnDiamondAmountChanged()
-    {
-        _diamondAmount.text = $"{SaveSystem.Inst.GeneralData.Diamonds:0.##}";
-    }
-
     private void HandleConversationEvent(IConversationEvent convoEvent)
     {
         Debug.Log($"#dukkan# HandleConversationEvent: {convoEvent}");
@@ -366,12 +339,32 @@ public class DukkanPage : Page
             case ChoiceEvent choiceEvent:
                 _customer.Talk(choiceEvent.Key, choiceEvent.Message, choiceEvent.Options, choiceEvent.ParseOptions);
                 break;
+            case LocalizedMessageEvent localizedMessageEvent:
+                _customer.Talk(localizedMessageEvent.Key, localizedMessageEvent.Message, () =>
+                {
+                    localizedMessageEvent.Advance();
+                });
+                break;
             case UserEvent userEvent:
                 Debug.Log($"#dukkan# userEvent: {userEvent.Name}");
-                if (userEvent.StopsFlow)
+                if (userEvent.Name == GO_TO_WORKSHOP)
+                {
                     GoToWorkshop();
+                }
+                else if (userEvent.Name == END_CONVO)
+                {
+                    _customer.StopTalking();
+                    _customer.PlayExitAnimation();
+                    Invoke(nameof(StartNextEvent), 1);
+                }
                 break;
         }
+    }
+
+    private void HandleEndEvent()
+    {
+        Debug.Log($"#dukkan# HandleEndEvent");
+        _customer.OnSpeechEnd();
     }
     #endregion
 

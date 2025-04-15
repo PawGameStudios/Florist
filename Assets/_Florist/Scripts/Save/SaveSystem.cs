@@ -9,8 +9,10 @@ public class SaveSystem : MonoBehaviour
 
     public GeneralData GeneralData;
     public ShopData ShopData;
+    public SaveData SaveData;
     private const string _generalDataKey = "HTndkrl.dat";
     private const string _shopDataKey = "YUCmas2.dat";
+    private const string _saveDataKey = "YFN351F).dat";
 
     private void Awake()
     {
@@ -25,8 +27,8 @@ public class SaveSystem : MonoBehaviour
             DestroyImmediate(gameObject);
         }
 
-        // Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        // Application.targetFrameRate = 60;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        Application.targetFrameRate = 60;
         QualitySettings.vSyncCount = 0;
     }
 
@@ -49,6 +51,7 @@ public class SaveSystem : MonoBehaviour
 
             GeneralData = FileManager.Load<GeneralData>(_generalDataKey);
             ShopData = FileManager.Load<ShopData>(_shopDataKey);
+            SaveData = FileManager.Load<SaveData>(_saveDataKey);
         }
         catch (Exception ex)
         {
@@ -63,8 +66,11 @@ public class SaveSystem : MonoBehaviour
         {
             GeneralData.IsFirstSession = false;
 
+            SaveData.SaveGame();
+
             FileManager.Save(_generalDataKey, GeneralData);
             FileManager.Save(_shopDataKey, ShopData);
+            FileManager.Save(_saveDataKey, SaveData);
         }
         catch (Exception ex)
         {
@@ -77,6 +83,7 @@ public class SaveSystem : MonoBehaviour
         Debug.Log("FirstTime");
         GeneralData = new();
         ShopData = new();
+        SaveData = new();
         PlayerPrefs.SetInt("FirstTime", 1);
     }
 
@@ -86,6 +93,7 @@ public class SaveSystem : MonoBehaviour
         errLog += $"FirstTime: {PlayerPrefs.GetInt("FirstTime")}\n";
         errLog += $"GeneralData: {GeneralData != null}\n";
         errLog += $"ShopData: {ShopData != null}\n";
+        errLog += $"SaveData: {SaveData != null}\n";
         errLog += $"ex: {ex}";
 
         // if (FirebaseController.Instance != null)

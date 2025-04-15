@@ -1,0 +1,107 @@
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using UnityEngine;
+using ShopButtonType = ShopPage.ShopButtonType;
+
+public class ShopButton : MonoBehaviour
+{
+    [SerializeField] private ShopButtonType _type;
+    [SerializeField] private ShopScroll _shopScrollPrefab;
+    [SerializeField] private ShopItem _shopItemPrefab;
+    [SerializeField] private List<ItemType> _itemTypes = new();
+    [ShowIf("@_itemTypes.Count > 1")][SerializeField] private List<GameObject> _subButtons = null;
+    [SerializeField] private List<GameObject> _arrowObjects;
+    private List<ShopScroll> _scrolls = new();
+    private bool _isOpen = false;
+    private bool _isExtended = false;
+    private bool _isInitialized = false;
+
+    public void OnButtonClicked()
+    {
+        if (_subButtons != null && _subButtons.Count > 0)
+        {
+            if (!_isInitialized)
+            {
+                int _subButtonsCount = _subButtons.Count;
+                for (int i = 0; i < _subButtonsCount; i++)
+                {
+                    var scroll = Instantiate(_shopScrollPrefab, References.ShopPage.ShopScrollParent);
+                    scroll.Init(Configs.ShopConfig.GetItems(_itemTypes[i]), _shopItemPrefab);
+                    _scrolls.Add(scroll);
+                }
+                _isInitialized = true;
+            }
+
+            ToggleSubButtons();
+        }
+        else
+        {
+            if (!_isOpen)
+            {
+                if (!_isInitialized)
+                {
+                    var scroll = Instantiate(_shopScrollPrefab, References.ShopPage.ShopScrollParent);
+                    scroll.Init(Configs.ShopConfig.GetItems(_itemTypes[0]), _shopItemPrefab);
+                    _scrolls.Add(scroll);
+                    _isInitialized = true;
+                }
+
+                References.ShopPage.OnButtonClicked(_type);
+                _isOpen = true;
+                _scrolls[0].Open();
+                _arrowObjects[0].SetActive(true);
+            }
+        }
+    }
+
+    public void OnSubButtonClicked(int index)
+    {
+        for (int i = 0; i < _subButtons.Count; i++)
+        {
+            if (i == index)
+            {
+                References.ShopPage.OnButtonClicked(_type);
+                _scrolls[i].Open();
+                _arrowObjects[i].SetActive(true);
+            }
+            else
+            {
+                _scrolls[i].Close();
+                _arrowObjects[i].SetActive(false);
+            }
+        }
+    }
+
+    public void CloseScroll()
+    {
+        if (_subButtons != null && _subButtons.Count > 0)
+        {
+            for (int i = 0; i < _subButtons.Count; i++)
+            {
+                _scrolls[i].Close();
+                _arrowObjects[i].SetActive(false);
+            }
+
+            _isExtended = false;
+            foreach (var subButton in _subButtons)
+            {
+                subButton.SetActive(_isExtended);
+            }
+        }
+        else
+        {
+            _isOpen = false;
+            _scrolls[0].Close();
+            _arrowObjects[0].SetActive(false);
+        }
+    }
+
+    private void ToggleSubButtons()
+    {
+        _isExtended = !_isExtended;
+        foreach (var subButton in _subButtons)
+        {
+            subButton.SetActive(_isExtended);
+        }
+    }
+}

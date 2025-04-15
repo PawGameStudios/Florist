@@ -1,17 +1,10 @@
 using System;
 using UnityEngine;
-using AYellowpaper.SerializedCollections;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 
 namespace Config
 {
-    [Serializable]
-    public class Recipe
-    {
-        public BouquetModel Bouquet;
-    }
-
     public enum FlowerColor
     {
         None, Red, Pink, White, Yellow, Blue, Purple, Orange,
@@ -40,53 +33,78 @@ namespace Config
     }
 
     [Serializable]
-    public class FlowerInfo
+    public class Recipe
     {
-        [TableColumnWidth(80, Resizable = false)]
-        [PreviewField(Alignment = ObjectFieldAlignment.Center)]
+        public BouquetModel Bouquet;
+    }
+
+    [Serializable]
+    public class Order
+    {
+        public BouquetType BouquetType;
+        public RibbonType RibbonType;
+        public WrappingPaperType WrappingPaperType;
+        [ShowIf("BouquetType", BouquetType.Custom)] public List<BouquetFlowerInfo> CustomFlowers;
+    }
+
+    [Serializable]
+    public class WorkshopItem
+    {
+        [HorizontalGroup("Icons", order: 0)]
+        [TableColumnWidth(150, Resizable = false)]
+        [PreviewField(Height = 80, Alignment = ObjectFieldAlignment.Center)]
+        [HideLabel]
         public Sprite Sprite;
 
+        [VerticalGroup("Info")]
+        public string Id;
+        [VerticalGroup("Info")]
+        public float Cost, Price;
+    }
+
+    [Serializable]
+    public class FlowerInfo : WorkshopItem
+    {
+        [HorizontalGroup("Icons", order: 0)]
+        [PreviewField(Height = 80, Alignment = ObjectFieldAlignment.Center)]
+        [HideLabel]
+        public Sprite FlowerInBoxImage;
+
+        [VerticalGroup("Info")]
+        public string Name;
         [VerticalGroup("Info")]
         public FlowerType FlowerType;
+
         [VerticalGroup("Info")]
-        public float Cost, Price;
+        public FlowerColor Color;
     }
 
     [Serializable]
-    public class RibbonInfo
+    public class RibbonInfo : WorkshopItem
     {
-        [TableColumnWidth(80, Resizable = false)]
-        [PreviewField(Alignment = ObjectFieldAlignment.Center)]
-        public Sprite Sprite;
-
         [VerticalGroup("Info")]
         public RibbonType RibbonType;
-        [VerticalGroup("Info")]
-        public float Cost, Price;
     }
 
     [Serializable]
-    public class WrappingPaperInfo
+    public class WrappingPaperInfo : WorkshopItem
     {
-        [TableColumnWidth(80, Resizable = false)]
-        [PreviewField(Alignment = ObjectFieldAlignment.Center)]
-        public Sprite Sprite;
-
         [VerticalGroup("Info")]
         public WrappingPaperType WrappingPaperType;
-        [VerticalGroup("Info")]
-        public float Cost, Price;
     }
 
 
     [CreateAssetMenu(fileName = "WorkshopConfig", menuName = "Paw/Configs/Workshop")]
     public class WorkshopConfig : SerializedScriptableObject
     {
-        public SerializedDictionary<BouquetType, Recipe> BouquetRecipes;
+        public Dictionary<BouquetType, Recipe> BouquetRecipes;
+
         [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
         public List<FlowerInfo> FlowerInfo;
+
         [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
         public List<RibbonInfo> RibbonInfo;
+
         [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
         public List<WrappingPaperInfo> WrappingPaperInfo;
 

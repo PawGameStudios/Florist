@@ -1,7 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" conversa="Conversa.Editor" editor-extension-mode="False">
     <Style src="project://database/Assets/Packages/Conversa/Editor/Resources/Inspectors/ChoiceNode.uss?fileID=7433441132597879392&amp;guid=62eec293232d467fa8f689cfb86b6912&amp;type=3#ChoiceNode" />
     <ui:Label text="Choice" class="h1 mb-s" />
-    <Conversa.Editor.ActorField />
     <ui:TextField label="Message" name="message" multiline="true" class="text-wrap" style="align-items: stretch;" />
     <ui:VisualElement class="parse-option-list" />
     <ui:EnumField label="Parse Type 1 (optional)" name="type1" type="Conversa.Runtime.Events.StringParseOptions, Conversa.Runtime" value="None" style="align-items: auto; justify-content: center;" />

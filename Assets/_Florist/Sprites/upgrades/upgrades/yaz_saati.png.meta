@@ -91,7 +91,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -513,7 +513,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -522,7 +522,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      yaz_saati_0: 1321644753005906538
+      yaz_saati_1: 5310937419430337229
+      yaz_saati_10: -3519877893227800829
+      yaz_saati_11: 4462601214290139719
+      yaz_saati_12: -8994625061885860236
+      yaz_saati_13: 3550109348912591419
+      yaz_saati_14: -6502258091189215798
+      yaz_saati_15: -4832706684991968992
+      yaz_saati_2: -5141272535869893278
+      yaz_saati_3: -3651376813854489521
+      yaz_saati_4: -1197811786932894939
+      yaz_saati_5: -4928902387763506520
+      yaz_saati_6: -6629233371975759442
+      yaz_saati_7: -6402445361453907333
+      yaz_saati_8: -1566756957988004947
+      yaz_saati_9: 2355112055182792205
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

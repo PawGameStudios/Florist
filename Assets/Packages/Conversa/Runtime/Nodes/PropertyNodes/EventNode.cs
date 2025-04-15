@@ -9,21 +9,21 @@ using UnityEngine.Serialization;
 namespace Conversa.Runtime.Nodes
 {
 	[MovedFrom(true, null, "Assembly-CSharp")]
-	[Serializable]		
+	[Serializable]
 	[Port("Previous", "previous", typeof(BaseNode), Flow.In, Capacity.Many)]
 	[Port("Next", "next", typeof(BaseNode), Flow.Out, Capacity.One)]
 	public class EventNode : BaseNode, IEventNode
 	{
 		[SerializeField] private bool stopsFlow;
-		
+
 		[SerializeField]
 		[FormerlySerializedAs("EventGuid")]
 		private string eventGuid;
-		
+
 		[SerializeField]
 		[FormerlySerializedAs("EventName")]
 		private string eventName; // Redundant. Should be taken from the Properties list
-		
+
 		public string EventGuid { get => eventGuid; set => eventGuid = value; }
 		public string EventName { get => eventName; set => eventName = value; }
 
@@ -33,7 +33,7 @@ namespace Conversa.Runtime.Nodes
 			this.eventName = eventName;
 			this.stopsFlow = stopsFlow;
 		}
-		
+
 		public bool StopsFlow
 		{
 			get => stopsFlow;
@@ -47,7 +47,7 @@ namespace Conversa.Runtime.Nodes
 				var nextNode = conversation.GetOppositeNodes(GetNodePort("next")).FirstOrDefault();
 				conversation.Process(nextNode, conversationEvents);
 			}
-			
+
 			var e = stopsFlow ? new UserEvent(EventName, stopsFlow, Advance) : new UserEvent(EventName, stopsFlow);
 
 			conversationEvents.OnUserEvent.Invoke(e); // Deprecated

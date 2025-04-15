@@ -20,132 +20,253 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
-  BouquetRecipes:
-    _serializedList:
-    - Key: 0
-      Value:
-        Bouquet:
-          Flowers:
-            _serializedList:
-            - Key: 0
-              Value: 0
-          RibbonType: 0
-          WrappingPaperType: 0
-          BeautyPercentage: 0
-          BouquetType: 0
+    SerializationNodes:
+    - Name: BouquetRecipes
+      Entry: 7
+      Data: 0|Unity.VisualScripting.FlexibleDictionary`2[[Config.BouquetType, Assembly-CSharp],[Config.Recipe,
+        Assembly-CSharp]], Unity.VisualScripting.Core
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Config.BouquetType,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 7
+      Data: 2|Config.Recipe, Assembly-CSharp
+    - Name: Bouquet
+      Entry: 7
+      Data: 3|BouquetModel, Assembly-CSharp
+    - Name: Flowers
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[BouquetFlowerInfo, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 5|BouquetFlowerInfo, Assembly-CSharp
+    - Name: FlowerType
+      Entry: 3
+      Data: 0
+    - Name: Count
+      Entry: 3
+      Data: 4
+    - Name: FlowerColor
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 6|BouquetFlowerInfo, Assembly-CSharp
+    - Name: FlowerType
+      Entry: 3
+      Data: 1
+    - Name: Count
+      Entry: 3
+      Data: 4
+    - Name: FlowerColor
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|BouquetFlowerInfo, Assembly-CSharp
+    - Name: FlowerType
+      Entry: 3
+      Data: 2
+    - Name: Count
+      Entry: 3
+      Data: 2
+    - Name: FlowerColor
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: RibbonType
+      Entry: 3
+      Data: 0
+    - Name: WrappingPaperType
+      Entry: 3
+      Data: 0
+    - Name: BouquetType
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   FlowerInfo:
-  - Sprite: {fileID: 21300000, guid: 86c1aea95aa146a49ad1505f616afa70, type: 3}
-    FlowerType: 0
+  - Sprite: {fileID: 21300000, guid: 55bf01c3f9a85024f899b747b4ae7275, type: 3}
+    Id: f_1
     Cost: 5
     Price: 8
-  - Sprite: {fileID: 21300000, guid: b4f0222d7ca32674ebcefa98df5930b6, type: 3}
-    FlowerType: 1
+    FlowerInBoxImage: {fileID: 21300000, guid: 86c1aea95aa146a49ad1505f616afa70, type: 3}
+    Name: gypsum
+    FlowerType: 0
+    Color: 0
+  - Sprite: {fileID: 21300000, guid: bc8117063a8feb540821e53bb104f069, type: 3}
+    Id: f_2
     Cost: 6
     Price: 9
-  - Sprite: {fileID: 21300000, guid: 5c10d07ac2ef17a46b27b6a3a9757050, type: 3}
+    FlowerInBoxImage: {fileID: 21300000, guid: b4f0222d7ca32674ebcefa98df5930b6, type: 3}
+    Name: eucalyptus
+    FlowerType: 1
+    Color: 0
+  - Sprite: {fileID: 21300000, guid: 64af6759094dbe542bbccf6fc4f45586, type: 3}
+    Id: f_3
+    Cost: 10
+    Price: 15
+    FlowerInBoxImage: {fileID: 21300000, guid: 0f818b31f81aabf45abbb36a0f4bea7b, type: 3}
+    Name: rose
     FlowerType: 2
+    Color: 1
+  - Sprite: {fileID: 21300000, guid: ce4cd09af825d2a449d9f02bad096e38, type: 3}
+    Id: f_4
     Cost: 10
     Price: 15
-  - Sprite: {fileID: 21300000, guid: 57101f17d4957424f8dbdae64f34f7b5, type: 3}
-    FlowerType: 3
-    Cost: 10
-    Price: 15
-  - Sprite: {fileID: 21300000, guid: 55e842a05eb2a8348a115b77d4a8cab0, type: 3}
-    FlowerType: 4
-    Cost: 10
-    Price: 15
-  - Sprite: {fileID: 21300000, guid: f6f8e1c6b3303694a935b2df528b1558, type: 3}
-    FlowerType: 5
-    Cost: 10
-    Price: 15
-  - Sprite: {fileID: 21300000, guid: 1178f160c16cbb6489b837740490bba1, type: 3}
-    FlowerType: 6
-    Cost: 10
-    Price: 15
-  - Sprite: {fileID: 21300000, guid: fd2de75049f73c64385490001c9b0cb8, type: 3}
-    FlowerType: 7
-    Cost: 10
-    Price: 15
+    FlowerInBoxImage: {fileID: 21300000, guid: 23ab7fa2b498592429e53c49db748201, type: 3}
+    Name: anemone
+    FlowerType: 0
+    Color: 2
   RibbonInfo:
   - Sprite: {fileID: 21300000, guid: bdea666e3183f014ebe41c13d4755760, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     RibbonType: 1
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 0c99f93b7ba19d243b29664528003df5, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     RibbonType: 2
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: c8fa2d4f48d8d6949bd9bf438ffc95dc, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     RibbonType: 3
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 452517cc7780625408d7c89eed1955e0, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     RibbonType: 4
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 211900e9107ff3d4dbdbf47b0a6fb60c, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     RibbonType: 5
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 9d3a2804bfaa4c24c905fa6d46cc983f, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     RibbonType: 6
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 4c5ec4321cb0ff845b06a3766d6b69f5, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     RibbonType: 7
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: d215f74870fae8e4b86b173c0f3dd5a1, type: 3}
-    RibbonType: 8
+    Id: 
     Cost: 0
     Price: 0
+    RibbonType: 8
   WrappingPaperInfo:
   - Sprite: {fileID: 21300000, guid: 68453a04a4e20ab45997797daf21c5f1, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 1
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 3c7384eed5364164d81deb1638aaf672, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 2
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 9d18f82b4be68d34d93d5081cc291498, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 3
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: f69b593c235aa754ca5167914a4db779, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 4
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: b12a16a1da402c947a6e978f077549ba, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 5
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 306951f76791fc14eaeb78109e109911, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 6
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: ba97ab076c9281c4c91c012946c50e1d, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 7
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 9ab046f10a6292243bf4598311d334ef, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 8
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 42881da6683b42a41bc78011a18f0307, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 9
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 760d7cfb7a895c3498e4bd927fe930ed, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 10
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: dae72a82079fc294ebdc45f7e47826e3, type: 3}
+    Id: 
+    Cost: 0
+    Price: 0
     WrappingPaperType: 11
-    Cost: 0
-    Price: 0
   - Sprite: {fileID: 21300000, guid: 23e1f6b470753dd4e8de3c8c2bb64261, type: 3}
-    WrappingPaperType: 12
+    Id: 
     Cost: 0
     Price: 0
+    WrappingPaperType: 12

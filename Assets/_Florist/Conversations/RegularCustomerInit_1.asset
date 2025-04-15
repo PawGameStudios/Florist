@@ -23,64 +23,50 @@ MonoBehaviour:
       height: 40
     name: Start
   nodes:
-  - rid: 5233201009239785568
-  - rid: 5233201009239785569
-  - rid: 5233201009239785570
-  - rid: 5233201009239785571
+  - rid: 8414295476681572907
+  - rid: 8414295476681572908
+  - rid: 8414295476681572909
+  - rid: 8414295476681572910
   edges:
-  - rid: 5233201009239785572
-  - rid: 5233201009239785573
-  - rid: 5233201009239785574
-  - rid: 5233201009239785575
-  - rid: 5233201009239785576
-  - rid: 5233201009239785577
+  - rid: 8414295476681572911
+  - rid: 8414295476681572912
+  - rid: 8414295476681572913
+  - rid: 8414295476681572914
+  - rid: 8414295476681572915
+  - rid: 8414295476681572916
   properties:
-  - rid: 5233201009239785578
-  - rid: 5233201009239785579
+  - rid: 8414295476681572917
+  - rid: 8414295476681572918
   stickyNotes: []
   groups: []
   references:
     version: 2
     RefIds:
-    - rid: 5233201009239785568
+    - rid: 8414295476681572907
       type: {class: ChoiceNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: f28b5ec6-62ed-43f8-91cb-6fe51aed4908
         <NodeRect>k__BackingField:
           serializedVersion: 2
-          x: 115
-          y: -49
-          width: 208
-          height: 233
-        actor: Customer
+          x: 115.2
+          y: -38.399998
+          width: 208.00002
+          height: 210.40001
         actorProfile: {fileID: 0}
         useActorProfile: 0
         message: 'Hi what''s up?
 
-          I want to buy a bouqet of {0}.'
+          I want to buy a bouqet of 0_{0}.'
         key: Localization Key
         parseOption1: 4
         parseOption2: 0
         parseOption3: 0
         options:
         - guid: no
-          label: Sure
+          label: sure
         - guid: e6099b67-4095-40b7-b1c6-ebe197281864
-          label: What?
-    - rid: 5233201009239785569
-      type: {class: EventNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
-      data:
-        <Guid>k__BackingField: a39229ce-9de8-42e8-ba6a-fbc3bcbd2d45
-        <NodeRect>k__BackingField:
-          serializedVersion: 2
-          x: 423
-          y: -238
-          width: 154
-          height: 101
-        stopsFlow: 1
-        eventGuid: 820efebf-084d-42bb-a8e9-a6c89b8c3be3
-        eventName: EndConvo
-    - rid: 5233201009239785570
+          label: what?
+    - rid: 8414295476681572908
       type: {class: ChoiceNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: dd88f83e-0eab-40e3-96b5-ca90d777994b
@@ -90,42 +76,53 @@ MonoBehaviour:
           y: -51
           width: 208
           height: 233
-        actor: Customer
         actorProfile: {fileID: 0}
         useActorProfile: 0
         message: Nothing complicated, some eucalyptus, gypso and other flowers in
-          {0}.
+          0_{0}.
         key: Localization Key
         parseOption1: 4
         parseOption2: 0
         parseOption3: 0
         options:
         - guid: yes
-          label: Got It
+          label: got_it
         - guid: eb5db569-94f5-492a-9df4-04518ac889f9
-          label: Hint
-    - rid: 5233201009239785571
+          label: hint
+    - rid: 8414295476681572909
       type: {class: ChoiceNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: 5e16f066-3f08-4a98-bf1e-31dc99c0b7c4
         <NodeRect>k__BackingField:
           serializedVersion: 2
-          x: 619
-          y: -57
+          x: 619.2
+          y: -51.199997
           width: 208
-          height: 222
-        actor: Customer
+          height: 197.6
         actorProfile: {fileID: 0}
         useActorProfile: 0
-        message: '{0}. That!s it.'
+        message: 0_{0}. That!s it.
         key: Localization Key
         parseOption1: 5
         parseOption2: 0
         parseOption3: 0
         options:
         - guid: yes
-          label: Okay
-    - rid: 5233201009239785572
+          label: okay
+    - rid: 8414295476681572910
+      type: {class: EventNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
+      data:
+        <Guid>k__BackingField: 68f61f56-5cc2-4ef6-afd4-5b5d5826c06a
+        <NodeRect>k__BackingField:
+          serializedVersion: 2
+          x: 338.4
+          y: -164.79999
+          width: 172.80002
+          height: 100.799995
+        stopsFlow: 1
+        eventGuid: 820efebf-084d-42bb-a8e9-a6c89b8c3be3
+        eventName: GoToWorkshop
+    - rid: 8414295476681572911
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -134,7 +131,7 @@ MonoBehaviour:
         input:
           node: f28b5ec6-62ed-43f8-91cb-6fe51aed4908
           port: previous
-    - rid: 5233201009239785573
+    - rid: 8414295476681572912
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -143,34 +140,7 @@ MonoBehaviour:
         input:
           node: 5e16f066-3f08-4a98-bf1e-31dc99c0b7c4
           port: previous
-    - rid: 5233201009239785574
-      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
-      data:
-        output:
-          node: dd88f83e-0eab-40e3-96b5-ca90d777994b
-          port: yes
-        input:
-          node: a39229ce-9de8-42e8-ba6a-fbc3bcbd2d45
-          port: previous
-    - rid: 5233201009239785575
-      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
-      data:
-        output:
-          node: 5e16f066-3f08-4a98-bf1e-31dc99c0b7c4
-          port: yes
-        input:
-          node: a39229ce-9de8-42e8-ba6a-fbc3bcbd2d45
-          port: previous
-    - rid: 5233201009239785576
-      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
-      data:
-        output:
-          node: f28b5ec6-62ed-43f8-91cb-6fe51aed4908
-          port: no
-        input:
-          node: a39229ce-9de8-42e8-ba6a-fbc3bcbd2d45
-          port: previous
-    - rid: 5233201009239785577
+    - rid: 8414295476681572913
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -179,15 +149,42 @@ MonoBehaviour:
         input:
           node: dd88f83e-0eab-40e3-96b5-ca90d777994b
           port: previous
-    - rid: 5233201009239785578
+    - rid: 8414295476681572914
+      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
+      data:
+        output:
+          node: 5e16f066-3f08-4a98-bf1e-31dc99c0b7c4
+          port: yes
+        input:
+          node: 68f61f56-5cc2-4ef6-afd4-5b5d5826c06a
+          port: previous
+    - rid: 8414295476681572915
+      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
+      data:
+        output:
+          node: dd88f83e-0eab-40e3-96b5-ca90d777994b
+          port: yes
+        input:
+          node: 68f61f56-5cc2-4ef6-afd4-5b5d5826c06a
+          port: previous
+    - rid: 8414295476681572916
+      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
+      data:
+        output:
+          node: f28b5ec6-62ed-43f8-91cb-6fe51aed4908
+          port: no
+        input:
+          node: 68f61f56-5cc2-4ef6-afd4-5b5d5826c06a
+          port: previous
+    - rid: 8414295476681572917
       type: {class: FloatProperty, ns: Conversa.Runtime.Properties, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: 515234b4-7919-451d-862c-5faefcbe535a
         name: Float
         value: 0
         initialValue: 0
-    - rid: 5233201009239785579
+    - rid: 8414295476681572918
       type: {class: EventProperty, ns: Conversa.Runtime.Properties, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: 820efebf-084d-42bb-a8e9-a6c89b8c3be3
-        name: EndConvo
+        name: GoToWorkshop

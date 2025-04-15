@@ -1,24 +1,23 @@
 using TMPro;
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ShopPage : Page
 {
-    [SerializeField] private GameObject _mainMenu;
-    [SerializeField] private ShopItem _shopItemPrefab;
-    [SerializeField] private ShopScroll _flowerScroll;
-    [SerializeField] private ShopScroll _wrapperScroll;
-    [SerializeField] private ShopScroll _ribbonScroll;
-    [SerializeField] private ShopScroll _upgradesScroll;
-    [SerializeField] private ShopScroll _accessoryScroll;
-    [SerializeField] private ShopScroll _wallpaperScroll, _floorScroll, _signScroll;
-    [SerializeField] private ShopScroll _counterItemsScroll, _speechBubblesScroll;
+    public enum ShopButtonType
+    {
+        Flowers,
+        Bouquets,
+        Upgrades,
+        Decorations,
+    }
+    public Transform ShopScrollParent;
     [SerializeField] private TextMeshProUGUI _moneyAmount, _diamondAmount;
-    [SerializeField] private GameObject _flowerButton, _bouquetButton, _wrapperButton, _ribbonButton;
-    [SerializeField] private GameObject _upgradesButton, _decorationButton, _accessoryButton;
-    [SerializeField] private GameObject _wallpaperButton, _floorButton, _signButton;
-    [SerializeField] private GameObject _counterItemsButton, _speechBubblesButton;
+    [SerializeField] private ShopButton _flowersButton, _bouquetsButton, _upgradesButton, _decorationsButton;
     private ShopScroll _currentScroll;
+    private ShopButtonType _currentButtonType;
+    private ShopButton _currentButton;
 
     private void OnEnable()
     {
@@ -30,9 +29,9 @@ public class ShopPage : Page
 
     private void Start()
     {
-        _currentScroll = _flowerScroll;
-        _flowerScroll.Init(Configs.ShopConfig.FlowerItems, _shopItemPrefab);
-        _flowerScroll.Open();
+        _currentButton = _flowersButton;
+        _currentButton.OnButtonClicked();
+        _currentButtonType = ShopButtonType.Flowers;
     }
 
     private void OnDisable()
@@ -41,115 +40,42 @@ public class ShopPage : Page
         GeneralData.DiamondAmountChanged -= OnDiamondAmountChanged;
     }
 
-    public override void Close(Action onCompleted = null)
+    public override void Close(PageData pageData = null, Action onCompleted = null)
     {
         gameObject.SetActive(false);
-        _mainMenu.SetActive(true);
     }
 
-    public override void Open(Action onCompleted = null)
+    public override void Open(PageData pageData = null, Action onCompleted = null)
     {
+        base.Open(pageData, onCompleted);
         gameObject.SetActive(true);
     }
 
 
     #region Buttons
-    public void OnBouquetClicked()
+    public void OnCloseClicked()
     {
-        bool isActive = _wrapperButton.activeSelf;
-        _wrapperButton.SetActive(!isActive);
-        _ribbonButton.SetActive(!isActive);
+        Close();
     }
 
-    public void OnDecorationClicked()
+    public void OnButtonClicked(ShopButtonType type)
     {
-        bool isActive = _accessoryButton.activeSelf;
-        _accessoryButton.SetActive(!isActive);
-        _wallpaperButton.SetActive(!isActive);
-        _floorButton.SetActive(!isActive);
-        _signButton.SetActive(!isActive);
-        _counterItemsButton.SetActive(!isActive);
-        _speechBubblesButton.SetActive(!isActive);
-    }
+        if (_currentButtonType == type)
+        {
+            return;
+        }
 
-    public void OnFlowerClicked()
-    {
-        _currentScroll.Close();
-        _flowerScroll.Init(Configs.ShopConfig.FlowerItems, _shopItemPrefab);
-        _flowerScroll.Open();
-        _currentScroll = _flowerScroll;
-    }
+        _currentButton.CloseScroll();
+        _currentButtonType = type;
 
-    public void OnUpgradesClicked()
-    {
-        _currentScroll.Close();
-        _upgradesScroll.Init(Configs.ShopConfig.UpgradeItems, _shopItemPrefab);
-        _upgradesScroll.Open();
-        _currentScroll = _upgradesScroll;
-    }
-
-    public void OnWrapperClicked()
-    {
-        _currentScroll.Close();
-        _wrapperScroll.Init(Configs.ShopConfig.WrapperItems, _shopItemPrefab);
-        _wrapperScroll.Open();
-        _currentScroll = _wrapperScroll;
-    }
-
-    public void OnRibbonClicked()
-    {
-        _currentScroll.Close();
-        _ribbonScroll.Init(Configs.ShopConfig.RibbonItems, _shopItemPrefab);
-        _ribbonScroll.Open();
-        _currentScroll = _ribbonScroll;
-    }
-
-    public void OnAccessoryClicked()
-    {
-        _currentScroll.Close();
-        _accessoryScroll.Init(Configs.ShopConfig.AccessoryItems, _shopItemPrefab);
-        _accessoryScroll.Open();
-        _currentScroll = _accessoryScroll;
-    }
-
-    public void OnWallpaperClicked()
-    {
-        _currentScroll.Close();
-        _wallpaperScroll.Init(Configs.ShopConfig.WallpaperItems, _shopItemPrefab);
-        _wallpaperScroll.Open();
-        _currentScroll = _wallpaperScroll;
-    }
-
-    public void OnFloorClicked()
-    {
-        _currentScroll.Close();
-        _floorScroll.Init(Configs.ShopConfig.FloorItems, _shopItemPrefab);
-        _floorScroll.Open();
-        _currentScroll = _floorScroll;
-    }
-
-    public void OnSignClicked()
-    {
-        _currentScroll.Close();
-        _signScroll.Init(Configs.ShopConfig.SignItems, _shopItemPrefab);
-        _signScroll.Open();
-        _currentScroll = _signScroll;
-    }
-
-    public void OnCounterItemsClicked()
-    {
-        _currentScroll.Close();
-        _counterItemsScroll.Init(Configs.ShopConfig.CounterItems, _shopItemPrefab);
-        _counterItemsScroll.Open();
-        _currentScroll = _counterItemsScroll;
-    }
-
-    public void OnSpeechBubblesClicked()
-    {
-        _currentScroll.Close();
-        _speechBubblesScroll.Init(Configs.ShopConfig.SpeechBubbleItems, _shopItemPrefab);
-        _speechBubblesScroll.Open();
-        _currentScroll = _speechBubblesScroll;
+        _currentButton = _currentButtonType switch
+        {
+            ShopButtonType.Flowers => _flowersButton,
+            ShopButtonType.Bouquets => _bouquetsButton,
+            ShopButtonType.Upgrades => _upgradesButton,
+            ShopButtonType.Decorations => _decorationsButton,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
     }
     #endregion
 

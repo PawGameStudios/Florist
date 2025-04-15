@@ -15,9 +15,9 @@ namespace Conversa.Editor
             var template = Resources.Load<VisualTreeAsset>("Inspectors/ChoiceNode");
             template.CloneTree(this);
 
-            var actorField = this.Q<ActorField>();
-            actorField.OnChange(HandleActorChange);
-            actorField.SetValueWithoutNotify(data.Actor, data.UseActorProfile, data.ActorProfile);
+            // var actorField = this.Q<ActorField>();
+            // actorField.OnChange(HandleActorChange);
+            // actorField.SetValueWithoutNotify(data.Actor, data.UseActorProfile, data.ActorProfile);
 
             var messageInput = this.Q<TextField>("message");
             messageInput.RegisterValueChangedCallback(HandleUpdateMessage);
@@ -46,12 +46,12 @@ namespace Conversa.Editor
             this.Q<Button>(classes: "add-option").clickable.clicked += HandleAddOption;
         }
 
-        private void HandleActorChange(string staticActor, bool useActorProfile, Actor actorProfile)
-        {
-            data.Actor = staticActor;
-            data.UseActorProfile = useActorProfile;
-            data.ActorProfile = actorProfile;
-        }
+        // private void HandleActorChange(string staticActor, bool useActorProfile, Actor actorProfile)
+        // {
+        //     data.Actor = staticActor;
+        //     data.UseActorProfile = useActorProfile;
+        //     data.ActorProfile = actorProfile;
+        // }
 
         private void SetOption(PortDefinition<BaseNode> portDefinition)
         {

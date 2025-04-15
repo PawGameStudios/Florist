@@ -24,8 +24,10 @@ public class EndDayPage : Page
         CancelInvoke();
     }
 
-    public override void Open(Action onCompleted = null)
+    public override void Open(PageData pageData = null, Action onCompleted = null)
     {
+        base.Open(pageData, onCompleted);
+
         gameObject.SetActive(true);
         _endDayPanel.SetActive(true);
 
@@ -40,7 +42,7 @@ public class EndDayPage : Page
         }));
     }
 
-    public override void Close(Action onCompleted = null)
+    public override void Close(PageData pageData = null, Action onCompleted = null)
     {
         gameObject.SetActive(false);
         _endDayPanel.SetActive(false);

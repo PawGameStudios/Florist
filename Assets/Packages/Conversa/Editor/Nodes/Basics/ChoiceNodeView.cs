@@ -14,7 +14,7 @@ namespace Conversa.Editor
 	{
 		protected override string Title => "Choice";
 
-		private Label actorLabel;
+		// private Label actorLabel;
 		private Label messageKeyLabel;
 		private Label messageLabel;
 		private VisualElement optionList;
@@ -34,8 +34,8 @@ namespace Conversa.Editor
 
 			template.CloneTree(bodyContainer);
 
-			actorLabel = bodyContainer.Q<Label>("actor");
-			actorLabel.text = Data.Actor;
+			// actorLabel = bodyContainer.Q<Label>("actor");
+			// actorLabel.text = Data.Actor;
 
 			messageKeyLabel = bodyContainer.Q<Label>("key");
 			messageLabel = bodyContainer.Q<Label>("message");
@@ -93,11 +93,11 @@ namespace Conversa.Editor
 
 		private void HandleNodeChange()
 		{
-			var actorName = Data.UseActorProfile == false ? Data.Actor :
-				Data.ActorProfile != null ? Data.ActorProfile.DisplayName : "";
+			// var actorName = Data.UseActorProfile == false ? Data.Actor :
+			// 	Data.ActorProfile != null ? Data.ActorProfile.DisplayName : "";
 
-			if (actorLabel.text != actorName)
-				actorLabel.text = actorName;
+			// if (actorLabel.text != actorName)
+			// 	actorLabel.text = actorName;
 
 			if (messageLabel.text != Data.Message)
 				messageLabel.text = Data.Message;

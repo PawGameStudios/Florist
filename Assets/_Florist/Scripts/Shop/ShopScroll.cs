@@ -6,7 +6,7 @@ public class ShopScroll : MonoBehaviour
 {
     [SerializeField] private Transform _shopItemParent;
     private bool _isInitialized = false;
-    private List<ShopItem> _items = new();
+    private readonly List<ShopItem> _items = new();
 
     public void Init(List<ShopItemInfo> items, ShopItem prefab)
     {

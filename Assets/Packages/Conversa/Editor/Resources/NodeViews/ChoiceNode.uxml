@@ -1,7 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns="UnityEngine.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Packages/Conversa/Editor/Resources/NodeViews/ChoiceNode.uss?fileID=7433441132597879392&amp;guid=88d2a71ad5f044bca1f974cde78a701b&amp;type=3#ChoiceNode" />
     <ui:VisualElement name="choice-node">
-        <ui:Label text="Actor" name="actor" />
         <ui:VisualElement class="option-list" />
         <ui:Label text="Key" name="key" tooltip="Localized key" />
         <ui:Label text="Message" name="message" class="text-wrap" />
