@@ -16,6 +16,13 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     private Vector2 _offset;
     private Vector3 _startPosition;
 
+    public void GetPaperToArea(Transform paper)
+    {
+        paper.SetParent(_paperArea);
+        paper.localPosition = Vector3.zero;
+        paper.localEulerAngles = Vector3.zero;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (_isDragging)
@@ -53,7 +60,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
             targetRot = new Vector3(0, 0, -angle);
         }
 
-        References.WorkshopPage.OnPaperAreaClicked(targetPos, targetRot);
+        References.WorkshopPage.OnPaperAreaClicked(eventData.position, targetRot);
     }
 
     public void OnBeginDrag(PointerEventData eventData)

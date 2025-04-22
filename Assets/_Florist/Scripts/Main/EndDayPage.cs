@@ -9,6 +9,9 @@ public class EndDayPage : Page
 {
     [SerializeField] private GameObject _endDayPanel;
     [SerializeField] private Image _fadeImage;
+    [SerializeField] private Image _nightImage;
+    [SerializeField] private Image _nightLightImage;
+    [SerializeField] private Image _dayImage;
     [SerializeField] private TextMeshProUGUI _dayText;
     [SerializeField] private TextMeshProUGUI _revenueText;
     [SerializeField] private TextMeshProUGUI _tipText;
@@ -33,19 +36,33 @@ public class EndDayPage : Page
 
         _fadeImage.gameObject.SetActive(true);
         _fadeImage.color = new Color(0, 0, 0, .95f);
+        _nightLightImage.color = new Color(1, 1, 1, 1);
+        _nightImage.color = new Color(1, 1, 1, 1);
+        _dayImage.color = new Color(1, 1, 1, 1);
 
         _sequence?.Kill();
         _sequence = DOTween.Sequence();
         _sequence.Append(_fadeImage.DOFade(endValue: 0, duration: .3f).SetEase(Ease.InSine).OnComplete(() =>
         {
             _fadeImage.gameObject.SetActive(false);
+            onCompleted?.Invoke();
         }));
     }
 
     public override void Close(PageData pageData = null, Action onCompleted = null)
     {
-        gameObject.SetActive(false);
         _endDayPanel.SetActive(false);
+
+        _sequence?.Kill();
+        _sequence = DOTween.Sequence();
+        _sequence.Append(_nightLightImage.DOFade(endValue: 0, duration: .4f).SetEase(Ease.Linear));
+        _sequence.Append(_nightImage.DOFade(endValue: 0, duration: .4f).SetEase(Ease.Linear));
+        _sequence.Append(_dayImage.DOFade(endValue: 0, duration: .4f).SetEase(Ease.Linear));
+        _sequence.AppendCallback(() =>
+        {
+            gameObject.SetActive(false);
+            onCompleted?.Invoke();
+        });
     }
 
     public void SetData(EarningsInfo earningsInfo)
@@ -61,13 +78,10 @@ public class EndDayPage : Page
 
     public void OnNextDayButtonClicked()
     {
-        Close();
-        References.DukkanPage.Open();
-    }
-
-    private void SetText()
-    {
-
+        Close(onCompleted: () =>
+        {
+            References.MainPage.Open();
+        });
     }
 
     [Button("OpenPage")]

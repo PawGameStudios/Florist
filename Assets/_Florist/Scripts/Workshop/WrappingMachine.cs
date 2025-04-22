@@ -14,4 +14,10 @@ public class WrappingMachine : MonoBehaviour
         // Logic to open the wrapping machine
         Debug.Log("Wrapping machine opened.");
     }
+
+    public void CloseMachine()
+    {
+        // Logic to close the wrapping machine
+        Debug.Log("Wrapping machine closed.");
+    }
 }

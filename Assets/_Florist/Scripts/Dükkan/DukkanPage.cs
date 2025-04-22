@@ -111,13 +111,15 @@ public class DukkanPage : Page
         {
             _fadeImage.color = new Color(0, 0, 0, 0);
             onCompleted?.Invoke();
+            gameObject.SetActive(false);
         }));
-
     }
 
     public override void Open(PageData pageData = null, Action onCompleted = null)
     {
         base.Open(pageData, onCompleted);
+
+        References.HappinessMeter.ResetHappinessMeter();
 
         gameObject.SetActive(true);
         _contentObjects.SetActive(false);
@@ -274,6 +276,8 @@ public class DukkanPage : Page
         Debug.Log($"#dukkan# StartNextEvent, _currentCustomerIndex: {_currentCustomerIndex}, _dayInfo.Events.Count: {_dayInfo.Events.Count}");
         if (_currentCustomerIndex < _dayInfo.Events.Count)
         {
+            References.HappinessMeter.ResetHappinessMeter();
+
             DayEvent dayEvent = _dayInfo.Events[_currentCustomerIndex];
             if (dayEvent.IsEvent)
             {
@@ -309,6 +313,7 @@ public class DukkanPage : Page
         Close(onCompleted: () =>
         {
             _earningsInfo.CalculateProfit();
+            References.TopCanvas.Close();
             References.EndDayPage.SetData(_earningsInfo);
             References.EndDayPage.Open();
         });

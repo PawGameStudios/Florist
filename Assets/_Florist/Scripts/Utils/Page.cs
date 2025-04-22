@@ -4,9 +4,7 @@ using UnityEngine;
 public class PageData
 {
     public bool LoadFromSaveData;
-    public PageType PageType;
-    public Vector2 Position;
-    public Vector2 Size;
+    public PageType PreviousPage;
 }
 
 public abstract class Page : MonoBehaviour

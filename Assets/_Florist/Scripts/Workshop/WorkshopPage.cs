@@ -11,6 +11,8 @@ public class WorkshopPage : Page
     [SerializeField] private Image _flowerImage;
     [SerializeField] private List<Transform> _flowerBoxPosRefs;
     [SerializeField] private FlowerBox _flowerBoxPrefab;
+    [SerializeField] private PaperArea _paperArea;
+    [SerializeField] private PaperBox _paperBox;
     [SerializeField] private Transform _flowerParent;
     [SerializeField] private Transform _flowerBoxParent;
     [SerializeField] private Transform _workshopPanel;
@@ -42,12 +44,19 @@ public class WorkshopPage : Page
         _wrappingMachine.OpenMachine();
 
         SetAvailableFlowers();
+        // SetAvailablePapers();
     }
 
-    public void OnBoxSelected(Sprite flowerSprite, FlowerColor flowerColor, int index)
+    public void OnBoxSelected(Sprite flowerSprite)
     {
         _isInputWaiting = true;
         _flowerImage.sprite = flowerSprite;
+    }
+
+    public void OnPaperSelected(GameObject paperOpenAnimation)
+    {
+        _paperArea.GetPaperToArea(paperOpenAnimation.transform);
+        // TODO: play animation
     }
 
     public void OnPaperAreaClicked(Vector3 targetPos, Vector3 targetRotation)
@@ -58,9 +67,6 @@ public class WorkshopPage : Page
         var newFlower = Instantiate(_flowerImage, targetPos, Quaternion.Euler(targetRotation), _flowerParent);
         newFlower.gameObject.SetActive(true);
         _flowersForBouquet.Add(newFlower.gameObject);
-
-        Debug.Log("targetPos: " + targetPos);
-        Debug.Log("targetRotation: " + targetRotation);
     }
 
     public bool CheckIfInMachineArea(Vector2 pos)
@@ -88,6 +94,7 @@ public class WorkshopPage : Page
     public void OnFlowerGivenToMachine()
     {
         Debug.Log("Flower given to machine.");
+        _wrappingMachine.OpenMachine();
     }
 
     public void OnFlowerReady()
@@ -146,5 +153,27 @@ public class WorkshopPage : Page
             _flowerBoxes.Add(flowerBox);
         }
         _isInitialized = true;
+    }
+
+    private void SetAvailablePapers()
+    {
+        List<WrappingPaperInfo> paperInfos = new();
+        List<ShopConfig.ShopItemInfo> paperItems = Configs.ShopConfig.WrapperItems;
+        List<int> purchasedPaperIndexes = SaveSystem.Inst.ShopData.GetPurchasedItems(ItemType.Wrapper);
+        for (int i = 0; i < purchasedPaperIndexes.Count; i++)
+        {
+            int configIndex = purchasedPaperIndexes[i];
+            string id = paperItems[configIndex].Id;
+            for (int k = 0; k < Configs.WorkshopConfig.WrappingPaperInfo.Count; k++)
+            {
+                if (Configs.WorkshopConfig.WrappingPaperInfo[k].Id == id)
+                {
+                    paperInfos.Add(Configs.WorkshopConfig.WrappingPaperInfo[k]);
+                    break;
+                }
+            }
+        }
+
+        _paperBox.Initilize(paperInfos);
     }
 }

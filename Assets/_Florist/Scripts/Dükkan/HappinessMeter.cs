@@ -27,6 +27,14 @@ public class HappinessMeter : MonoBehaviour
         Timer.TimeTickMiliseconds -= TimeTickHandler;
     }
 
+    public void ResetHappinessMeter()
+    {
+        _currentTick = 0;
+        _happinessValue = 100;
+        _happinessText.text = $"{_happinessValue}%";
+        SetEmojiText();
+    }
+
     public void StartNewHappinessCountdown()
     {
         _currentTick = 0;
@@ -44,8 +52,7 @@ public class HappinessMeter : MonoBehaviour
     {
         _happinessValue += happinessValue;
         _happinessText.text = $"{_happinessValue}%";
-        // int emojiIndex = Mathf.Clamp((int)(_happinessValue / 20), 0, _emojiSprites.Count - 1);
-        // _emojiImage.sprite = _emojiSprites[emojiIndex];
+        SetEmojiText();
     }
 
     private void TimeTickHandler()
@@ -53,5 +60,14 @@ public class HappinessMeter : MonoBehaviour
         _currentTick++;
         _happinessValue = 100 - (int)((float)_currentTick / _totalTicksForCustomer * 100);
         _happinessText.text = $"{_happinessValue}%";
+        SetEmojiText();
+    }
+
+    private void SetEmojiText()
+    {
+        int emojiCount = _emojiSprites.Count;
+        int divider = 100 / emojiCount;
+        int emojiIndex = Mathf.Clamp((int)(_happinessValue / divider), 0, emojiCount - 1);
+        _emojiImage.sprite = _emojiSprites[emojiIndex];
     }
 }

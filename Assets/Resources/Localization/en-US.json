@@ -57,6 +57,9 @@
         "wrapping_papers": "Wrapping Papers",
         "ribbons": "Ribbons",
         "upgrades": "Upgrades",
-        "decorations": "Decorations"
+        "decorations": "Decorations",
+        "shop": "Shop",
+        "play": "Play",
+        "laptop": "Laptop"
     }
 }

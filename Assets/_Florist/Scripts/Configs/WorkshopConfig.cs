@@ -91,6 +91,9 @@ namespace Config
     {
         [VerticalGroup("Info")]
         public WrappingPaperType WrappingPaperType;
+
+        [VerticalGroup("Info")]
+        public GameObject PaperOpenAnimation;
     }
 
 

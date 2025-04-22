@@ -54,6 +54,6 @@ public class FlowerBox : MonoBehaviour
 
     public void OnBoxSelected()
     {
-        References.WorkshopPage.OnBoxSelected(_flowerSprite, FlowerColor.None, _index);
+        References.WorkshopPage.OnBoxSelected(_flowerSprite);
     }
 }
