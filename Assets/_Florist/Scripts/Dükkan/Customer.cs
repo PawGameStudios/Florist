@@ -583,7 +583,7 @@ public class Customer : MonoBehaviour
 
         var buttonsParentTransform = _speechBubbleButtonsLayoutGroup.transform;
         buttonsParentTransform.position = new Vector3(buttonsParentTransform.position.x,
-                                            _speechBubbleBgImage.transform.position.y - height - 100,
+                                            _speechBubbleBgImage.transform.position.y - height - 50,
                                             buttonsParentTransform.position.z);
 
         int answerCount = answerOptions == null ? 0 : answerOptions.Count;
