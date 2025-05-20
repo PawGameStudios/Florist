@@ -77,6 +77,9 @@ namespace Config
 
         [VerticalGroup("Info")]
         public FlowerColor Color;
+
+        [VerticalGroup("Info")]
+        public GameObject Prefab;
     }
 
     [Serializable]

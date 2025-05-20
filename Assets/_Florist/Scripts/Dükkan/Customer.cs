@@ -36,6 +36,7 @@ public class Customer : MonoBehaviour
     }
 
     public CustomerInfo CustomerInfo => _customerInfo;
+    [SerializeField] private Transform _customerImageTransform;
     [SerializeField] private Transform _customerTransform;
     [SerializeField] private Transform _initialPositionRef;
     [SerializeField] private Transform _finalPositionRef;
@@ -101,9 +102,9 @@ public class Customer : MonoBehaviour
         _sequence = DOTween.Sequence();
         _sequence.Append(_customerTransform.DOLocalMoveY(_initialPositionRef.localPosition.y, 0));
         _sequence.Append(_customerTransform.DOLocalMoveY(_finalPositionRef.localPosition.y, .5f));
-        _sequence.Join(_customerTransform.DOScaleY(ENTER_SCALE_Y, .1f));
-        _sequence.Append(_customerTransform.DOScaleY(1, .2f).SetEase(Ease.OutQuad));
-        _sequence.Append(_customerTransform.DOScaleY(1, 0).OnComplete(() =>
+        _sequence.Join(_customerImageTransform.DOScaleY(ENTER_SCALE_Y, .1f));
+        _sequence.Append(_customerImageTransform.DOScaleY(1, .2f).SetEase(Ease.OutQuad));
+        _sequence.Append(_customerImageTransform.DOScaleY(1, 0).OnComplete(() =>
         {
             onComplete?.Invoke();
             PlayIdleAnimation();
@@ -117,10 +118,10 @@ public class Customer : MonoBehaviour
         // Play exit animation
         _sequence?.Kill();
         _sequence = DOTween.Sequence();
-        _sequence.Append(_customerTransform.DOScaleY(ENTER_SCALE_Y, .1f));
-        _sequence.Append(_customerTransform.DOScaleY(1, .2f).SetEase(Ease.OutQuad));
-        _sequence.Join(_customerTransform.DOLocalMoveY(_initialPositionRef.localPosition.y, .5f));
-        _sequence.Append(_customerTransform.DOScaleY(1, 0).OnComplete(() =>
+        _sequence.Append(_customerImageTransform.DOScaleY(ENTER_SCALE_Y, .1f));
+        _sequence.Append(_customerImageTransform.DOScaleY(1, .2f).SetEase(Ease.OutQuad));
+        _sequence.Join(_customerTransform.DOLocalMoveY(_initialPositionRef.localPosition.y, .9f));
+        _sequence.Append(_customerImageTransform.DOScaleY(1, 0).OnComplete(() =>
         {
             onComplete?.Invoke();
         }));
@@ -395,10 +396,10 @@ public class Customer : MonoBehaviour
         _sequence?.Kill();
         _idleSequence?.Kill();
         _idleSequence = DOTween.Sequence();
-        _idleSequence.Append(_customerTransform.DOScaleY(IDLE_SCALE_Y, IDLE_DURATION).SetEase(Ease.Linear));
-        _idleSequence.Join(_customerTransform.DOScaleX(IDLE_SCALE_X, IDLE_DURATION).SetEase(Ease.Linear));
-        _idleSequence.Append(_customerTransform.DOScaleY(1, IDLE_DURATION).SetEase(Ease.Linear));
-        _idleSequence.Join(_customerTransform.DOScaleX(1, IDLE_DURATION).SetEase(Ease.Linear));
+        _idleSequence.Append(_customerImageTransform.DOScaleY(IDLE_SCALE_Y, IDLE_DURATION).SetEase(Ease.Linear));
+        _idleSequence.Join(_customerImageTransform.DOScaleX(IDLE_SCALE_X, IDLE_DURATION).SetEase(Ease.Linear));
+        _idleSequence.Append(_customerImageTransform.DOScaleY(1, IDLE_DURATION).SetEase(Ease.Linear));
+        _idleSequence.Join(_customerImageTransform.DOScaleX(1, IDLE_DURATION).SetEase(Ease.Linear));
         _idleSequence.OnComplete(PlayIdleAnimation);
     }
 

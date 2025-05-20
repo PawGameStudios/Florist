@@ -78,21 +78,9 @@ public class EndDayPage : Page
 
     public void OnNextDayButtonClicked()
     {
+        References.MainPage.Open();
         Close(onCompleted: () =>
         {
-            References.MainPage.Open();
         });
-    }
-
-    [Button("OpenPage")]
-    public void OpenPage()
-    {
-        Open();
-    }
-
-    [Button("ClosePage")]
-    public void ClosePage()
-    {
-        Close();
     }
 }

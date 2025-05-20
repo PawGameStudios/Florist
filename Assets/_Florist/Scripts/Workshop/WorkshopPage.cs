@@ -4,24 +4,41 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using Config;
+using Sirenix.OdinInspector;
 
 public class WorkshopPage : Page
 {
-    [SerializeField] private WrappingMachine _wrappingMachine;
+    [Title("Flower Table")]
+    [SerializeField] private RectTransform _flowerTable;
     [SerializeField] private Image _flowerImage;
-    [SerializeField] private List<Transform> _flowerBoxPosRefs;
-    [SerializeField] private FlowerBox _flowerBoxPrefab;
-    [SerializeField] private PaperArea _paperArea;
-    [SerializeField] private PaperBox _paperBox;
-    [SerializeField] private Transform _flowerParent;
     [SerializeField] private Transform _flowerBoxParent;
+    [SerializeField] private FlowerBox _flowerBoxPrefab;
+    [SerializeField] private Transform _flowerParent;
+    [SerializeField] private List<Transform> _flowerBoxPosRefs;
+
+    [Title("Paper Area")]
+    [SerializeField] private PaperArea _paperAreaPrefab;
+    [SerializeField] private PaperBox _paperBox;
+    [SerializeField] private RectTransform _paperAreaParent;
+
+    [Title("Misc")]
+    [SerializeField] private RectTransform _scrollContent;
+    [SerializeField] private HorizontalLayoutGroup _scrollLayout;
+    [SerializeField] private HorizontalLayoutGroup _tableLayout;
+    [SerializeField] private RectTransform _trashBin;
     [SerializeField] private Transform _workshopPanel;
+
+    [Title("Machine")]
+    [SerializeField] private RectTransform _machineTable;
+    [SerializeField] private WrappingMachine _wrappingMachine;
+
     private readonly List<FlowerBox> _flowerBoxes = new();
     private const float DURATION = .8f;
     private const Ease EASE = Ease.OutBack;
     private bool _isInitialized = false;
     private bool _isInputWaiting = false;
-    private List<GameObject> _flowersForBouquet = new();
+    private List<PaperArea> _papersInUse = new();
+    private GameObject _selectedFlowerPrefab;
 
     void OnEnable()
     {
@@ -38,13 +55,14 @@ public class WorkshopPage : Page
         base.Open(pageData, onCompleted);
         gameObject.SetActive(true);
         int screenWidth = Screen.width;
-        _workshopPanel.localPosition = new Vector3(screenWidth / 2f, _workshopPanel.localPosition.y, _workshopPanel.localPosition.z);
+        _workshopPanel.localPosition = new Vector3(screenWidth / 2f + 400, _workshopPanel.localPosition.y, _workshopPanel.localPosition.z);
         _workshopPanel.DOLocalMoveX(-screenWidth / 2f, DURATION).SetEase(EASE);
 
         _wrappingMachine.OpenMachine();
 
         SetAvailableFlowers();
         // SetAvailablePapers();
+        _isInitialized = true;
     }
 
     public void OnBoxSelected(Sprite flowerSprite)
@@ -53,20 +71,31 @@ public class WorkshopPage : Page
         _flowerImage.sprite = flowerSprite;
     }
 
+    public void OnBoxSelected(GameObject prefab)
+    {
+        _isInputWaiting = true;
+        _selectedFlowerPrefab = prefab;
+    }
+
     public void OnPaperSelected(GameObject paperOpenAnimation)
     {
-        _paperArea.GetPaperToArea(paperOpenAnimation.transform);
+        var paperArea = Instantiate(_paperAreaPrefab, _paperAreaParent);
+        paperArea.gameObject.SetActive(true);
+        _papersInUse.Add(paperArea);
+
+        paperArea.GetPaperToArea(paperOpenAnimation.transform);
         // TODO: play animation
     }
 
-    public void OnPaperAreaClicked(Vector3 targetPos, Vector3 targetRotation)
+    public GameObject CreateNewFlower(Vector3 targetPos, Vector3 targetRotation)
     {
         if (!_isInputWaiting)
-            return;
+            return null;
 
-        var newFlower = Instantiate(_flowerImage, targetPos, Quaternion.Euler(targetRotation), _flowerParent);
+        // var newFlower = Instantiate(_flowerImage, targetPos, Quaternion.Euler(targetRotation), _flowerParent);
+        var newFlower = Instantiate(_selectedFlowerPrefab, targetPos, Quaternion.Euler(targetRotation), _flowerParent);
         newFlower.gameObject.SetActive(true);
-        _flowersForBouquet.Add(newFlower.gameObject);
+        return newFlower.gameObject;
     }
 
     public bool CheckIfInMachineArea(Vector2 pos)
@@ -91,10 +120,45 @@ public class WorkshopPage : Page
         return false;
     }
 
+    public bool CheckIfInTrashArea(Vector2 pos)
+    {
+        Rect rect = _trashBin.rect;
+
+        // Get the left, right, top, and bottom boundaries of the rect
+        Vector3 rectPos = _trashBin.transform.position;
+        float leftSide = rectPos.x - rect.width / 2;
+        float rightSide = rectPos.x + rect.width / 2;
+        float topSide = rectPos.y + rect.height / 2;
+        float bottomSide = rectPos.y - rect.height / 2;
+
+        // Check to see if the point is in the calculated bounds
+        if (pos.x >= leftSide &&
+            pos.x <= rightSide &&
+            pos.y >= bottomSide &&
+            pos.y <= topSide)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void OnFlowerGivenToMachine()
     {
         Debug.Log("Flower given to machine.");
         _wrappingMachine.OpenMachine();
+
+        var targetPosX = _trashBin.rect.width + _flowerTable.rect.width + _machineTable.rect.width / 2;
+        targetPosX += _tableLayout.spacing * 2f;
+        targetPosX -= Screen.width / 2f;
+        _scrollContent.DOLocalMoveX(-targetPosX, DURATION).SetEase(EASE);
+    }
+
+    public void OnFlowerGivenToTrash(PaperArea paperArea)
+    {
+        Debug.Log("Flower given to trash.");
+
+        _papersInUse.Remove(paperArea);
+        Destroy(paperArea.gameObject);
     }
 
     public void OnFlowerReady()
@@ -149,14 +213,19 @@ public class WorkshopPage : Page
                                     .SetTransform(_flowerBoxPosRefs[i])
                                     .SetFlowerBoxImage(flowerInfos[i].FlowerInBoxImage)
                                     .SetFlowerImage(flowerInfos[i].Sprite)
+                                    .SetFlowerPrefab(flowerInfos[i].Prefab)
                                     .SetFlowerName(flowerInfos[i].Name, flowerInfos[i].Color);
             _flowerBoxes.Add(flowerBox);
         }
-        _isInitialized = true;
+
+        // TODO: set flower table width
     }
 
     private void SetAvailablePapers()
     {
+        if (_isInitialized)
+            return;
+
         List<WrappingPaperInfo> paperInfos = new();
         List<ShopConfig.ShopItemInfo> paperItems = Configs.ShopConfig.WrapperItems;
         List<int> purchasedPaperIndexes = SaveSystem.Inst.ShopData.GetPurchasedItems(ItemType.Wrapper);

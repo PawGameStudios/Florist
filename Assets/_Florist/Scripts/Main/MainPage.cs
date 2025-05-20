@@ -30,6 +30,10 @@ public class MainPage : Page
         References.ShopPage.Open();
     }
 
+    public void OnPcClicked()
+    {
+    }
+
     private void CheckSaveData()
     {
         if (SaveSystem.Inst.SaveData.LastPage == PageType.MainPage)

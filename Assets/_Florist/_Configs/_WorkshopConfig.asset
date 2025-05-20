@@ -140,34 +140,38 @@ MonoBehaviour:
     Id: f_1
     Cost: 5
     Price: 8
-    FlowerInBoxImage: {fileID: 21300000, guid: 86c1aea95aa146a49ad1505f616afa70, type: 3}
+    FlowerInBoxImage: {fileID: 21300000, guid: f60fc497f55127547909d8629874946a, type: 3}
     Name: gypsum
     FlowerType: 0
     Color: 0
+    Prefab: {fileID: 1215466011441787327, guid: d9a5953c6faf8344ca2d36c69ddf1adb, type: 3}
   - Sprite: {fileID: 21300000, guid: 679844faa7245ae459e72d0bd833d84f, type: 3}
     Id: f_2
     Cost: 6
     Price: 9
-    FlowerInBoxImage: {fileID: 21300000, guid: b4f0222d7ca32674ebcefa98df5930b6, type: 3}
+    FlowerInBoxImage: {fileID: 21300000, guid: 0056d96d51e022e4c9a1985aad3dbbee, type: 3}
     Name: eucalyptus
     FlowerType: 1
     Color: 0
+    Prefab: {fileID: 1215466011441787327, guid: b331fc7edf22a294680994b939eb5733, type: 3}
   - Sprite: {fileID: 21300000, guid: aa9714ac61ce3be429ad938d8e6a0d54, type: 3}
     Id: f_3
     Cost: 10
     Price: 15
-    FlowerInBoxImage: {fileID: 21300000, guid: 0f818b31f81aabf45abbb36a0f4bea7b, type: 3}
+    FlowerInBoxImage: {fileID: 21300000, guid: 01077c586af53fc4898bf6258fc059bf, type: 3}
     Name: rose
     FlowerType: 3
     Color: 1
+    Prefab: {fileID: 1215466011441787327, guid: b6cbff1c02ed3e84e9f105b52c6ab0db, type: 3}
   - Sprite: {fileID: 21300000, guid: 073e3e69907d80e4b90c5479d741879b, type: 3}
     Id: f_4
     Cost: 10
     Price: 15
-    FlowerInBoxImage: {fileID: 21300000, guid: 23ab7fa2b498592429e53c49db748201, type: 3}
+    FlowerInBoxImage: {fileID: 21300000, guid: 066f0772d2b243b4eb4745636fefb363, type: 3}
     Name: anemone
     FlowerType: 4
     Color: 2
+    Prefab: {fileID: 1215466011441787327, guid: 036d6ea8aaa6ce64cb588c3690be7957, type: 3}
   RibbonInfo:
   - Sprite: {fileID: 21300000, guid: bdea666e3183f014ebe41c13d4755760, type: 3}
     Id: 

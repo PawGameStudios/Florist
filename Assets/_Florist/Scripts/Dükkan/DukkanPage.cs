@@ -58,6 +58,7 @@ public class DukkanPage : Page
     public DukkanState DukkanState => _dukkanState;
     public EarningsInfo EarningsInfo => _earningsInfo;
     public int CurrentCustomerIndex => _currentCustomerIndex;
+    [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Image _fadeImage;
     [SerializeField] private RectTransform _flowerDeliveryArea;
     [SerializeField] private Customer _customer;
@@ -107,9 +108,12 @@ public class DukkanPage : Page
 
         _sequence?.Kill();
         _sequence = DOTween.Sequence();
-        _sequence.Append(_fadeImage.DOFade(endValue: .95f, duration: .3f).SetEase(Ease.OutSine).OnComplete(() =>
+        _sequence.Append(_fadeImage.DOFade(endValue: .65f, duration: .3f).SetEase(Ease.Linear));
+        _sequence.Append(_fadeImage.DOFade(endValue: 0, duration: .3f).SetEase(Ease.Linear));
+        _sequence.Join(_canvasGroup.DOFade(endValue: 0, duration: .3f).SetEase(Ease.Linear).OnComplete(() =>
         {
             _fadeImage.color = new Color(0, 0, 0, 0);
+            _canvasGroup.alpha = 0;
             onCompleted?.Invoke();
             gameObject.SetActive(false);
         }));
@@ -128,19 +132,25 @@ public class DukkanPage : Page
         _earningsInfo ??= new EarningsInfo();
         _earningsInfo.Reset();
 
+        _canvasGroup.alpha = 0;
+
         _sequence?.Kill();
         _sequence = DOTween.Sequence();
-        _sequence.Append(_fadeImage.DOFade(endValue: .95f, duration: .3f).SetEase(Ease.OutSine).OnComplete(() =>
+        _sequence.Append(_fadeImage.DOFade(endValue: .65f, duration: .3f).SetEase(Ease.Linear).OnComplete(() =>
         {
             _contentObjects.SetActive(true);
             References.TopCanvas.Open();
         }));
-        _sequence.Append(_fadeImage.DOFade(endValue: 0, duration: .3f).SetEase(Ease.InSine));
+        _sequence.Append(_fadeImage.DOFade(endValue: 0, duration: .3f).SetEase(Ease.Linear));
+        _sequence.Join(_canvasGroup.DOFade(endValue: 1, duration: .3f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            onCompleted?.Invoke();
 
-        _currentCustomerIndex = 0;
-        _dayInfo = Configs.LevelConfig.Days[SaveSystem.Inst.GeneralData.CurrentDayIndex];
-        _customer.gameObject.SetActive(false);
-        _posController.ResetPos();
+            _currentCustomerIndex = 0;
+            _dayInfo = Configs.LevelConfig.Days[SaveSystem.Inst.GeneralData.CurrentDayIndex];
+            _customer.gameObject.SetActive(false);
+            _posController.ResetPos();
+        }));
         Invoke(nameof(StartNextEvent), 1);
     }
 
@@ -310,12 +320,14 @@ public class DukkanPage : Page
     private void EndDay()
     {
         Debug.Log("#dukkan# EndDay");
+
+        References.EndDayPage.SetData(_earningsInfo);
+        References.EndDayPage.Open();
+
         Close(onCompleted: () =>
         {
             _earningsInfo.CalculateProfit();
             References.TopCanvas.Close();
-            References.EndDayPage.SetData(_earningsInfo);
-            References.EndDayPage.Open();
         });
     }
 
@@ -380,17 +392,4 @@ public class DukkanPage : Page
         Debug.Log("OnCustomerButtonClicked");
     }
     #endregion
-
-
-    [Button("OpenPage")]
-    public void OpenPage()
-    {
-        Open();
-    }
-
-    [Button("ClosePage")]
-    public void ClosePage()
-    {
-        Close();
-    }
 }

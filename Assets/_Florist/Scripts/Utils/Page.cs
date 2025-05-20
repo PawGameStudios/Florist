@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class PageData
 {
@@ -18,4 +19,16 @@ public abstract class Page : MonoBehaviour
     }
 
     public abstract void Close(PageData pageData = null, Action onCompleted = null);
+
+    [Button("OpenPage")]
+    public void OpenPage()
+    {
+        Open();
+    }
+
+    [Button("ClosePage")]
+    public void ClosePage()
+    {
+        Close();
+    }
 }
