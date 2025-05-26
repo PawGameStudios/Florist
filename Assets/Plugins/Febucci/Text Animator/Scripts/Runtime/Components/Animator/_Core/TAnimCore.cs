@@ -6,6 +6,10 @@ using Febucci.UI.Effects;
 using Febucci.UI.Styles;
 using UnityEngine;
 using UnityEngine.Serialization;
+// backward compatibility in case users didn't delete the old scripts
+using TagParserBase = Febucci.TextUtils.Parsing.TagParserBase;
+using PlainTagParser = Febucci.TextUtils.Parsing.PlainTagParser;
+using TextParser = Febucci.TextUtils.Parsing.TextParser;
 
 namespace Febucci.UI.Core
 {
@@ -67,7 +71,7 @@ namespace Febucci.UI.Core
         /// </summary>
         [Tooltip("Controls when this TextAnimator component should update its effects. Defaults in the 'Update' Loop.\nSet it to 'Manual' if you want to control the animations from your own loop instead.")]
         public AnimationLoop animationLoop = AnimationLoop.Update;
-        
+
         /// <summary>
         /// Chooses which Time Scale to use when automatically animating effects (in other words, when the Update Mode is not set to Script). Set it to <see cref="TimeScale.Unscaled"/> if you want to animate effects even when the game is paused.
         /// </summary>
@@ -86,7 +90,7 @@ namespace Febucci.UI.Core
             get => _text;
             set
             {
-                if(typewriterStartsAutomatically 
+                if(typewriterStartsAutomatically
                     #if UNITY_EDITOR
                     && Application.isPlaying
                     #endif
@@ -96,7 +100,7 @@ namespace Febucci.UI.Core
                     SetTypewriterText(value);
                     return;
                 }
-                
+
                 SetText(value);
             }
         }
@@ -110,7 +114,7 @@ namespace Febucci.UI.Core
         /// </remarks>
         public string textWithoutTextAnimTags { get; private set; } = string.Empty;
         public string textWithoutAnyTag { get; private set; } = string.Empty;
-        
+
         bool hasText => charactersCount > 0;
 
         public CharacterData latestCharacterShown { get; private set; }
@@ -131,14 +135,16 @@ namespace Febucci.UI.Core
 
                 for (int i = 0; i < charactersCount; i++)
                 {
-                    if (!characters[i].isVisible)
+                    if (characters[i].isVisible)
                     {
-                        if (characters[i].passedTime <= 0)
+                        // not fully shown yet
+                        if (characters[i].info.isRendered && characters[i].passedTime < characters[i].info.appearancesMaxDuration)
                             return false;
                     }
                     else
                     {
-                        if (characters[i].info.isRendered && characters[i].passedTime < characters[i].info.appearancesMaxDuration)
+                        // hidden
+                        if (characters[i].passedTime <= 0)
                             return false;
                     }
                 }
@@ -154,7 +160,7 @@ namespace Febucci.UI.Core
         /// <remarks>
         /// You can use this to check if the disappearance effects are still running.
         /// </remarks>
-        public bool anyLetterVisible //TODO test 
+        public bool anyLetterVisible
         {
             get
             {
@@ -164,11 +170,11 @@ namespace Febucci.UI.Core
                 {
                     return characters[index].passedTime > 0;
                 }
-                
+
                 //searches for the first character or the last one first, since they're most probably the first ones to be shown (based on orientation)
                 if (IsCharacterVisible(0) || IsCharacterVisible(charactersCount-1))
                     return true;
-                
+
                 //searches for the other, which might still be running their appearance/disappearance
                 for(int i=1;i<charactersCount-1;i++)
                     if (IsCharacterVisible(i))
@@ -176,9 +182,9 @@ namespace Febucci.UI.Core
 
                 return false;
             }
-            
+
         }
-            
+
 
         /// <summary>
         /// Number of characters in the text
@@ -208,7 +214,7 @@ namespace Febucci.UI.Core
         {
             get => wordsCount;
         }
-        
+
         WordInfo[] words;
         /// <summary>
         /// The array of words currently present in the text.
@@ -217,7 +223,7 @@ namespace Febucci.UI.Core
         /// This array might be larger than the actual number of words, so please cycle for <see cref="WordsCount"/> instead.
         /// </remarks>
         public WordInfo[] Words => words;
-        
+
         //---CHARS SIZE/INTENSITY---
 
         /// <summary>
@@ -225,7 +231,7 @@ namespace Febucci.UI.Core
         /// </summary>
         [Tooltip("True if you want the animations to be uniform/consistent across different font sizes. Default/Suggested to leave this as true, and change the 'Reference Font Size'.\nOtherwise, effects will move more when the text is smaller (requires less space on screen)")]
         public bool useDynamicScaling = true;
-        
+
         /// <summary>
         /// Font size that will be used as reference to keep animations consistent/uniform at different scales. Works only if <see cref="useDynamicScaling"/> is set to true.
         /// </summary>
@@ -240,11 +246,11 @@ namespace Febucci.UI.Core
         /// </summary>
         [Tooltip("True if you want the animator's time to be reset on new text.")]
         [FormerlySerializedAs("isResettingEffectsOnNewText")] public bool isResettingTimeOnNewText = true;
-        
+
         #endregion
 
         #region Effects and Databases
-        
+
         bool isAnimatingBehaviors = true;
         bool isAnimatingAppearances = true;
 
@@ -253,7 +259,7 @@ namespace Febucci.UI.Core
         /// </summary>
         [Tooltip("Lets you use the databases referenced in the 'TextAnimatorSettings' asset.\nSet to false if you'd like to specify which databases to use in this component.")]
         public bool useDefaultDatabases = true;
-        
+
         // ----------------
         // -- Databases --
         // ----------------
@@ -286,11 +292,11 @@ namespace Febucci.UI.Core
                 requiresTagRefresh = true;
             }
         }
-        
+
         // ----------------
         // -- Styles --
         // ----------------
-        
+
         public bool useDefaultStyleSheet = true;
         [SerializeField] StyleSheetScriptable styleSheet;
 
@@ -328,7 +334,7 @@ namespace Febucci.UI.Core
             set => appearances = value;
         }
         AnimationRegion[] disappearances;
-        
+
         /// <summary>
         /// All the disappearance effects that are applied to the current text.
         /// </summary>
@@ -337,11 +343,43 @@ namespace Febucci.UI.Core
             get => disappearances;
             set => disappearances = value;
         }
+
+        Vector2Int[] typewriterDisabledRange;
+
+        /// <summary>
+        /// Holds any range where the typewriter should be skipped entirely and show the entire text.
+        /// Only takes effect if you're using a <see cref="TypewriterCore"/>
+        /// </summary>
+        /// <remarks><seealso cref="IsTypewriterEnabledAtIndex"/>
+        ///P.S. this value is reset every time you set a new text, calculating the "notypewriter" tags in it
+        /// </remarks>
+        public Vector2Int[] TypewriterDisabledRange
+        {
+            get => typewriterDisabledRange;
+            set => typewriterDisabledRange = value;
+        }
+
+        /// <summary>
+        /// True if the typewriter should calculate a <see cref="CharacterData"/> appearance or disappearance time.
+        /// Calculated from <see cref="TypewriterDisabledRange"/>
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public bool IsTypewriterEnabledAtIndex(int index)
+        {
+            foreach (var range in typewriterDisabledRange)
+            {
+                if (index >= range.x && index < range.y) return false;
+            }
+
+            return true;
+        }
+
         #endregion
 
         #region Actions and Events
         ActionMarker[] actions;
-        
+
         /// <summary>
         /// All the actions that have been parsed from the current text, and that will be used by a <see cref="TypewriterCore"/> component if present.
         /// </summary>
@@ -435,7 +473,7 @@ namespace Febucci.UI.Core
         #endregion
 
         #endregion
-        
+
         #region Abstract / Virtual
         /// <summary>
         /// Called once when the component is initialized.
@@ -474,7 +512,7 @@ namespace Febucci.UI.Core
             requiresMeshUpdate = false;
             OnForceMeshUpdate();
         }
-        
+
         void Awake()
         {
             requiresTagRefresh = true;
@@ -490,15 +528,15 @@ namespace Febucci.UI.Core
                     initialized = false;
             }
             #endif
-            
+
             if (initialized) return;
 
             initialized = true;
-            
+
             TextUtilities.Initialize();
             charactersCount = 0;
             characters = new CharacterData[0];
-            
+
             wordsCount = 0;
             words = new WordInfo[0];
 
@@ -507,7 +545,8 @@ namespace Febucci.UI.Core
             disappearances = new AnimationRegion[0];
             actions = new ActionMarker[0];
             events = new EventMarker[0];
-            
+            typewriterDisabledRange = Array.Empty<Vector2Int>();
+
             if(DatabaseActions) DatabaseActions.ForceBuildRefresh();
             if(DatabaseAppearances) DatabaseAppearances.ForceBuildRefresh();
             if(DatabaseBehaviors) DatabaseBehaviors.ForceBuildRefresh();
@@ -520,7 +559,7 @@ namespace Febucci.UI.Core
         /// Contains TextAnimator's current time values.
         /// </summary>
         [HideInInspector] public TimeData time;
-        
+
 
         /// <summary>
         /// Returns the first character index inside the page, in case the text has an overflow mode set up and the text is paginated.
@@ -543,7 +582,7 @@ namespace Febucci.UI.Core
                 for (int i = 0; i < characters.Length; i++)
                 {
                     // multiplies by current character size, which could be modified by "size" tags and so
-                    // be different than the basic tmp font size value 
+                    // be different than the basic tmp font size value
                     characters[i].UpdateIntensity(referenceFontSize);
                 }
             }
@@ -583,7 +622,7 @@ namespace Febucci.UI.Core
         {
             if (textToParse is null) // prevents error along the method if text is passed as null
                 textToParse = string.Empty;
-            
+
             #region Local Methods
             void PopulateCharacters(bool resetVisibility)
             {
@@ -622,7 +661,7 @@ namespace Febucci.UI.Core
                                 }
                             }
                         }
-                        
+
                         return maxDuration;
                     }
 
@@ -635,7 +674,7 @@ namespace Febucci.UI.Core
             {
                 StringBuilder currentWord = new StringBuilder();
                 wordsCount = charactersCount;
-                
+
                 if (words.Length < wordsCount)
                     Array.Resize(ref words, wordsCount);
 
@@ -669,11 +708,11 @@ namespace Febucci.UI.Core
                     {
                         currentFirstIndex++; //proceeds to shift white spaces etc.
                     }
-                    
+
                     currentWord.Clear();
                     tempLength = 0;
                 }
-                
+
                 //Adds last
                 if (tempLength > 0)
                 {
@@ -686,7 +725,7 @@ namespace Febucci.UI.Core
 
                 wordsCount = wordIndex;
             }
-            
+
             void HideCharacterTime(int charIndex)
             {
                 var c = characters[charIndex];
@@ -714,7 +753,7 @@ namespace Febucci.UI.Core
                     characters[i] = c;
                 }
             }
-            
+
             bool IsCharacterInsideAnyEffect(int charIndex, AnimationRegion[] regions)
             {
                 foreach (var region in regions)
@@ -734,7 +773,7 @@ namespace Febucci.UI.Core
             void AddFallbackEffectsFor<T>(ref AnimationRegion[] currentEffects, VisibilityMode visibilityMode, Database<T> database, string[] defaultEffectsTags) where T : AnimationScriptableBase
             {
                 if(!database) return;
-                
+
                 if (defaultEffectsTags == null || defaultEffectsTags.Length == 0)
                 {
                     return;
@@ -748,7 +787,7 @@ namespace Febucci.UI.Core
                 {
                     if(string.IsNullOrEmpty(tag))
                     {
-                        if(Application.isPlaying) 
+                        if(Application.isPlaying)
                             Debug.LogError($"Empty tag as default effect in database {database.name}. Skipping.", gameObject);
                         continue;
                     }
@@ -819,7 +858,7 @@ namespace Febucci.UI.Core
                     currentEffects[prevCount + i] = defaultRegions[i].region;
                 }
             }
-            
+
             #endregion
 
             TryInitializing();
@@ -834,7 +873,7 @@ namespace Febucci.UI.Core
                 Debug.LogError("Text Animator Settings not found. Skipping setting the text to Text Animator.");
                 return;
             }
-            
+
             // Uses default database from settings
             if (useDefaultDatabases)
             {
@@ -842,12 +881,14 @@ namespace Febucci.UI.Core
                 databaseAppearances = settings.appearances.defaultDatabase;
                 databaseActions = settings.actions.defaultDatabase;
             }
-            
+
             var ruleBehavior = new AnimationParser<AnimationScriptableBase>(settings.behaviors.openingSymbol, '/', settings.behaviors.closingSymbol, VisibilityMode.Persistent, databaseBehaviors);
             var ruleAppearance = new AnimationParser<AnimationScriptableBase>(settings.appearances.openingSymbol, '/', settings.appearances.closingSymbol, VisibilityMode.OnVisible, databaseAppearances);
-            var ruleDisappearance = new AnimationParser<AnimationScriptableBase>(settings.appearances.openingSymbol, '/', '#', settings.appearances.closingSymbol, VisibilityMode.OnHiding, databaseAppearances);
+            var ruleDisappearance = new AnimationParser<AnimationScriptableBase>(settings.appearances.openingSymbol, '/', settings.disappearancesMiddleSymbol, settings.appearances.closingSymbol, VisibilityMode.OnHiding, databaseAppearances);
             ActionParser ruleActions = new ActionParser(settings.actions.openingSymbol, '/', settings.actions.closingSymbol, databaseActions);
             EventParser ruleEvents = new EventParser('<', '/', '>');
+
+            var typewriterDisabled = new PlainTagParser(settings.controlTags.disableTypewriter, '<', '/', '>');
 
             //TODO optimize
             var parsers = new System.Collections.Generic.List<TagParserBase>()
@@ -856,20 +897,21 @@ namespace Febucci.UI.Core
                 ruleAppearance,
                 ruleDisappearance,
                 ruleActions,
-                ruleEvents
+                ruleEvents,
+                typewriterDisabled
             };
-            
+
             foreach (var extraParser in GetExtraParsers())
             {
                 parsers.Add(extraParser);
             }
 
             // Parses stylesheets before anything else
-            textWithoutTextAnimTags = 
-                StyleSheet 
+            textWithoutTextAnimTags =
+                StyleSheet
                     ? TextParser.ParseText(_text, new StylesParser('<', '/', '>', StyleSheet))
                     : _text;
-                
+
             //Convert text in tags, mesh etc.
             textWithoutTextAnimTags = TextParser.ParseText(textWithoutTextAnimTags, parsers.ToArray());
 
@@ -884,6 +926,10 @@ namespace Febucci.UI.Core
             disappearances = ruleDisappearance.results;
             actions = ruleActions.results;
             events = ruleEvents.results;
+            var results = typewriterDisabled.results;
+            typewriterDisabledRange = new Vector2Int[results.Length];
+            for (int i = 0; i < results.Length; i++)
+                typewriterDisabledRange[i] = new Vector2Int(results[i].x, results[i].y);
 
             //Adds fallback effects to characters that have no effect assigned
             AddFallbackEffectsFor(ref behaviors, VisibilityMode.Persistent,databaseBehaviors, defaultBehaviorsTags);
@@ -899,14 +945,14 @@ namespace Febucci.UI.Core
             PopulateCharacters(showTextMode != ShowTextMode.Refresh);
             CopyMeshFromSource(ref characters);
             CalculateWords();
-            
+
             switch(showTextMode)
             {
                 case ShowTextMode.Hidden:
                     HideAllCharactersTime();
                     break;
 
-                case ShowTextMode.Shown: 
+                case ShowTextMode.Shown:
                     ShowCharacterTimes();
                     break;
 
@@ -919,22 +965,22 @@ namespace Febucci.UI.Core
                         characters[charactersCount - 1].isVisible = true;
                     }
                     break;
-                
+
                 case ShowTextMode.Refresh:
                     //Does nothing
                     break;
             }
 
             _maxVisibleCharacters = charactersCount;
-            
+
             // Makes sure deltaTime is updated instantly, as user might change the timeScale on the same frame as the
             // text is set (or even at Start/Awake) and typewriters might detect deltaTime of 0 and skip showing the text
             time.UpdateDeltaTime(timeScale == TimeScale.Unscaled ? Time.unscaledDeltaTime : Time.deltaTime);
-            
+
             if(isResettingTimeOnNewText && showTextMode != ShowTextMode.Refresh)
                 time.RestartTime();
         }
-        
+
         /// <summary>
         /// Sets the text to Text Animator, parsing its rich text tags.
         /// </summary>
@@ -982,7 +1028,7 @@ namespace Febucci.UI.Core
 
             bool previousResettingTime = isResettingTimeOnNewText;
             isResettingTimeOnNewText = false;
-            
+
             int previousMaximum = maxVisibleCharacters;
             int currentFirst = firstVisibleCharacter;
             SetText(textFull + appendedText, hideText);
@@ -1052,15 +1098,15 @@ namespace Febucci.UI.Core
         public void SetVisibilityWord(int index, bool isVisible, bool canPlayEffects = true)
         {
             if(index<0 || index >= wordsCount) return;
-            
+
             WordInfo word = words[index];
             for (int i = Mathf.Max(word.firstCharacterIndex, 0); i <= word.lastCharacterIndex && i < charactersCount; i++)
             {
                 SetVisibilityChar(i, isVisible, canPlayEffects);
             }
         }
-        
-        
+
+
         //TODO Test
         /// <summary>
         /// Sets the visibility of the entire text, also allowing to play or skip effects.
@@ -1114,7 +1160,7 @@ namespace Febucci.UI.Core
         }
 
 
-        #endregion 
+        #endregion
 
 
         #region Animation
@@ -1130,7 +1176,7 @@ namespace Febucci.UI.Core
                     SetTypewriterText(GetOriginalTextFromSource());
                     return;
                 }
-                
+
                 ConvertText(GetOriginalTextFromSource(), ShowTextMode.UserTyping);
                 return;
             }
@@ -1158,7 +1204,7 @@ namespace Febucci.UI.Core
         public void Animate(float deltaTime)
         {
             if(!IsReady()) return;
-            
+
             if(requiresTagRefresh)
                 ConvertText(_text, ShowTextMode.Refresh);
 
@@ -1185,14 +1231,14 @@ namespace Febucci.UI.Core
                     {
                         if(characters[i].passedTime<=0) continue;
                         if(!region.IsVisibilityPolicySatisfied(IsCharacterAppearing(i))) continue;
-                        
+
                         if(region.animation.CanApplyEffectTo(characters[i], this))
                             region.animation.ApplyEffectTo(ref characters[i], this);
                     }
                 }
             }
         }
-        
+
         #endregion
 
         /// <summary>
@@ -1202,7 +1248,7 @@ namespace Febucci.UI.Core
         {
             //no text, skips
             if (!hasText) return;
-            
+
             TryInitializing(); //called here as well since this might be called from outside
 
             //Prepare characters
@@ -1217,10 +1263,10 @@ namespace Febucci.UI.Core
                 }
 
                 characters[i].ResetAnimation();
-                
+
                 //Updates passed time
                 if (IsCharacterAppearing(i))
-                { 
+                {
                     characters[i].passedTime += time.deltaTime;
                 }
                 else
@@ -1230,7 +1276,7 @@ namespace Febucci.UI.Core
                     else
                         characters[i].passedTime -= time.deltaTime;
 
-                    if (characters[i].passedTime <= 0) // "<=" to force hiding characters when TimeScale = 0 
+                    if (characters[i].passedTime <= 0) // "<=" to force hiding characters when TimeScale = 0
                     {
                         characters[i].passedTime = 0;
                         characters[i].Hide();
@@ -1267,7 +1313,7 @@ namespace Febucci.UI.Core
         #endregion
 
         /// <summary>
-        /// Schedules that a mesh refresh is required as soon as possible, which will be applied before the next animation loop starts. 
+        /// Schedules that a mesh refresh is required as soon as possible, which will be applied before the next animation loop starts.
         /// </summary>
         public void ScheduleMeshRefresh() => requiresMeshUpdate = true;
         public void ForceDatabaseRefresh()
@@ -1276,7 +1322,7 @@ namespace Febucci.UI.Core
             if(DatabaseAppearances) DatabaseAppearances.ForceBuildRefresh();
             if(DatabaseBehaviors) DatabaseBehaviors.ForceBuildRefresh();
             if(StyleSheet) StyleSheet.ForceBuildRefresh();
-            
+
             ConvertText(GetOriginalTextFromSource(), ShowTextMode.Refresh);
         }
 
@@ -1286,23 +1332,23 @@ namespace Febucci.UI.Core
         /// </summary>
         /// <param name="isCategoryEnabled"></param>
         public void SetBehaviorsActive(bool isCategoryEnabled) => isAnimatingBehaviors = isCategoryEnabled;
-        
+
         /// <summary>
         /// Enables or disables appearance effects animation *LOCALLY* on this Text Animator component.
         /// To change this globally, see <see cref="TextAnimatorSettings.SetAppearancesActive"/>
         /// </summary>
         /// <param name="isCategoryEnabled"></param>
         public void SetAppearancesActive(bool isCategoryEnabled) => isAnimatingAppearances = isCategoryEnabled;
-        
+
         #region Callbacks
 
         protected virtual void OnEnable() // things might have changed when disabled, e.g. autoSize etc.
         {
-            requiresMeshUpdate = true; 
+            requiresMeshUpdate = true;
             AnimateText();
         }
         #endregion
-    
+
         public void ResetState()
         {
             _text = string.Empty;
@@ -1313,8 +1359,8 @@ namespace Febucci.UI.Core
             initialized = false;
             TryInitializing();
         }
-        
-        
+
+
 
         #region Obsolete
         // Just for compatibility with older versions
@@ -1324,25 +1370,25 @@ namespace Febucci.UI.Core
 
         [Obsolete("Use TextAnimatorSettings.SetAppearancesActive instead")]
         public static void EnableAppearances(bool enabled) => TextAnimatorSettings.SetAppearancesActive(enabled);
-        
+
         [Obsolete("Use TextAnimatorSettings.SetBehaviorsActive instead")]
         public static void EnableBehaviors(bool enabled) => TextAnimatorSettings.SetBehaviorsActive(enabled);
 
-        
+
         [Obsolete("Use SetAppearancesActive instead")]
         public void EnableAppearancesLocally(bool value) => SetAppearancesActive(value);
-        
+
         [Obsolete("Use SetBehaviorsActive instead")]
         public void EnableBehaviorsLocally(bool value) => SetBehaviorsActive(value);
 
-        
+
         /// <summary>
         /// Turns all characters visible at the end of the frame (i.e. "a typewriter skip")
         /// </summary>
         /// <param name="skipAppearanceEffects">Set this to true if you want all letters to appear instantly (without any appearance effect)</param>
         [System.Obsolete("Use SetVisibilityEntireText instead")]
         public void ShowAllCharacters(bool skipAppearanceEffects) => SetVisibilityEntireText(true, skipAppearanceEffects);
-        
+
         [System.Obsolete("Use 'Animate' instead.")]
         public void UpdateEffects() => Animate(timeScale == TimeScale.Unscaled ? Time.unscaledDeltaTime : Time.deltaTime);
 
@@ -1361,13 +1407,13 @@ namespace Febucci.UI.Core
 
         [System.Obsolete("Use 'ScheduleMeshRefresh' instead")]
         public void ForceMeshRefresh() => ScheduleMeshRefresh();
-        
-        
+
+
         [System.Obsolete("To restart TextAnimator's time, please use 'time.RestartTime()'. To skip appearances effects please set 'SetVisibilityEntireText(true, false)' instead")]
         public void ResetEffectsTime(bool skipAppearances)
         {
             time.RestartTime();
-            
+
             if(skipAppearances) SetVisibilityEntireText(true, false);
         }
 
@@ -1379,10 +1425,10 @@ namespace Febucci.UI.Core
 
         [System.Obsolete("Events are now handled/stored by Typewriters instead.")]
         public MessageEvent onEvent => typewriter.onMessage;
-        
+
         [System.Obsolete("Please use TextAnimatorSettings.Instance.appearances.enabled instead")]
         public static bool effectsAppearancesEnabled => TextAnimatorSettings.Instance.appearances.enabled;
-        
+
         [System.Obsolete("Please use TextAnimatorSettings.Instance.behaviors.enabled instead")]
         public static bool effectsBehaviorsEnabled => TextAnimatorSettings.Instance.behaviors.enabled;
 

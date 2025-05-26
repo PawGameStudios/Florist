@@ -40,11 +40,12 @@ namespace Febucci.UI.Core.Editors
                 "waitLong",
                 "waitMiddle",
                 "avoidMultiplePunctuactionWait",
+                "avoidMultiplePunctuationWait",
                 "waitForNewLines",
                 "waitForLastCharacter",
                 "useTypewriterWaitForDisappearances",
                 "disappearanceSpeedMultiplier",
-                "disappearanceWaitTime"
+                "disappearanceWaitTime",
             };
 
             string[] baseProperties = base.GetPropertiesToExclude();
