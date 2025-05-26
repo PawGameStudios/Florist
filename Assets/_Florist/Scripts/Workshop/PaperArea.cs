@@ -1,15 +1,29 @@
 using System.Collections.Generic;
+using Config;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    private enum State
+    {
+        None,
+        AddingFlowers,
+        ScissorInUse,
+        ScissorUsed,
+        InMachine,
+        MachineDone,
+        InRibbonArea,
+        Done
+    }
+
+    public bool CanUseScissor => _state == State.AddingFlowers;
     [SerializeField] private RectTransform _paperArea;
     [SerializeField] private RectTransform _saplingArea;
     [SerializeField] private Transform _scissorPosRef;
-    [SerializeField] private Transform _scissor;
     [SerializeField] private GameObject _scissorMaskObject;
+    [SerializeField] private Canvas _canvas;
     private float _bottomMostY;
     private float _saplingRightMostPosX;
     private float _saplingLeftMostPosX;
@@ -18,31 +32,53 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     private float _paperMiddleX;
     private bool _isPosCalculated = false;
     private bool _isDragging = false;
-    private bool _isScissorUsed = false;
     private Vector2 _offset;
     private Vector3 _startPosition;
     private Sequence _sequence;
-    private List<RectTransform> _papersInUse = new();
-    private List<GameObject> _flowersForBouquet = new();
+    private readonly List<GameObject> _flowersForBouquet = new();
+    private BouquetModel _bouquetModel = new();
+    private State _state = State.None;
+    private const float ANGLE_LIMIT = 40f;
+    private Vector3 _lastEventDataPosition;
+    private GameObject _scissorObject;
 
     void OnDisable()
     {
         _sequence?.Kill();
-        _isScissorUsed = false;
         _isPosCalculated = false;
         _isDragging = false;
     }
 
-    public void GetPaperToArea(Transform paper)
+    void Update()
     {
-        paper.SetParent(_paperArea);
-        paper.localPosition = Vector3.zero;
-        paper.localEulerAngles = Vector3.zero;
+        if (_isDragging)
+        {
+            References.WorkshopPage.CheckIfPaperAreaInScreenEdge(_lastEventDataPosition, _paperArea.rect.size.x, this);
+        }
+    }
+
+    public void GetPaperToArea(GameObject paper, WrappingPaperType paperType)
+    {
+        // TODO: Implement paper animation and position setting
+        // paper.SetParent(_paperArea);
+        // paper.localPosition = Vector3.zero;
+        // paper.localEulerAngles = Vector3.zero;
+
+        _bouquetModel = new BouquetModel
+        {
+            Flowers = new List<BouquetFlowerInfo>(),
+            WrappingPaperType = paperType
+        };
+
+        _state = State.AddingFlowers;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (_isDragging)
+            return;
+
+        if (_state != State.AddingFlowers)
             return;
 
         if (!_isPosCalculated)
@@ -77,71 +113,137 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         }
 
         float targetRotationZ = targetRot.z;
-        if (targetRotationZ < -60 || targetRotationZ > 60)
+        if (targetRotationZ < -ANGLE_LIMIT || targetRotationZ > ANGLE_LIMIT)
         {
             return;
         }
 
-        var newFlower = References.WorkshopPage.CreateNewFlower(eventData.position, targetRot);
+        var newFlower = References.WorkshopPage.CreateNewFlower(eventData.position, targetRot, _paperArea);
         if (newFlower != null)
         {
-            _flowersForBouquet.Add(newFlower);
+            _flowersForBouquet.Add(newFlower.gameObject);
+            _bouquetModel.Flowers.Add(new BouquetFlowerInfo
+            {
+                FlowerType = newFlower.FlowerType,
+                FlowerColor = newFlower.FlowerColor,
+            });
         }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (_state == State.ScissorInUse || _state == State.InMachine || _state == State.InRibbonArea || _state == State.Done)
+            return;
+
+        _lastEventDataPosition = eventData.position;
         _isDragging = true;
-        _startPosition = transform.position;
+        _startPosition = transform.localPosition;
         _offset = new Vector2(transform.position.x, transform.position.y) - eventData.position;
         transform.position = eventData.position;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (_state == State.ScissorInUse || _state == State.InMachine || _state == State.InRibbonArea || _state == State.Done)
+            return;
+
+        _canvas.sortingOrder = 10;
+        _lastEventDataPosition = eventData.position;
         transform.position = eventData.position + _offset;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (_state == State.ScissorInUse || _state == State.InMachine || _state == State.InRibbonArea || _state == State.Done)
+            return;
+
+        _canvas.sortingOrder = 5;
         _isDragging = false;
-        if (References.WorkshopPage.CheckIfInMachineArea(transform.position) && _isScissorUsed)
-        {
-            References.WorkshopPage.OnFlowerGivenToMachine();
-        }
-        else if (References.WorkshopPage.CheckIfInTrashArea(transform.position))
+
+        if (References.WorkshopPage.CheckIfInTrashArea(transform.position))
         {
             References.WorkshopPage.OnFlowerGivenToTrash(this);
+            return;
         }
-        else
+
+        if (_state == State.AddingFlowers)
         {
-            transform.position = _startPosition;
+            transform.localPosition = _startPosition;
+        }
+        else if (_state == State.ScissorUsed)
+        {
+            if (References.WorkshopPage.CheckIfInMachineArea(transform.position))
+            {
+                _state = State.InMachine;
+                References.WorkshopPage.OnFlowerGivenToMachine(this);
+            }
+            else
+            {
+                transform.localPosition = _startPosition;
+            }
+        }
+        else if (_state == State.MachineDone)
+        {
+            if (References.WorkshopPage.CheckIfInRibbonArea(transform.position))
+            {
+                _state = State.InRibbonArea;
+                References.WorkshopPage.OnFlowerGivenToRibbon(this);
+            }
+            else
+            {
+                transform.localPosition = _startPosition;
+            }
         }
     }
 
-    public void OnScissorClicked()
+    public void OnRibbonSelected(RibbonType ribbonType)
     {
-        _scissor.gameObject.SetActive(true);
+        if (_state != State.InRibbonArea)
+            return;
+
+        Debug.Log($"Selected ribbon type: {ribbonType}");
+        _bouquetModel.RibbonType = ribbonType;
+        _state = State.Done;
+    }
+
+    public void OnMachineDone()
+    {
+        if (_state != State.InMachine)
+            return;
+
+        Debug.Log($"OnMachineDone");
+        _state = State.MachineDone;
+        // TODO: show actual bouquet here
+    }
+
+    public void OnScissorClicked(Transform scissor)
+    {
+        _state = State.ScissorInUse;
+
+        _scissorObject = scissor.gameObject;
+        _scissorObject.SetActive(true);
+        scissor.SetParent(_paperArea);
 
         float time = 0;
-        Vector3 p0 = _scissor.position;
-        Vector3 p1 = _scissor.position + new Vector3(Random.Range(0, 300), Random.Range(-300, 300), 0);
+        Vector3 p0 = scissor.position;
+        Vector3 p1 = scissor.position + new Vector3(Random.Range(0, 300), Random.Range(-300, 300), 0);
         Vector3 p2 = new(_saplingRightMostPosX, _scissorPosRef.position.y, _scissorPosRef.position.z);
         Vector3 destination = new(_saplingRightMostPosX, _scissorPosRef.position.y, _scissorPosRef.position.z);
         Vector3 finalDestination = new(_saplingLeftMostPosX, _scissorPosRef.position.y, _scissorPosRef.position.z);
 
         var initTween = DOTween.To(() => time, t => time = t, 1, 1).OnUpdate(() =>
         {
-            _scissor.position = GetPointOnBezier(time, p0, p1, p2, destination);
+            scissor.position = GetPointOnBezier(time, p0, p1, p2, destination);
         });
 
         _sequence?.Kill();
         _sequence = DOTween.Sequence();
         _sequence.Append(initTween.SetEase(Ease.InSine));
-        _sequence.Append(_scissor.DOMove(finalDestination, .1f).SetEase(Ease.OutSine).OnComplete(() =>
+        _sequence.Append(scissor.DOMove(finalDestination, .1f).SetEase(Ease.OutSine).OnComplete(() =>
         {
             _scissorMaskObject.SetActive(true);
-            _isScissorUsed = true;
+            _scissorObject.SetActive(false);
+            _state = State.ScissorUsed;
         }));
     }
 

@@ -5,24 +5,26 @@ using UnityEngine.UI;
 
 public class PaperBox : MonoBehaviour
 {
-    [SerializeField] private Transform _paperImageParent;
-    [SerializeField] private Image _paperImagePrefab;
-    [SerializeField] private List<Transform> _paperImageReferences;
+    [SerializeField] private List<Image> _paperImages;
+    [SerializeField] private Sprite _lockSprite;
     private List<WrappingPaperInfo> _papers;
 
-    public void Initilize(List<WrappingPaperInfo> papers)
+    public void Initialize(List<WrappingPaperInfo> papers)
     {
         _papers = papers;
-        for (int i = 0; i < papers.Count; i++)
+        int i = 0;
+        for (; i < papers.Count; i++)
         {
-            if (i >= _paperImageReferences.Count)
+            if (i >= _paperImages.Count)
                 break;
 
-            var paper = Instantiate(_paperImagePrefab, _paperImageParent);
-            paper.sprite = papers[i].Sprite;
-            paper.transform.SetPositionAndRotation(_paperImageReferences[i].position, _paperImageReferences[i].rotation);
-            paper.transform.localScale = _paperImageReferences[i].localScale;
-            paper.gameObject.SetActive(true);
+            _paperImages[i].sprite = papers[i].Sprite;
+            _paperImages[i].gameObject.SetActive(true);
+        }
+        for (; i < _paperImages.Count; i++)
+        {
+            _paperImages[i].sprite = _lockSprite;
+            _paperImages[i].gameObject.SetActive(true);
         }
     }
 
@@ -32,6 +34,6 @@ public class PaperBox : MonoBehaviour
             return;
 
         var selectedPaper = _papers[index];
-        References.WorkshopPage.OnPaperSelected(selectedPaper.PaperOpenAnimation);
+        References.WorkshopPage.OnPaperSelected(selectedPaper.PaperOpenAnimation, selectedPaper.WrappingPaperType);
     }
 }

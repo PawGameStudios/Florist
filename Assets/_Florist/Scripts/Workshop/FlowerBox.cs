@@ -6,11 +6,9 @@ using UnityEngine.UI;
 public class FlowerBox : MonoBehaviour
 {
     [SerializeField] private Image _flowerBoxImage;
-    // [SerializeField] private Image _flowerImage;
     [SerializeField] private TextMeshProUGUI _flowerName;
     private int _index;
-    private Sprite _flowerSprite;
-    private GameObject _flowerPrefab;
+    private Flower _flowerPrefab;
 
     public FlowerBox SetIndex(int index)
     {
@@ -24,14 +22,7 @@ public class FlowerBox : MonoBehaviour
         return this;
     }
 
-    public FlowerBox SetFlowerImage(Sprite flowerSprite)
-    {
-        // _flowerSprite = flowerSprite;
-        // _flowerImage.sprite = flowerSprite;
-        return this;
-    }
-
-    public FlowerBox SetFlowerPrefab(GameObject flowerPrefab)
+    public FlowerBox SetFlowerPrefab(Flower flowerPrefab)
     {
         _flowerPrefab = flowerPrefab;
         return this;
@@ -61,6 +52,6 @@ public class FlowerBox : MonoBehaviour
 
     public void OnBoxSelected()
     {
-        References.WorkshopPage.OnBoxSelected(_flowerPrefab);
+        References.WorkshopPage.OnBoxSelected(_flowerPrefab, _index);
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9096282666630889059}
   - component: {fileID: 7181696698214424114}
   - component: {fileID: 8896125047312462426}
+  - component: {fileID: 2704872906745386456}
   m_Layer: 5
   m_Name: Flower
   m_TagString: Untagged
@@ -75,3 +76,17 @@ MonoBehaviour:
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2704872906745386456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215466011441787327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 041921242374e864f9eb5c1bf1afa855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flowerType: 0
+  _flowerColor: 0

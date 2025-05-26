@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class MainPage : Page
 {
@@ -26,7 +27,6 @@ public class MainPage : Page
 
     public void OnShopClicked()
     {
-        // gameObject.SetActive(false);
         References.ShopPage.Open();
     }
 

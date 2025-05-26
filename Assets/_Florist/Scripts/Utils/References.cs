@@ -12,6 +12,7 @@ public class References : MonoBehaviour
     public static EndDayPage EndDayPage => s_instance._endDayPage;
     public static DayTimeManager DayTimeManager => s_instance._dayTimeManager;
     public static HappinessMeter HappinessMeter => s_instance._happinessMeter;
+    public static ProfileMenu ProfileMenu => s_instance._profileMenu;
 
     [SerializeField] private TopCanvas _topCanvas = null;
     [SerializeField] private MainPage _mainPage = null;
@@ -21,6 +22,7 @@ public class References : MonoBehaviour
     [SerializeField] private EndDayPage _endDayPage = null;
     [SerializeField] private DayTimeManager _dayTimeManager;
     [SerializeField] private HappinessMeter _happinessMeter;
+    [SerializeField] private ProfileMenu _profileMenu;
 
     private void Awake() => s_instance = this;
 }

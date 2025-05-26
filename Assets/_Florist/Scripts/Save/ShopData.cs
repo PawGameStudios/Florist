@@ -71,67 +71,67 @@ public class ShopData
         }
         for (int i = 0; i < Configs.ShopConfig.WrapperItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.WrapperItems[i].Id, new ItemData(ItemType.Wrapper, i));
+            Items.Add(Configs.ShopConfig.WrapperItems[i].Id, new ItemData(ItemType.Wrapper, i, Configs.ShopConfig.WrapperItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.RibbonItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.RibbonItems[i].Id, new ItemData(ItemType.Ribbon, i));
+            Items.Add(Configs.ShopConfig.RibbonItems[i].Id, new ItemData(ItemType.Ribbon, i, Configs.ShopConfig.RibbonItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.UpgradeItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.UpgradeItems[i].Id, new ItemData(ItemType.Upgrade, i));
+            Items.Add(Configs.ShopConfig.UpgradeItems[i].Id, new ItemData(ItemType.Upgrade, i, Configs.ShopConfig.UpgradeItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.AccessoryItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.AccessoryItems[i].Id, new ItemData(ItemType.Accessory, i));
+            Items.Add(Configs.ShopConfig.AccessoryItems[i].Id, new ItemData(ItemType.Accessory, i, Configs.ShopConfig.AccessoryItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.WallpaperItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.WallpaperItems[i].Id, new ItemData(ItemType.Wallpaper, i));
+            Items.Add(Configs.ShopConfig.WallpaperItems[i].Id, new ItemData(ItemType.Wallpaper, i, Configs.ShopConfig.WallpaperItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.FloorItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.FloorItems[i].Id, new ItemData(ItemType.Floor, i));
+            Items.Add(Configs.ShopConfig.FloorItems[i].Id, new ItemData(ItemType.Floor, i, Configs.ShopConfig.FloorItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.SignItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.SignItems[i].Id, new ItemData(ItemType.Sign, i));
+            Items.Add(Configs.ShopConfig.SignItems[i].Id, new ItemData(ItemType.Sign, i, Configs.ShopConfig.SignItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.CounterItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.CounterItems[i].Id, new ItemData(ItemType.Counter, i));
+            Items.Add(Configs.ShopConfig.CounterItems[i].Id, new ItemData(ItemType.Counter, i, Configs.ShopConfig.CounterItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.SpeechBubbleItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.SpeechBubbleItems[i].Id, new ItemData(ItemType.SpeechBubble, i));
+            Items.Add(Configs.ShopConfig.SpeechBubbleItems[i].Id, new ItemData(ItemType.SpeechBubble, i, Configs.ShopConfig.SpeechBubbleItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.SpeechBubbleButtonItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.SpeechBubbleButtonItems[i].Id, new ItemData(ItemType.SpeechBubbleButton, i));
+            Items.Add(Configs.ShopConfig.SpeechBubbleButtonItems[i].Id, new ItemData(ItemType.SpeechBubbleButton, i, Configs.ShopConfig.FlowerItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.OutsideDukkanItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.OutsideDukkanItems[i].Id, new ItemData(ItemType.OutsideDukkan, i));
+            Items.Add(Configs.ShopConfig.OutsideDukkanItems[i].Id, new ItemData(ItemType.OutsideDukkan, i, Configs.ShopConfig.OutsideDukkanItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.DoorItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.DoorItems[i].Id, new ItemData(ItemType.Door, i));
+            Items.Add(Configs.ShopConfig.DoorItems[i].Id, new ItemData(ItemType.Door, i, Configs.ShopConfig.DoorItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.FlowerStandItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.FlowerStandItems[i].Id, new ItemData(ItemType.FlowerStand, i));
+            Items.Add(Configs.ShopConfig.FlowerStandItems[i].Id, new ItemData(ItemType.FlowerStand, i, Configs.ShopConfig.FlowerStandItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.DecorItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.DecorItems[i].Id, new ItemData(ItemType.Decor, i));
+            Items.Add(Configs.ShopConfig.DecorItems[i].Id, new ItemData(ItemType.Decor, i, Configs.ShopConfig.DecorItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.PcItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.PcItems[i].Id, new ItemData(ItemType.Pc, i));
+            Items.Add(Configs.ShopConfig.PcItems[i].Id, new ItemData(ItemType.Pc, i, Configs.ShopConfig.PcItems[i].DefaultItemState));
         }
         for (int i = 0; i < Configs.ShopConfig.PosItems.Count; i++)
         {
-            Items.Add(Configs.ShopConfig.PosItems[i].Id, new ItemData(ItemType.Pos, i));
+            Items.Add(Configs.ShopConfig.PosItems[i].Id, new ItemData(ItemType.Pos, i, Configs.ShopConfig.PosItems[i].DefaultItemState));
         }
 
         IsInitialized = true;

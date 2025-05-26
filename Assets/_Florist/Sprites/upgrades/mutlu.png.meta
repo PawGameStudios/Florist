@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mutlu_0: 3988020367366674255
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

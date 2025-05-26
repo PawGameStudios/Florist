@@ -8,7 +8,7 @@ public class PageData
     public PageType PreviousPage;
 }
 
-public abstract class Page : MonoBehaviour
+public abstract class Page : SerializedMonoBehaviour
 {
     public PageType PageType => _pageType;
     [SerializeField] private PageType _pageType;

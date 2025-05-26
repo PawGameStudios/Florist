@@ -1,0 +1,214 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ab0d4731c934f4c937fd956ed2644a, type: 3}
+  m_Name: ShopConfig
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  FlowerItems:
+  - Icon: {fileID: 21300000, guid: 2549810d1db61ed43b899d71c4048e25, type: 3}
+    Name: gypsum
+    Id: f_1
+    Price: 0
+    IsSelectable: 0
+    DefaultItemState: 2
+  - Icon: {fileID: 21300000, guid: 679844faa7245ae459e72d0bd833d84f, type: 3}
+    Name: eucalyptus
+    Id: f_2
+    Price: 0
+    IsSelectable: 0
+    DefaultItemState: 2
+  - Icon: {fileID: 21300000, guid: aa9714ac61ce3be429ad938d8e6a0d54, type: 3}
+    Name: rose
+    Id: f_3
+    Price: 0
+    IsSelectable: 0
+    DefaultItemState: 2
+  - Icon: {fileID: 21300000, guid: d0c4139fa483ecc49a86f6c2cc5a10b2, type: 3}
+    Name: anemone
+    Id: f_4
+    Price: 0
+    IsSelectable: 0
+    DefaultItemState: 2
+  WrapperItems:
+  - Icon: {fileID: 21300000, guid: db85ece96322be3458ede3f4603e23c8, type: 3}
+    Name: Wrapper 1
+    Id: wp_1
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 2
+  - Icon: {fileID: 21300000, guid: 836b4681770bec240a6316ec7db7489c, type: 3}
+    Name: Wrapper 2
+    Id: wp_2
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 2
+  - Icon: {fileID: 21300000, guid: 83dfea964573ea24d90f18c485562b17, type: 3}
+    Name: Wrapper 3
+    Id: wp_3
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 49761f6690db1884c98439e2f677c9ed, type: 3}
+    Name: Wrapper 4
+    Id: wp_4
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: ef5c80316dfcbd2458361b1e5a83f400, type: 3}
+    Name: Wrapper 5
+    Id: wp_5
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 8fe043a4a7b62c34ca51390db761549f, type: 3}
+    Name: Wrapper 6
+    Id: wp_6
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 48b22dd9bb1c668468bf161ab50d70ad, type: 3}
+    Name: Wrapper 7
+    Id: wp_7
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: a826f6c5d9e468447865638bfe820f3a, type: 3}
+    Name: Wrapper 8
+    Id: wp_8
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 949ccc512fdc89c459c1d7b05db97e97, type: 3}
+    Name: Wrapper 9
+    Id: wp_9
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 05a6c9205f327ee4bbc2dd844591d441, type: 3}
+    Name: Wrapper 10
+    Id: wp_10
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 7cc39c37dbfae8e45b8f30a5b82805e3, type: 3}
+    Name: Wrapper 11
+    Id: wp_11
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 0e8281c6c12fe8b4ab985e4c9f038aef, type: 3}
+    Name: Wrapper 12
+    Id: wp_12
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  RibbonItems:
+  - Icon: {fileID: 21300000, guid: ac4383188d9dcc4499816ac4f60b354f, type: 3}
+    Name: Ribbon 1
+    Id: r_1
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 2
+  - Icon: {fileID: 21300000, guid: 5b014294ccbbbba4286984c64950b85e, type: 3}
+    Name: Ribbon 2
+    Id: r_2
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 2
+  - Icon: {fileID: 21300000, guid: 52e674f7144428a4593f6740b1e8383a, type: 3}
+    Name: Ribbon 3
+    Id: r_3
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 2
+  - Icon: {fileID: 21300000, guid: ba44b42c6984e5443980e1a9e7c658bb, type: 3}
+    Name: Ribbon 4
+    Id: r_4
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: f9dda01d2837774428dd25f65e706b5d, type: 3}
+    Name: Ribbon 5
+    Id: r_5
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: a882971446e93a94684e43f9bca85ef8, type: 3}
+    Name: Ribbon 6
+    Id: r_6
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 5b014294ccbbbba4286984c64950b85e, type: 3}
+    Name: Ribbon 7
+    Id: r_7
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 6fd473eda8c4bfa44bd1e7a0fd959e3f, type: 3}
+    Name: Ribbon 8
+    Id: r_8
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  UpgradeItems:
+  - Icon: {fileID: 21300000, guid: d9c85b4cf4ddc234d8b5093f25e60e2c, type: 3}
+    Name: Kurye
+    Id: u_1
+    Price: 0
+    IsSelectable: 0
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 09324d3b4d45c384891ec9a2cd3aa7c9, type: 3}
+    Name: Yaz saati
+    Id: u_2
+    Price: 0
+    IsSelectable: 0
+    DefaultItemState: 1
+  AccessoryItems: []
+  WallpaperItems:
+  - Icon: {fileID: 21300000, guid: b78031a191fadfc40ad0bb4af5b24728, type: 3}
+    Name: Wallpaper 1
+    Id: w_1
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: e1514477ef43f894e861e78bce0f9601, type: 3}
+    Name: Wallpaper 2
+    Id: w_2
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  FloorItems:
+  - Icon: {fileID: 21300000, guid: 8a25ff2dba7c00143b76204a7a0e8bbb, type: 3}
+    Name: Floor 1
+    Id: fl_1
+    Price: 0
+    IsSelectable: 1
+    DefaultItemState: 1
+  SignItems: []
+  CounterItems: []
+  SpeechBubbleItems: []
+  SpeechBubbleButtonItems: []
+  OutsideDukkanItems: []
+  DoorItems: []
+  FlowerStandItems: []
+  DecorItems: []
+  PcItems: []
+  PosItems: []

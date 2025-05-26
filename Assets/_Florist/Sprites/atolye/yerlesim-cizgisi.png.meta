@@ -1,0 +1,1456 @@
+fileFormatVersion: 2
+guid: cfdbade112946a344a4c7c4e33c4dc83
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1009172250664037688
+    second: yerlesim-cizgisi_0
+  - first:
+      213: -2682996439136030317
+    second: yerlesim-cizgisi_1
+  - first:
+      213: 5455503952258683520
+    second: yerlesim-cizgisi_2
+  - first:
+      213: 3870400390572749672
+    second: yerlesim-cizgisi_3
+  - first:
+      213: -3319528180809931318
+    second: yerlesim-cizgisi_4
+  - first:
+      213: -8341086273503026438
+    second: yerlesim-cizgisi_5
+  - first:
+      213: 4355273778182538533
+    second: yerlesim-cizgisi_6
+  - first:
+      213: 1370691029214941545
+    second: yerlesim-cizgisi_7
+  - first:
+      213: -2888094277490244088
+    second: yerlesim-cizgisi_8
+  - first:
+      213: 6783822075304523667
+    second: yerlesim-cizgisi_9
+  - first:
+      213: 4048362098937126065
+    second: yerlesim-cizgisi_10
+  - first:
+      213: 596178575709835136
+    second: yerlesim-cizgisi_11
+  - first:
+      213: 7705904873772901221
+    second: yerlesim-cizgisi_12
+  - first:
+      213: -2896796866401166398
+    second: yerlesim-cizgisi_13
+  - first:
+      213: -4965686819654356061
+    second: yerlesim-cizgisi_14
+  - first:
+      213: 3495657585724977876
+    second: yerlesim-cizgisi_15
+  - first:
+      213: 1881360947362013438
+    second: yerlesim-cizgisi_16
+  - first:
+      213: -1399669755710074735
+    second: yerlesim-cizgisi_17
+  - first:
+      213: -6238901836149368945
+    second: yerlesim-cizgisi_18
+  - first:
+      213: -6927327782449861307
+    second: yerlesim-cizgisi_19
+  - first:
+      213: -1283886201361413920
+    second: yerlesim-cizgisi_20
+  - first:
+      213: -1079370122770357602
+    second: yerlesim-cizgisi_21
+  - first:
+      213: 2698039975870832050
+    second: yerlesim-cizgisi_22
+  - first:
+      213: 4741808872593794264
+    second: yerlesim-cizgisi_23
+  - first:
+      213: -372955716371555486
+    second: yerlesim-cizgisi_24
+  - first:
+      213: -4805618957392345438
+    second: yerlesim-cizgisi_25
+  - first:
+      213: -7791137610884068887
+    second: yerlesim-cizgisi_26
+  - first:
+      213: 3269340720990781471
+    second: yerlesim-cizgisi_27
+  - first:
+      213: -4088144759571331753
+    second: yerlesim-cizgisi_28
+  - first:
+      213: -8799738418506039775
+    second: yerlesim-cizgisi_29
+  - first:
+      213: -2232750593219265799
+    second: yerlesim-cizgisi_30
+  - first:
+      213: -1663097599931463143
+    second: yerlesim-cizgisi_31
+  - first:
+      213: 9116680246582855641
+    second: yerlesim-cizgisi_32
+  - first:
+      213: -8942642547439760261
+    second: yerlesim-cizgisi_33
+  - first:
+      213: -4157096590459789627
+    second: yerlesim-cizgisi_34
+  - first:
+      213: -6862367251637669773
+    second: yerlesim-cizgisi_35
+  - first:
+      213: -7422483282992717643
+    second: yerlesim-cizgisi_36
+  - first:
+      213: -8277075013621475358
+    second: yerlesim-cizgisi_37
+  - first:
+      213: 6571131451386839716
+    second: yerlesim-cizgisi_38
+  - first:
+      213: -8622726564879483548
+    second: yerlesim-cizgisi_39
+  - first:
+      213: 1052544045173056892
+    second: yerlesim-cizgisi_40
+  - first:
+      213: 8949933177065334133
+    second: yerlesim-cizgisi_41
+  - first:
+      213: 8706722887208726903
+    second: yerlesim-cizgisi_42
+  - first:
+      213: 1578954566443893342
+    second: yerlesim-cizgisi_43
+  - first:
+      213: -348523325208160022
+    second: yerlesim-cizgisi_44
+  - first:
+      213: 494625795585997236
+    second: yerlesim-cizgisi_45
+  - first:
+      213: 2398308300096898661
+    second: yerlesim-cizgisi_46
+  - first:
+      213: 7210253326743885268
+    second: yerlesim-cizgisi_47
+  - first:
+      213: 6164418126051340075
+    second: yerlesim-cizgisi_48
+  - first:
+      213: -7405985951369673321
+    second: yerlesim-cizgisi_49
+  - first:
+      213: 4864212200732084285
+    second: yerlesim-cizgisi_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 51
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_0
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 633
+        width: 29
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c21df15f23bef1f0800000000000000
+      internalID: -1009172250664037688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_1
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 640
+        width: 29
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 391b8a724f414cad0800000000000000
+      internalID: -2682996439136030317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_2
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 644
+        width: 30
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0825e19a0f7d5bb40800000000000000
+      internalID: 5455503952258683520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_3
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 644
+        width: 29
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8633f9226ac66b530800000000000000
+      internalID: 3870400390572749672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_4
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 640
+        width: 29
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac5ece805baaee1d0800000000000000
+      internalID: -3319528180809931318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_5
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 634
+        width: 29
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af227fa2a328e3c80800000000000000
+      internalID: -8341086273503026438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_6
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 611
+        width: 28
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 525c4201d6a017c30800000000000000
+      internalID: 4355273778182538533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_7
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 624
+        width: 28
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 961db259a3ca50310800000000000000
+      internalID: 1370691029214941545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_8
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 624
+        width: 29
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8060b507e8d6be7d0800000000000000
+      internalID: -2888094277490244088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_9
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 611
+        width: 28
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 397baf93c3af42e50800000000000000
+      internalID: 6783822075304523667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_10
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 576
+        width: 27
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bc5d4d31ebae2830800000000000000
+      internalID: 4048362098937126065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_11
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 595
+        width: 28
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08f02e3814d064800800000000000000
+      internalID: 596178575709835136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_12
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 595
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5636f22b7afd0fa60800000000000000
+      internalID: 7705904873772901221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_13
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 576
+        width: 27
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cb91bf09928cc7d0800000000000000
+      internalID: -2896796866401166398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_14
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 554
+        width: 26
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a3b9a89526561bb0800000000000000
+      internalID: -4965686819654356061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_15
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 554
+        width: 26
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d2798dad02138030800000000000000
+      internalID: 3495657585724977876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_16
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 530
+        width: 25
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef02ec150dfeb1a10800000000000000
+      internalID: 1881360947362013438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_17
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 530
+        width: 25
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1901b00e5cf539ce0800000000000000
+      internalID: -1399669755710074735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_18
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 502
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f87d8cbc5d7fa69a0800000000000000
+      internalID: -6238901836149368945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_19
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 503
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54da16c95103ddf90800000000000000
+      internalID: -6927327782449861307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 472
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e8c3db5d48be2ee0800000000000000
+      internalID: -1283886201361413920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_21
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 472
+        width: 15
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e926a13979e4501f0800000000000000
+      internalID: -1079370122770357602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_22
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 440
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bd959f201d517520800000000000000
+      internalID: 2698039975870832050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_23
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 440
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d4afb3eb0a4ec140800000000000000
+      internalID: 4741808872593794264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_24
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 408
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26bd8b080cef2daf0800000000000000
+      internalID: -372955716371555486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_25
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 408
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a60fbef4030f4db0800000000000000
+      internalID: -4805618957392345438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_26
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 376
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e9c1134f9150e390800000000000000
+      internalID: -7791137610884068887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_27
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 376
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f10006460180f5d20800000000000000
+      internalID: 3269340720990781471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_28
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 344
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7554067400ef347c0800000000000000
+      internalID: -4088144759571331753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_29
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 344
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12ef698088c01e580800000000000000
+      internalID: -8799738418506039775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_30
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 312
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fa7f134a2da301e0800000000000000
+      internalID: -2232750593219265799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_31
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 312
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91ac7495b8d7be8e0800000000000000
+      internalID: -1663097599931463143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_32
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 280
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d7446cc164f48e70800000000000000
+      internalID: 9116680246582855641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_33
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 280
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7c0f86bbf955e380800000000000000
+      internalID: -8942642547439760261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_34
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 248
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ce18ac1da60f46c0800000000000000
+      internalID: -4157096590459789627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_35
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 248
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 370fcdfc759f3c0a0800000000000000
+      internalID: -6862367251637669773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_36
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 216
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b0a1f5b7ca0ef890800000000000000
+      internalID: -7422483282992717643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_37
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 216
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e794d1012ce12d80800000000000000
+      internalID: -8277075013621475358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_38
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 184
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a24f4c5d39513b50800000000000000
+      internalID: 6571131451386839716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_39
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 184
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46db809dfdbe55880800000000000000
+      internalID: -8622726564879483548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_40
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 152
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c752ef28b336b9e00800000000000000
+      internalID: 1052544045173056892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_41
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 152
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57566764ecc843c70800000000000000
+      internalID: 8949933177065334133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_42
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 120
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 771f6d1f55e74d870800000000000000
+      internalID: 8706722887208726903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_43
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 120
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e528e5100d299e510800000000000000
+      internalID: 1578954566443893342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_44
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 88
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae8970dd1ebc92bf0800000000000000
+      internalID: -348523325208160022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_45
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 88
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b9f5aa5a834dd600800000000000000
+      internalID: 494625795585997236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_46
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 56
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 566852131b0884120800000000000000
+      internalID: 2398308300096898661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_47
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 56
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d5d529f237ff0460800000000000000
+      internalID: 7210253326743885268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_48
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 24
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2fe44a00a96c8550800000000000000
+      internalID: 6164418126051340075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_49
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 24
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 795c31d0407a83990800000000000000
+      internalID: -7405985951369673321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: yerlesim-cizgisi_50
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 0
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d38c1c09937218340800000000000000
+      internalID: 4864212200732084285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      yerlesim-cizgisi_0: -1009172250664037688
+      yerlesim-cizgisi_1: -2682996439136030317
+      yerlesim-cizgisi_10: 4048362098937126065
+      yerlesim-cizgisi_11: 596178575709835136
+      yerlesim-cizgisi_12: 7705904873772901221
+      yerlesim-cizgisi_13: -2896796866401166398
+      yerlesim-cizgisi_14: -4965686819654356061
+      yerlesim-cizgisi_15: 3495657585724977876
+      yerlesim-cizgisi_16: 1881360947362013438
+      yerlesim-cizgisi_17: -1399669755710074735
+      yerlesim-cizgisi_18: -6238901836149368945
+      yerlesim-cizgisi_19: -6927327782449861307
+      yerlesim-cizgisi_2: 5455503952258683520
+      yerlesim-cizgisi_20: -1283886201361413920
+      yerlesim-cizgisi_21: -1079370122770357602
+      yerlesim-cizgisi_22: 2698039975870832050
+      yerlesim-cizgisi_23: 4741808872593794264
+      yerlesim-cizgisi_24: -372955716371555486
+      yerlesim-cizgisi_25: -4805618957392345438
+      yerlesim-cizgisi_26: -7791137610884068887
+      yerlesim-cizgisi_27: 3269340720990781471
+      yerlesim-cizgisi_28: -4088144759571331753
+      yerlesim-cizgisi_29: -8799738418506039775
+      yerlesim-cizgisi_3: 3870400390572749672
+      yerlesim-cizgisi_30: -2232750593219265799
+      yerlesim-cizgisi_31: -1663097599931463143
+      yerlesim-cizgisi_32: 9116680246582855641
+      yerlesim-cizgisi_33: -8942642547439760261
+      yerlesim-cizgisi_34: -4157096590459789627
+      yerlesim-cizgisi_35: -6862367251637669773
+      yerlesim-cizgisi_36: -7422483282992717643
+      yerlesim-cizgisi_37: -8277075013621475358
+      yerlesim-cizgisi_38: 6571131451386839716
+      yerlesim-cizgisi_39: -8622726564879483548
+      yerlesim-cizgisi_4: -3319528180809931318
+      yerlesim-cizgisi_40: 1052544045173056892
+      yerlesim-cizgisi_41: 8949933177065334133
+      yerlesim-cizgisi_42: 8706722887208726903
+      yerlesim-cizgisi_43: 1578954566443893342
+      yerlesim-cizgisi_44: -348523325208160022
+      yerlesim-cizgisi_45: 494625795585997236
+      yerlesim-cizgisi_46: 2398308300096898661
+      yerlesim-cizgisi_47: 7210253326743885268
+      yerlesim-cizgisi_48: 6164418126051340075
+      yerlesim-cizgisi_49: -7405985951369673321
+      yerlesim-cizgisi_5: -8341086273503026438
+      yerlesim-cizgisi_50: 4864212200732084285
+      yerlesim-cizgisi_6: 4355273778182538533
+      yerlesim-cizgisi_7: 1370691029214941545
+      yerlesim-cizgisi_8: -2888094277490244088
+      yerlesim-cizgisi_9: 6783822075304523667
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

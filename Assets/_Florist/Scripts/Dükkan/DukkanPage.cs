@@ -228,54 +228,54 @@ public class DukkanPage : Page
 
     private void SetItems()
     {
-        // outside
-        Sprite outSideSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.OutsideDukkan);
-        if (outSideSprite != null)
-            _outsideImage.sprite = outSideSprite;
+        // // outside
+        // Sprite outSideSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.OutsideDukkan);
+        // if (outSideSprite != null)
+        //     _outsideImage.sprite = outSideSprite;
 
-        // door
-        Sprite doorSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Door);
-        if (doorSprite != null)
-            _doorImage.sprite = doorSprite;
+        // // door
+        // Sprite doorSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Door);
+        // if (doorSprite != null)
+        //     _doorImage.sprite = doorSprite;
 
-        // floor
-        Sprite floorSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Floor);
-        if (floorSprite != null)
-            _floorImage.sprite = floorSprite;
+        // // floor
+        // Sprite floorSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Floor);
+        // if (floorSprite != null)
+        //     _floorImage.sprite = floorSprite;
 
-        // left wall
-        Sprite wallSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Wallpaper);
-        if (wallSprite != null)
-            _leftWallImage.sprite = wallSprite;
+        // // left wall
+        // Sprite wallSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Wallpaper);
+        // if (wallSprite != null)
+        //     _leftWallImage.sprite = wallSprite;
 
-        // right wall
-        if (wallSprite != null)
-            _rightWallImage.sprite = wallSprite;
+        // // right wall
+        // if (wallSprite != null)
+        //     _rightWallImage.sprite = wallSprite;
 
-        // flower stand
-        Sprite flowerStandSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.FlowerStand);
-        if (flowerStandSprite != null)
-            _flowerStandImage.sprite = flowerStandSprite;
+        // // flower stand
+        // Sprite flowerStandSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.FlowerStand);
+        // if (flowerStandSprite != null)
+        //     _flowerStandImage.sprite = flowerStandSprite;
 
-        // decor
-        Sprite decorSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Decor);
-        if (decorSprite != null)
-            _decorImage.sprite = decorSprite;
+        // // decor
+        // Sprite decorSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Decor);
+        // if (decorSprite != null)
+        //     _decorImage.sprite = decorSprite;
 
-        // table
-        Sprite tableSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Counter);
-        if (tableSprite != null)
-            _tableImage.sprite = tableSprite;
+        // // table
+        // Sprite tableSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Counter);
+        // if (tableSprite != null)
+        //     _tableImage.sprite = tableSprite;
 
-        // pc
-        Sprite pcSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Pc);
-        if (pcSprite != null)
-            _pcImage.sprite = pcSprite;
+        // // pc
+        // Sprite pcSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Pc);
+        // if (pcSprite != null)
+        //     _pcImage.sprite = pcSprite;
 
-        // pos
-        Sprite posSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Pos);
-        if (posSprite != null)
-            _posImage.sprite = posSprite;
+        // // pos
+        // Sprite posSprite = SaveSystem.Inst.ShopData.GetSelectedItemSprite(ItemType.Pos);
+        // if (posSprite != null)
+        //     _posImage.sprite = posSprite;
 
         // speech bubbles
         _customer.SetSpeechBubbleSprites();

@@ -79,7 +79,7 @@ namespace Config
         public FlowerColor Color;
 
         [VerticalGroup("Info")]
-        public GameObject Prefab;
+        public Flower Prefab;
     }
 
     [Serializable]
@@ -99,6 +99,18 @@ namespace Config
         public GameObject PaperOpenAnimation;
     }
 
+    [Serializable]
+    public class MachineInfo
+    {
+        public float BaseDuration;
+        public float DurationGainPerLevel;
+
+        public float CalculateDuration(int level)
+        {
+            return Mathf.Max(.1f, BaseDuration - DurationGainPerLevel * (level - 1));
+        }
+    }
+
 
     [CreateAssetMenu(fileName = "WorkshopConfig", menuName = "Paw/Configs/Workshop")]
     public class WorkshopConfig : SerializedScriptableObject
@@ -113,6 +125,8 @@ namespace Config
 
         [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
         public List<WrappingPaperInfo> WrappingPaperInfo;
+
+        public MachineInfo MachineInfo;
 
         public float GetFlowerCost(FlowerType flowerType)
         {
