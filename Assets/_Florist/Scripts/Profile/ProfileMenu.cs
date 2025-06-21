@@ -23,15 +23,18 @@ public class ProfileMenu : MonoBehaviour
     public void OnCloseClicked()
     {
         gameObject.SetActive(false);
+        HapticsController.PlayButtonHaptic();
     }
 
     public void OnNameChanged()
     {
+        HapticsController.PlayButtonHaptic();
         SaveSystem.Inst.GeneralData.ChangePlayerName(_inputField.text);
     }
 
     public void OnAvatarClicked(int index)
     {
+        HapticsController.PlayButtonHaptic();
         SaveSystem.Inst.GeneralData.ChangeAvatar(index);
         SetProfile();
     }

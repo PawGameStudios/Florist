@@ -48,80 +48,80 @@ MonoBehaviour:
     DefaultItemState: 2
   WrapperItems:
   - Icon: {fileID: 21300000, guid: db85ece96322be3458ede3f4603e23c8, type: 3}
-    Name: Wrapper 1
+    Name: wrapper_1
     Id: wp_1
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 2
   - Icon: {fileID: 21300000, guid: 836b4681770bec240a6316ec7db7489c, type: 3}
-    Name: Wrapper 2
+    Name: wrapper_2
     Id: wp_2
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 2
   - Icon: {fileID: 21300000, guid: 83dfea964573ea24d90f18c485562b17, type: 3}
-    Name: Wrapper 3
+    Name: wrapper_3
     Id: wp_3
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 49761f6690db1884c98439e2f677c9ed, type: 3}
-    Name: Wrapper 4
+    Name: wrapper_4
     Id: wp_4
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: ef5c80316dfcbd2458361b1e5a83f400, type: 3}
-    Name: Wrapper 5
+    Name: wrapper_5
     Id: wp_5
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 8fe043a4a7b62c34ca51390db761549f, type: 3}
-    Name: Wrapper 6
+    Name: wrapper_6
     Id: wp_6
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 48b22dd9bb1c668468bf161ab50d70ad, type: 3}
-    Name: Wrapper 7
+    Name: wrapper_7
     Id: wp_7
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: a826f6c5d9e468447865638bfe820f3a, type: 3}
-    Name: Wrapper 8
+    Name: wrapper_8
     Id: wp_8
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 949ccc512fdc89c459c1d7b05db97e97, type: 3}
-    Name: Wrapper 9
+    Name: wrapper_9
     Id: wp_9
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 05a6c9205f327ee4bbc2dd844591d441, type: 3}
-    Name: Wrapper 10
+    Name: wrapper_10
     Id: wp_10
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 7cc39c37dbfae8e45b8f30a5b82805e3, type: 3}
-    Name: Wrapper 11
+    Name: wrapper_11
     Id: wp_11
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 0e8281c6c12fe8b4ab985e4c9f038aef, type: 3}
-    Name: Wrapper 12
+    Name: wrapper_12
     Id: wp_12
     Price: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   RibbonItems:
   - Icon: {fileID: 21300000, guid: ac4383188d9dcc4499816ac4f60b354f, type: 3}
-    Name: Ribbon 1
+    Name: ribbon_
     Id: r_1
     Price: 0
     IsSelectable: 1

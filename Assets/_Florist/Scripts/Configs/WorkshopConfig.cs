@@ -111,7 +111,6 @@ namespace Config
         }
     }
 
-
     [CreateAssetMenu(fileName = "WorkshopConfig", menuName = "Paw/Configs/Workshop")]
     public class WorkshopConfig : SerializedScriptableObject
     {
@@ -127,6 +126,45 @@ namespace Config
         public List<WrappingPaperInfo> WrappingPaperInfo;
 
         public MachineInfo MachineInfo;
+
+        public Sprite GetFlowerSprite(FlowerType flowerType, FlowerColor flowerColor)
+        {
+            foreach (var flowerInfo in FlowerInfo)
+            {
+                if (flowerInfo.FlowerType == flowerType && flowerInfo.Color == flowerColor)
+                {
+                    return flowerInfo.Sprite;
+                }
+            }
+            Debug.LogError($"Flower type {flowerType} with color {flowerColor} not found in FlowerInfo list.");
+            return null;
+        }
+
+        public Sprite GetRibbonSprite(RibbonType ribbonType)
+        {
+            foreach (var ribbonInfo in RibbonInfo)
+            {
+                if (ribbonInfo.RibbonType == ribbonType)
+                {
+                    return ribbonInfo.Sprite;
+                }
+            }
+            Debug.LogError($"Ribbon type {ribbonType} not found in RibbonInfo list.");
+            return null;
+        }
+
+        public Sprite GetWrappingPaperSprite(WrappingPaperType wrappingPaperType)
+        {
+            foreach (var wrappingPaperInfo in WrappingPaperInfo)
+            {
+                if (wrappingPaperInfo.WrappingPaperType == wrappingPaperType)
+                {
+                    return wrappingPaperInfo.Sprite;
+                }
+            }
+            Debug.LogError($"Wrapping paper type {wrappingPaperType} not found in WrappingPaperInfo list.");
+            return null;
+        }
 
         public float GetFlowerCost(FlowerType flowerType)
         {
@@ -206,6 +244,5 @@ namespace Config
             return -1;
         }
     }
-
 }
 

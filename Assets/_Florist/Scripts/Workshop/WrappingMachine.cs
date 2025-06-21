@@ -24,20 +24,24 @@ public class WrappingMachine : MonoBehaviour
         _progressTween = _progressImage.DOFillAmount(0f, .1f).SetEase(Ease.Linear);
 
         _openTween?.Kill();
-        _openTween = _door.DOLocalMoveX(800f, .5f).SetEase(Ease.OutCubic);
+        _openTween = _door.DOLocalMoveX(800f, .5f).SetEase(Ease.InCubic);
     }
 
     public void CloseMachine(Action onComplete = null)
     {
         Debug.Log("Wrapping machine closed.");
         _openTween?.Kill();
-        _openTween = _door.DOLocalMoveX(0f, .5f).SetEase(Ease.InCubic).OnComplete(() => onComplete?.Invoke());
+        _openTween = _door.DOLocalMoveX(0f, .5f).SetEase(Ease.OutCubic).OnComplete(() => onComplete?.Invoke());
+    }
+
+    public void TakeBouquet(PaperArea paperArea)
+    {
+        paperArea.transform.SetPositionAndRotation(_paperSitPosition.position, _paperSitPosition.rotation);
     }
 
     public void StartMachine(PaperArea paperArea)
     {
         Debug.Log("Wrapping machine started.");
-        paperArea.transform.SetPositionAndRotation(_paperSitPosition.position, _paperSitPosition.rotation);
 
         CloseMachine(() =>
         {
@@ -48,6 +52,7 @@ public class WrappingMachine : MonoBehaviour
             _progressTween?.Kill();
             _progressTween = _progressImage.DOFillAmount(1f, duration).SetEase(Ease.Linear).OnComplete(() =>
             {
+                HapticsController.PlayLightHaptic();
                 paperArea.OnMachineDone();
 
                 OpenMachine();

@@ -73,4 +73,13 @@ public class GeneralData
         PlayerName = name;
         PlayerNameChanged?.Invoke();
     }
+
+    public void IncreaseDayIndex()
+    {
+        CurrentDayIndex++;
+
+        // TODO:
+        if (CurrentDayIndex >= Configs.LevelConfig.Days.Count)
+            CurrentDayIndex = 0;
+    }
 }

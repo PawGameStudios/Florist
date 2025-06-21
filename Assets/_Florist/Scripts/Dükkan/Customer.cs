@@ -35,6 +35,8 @@ public class Customer : MonoBehaviour
         public SerializedDictionary<FlowerType, int> MissingFlowers;
     }
 
+    public int OrderCount => _bouquetsToOrder.Count;
+    public List<BouquetModel> CurrentOrder => _bouquetsToOrder;
     public CustomerInfo CustomerInfo => _customerInfo;
     [SerializeField] private Transform _customerImageTransform;
     [SerializeField] private Transform _customerTransform;
@@ -89,7 +91,24 @@ public class Customer : MonoBehaviour
         _customerInfo = customerInfo;
         _customerImage.sprite = _customerInfo.Sprite;
         _speechBubbleObjects.SetActive(false);
+
         DetermineOrder();
+    }
+
+    public void LoadCustomer(CustomerInfo customerInfo, Sprite sprite, List<BouquetModel> bouquetsToOrder)
+    {
+        _customerInfo = customerInfo;
+        _customerImage.sprite = sprite;
+        _speechBubbleObjects.SetActive(false);
+        _bouquetsToOrder = bouquetsToOrder;
+    }
+
+    public void EnterWithoutAnimation()
+    {
+        _customerTransform.localPosition = _finalPositionRef.localPosition;
+        _speechBubbleObjects.SetActive(false);
+        gameObject.SetActive(true);
+        PlayIdleAnimation();
     }
 
     public void PlayEnterAnimation(Action onComplete)
@@ -377,6 +396,7 @@ public class Customer : MonoBehaviour
 
     public void OnSkipClicked()
     {
+        HapticsController.PlayButtonHaptic();
         _typeWriter.SkipTypewriter();
     }
 
@@ -384,7 +404,6 @@ public class Customer : MonoBehaviour
     {
         if (_isWaitingForSpeechEnd)
         {
-            Debug.LogError("OnSpeechEnd called 22222");
             _onTalkEnd?.Invoke();
             _onTalkEnd = null;
             _typeWriter.onTextShowed.RemoveListener(OnSpeechEnd);
@@ -598,6 +617,7 @@ public class Customer : MonoBehaviour
             Action action = answerOptions[i].Advance;
             _speechBubbleButtons[i].onClick.AddListener(() =>
             {
+                HapticsController.PlayButtonHaptic();
                 action?.Invoke();
             });
         }

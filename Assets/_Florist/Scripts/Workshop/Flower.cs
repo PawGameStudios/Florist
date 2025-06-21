@@ -1,8 +1,10 @@
 using Config;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Flower : MonoBehaviour
 {
+    public Image FlowerImage;
     public FlowerType FlowerType => _flowerType;
     public FlowerColor FlowerColor => _flowerColor;
 

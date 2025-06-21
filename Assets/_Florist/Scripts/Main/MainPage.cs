@@ -8,12 +8,12 @@ public class MainPage : Page
         CheckSaveData();
     }
 
-    public override void Close(PageData pageData = null, Action onCompleted = null)
+    public override void Close(PageParams pageData = null, Action onCompleted = null)
     {
         throw new NotImplementedException();
     }
 
-    public override void Open(PageData pageData = null, Action onCompleted = null)
+    public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
         base.Open(pageData, onCompleted);
         gameObject.SetActive(true);
@@ -23,15 +23,19 @@ public class MainPage : Page
     {
         gameObject.SetActive(false);
         References.DukkanPage.Open();
+
+        HapticsController.PlayButtonHaptic();
     }
 
     public void OnShopClicked()
     {
         References.ShopPage.Open();
+        HapticsController.PlayButtonHaptic();
     }
 
     public void OnPcClicked()
     {
+        HapticsController.PlayButtonHaptic();
     }
 
     private void CheckSaveData()

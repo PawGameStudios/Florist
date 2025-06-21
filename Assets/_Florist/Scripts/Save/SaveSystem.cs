@@ -52,6 +52,8 @@ public class SaveSystem : MonoBehaviour
             GeneralData = FileManager.Load<GeneralData>(_generalDataKey);
             ShopData = FileManager.Load<ShopData>(_shopDataKey);
             SaveData = FileManager.Load<SaveData>(_saveDataKey);
+
+            SaveData.LoadGame();
         }
         catch (Exception ex)
         {

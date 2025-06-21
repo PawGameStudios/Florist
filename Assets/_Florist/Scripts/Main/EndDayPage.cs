@@ -27,7 +27,7 @@ public class EndDayPage : Page
         CancelInvoke();
     }
 
-    public override void Open(PageData pageData = null, Action onCompleted = null)
+    public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
         base.Open(pageData, onCompleted);
 
@@ -49,8 +49,9 @@ public class EndDayPage : Page
         }));
     }
 
-    public override void Close(PageData pageData = null, Action onCompleted = null)
+    public override void Close(PageParams pageData = null, Action onCompleted = null)
     {
+        SaveSystem.Inst.GeneralData.IncreaseDayIndex();
         _endDayPanel.SetActive(false);
 
         _sequence?.Kill();
@@ -67,7 +68,7 @@ public class EndDayPage : Page
 
     public void SetData(EarningsInfo earningsInfo)
     {
-        _dayText.text = $"{LocalizationManager.GetLocalizedText("day")}: {SaveSystem.Inst.GeneralData.CurrentDayIndex}";
+        _dayText.text = $"{LocalizationManager.GetLocalizedText("day")}: {SaveSystem.Inst.GeneralData.CurrentDayIndex + 1}";
         _revenueText.text = earningsInfo.Earnings.ToString("0.00");
         _tipText.text = earningsInfo.Tip.ToString("0.00");
         _rentText.text = $"-{earningsInfo.Rent:0.00}";
@@ -78,6 +79,7 @@ public class EndDayPage : Page
 
     public void OnNextDayButtonClicked()
     {
+        HapticsController.PlayButtonHaptic();
         References.MainPage.Open();
         Close(onCompleted: () =>
         {

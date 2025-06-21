@@ -15,7 +15,7 @@ namespace MelenitasDev.SoundsGood.Demo
         [SerializeField] private Toggle laserClipToggle;
         [SerializeField] private Toggle coinClipToggle;
         [SerializeField] private Toggle hitClipToggle;
-        
+
         [Header("Player")]
         [SerializeField] private Image playerProgressBar;
         [SerializeField] private TextMeshProUGUI clipDurationLabel;
@@ -30,22 +30,22 @@ namespace MelenitasDev.SoundsGood.Demo
 
     public partial class SG_DemoSound : MonoBehaviour
     {
-        void OnEnable ()
+        void OnEnable()
         {
             clipNameLabel.text = "------";
-            
-            sound = new Sound(SFX.laser);
-            sound.OnComplete(() => playerProgressBar.fillAmount = 1);
-            
+
+            // sound = new Sound(SFX.laser);
+            // sound.OnComplete(() => playerProgressBar.fillAmount = 1);
+
             laserClipToggle.onValueChanged.AddListener(OnSelectClip);
             coinClipToggle.onValueChanged.AddListener(OnSelectClip);
             hitClipToggle.onValueChanged.AddListener(OnSelectClip);
         }
 
-        void Update ()
+        void Update()
         {
             if (!sound.Playing) return;
-            
+
             playedTimeLabel.text = FormatSecsToTime(sound.CurrentLoopCycleTime);
             playerProgressBar.fillAmount = sound.CurrentLoopCycleTime / sound.ClipDuration;
         }
@@ -53,7 +53,7 @@ namespace MelenitasDev.SoundsGood.Demo
 
     public partial class SG_DemoSound // Public Methods
     {
-        public void Play ()
+        public void Play()
         {
             if (sound.Paused)
             {
@@ -62,7 +62,7 @@ namespace MelenitasDev.SoundsGood.Demo
             }
 
             if (sound.Playing) Stop();
-            
+
             if (randomPitchToggle.isOn) sound.SetRandomPitch();
             sound
                 .SetLoop(loopToggle.isOn)
@@ -74,40 +74,40 @@ namespace MelenitasDev.SoundsGood.Demo
             clipNameLabel.text = sound.Clip.name;
             clipDurationLabel.text = FormatSecsToTime(sound.ClipDuration);
         }
-        
-        public void Pause ()
+
+        public void Pause()
         {
             sound.Pause();
         }
 
-        public void Stop ()
+        public void Stop()
         {
             sound.Stop();
-            
+
             playerProgressBar.fillAmount = 0;
             playedTimeLabel.text = "0:00";
         }
-        
-        public void ChangeVolume (float volume)
+
+        public void ChangeVolume(float volume)
         {
             if (!sound.Playing) return;
-            
+
             sound.ChangeVolume(volume);
         }
     }
 
     public partial class SG_DemoSound // Private Methods
     {
-        private void OnSelectClip (bool isOn)
+        private void OnSelectClip(bool isOn)
         {
-            SFX sfx;
-            if (coinClipToggle.isOn) sfx = SFX.coin;
-            else if (laserClipToggle.isOn) sfx = SFX.laser;
-            else sfx = SFX.hit;
-            sound.SetClip(sfx);
+            // SFX sfx;
+            // if (coinClipToggle.isOn) sfx = SFX.coin;
+            // else if (laserClipToggle.isOn) sfx = SFX.laser;
+            // else sfx = SFX.hit;
+            // sound.SetClip(sfx);
         }
-        
-        private string FormatSecsToTime (float secs)
+
+        private string FormatSecsToTime(float secs)
         {
             int formatMins = (int)((secs % 3600) / 60);
             int formatSecs = Mathf.CeilToInt(secs % 60);

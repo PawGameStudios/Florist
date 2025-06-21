@@ -144,5 +144,17 @@ namespace Config
             // TODO:
             return GoodbyeConversations[HappinessState.Happy];
         }
+
+        public Sprite GetCustomerSprite(string name)
+        {
+            foreach (var customer in Customers)
+            {
+                if (customer.Name == name)
+                {
+                    return customer.Sprite;
+                }
+            }
+            return null;
+        }
     }
 }

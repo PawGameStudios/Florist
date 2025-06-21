@@ -5,6 +5,12 @@ using Config;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 
+[Serializable]
+public struct BouquetSaveInfo
+{
+    public List<Vector3> Positions;
+    public List<Vector3> Rotations;
+}
 
 [Serializable]
 public class BouquetFlowerInfo
@@ -12,6 +18,10 @@ public class BouquetFlowerInfo
     public FlowerType FlowerType;
     public int Count;
     public FlowerColor FlowerColor;
+    public Vector3 Position;
+    public Vector3 Rotation;
+    public Vector3 Pivot;
+    public bool IsFlowerCut;
 }
 
 [Serializable]
@@ -53,19 +63,29 @@ public class BouquetModel
         }
         return null;
     }
+
+    public void Clear()
+    {
+        Flowers.Clear();
+        RibbonType = RibbonType.None;
+        WrappingPaperType = WrappingPaperType.None;
+        BouquetType = BouquetType.None;
+    }
 }
 
 public class Bouquet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public OrderInfo Order => _order;
-    [SerializeField] private DukkanPage _dukkan;
     private Vector2 _offset;
     private Vector3 _startPosition;
     private OrderInfo _order;
 
-    public void SetOrder(OrderInfo order)
+    public void SetOrder(OrderInfo order, GameObject bouquetObject)
     {
         _order = order;
+        bouquetObject.transform.SetParent(transform);
+        bouquetObject.transform.localPosition = Vector3.zero;
+        bouquetObject.transform.localEulerAngles = Vector3.zero;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -82,9 +102,9 @@ public class Bouquet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (_dukkan.CheckIfInCustomerArea(transform.position))
+        if (References.DukkanPage.CheckIfInCustomerArea(transform.position))
         {
-            _dukkan.OnFlowerDelivered();
+            References.DukkanPage.OnFlowerDelivered();
             transform.position = _startPosition;
         }
         else

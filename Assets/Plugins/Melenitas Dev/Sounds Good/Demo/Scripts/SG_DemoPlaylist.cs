@@ -7,8 +7,8 @@ namespace MelenitasDev.SoundsGood.Demo
 {
     public partial class SG_DemoPlaylist // Serialized Fields
     {
-        [Header("References")] 
-        [Header("Customization")] 
+        [Header("References")]
+        [Header("Customization")]
         [SerializeField] private Toggle loopToggle;
 
         [SerializeField] private TMP_InputField fadeInInput;
@@ -16,7 +16,7 @@ namespace MelenitasDev.SoundsGood.Demo
         [SerializeField] private Slider volumeSlider;
         [SerializeField] private TMP_Dropdown[] trackDropdowns;
 
-        [Header("Player")] 
+        [Header("Player")]
         [SerializeField] private Image playerProgressBar;
         [SerializeField] private TextMeshProUGUI clipDurationLabel;
         [SerializeField] private TextMeshProUGUI clipNameLabel;
@@ -29,18 +29,18 @@ namespace MelenitasDev.SoundsGood.Demo
 
         private Track[] availableTracks = new Track[]
         {
-            Track.DuckDescencing,
-            Track.LittleGreenMen,
-            Track.StudyFirst
+            // Track.DuckDescencing,
+            // Track.LittleGreenMen,
+            // Track.StudyFirst
         };
     }
 
     public partial class SG_DemoPlaylist : MonoBehaviour
     {
-        void OnEnable ()
+        void OnEnable()
         {
             clipNameLabel.text = "------";
-            
+
             playlist = new Playlist(GetPlaylist());
             playlist.OnComplete(() => playerProgressBar.fillAmount = 1);
             playlist.OnNextTrackStart(() =>
@@ -50,7 +50,7 @@ namespace MelenitasDev.SoundsGood.Demo
             });
         }
 
-        void Update ()
+        void Update()
         {
             if (!playlist.Playing) return;
 
@@ -61,7 +61,7 @@ namespace MelenitasDev.SoundsGood.Demo
 
     public partial class SG_DemoPlaylist // Public Methods
     {
-        public void Play ()
+        public void Play()
         {
             if (playlist.Paused)
             {
@@ -82,12 +82,12 @@ namespace MelenitasDev.SoundsGood.Demo
             clipDurationLabel.text = FormatSecsToTime(playlist.CurrentClipDuration);
         }
 
-        public void Pause ()
+        public void Pause()
         {
             playlist.Pause();
         }
 
-        public void Stop ()
+        public void Stop()
         {
             playlist.Stop(Int32.Parse(fadeOutInput.text));
 
@@ -95,7 +95,7 @@ namespace MelenitasDev.SoundsGood.Demo
             playerProgressBar.fillAmount = 0;
         }
 
-        public void ChangeVolume (float volume)
+        public void ChangeVolume(float volume)
         {
             if (!playlist.Playing) return;
 
@@ -105,14 +105,14 @@ namespace MelenitasDev.SoundsGood.Demo
 
     public partial class SG_DemoPlaylist // Private Methods
     {
-        private string FormatSecsToTime (float secs)
+        private string FormatSecsToTime(float secs)
         {
             int formatMins = (int)((secs % 3600) / 60);
             int formatSecs = Mathf.CeilToInt(secs % 60);
             return string.Format("{0:D1}:{1:D2}", formatMins, formatSecs);
         }
-        
-        private Track[] GetPlaylist ()
+
+        private Track[] GetPlaylist()
         {
             Track[] playlistTracks = new Track[trackDropdowns.Length];
             for (int i = 0; i < playlistTracks.Length; i++)

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HappinessMeter : MonoBehaviour
 {
     public float HappinessValue => _happinessValue;
+    public int CurrentTick => _currentTick;
     [SerializeField] private Image _emojiImage;
     [SerializeField] private TextMeshProUGUI _happinessText;
     [SerializeField] private List<Sprite> _emojiSprites;
@@ -39,6 +40,16 @@ public class HappinessMeter : MonoBehaviour
     {
         _currentTick = 0;
         _happinessValue = 100;
+        Timer.TimeTickMiliseconds -= TimeTickHandler;
+        Timer.TimeTickMiliseconds += TimeTickHandler;
+    }
+
+    public void ContinueHappinessCountdown(int tick, float happinessValue)
+    {
+        _currentTick = tick;
+        _happinessValue = Mathf.Clamp(happinessValue, 0, 100);
+        _happinessText.text = $"{_happinessValue}%";
+        SetEmojiText();
         Timer.TimeTickMiliseconds -= TimeTickHandler;
         Timer.TimeTickMiliseconds += TimeTickHandler;
     }

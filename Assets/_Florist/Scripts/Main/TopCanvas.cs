@@ -22,12 +22,12 @@ public class TopCanvas : Page
         CancelInvoke();
     }
 
-    public override void Close(PageData pageData = null, Action onCompleted = null)
+    public override void Close(PageParams pageData = null, Action onCompleted = null)
     {
         gameObject.SetActive(false);
     }
 
-    public override void Open(PageData pageData = null, Action onCompleted = null)
+    public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
         gameObject.SetActive(true);
     }

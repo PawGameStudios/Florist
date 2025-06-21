@@ -8,10 +8,11 @@ public class ShopButton : MonoBehaviour
     [SerializeField] private ShopButtonType _type;
     [SerializeField] private ShopScroll _shopScrollPrefab;
     [SerializeField] private ShopItem _shopItemPrefab;
+    [SerializeField] private Sprite _shopItemBg;
     [SerializeField] private List<ItemType> _itemTypes = new();
     [ShowIf("@_itemTypes.Count > 1")][SerializeField] private List<GameObject> _subButtons = null;
     [SerializeField] private List<GameObject> _arrowObjects;
-    private List<ShopScroll> _scrolls = new();
+    private readonly List<ShopScroll> _scrolls = new();
     private bool _isOpen = false;
     private bool _isExtended = false;
     private bool _isInitialized = false;
@@ -26,13 +27,17 @@ public class ShopButton : MonoBehaviour
                 for (int i = 0; i < _subButtonsCount; i++)
                 {
                     var scroll = Instantiate(_shopScrollPrefab, References.ShopPage.ShopScrollParent);
-                    scroll.Init(Configs.ShopConfig.GetItems(_itemTypes[i]), _shopItemPrefab);
+                    scroll.Init(Configs.ShopConfig.GetItems(_itemTypes[i]), _shopItemPrefab, _shopItemBg);
                     _scrolls.Add(scroll);
                 }
                 _isInitialized = true;
             }
 
             ToggleSubButtons();
+            if (!_isOpen)
+            {
+                OnSubButtonClicked(0);
+            }
         }
         else
         {
@@ -41,7 +46,7 @@ public class ShopButton : MonoBehaviour
                 if (!_isInitialized)
                 {
                     var scroll = Instantiate(_shopScrollPrefab, References.ShopPage.ShopScrollParent);
-                    scroll.Init(Configs.ShopConfig.GetItems(_itemTypes[0]), _shopItemPrefab);
+                    scroll.Init(Configs.ShopConfig.GetItems(_itemTypes[0]), _shopItemPrefab, _shopItemBg);
                     _scrolls.Add(scroll);
                     _isInitialized = true;
                 }

@@ -8,7 +8,7 @@ public class ShopScroll : MonoBehaviour
     private bool _isInitialized = false;
     private readonly List<ShopItem> _items = new();
 
-    public void Init(List<ShopItemInfo> items, ShopItem prefab)
+    public void Init(List<ShopItemInfo> items, ShopItem prefab, Sprite itemBg)
     {
         if (_isInitialized)
             return;
@@ -16,7 +16,7 @@ public class ShopScroll : MonoBehaviour
         foreach (var item in items)
         {
             var shopItem = Instantiate(prefab, _shopItemParent);
-            shopItem.Init(item, this, _items.Count);
+            shopItem.Init(item, this, _items.Count, itemBg);
             _items.Add(shopItem);
         }
         _isInitialized = true;

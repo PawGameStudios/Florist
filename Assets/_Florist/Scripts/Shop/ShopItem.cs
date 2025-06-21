@@ -5,6 +5,7 @@ using ShopItemInfo = ShopConfig.ShopItemInfo;
 
 public class ShopItem : MonoBehaviour
 {
+    [SerializeField] private Image _bg;
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _buttonText;
     [SerializeField] private Image _icon;
@@ -13,9 +14,12 @@ public class ShopItem : MonoBehaviour
     private ShopItemInfo _shopItemInfo;
     private ShopScroll _shopScroll;
     private int _index;
+    private Sprite _itemBg;
 
-    public void Init(ShopItemInfo shopItemInfo, ShopScroll shopScroll, int index)
+    public void Init(ShopItemInfo shopItemInfo, ShopScroll shopScroll, int index, Sprite itemBg)
     {
+        _itemBg = itemBg;
+        _bg.sprite = itemBg;
         _shopScroll = shopScroll;
         _index = index;
         _shopItemInfo = shopItemInfo;
@@ -37,7 +41,7 @@ public class ShopItem : MonoBehaviour
                 case ShopData.ItemState.Purchasable:
                     _lock.SetActive(false);
                     _button.interactable = money >= shopItemInfo.Price;
-                    _buttonText.text = shopItemInfo.Price.ToString();
+                    _buttonText.text = $"<sprite=0> {shopItemInfo.Price}";
                     break;
                 case ShopData.ItemState.Purchased:
                     _lock.SetActive(false);
@@ -63,7 +67,7 @@ public class ShopItem : MonoBehaviour
                 case ShopData.ItemState.Purchasable:
                     _lock.SetActive(false);
                     _button.interactable = money >= shopItemInfo.Price;
-                    _buttonText.text = shopItemInfo.Price.ToString();
+                    _buttonText.text = $"<sprite=0> {shopItemInfo.Price}";
                     break;
                 case ShopData.ItemState.Purchased:
                     _lock.SetActive(false);
@@ -114,6 +118,6 @@ public class ShopItem : MonoBehaviour
                 break;
         }
 
-        Init(_shopItemInfo, _shopScroll, _index);
+        Init(_shopItemInfo, _shopScroll, _index, _itemBg);
     }
 }

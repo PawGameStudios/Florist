@@ -30,5 +30,6 @@ public class Profile : MonoBehaviour
     public void OnProfileClicked()
     {
         References.ProfileMenu.Open();
+        HapticsController.PlayButtonHaptic();
     }
 }

@@ -42,22 +42,15 @@ public struct OrderInfo
     public List<BouquetModel> BouquetModels;
 }
 
-public enum DukkanState
-{
-    None,
-    WaitingForCustomer,
-    CustomerArrived,
-    CustomerTalking,
-    CustomerLeaving,
-    FlowerReady,
-    FlowerDelivered
-}
-
 public class DukkanPage : Page
 {
-    public DukkanState DukkanState => _dukkanState;
+    public List<BouquetModel> CurrentOrder => _customer.CurrentOrder;
+    public CustomerInfo CurrentCustomerInfo => _customer.CustomerInfo;
+    public OrderInfo OrderInfo => _bouquet != null ? _bouquet.Order : new OrderInfo();
+    public DayInfo DayInfo => _dayInfo;
+    public DukkanSaveState DukkanState => _dukkanSaveState;
     public EarningsInfo EarningsInfo => _earningsInfo;
-    public int CurrentCustomerIndex => _currentCustomerIndex;
+    public int CurrentCustomerIndex => _nextCustomerIndex;
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Image _fadeImage;
     [SerializeField] private RectTransform _flowerDeliveryArea;
@@ -65,13 +58,14 @@ public class DukkanPage : Page
     [SerializeField] private Bouquet _bouquet;
     [SerializeField] private PosController _posController;
     [SerializeField] private GameObject _contentObjects;
+    [SerializeField] private Image _imageForLoad;
     private DayInfo _dayInfo;
     private ConversationRunner _convoRunner;
-    private int _currentCustomerIndex;
+    private int _nextCustomerIndex;
     private Sequence _sequence;
     public EarningsInfo _earningsInfo = new();
     public FlowerDeliveredInfo _flowerDeliveredInfo = new();
-    private DukkanState _dukkanState = DukkanState.None;
+    private DukkanSaveState _dukkanSaveState = DukkanSaveState.None;
     private const string GO_TO_WORKSHOP = "GoToWorkshop";
     private const string END_CONVO = "EndConvo";
 
@@ -101,7 +95,7 @@ public class DukkanPage : Page
         CancelInvoke();
     }
 
-    public override void Close(PageData pageData = null, Action onCompleted = null)
+    public override void Close(PageParams pageData = null, Action onCompleted = null)
     {
         _contentObjects.SetActive(true);
         References.TopCanvas.Open();
@@ -119,39 +113,57 @@ public class DukkanPage : Page
         }));
     }
 
-    public override void Open(PageData pageData = null, Action onCompleted = null)
+    public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
         base.Open(pageData, onCompleted);
 
-        References.HappinessMeter.ResetHappinessMeter();
-
-        gameObject.SetActive(true);
-        _contentObjects.SetActive(false);
-        References.TopCanvas.Close();
-
-        _earningsInfo ??= new EarningsInfo();
-        _earningsInfo.Reset();
-
-        _canvasGroup.alpha = 0;
-
-        _sequence?.Kill();
-        _sequence = DOTween.Sequence();
-        _sequence.Append(_fadeImage.DOFade(endValue: .65f, duration: .3f).SetEase(Ease.Linear).OnComplete(() =>
+        if (pageData != null && pageData.LoadFromSaveData)
         {
-            _contentObjects.SetActive(true);
-            References.TopCanvas.Open();
-        }));
-        _sequence.Append(_fadeImage.DOFade(endValue: 0, duration: .3f).SetEase(Ease.Linear));
-        _sequence.Join(_canvasGroup.DOFade(endValue: 1, duration: .3f).SetEase(Ease.Linear).OnComplete(() =>
-        {
-            onCompleted?.Invoke();
-
-            _currentCustomerIndex = 0;
-            _dayInfo = Configs.LevelConfig.Days[SaveSystem.Inst.GeneralData.CurrentDayIndex];
-            _customer.gameObject.SetActive(false);
+            _canvasGroup.alpha = 1;
             _posController.ResetPos();
-        }));
-        Invoke(nameof(StartNextEvent), 1);
+            _contentObjects.SetActive(true);
+            _customer.gameObject.SetActive(false);
+            gameObject.SetActive(true);
+            References.TopCanvas.Open();
+
+            Load(SaveSystem.Inst.SaveData.DukkanParams);
+        }
+        else
+        {
+            _dukkanSaveState = DukkanSaveState.CustomerProgress;
+
+            References.HappinessMeter.ResetHappinessMeter();
+
+            gameObject.SetActive(true);
+            _contentObjects.SetActive(false);
+            References.TopCanvas.Close();
+
+            _earningsInfo ??= new EarningsInfo();
+            _earningsInfo.Reset();
+
+            _canvasGroup.alpha = 0;
+
+            _sequence?.Kill();
+            _sequence = DOTween.Sequence();
+            _sequence.Append(_fadeImage.DOFade(endValue: .65f, duration: .3f).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                _contentObjects.SetActive(true);
+                References.TopCanvas.Open();
+            }));
+            _sequence.Append(_fadeImage.DOFade(endValue: 0, duration: .3f).SetEase(Ease.Linear));
+            _sequence.Join(_canvasGroup.DOFade(endValue: 1, duration: .3f).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                onCompleted?.Invoke();
+
+                _nextCustomerIndex = 0;
+                _dayInfo = Configs.LevelConfig.Days[SaveSystem.Inst.GeneralData.CurrentDayIndex];
+                _customer.gameObject.SetActive(false);
+                _posController.ResetPos();
+
+                References.DayTimeManager.StartDayTimeCountdown(0);
+            }));
+            Invoke(nameof(StartNextEvent), 1);
+        }
     }
 
     public void OnDayTimeEnded()
@@ -160,11 +172,15 @@ public class DukkanPage : Page
         EndDay();
     }
 
-    public void OnFlowerReady(OrderInfo orderInfo)
+    public void OnFlowerReady(OrderInfo orderInfo, GameObject bouquetObject)
     {
         Debug.Log("Flower Ready");
+
+        SaveSystem.Inst.SaveData.LastPage = PageType.Dukkan;
+        _dukkanSaveState = DukkanSaveState.FlowerReady;
+
         _posController.ResetPos();
-        _bouquet.SetOrder(orderInfo);
+        _bouquet.SetOrder(orderInfo, bouquetObject);
         _bouquet.gameObject.SetActive(true);
 
         // calculate the cost of the bouquet
@@ -185,6 +201,11 @@ public class DukkanPage : Page
     public void OnFlowerDelivered()
     {
         Debug.Log("Flower Delivered");
+
+        HapticsController.PlayMediumHaptic();
+
+        _dukkanSaveState = DukkanSaveState.FlowerDelivered;
+
         _bouquet.gameObject.SetActive(false);
 
         _flowerDeliveredInfo = _customer.GetOrderInfo(_bouquet.Order.BouquetModels);
@@ -283,12 +304,14 @@ public class DukkanPage : Page
 
     private void StartNextEvent()
     {
-        Debug.Log($"#dukkan# StartNextEvent, _currentCustomerIndex: {_currentCustomerIndex}, _dayInfo.Events.Count: {_dayInfo.Events.Count}");
-        if (_currentCustomerIndex < _dayInfo.Events.Count)
+        Debug.Log($"#dukkan# StartNextEvent, _currentCustomerIndex: {_nextCustomerIndex}, _dayInfo.Events.Count: {_dayInfo.Events.Count}");
+        if (_nextCustomerIndex < _dayInfo.Events.Count)
         {
+            _dukkanSaveState = DukkanSaveState.CustomerProgress;
+
             References.HappinessMeter.ResetHappinessMeter();
 
-            DayEvent dayEvent = _dayInfo.Events[_currentCustomerIndex];
+            DayEvent dayEvent = _dayInfo.Events[_nextCustomerIndex];
             if (dayEvent.IsEvent)
             {
                 SpecialEvents specialEvent = dayEvent.EventType;
@@ -309,7 +332,7 @@ public class DukkanPage : Page
                     References.HappinessMeter.StartNewHappinessCountdown();
                 });
             }
-            _currentCustomerIndex++;
+            _nextCustomerIndex++;
         }
         else
         {
@@ -321,12 +344,12 @@ public class DukkanPage : Page
     {
         Debug.Log("#dukkan# EndDay");
 
+        _earningsInfo.CalculateProfit();
         References.EndDayPage.SetData(_earningsInfo);
         References.EndDayPage.Open();
 
         Close(onCompleted: () =>
         {
-            _earningsInfo.CalculateProfit();
             References.TopCanvas.Close();
         });
     }
@@ -334,6 +357,9 @@ public class DukkanPage : Page
     private void GoToWorkshop()
     {
         Debug.Log("#dukkan# GoToWorkshop");
+
+        _dukkanSaveState = DukkanSaveState.InWorkshop;
+
         _convoRunner.OnConversationEvent.RemoveAllListeners();
         _customer.StopTalking();
 
@@ -342,6 +368,7 @@ public class DukkanPage : Page
 
         _posController.ReceivePayment(payment, () =>
         {
+            References.WorkshopPage.SetOrderCount(_customer.OrderCount);
             References.WorkshopPage.Open();
         });
     }
@@ -390,6 +417,100 @@ public class DukkanPage : Page
     public void OnCustomerButtonClicked()
     {
         Debug.Log("OnCustomerButtonClicked");
+    }
+    #endregion
+
+
+    #region Save Load
+    private void Load(DukkanParams dukkanParams)
+    {
+        Debug.Log("#dukkan# Load");
+
+        References.HappinessMeter.ContinueHappinessCountdown(dukkanParams.CurrentTick, dukkanParams.HappinessValue);
+        References.DayTimeManager.StartDayTimeCountdown(dukkanParams.TotalTimePassed);
+
+        _earningsInfo = dukkanParams.EarningsInfo;
+        _dayInfo = dukkanParams.DayInfo;
+        _nextCustomerIndex = dukkanParams.NextCustomerIndex;
+        _dukkanSaveState = dukkanParams.DukkanState;
+
+        switch (_dukkanSaveState)
+        {
+            case DukkanSaveState.None:
+            case DukkanSaveState.CustomerProgress:
+                _nextCustomerIndex--;
+                StartNextEvent();
+                break;
+            case DukkanSaveState.FlowerReady:
+                LoadCustomer(dukkanParams.CurrentCustomerInfo, dukkanParams.CurrentOrder);
+                LoadFlower(dukkanParams.OrderInfo, true);
+                break;
+            case DukkanSaveState.FlowerDelivered:
+                StartNextEvent();
+                break;
+            case DukkanSaveState.InWorkshop:
+                LoadCustomer(dukkanParams.CurrentCustomerInfo, dukkanParams.CurrentOrder);
+                LoadFlower(dukkanParams.OrderInfo, false);
+                References.WorkshopPage.SetOrderCount(dukkanParams.CurrentOrder.Count);
+                References.WorkshopPage.Open(new PageParams
+                {
+                    LoadFromSaveData = true,
+                    PreviousPage = PageType.MainPage
+                });
+                break;
+            default:
+                Debug.LogWarning($"#dukkan# Load: Unknown DukkanSaveState: {_dukkanSaveState}");
+                break;
+        }
+    }
+
+    private void LoadCustomer(CustomerInfo customer, List<BouquetModel> currentOrder)
+    {
+        Sprite customerSprite = Configs.LevelConfig.GetCustomerSprite(customer.Name);
+        _customer.LoadCustomer(customer, customerSprite, currentOrder);
+        _customer.EnterWithoutAnimation();
+        References.HappinessMeter.StartNewHappinessCountdown();
+    }
+
+    private void LoadFlower(OrderInfo orderInfo, bool activateBouquet)
+    {
+        Image bouquetParent = Instantiate(_imageForLoad, transform);
+        bouquetParent.enabled = false;
+        bouquetParent.gameObject.SetActive(activateBouquet);
+        Debug.Log(activateBouquet);
+
+        for (int i = 0; i < orderInfo.BouquetModels.Count; i++)
+        {
+            BouquetModel bouquetModel = orderInfo.BouquetModels[i];
+            for (int j = 0; j < bouquetModel.Flowers.Count; j++)
+            {
+                BouquetFlowerInfo flowerInfo = bouquetModel.Flowers[j];
+                Image flowerObject = Instantiate(_imageForLoad, bouquetParent.transform);
+                flowerObject.GetComponent<RectTransform>().pivot = flowerInfo.Pivot;
+                flowerObject.transform.SetLocalPositionAndRotation(flowerInfo.Position, Quaternion.Euler(flowerInfo.Rotation));
+                flowerObject.sprite = Configs.WorkshopConfig.GetFlowerSprite(flowerInfo.FlowerType, flowerInfo.FlowerColor);
+                flowerObject.name = $"{flowerInfo.FlowerType}_{flowerInfo.FlowerColor}";
+                flowerObject.gameObject.SetActive(true);
+            }
+
+            // TODO: Uncomment when ribbon and paper images are available
+
+            // Image ribbonObject = Instantiate(_imageForLoad, bouquetParent.transform);
+            // ribbonObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            // ribbonObject.sprite = Configs.WorkshopConfig.GetRibbonSprite(bouquetModel.RibbonType);
+            // ribbonObject.name = bouquetModel.RibbonType.ToString();
+            // ribbonObject.gameObject.SetActive(true);
+
+            // Image paperObject = Instantiate(_imageForLoad, bouquetParent.transform);
+            // paperObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            // paperObject.sprite = Configs.WorkshopConfig.GetWrappingPaperSprite(bouquetModel.WrappingPaperType);
+            // paperObject.name = bouquetModel.WrappingPaperType.ToString();
+            // paperObject.gameObject.SetActive(true);
+        }
+
+        _posController.ResetPos();
+        _bouquet.SetOrder(orderInfo, bouquetParent.gameObject);
+        _bouquet.gameObject.SetActive(activateBouquet);
     }
     #endregion
 }

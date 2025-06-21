@@ -33,18 +33,18 @@ namespace MelenitasDev.SoundsGood.Demo
 
     public partial class SG_DemoDynamicMusic : MonoBehaviour
     {
-        void OnEnable ()
+        void OnEnable()
         {
-            dynamicMusic = new DynamicMusic(new [] { 
-                Track.gravityBass,
-                Track.gravityKick,
-                Track.gravityPercussion,
-                Track.gravitySnare,
-                Track.gravityHitHat,
-                Track.gravityGuitar,
-                Track.gravityCyberline,
-                Track.gravityAlert
-            });
+            // dynamicMusic = new DynamicMusic(new [] { 
+            //     Track.gravityBass,
+            //     Track.gravityKick,
+            //     Track.gravityPercussion,
+            //     Track.gravitySnare,
+            //     Track.gravityHitHat,
+            //     Track.gravityGuitar,
+            //     Track.gravityCyberline,
+            //     Track.gravityAlert
+            // });
 
             foreach (var volumeSlider in volumeSliders)
             {
@@ -55,15 +55,15 @@ namespace MelenitasDev.SoundsGood.Demo
             dynamicMusic.OnComplete(() => playerProgressBar.fillAmount = 1);
         }
 
-        void Update ()
+        void Update()
         {
             if (!dynamicMusic.Playing) return;
-            
+
             playedTimeLabel.text = FormatSecsToTime(dynamicMusic.CurrentLoopCycleTime);
             playerProgressBar.fillAmount = dynamicMusic.CurrentLoopCycleTime / dynamicMusic.ClipDuration;
         }
 
-        void OnDestroy ()
+        void OnDestroy()
         {
             foreach (var volumeSlider in volumeSliders)
             {
@@ -74,53 +74,53 @@ namespace MelenitasDev.SoundsGood.Demo
 
     public partial class SG_DemoDynamicMusic // Public Methods
     {
-        public void Play ()
+        public void Play()
         {
             if (dynamicMusic.Paused)
             {
                 dynamicMusic.Resume();
                 return;
             }
-            
+
             foreach (var volumeSlider in volumeSliders)
             {
                 dynamicMusic.SetTrackVolume(volumeSlider.TargetTrack, volumeSlider.Volume);
             }
-            
+
             dynamicMusic
                 .SetLoop(loopToggle.isOn)
                 .SetSpatialSound(false)
                 .SetFadeOut(Int32.Parse(fadeOutInput.text))
                 .Play(Int32.Parse(fadeInInput.text));
-            
+
             clipNameLabel.text = dynamicMusic.Clips[0].name;
             clipDurationLabel.text = FormatSecsToTime(dynamicMusic.ClipDuration);
         }
-        
-        public void Pause ()
+
+        public void Pause()
         {
             dynamicMusic.Pause();
         }
 
-        public void Stop ()
+        public void Stop()
         {
             dynamicMusic.Stop(Int32.Parse(fadeOutInput.text));
-            
+
             playedTimeLabel.text = "0:00";
             playerProgressBar.fillAmount = 0;
         }
 
-        public void ChangeVolume (Track track, float volume)
+        public void ChangeVolume(Track track, float volume)
         {
             if (!dynamicMusic.Playing) return;
-            
+
             dynamicMusic.ChangeTrackVolume(track, volume);
         }
     }
-    
+
     public partial class SG_DemoDynamicMusic // Private Methods
     {
-        private string FormatSecsToTime (float secs)
+        private string FormatSecsToTime(float secs)
         {
             int formatMins = (int)((secs % 3600) / 60);
             int formatSecs = Mathf.CeilToInt(secs % 60);

@@ -19,10 +19,15 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
         {
             DontDestroyOnLoad(gameObject);
             s_instance = this as T;
+            VirtualAwake();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    protected virtual void VirtualAwake()
+    {
     }
 }

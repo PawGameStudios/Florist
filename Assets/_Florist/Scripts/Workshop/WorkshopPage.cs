@@ -5,11 +5,26 @@ using DG.Tweening;
 using System;
 using Config;
 using Sirenix.OdinInspector;
+using System.Collections;
+
+[Serializable]
+public struct TableParams
+{
+    public int PaperAreaCount;
+    public float Width;
+}
 
 public class WorkshopPage : Page
 {
+    private enum State
+    {
+        None,
+        PaperReady,
+        AddingFlowers,
+    }
+
     [Title("Flower Table")]
-    [SerializeField] private Dictionary<int, float> _flowerTableWidthByFlowerCount;
+    [SerializeField] private Dictionary<int, TableParams> _flowerTableParamsByFlowerCount;
     [SerializeField] private Transform _flowerHand;
     [SerializeField] private RectTransform _flowerTable;
     [SerializeField] private Transform _flowerBoxParent;
@@ -17,9 +32,8 @@ public class WorkshopPage : Page
     [SerializeField] private List<Transform> _flowerBoxPosRefs;
 
     [Title("Paper Area")]
-    [SerializeField] private PaperArea _paperAreaPrefab;
+    [SerializeField] private List<PaperArea> _paperAreas;
     [SerializeField] private PaperBox _paperBox;
-    [SerializeField] private RectTransform _paperAreaParent;
 
     [Title("Ribbon Table")]
     [SerializeField] private RibbonTable _ribbonTable;
@@ -43,9 +57,12 @@ public class WorkshopPage : Page
     private const Ease MACHINE_EASE = Ease.OutQuint;
     private bool _isInitialized = false;
     private bool _isInputWaiting = false;
-    private readonly List<PaperArea> _papersInUse = new();
     private Flower _selectedFlowerPrefab;
     private Tween _scrollTween;
+    private bool _canFlowersBeSelected = false;
+    private int _unfinishedOrderCount = 0;
+    private int _totalOrderCount = 0;
+    private List<BouquetModel> _finishedBouquetModels = new();
 
     void OnEnable()
     {
@@ -57,33 +74,71 @@ public class WorkshopPage : Page
         _scrollTween?.Kill();
     }
 
-    public override void Close(PageData pageData = null, Action onCompleted = null)
+    public override void Close(PageParams pageData = null, Action onCompleted = null)
     {
         gameObject.SetActive(false);
     }
 
-    public override void Open(PageData pageData = null, Action onCompleted = null)
+    public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
         base.Open(pageData, onCompleted);
-        gameObject.SetActive(true);
-        int screenWidth = Screen.width;
-        _workshopPanel.localPosition = new Vector3(screenWidth / 2f + 400, _workshopPanel.localPosition.y, _workshopPanel.localPosition.z);
-        _scrollTween?.Kill();
-        _scrollTween = _workshopPanel.DOLocalMoveX(-screenWidth / 2f, DURATION).SetEase(SCROLL_INIT_EASE).OnComplete(() =>
-        {
-            _scrollContent.sizeDelta = new(_tableContent.rect.width, _scrollContent.rect.height);
-            _wrappingMachine.OpenMachine();
-            onCompleted?.Invoke();
-        });
 
-        SetAvailableFlowers();
-        SetAvailablePapers();
-        SetAvailableRibbons();
-        _isInitialized = true;
+        if (pageData != null && pageData.LoadFromSaveData)
+        {
+            gameObject.SetActive(true);
+            int screenWidth = Screen.width;
+            _workshopPanel.localPosition = new Vector3(-screenWidth / 2f, _workshopPanel.localPosition.y, _workshopPanel.localPosition.z);
+
+            _scrollTween?.Kill();
+            _scrollTween = _workshopPanel.DOLocalMoveX(-screenWidth / 2f, DURATION).SetEase(SCROLL_INIT_EASE).OnComplete(() =>
+            {
+                _scrollContent.sizeDelta = new(_tableContent.rect.width, _scrollContent.rect.height);
+                onCompleted?.Invoke();
+            });
+
+            SetAvailableFlowers();
+            SetAvailablePapers();
+            SetAvailableRibbons();
+
+            _finishedBouquetModels.Clear();
+
+            _isInitialized = true;
+
+            Load(SaveSystem.Inst.SaveData.WorkshopParams);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            int screenWidth = Screen.width;
+            _workshopPanel.localPosition = new Vector3(screenWidth / 2f + 400, _workshopPanel.localPosition.y, _workshopPanel.localPosition.z);
+            _scrollTween?.Kill();
+            _scrollTween = _workshopPanel.DOLocalMoveX(-screenWidth / 2f, DURATION).SetEase(SCROLL_INIT_EASE).OnComplete(() =>
+            {
+                _scrollContent.sizeDelta = new(_tableContent.rect.width, _scrollContent.rect.height);
+                _wrappingMachine.OpenMachine();
+                onCompleted?.Invoke();
+            });
+
+            SetAvailableFlowers();
+            SetAvailablePapers();
+            SetAvailableRibbons();
+            _isInitialized = true;
+        }
+    }
+
+    public void SetOrderCount(int count)
+    {
+        _unfinishedOrderCount = count;
+        _totalOrderCount = count;
     }
 
     public void OnBoxSelected(Flower flowerPrefab, int boxIndex)
     {
+        if (!_canFlowersBeSelected)
+        {
+            return;
+        }
+
         _isInputWaiting = true;
         _selectedFlowerPrefab = flowerPrefab;
         _flowerHand.gameObject.SetActive(true);
@@ -92,23 +147,29 @@ public class WorkshopPage : Page
 
     public void OnPaperSelected(GameObject paperOpenAnimation, WrappingPaperType paperType)
     {
-        var paperArea = Instantiate(_paperAreaPrefab, _paperAreaParent);
-        paperArea.gameObject.SetActive(true);
-        _papersInUse.Add(paperArea);
+        for (int i = 0; i < _paperAreas.Count; i++)
+        {
+            if (_paperAreas[i].IsEmpty)
+            {
+                HapticsController.PlayButtonHaptic();
+                _canFlowersBeSelected = true;
 
-        // TODO: play animation
-        paperArea.GetPaperToArea(paperOpenAnimation, paperType);
+                _paperAreas[i].gameObject.SetActive(true);
+                _paperAreas[i].GetPaperToArea(paperOpenAnimation, paperType, i);
+                return;
+            }
+        }
     }
 
     public void OnScissorClicked()
     {
-        for (int i = 0; i < _papersInUse.Count; i++)
+        for (int i = 0; i < _paperAreas.Count; i++)
         {
-            if (_papersInUse[i].CanUseScissor)
+            if (_paperAreas[i].CanUseScissor)
             {
                 var scissor = Instantiate(_scissor, _flowerTable);
                 scissor.gameObject.SetActive(true);
-                _papersInUse[i].OnScissorClicked(scissor);
+                _paperAreas[i].OnScissorClicked(scissor);
                 break;
             }
         }
@@ -118,6 +179,8 @@ public class WorkshopPage : Page
     {
         if (!_isInputWaiting)
             return null;
+
+        HapticsController.PlayMediumHaptic();
 
         var newFlower = Instantiate(_selectedFlowerPrefab, targetPos, Quaternion.Euler(targetRotation), parent);
         newFlower.gameObject.SetActive(true);
@@ -217,18 +280,26 @@ public class WorkshopPage : Page
         targetPosX += _tableLayout.spacing * 2f;
         targetPosX -= Screen.width / 2f;
         _scrollTween?.Kill();
-        _scrollTween = _scrollContent.DOLocalMoveX(-targetPosX, DURATION).SetEase(MACHINE_EASE);
 
-        _papersInUse.Remove(paperArea);
-        _wrappingMachine.StartMachine(paperArea);
+        HapticsController.PlayLightHaptic();
+        _wrappingMachine.TakeBouquet(paperArea);
+        _scrollTween = _scrollContent.DOLocalMoveX(-targetPosX, DURATION).SetEase(MACHINE_EASE).OnComplete(() =>
+        {
+            _wrappingMachine.StartMachine(paperArea);
+        });
+
+        CheckCanAddFlowers();
     }
 
     public void OnFlowerGivenToTrash(PaperArea paperArea)
     {
         Debug.Log("Flower given to trash.");
 
-        _papersInUse.Remove(paperArea);
-        Destroy(paperArea.gameObject);
+        HapticsController.PlayMediumHaptic();
+
+        paperArea.gameObject.SetActive(false);
+
+        CheckCanAddFlowers();
     }
 
     public void OnFlowerGivenToRibbon(PaperArea paperArea)
@@ -239,32 +310,26 @@ public class WorkshopPage : Page
         targetPosX -= Screen.width / 2f;
         _scrollTween?.Kill();
         _scrollTween = _scrollContent.DOLocalMoveX(-targetPosX, DURATION).SetEase(MACHINE_EASE);
+        HapticsController.PlayLightHaptic();
 
-        _ribbonTable.AddFlowerToRibbonArea(paperArea);
+        _ribbonTable.AddFlowerToRibbonArea(paperArea, _totalOrderCount, _unfinishedOrderCount - 1);
     }
 
-    public void OnFlowerReady()
+    public void OnFlowerReady(BouquetModel bouquetModel, GameObject bouquetObject)
     {
-        List<BouquetModel> bouquetModels = new()
+        _finishedBouquetModels.Add(bouquetModel);
+
+        _unfinishedOrderCount--;
+        if (_unfinishedOrderCount <= 0)
         {
-            new BouquetModel
+            OrderInfo orderInfo = new()
             {
-                Flowers = new List<BouquetFlowerInfo>
-                {
-                    new() { FlowerType = FlowerType.Gypsum, Count = 4, FlowerColor = FlowerColor.None },
-                    new() { FlowerType = FlowerType.Eucalyptus, Count = 4, FlowerColor = FlowerColor.None },
-                    new() { FlowerType = FlowerType.Daisy, Count = 2, FlowerColor = FlowerColor.White },
-                },
-                RibbonType = RibbonType.Grid,
-                WrappingPaperType = WrappingPaperType.Rainbow,
-            }
-        };
-        OrderInfo orderInfo = new()
-        {
-            BouquetModels = bouquetModels,
-        };
-        References.DukkanPage.OnFlowerReady(orderInfo);
-        Close();
+                BouquetModels = _finishedBouquetModels,
+            };
+
+            References.DukkanPage.OnFlowerReady(orderInfo, bouquetObject);
+            Close();
+        }
     }
 
     public void OnBookClicked()
@@ -304,9 +369,17 @@ public class WorkshopPage : Page
             _flowerBoxes.Add(flowerBox);
         }
 
-        _flowerTable.sizeDelta = new Vector2(_flowerTableWidthByFlowerCount[flowerInfos.Count], _flowerTable.sizeDelta.y);
+        TableParams tableParams = _flowerTableParamsByFlowerCount[flowerInfos.Count];
 
-        // TODO: set flower table width
+        _flowerTable.sizeDelta = new Vector2(tableParams.Width, _flowerTable.sizeDelta.y);
+
+        for (int i = 0; i < tableParams.PaperAreaCount; i++)
+        {
+            if (i < _paperAreas.Count)
+            {
+                _paperAreas[i].SetAvailable(true);
+            }
+        }
     }
 
     private void SetAvailablePapers()
@@ -358,4 +431,139 @@ public class WorkshopPage : Page
 
         _ribbonTable.Initialize(ribbonInfos);
     }
+
+    private void CheckCanAddFlowers()
+    {
+        _canFlowersBeSelected = false;
+        for (int i = 0; i < _paperAreas.Count; i++)
+        {
+            if (_paperAreas[i].CanAddFlowers)
+            {
+                _canFlowersBeSelected = true;
+                break;
+            }
+        }
+
+        if (_canFlowersBeSelected)
+        {
+            _flowerHand.gameObject.SetActive(false);
+            _isInputWaiting = false;
+        }
+    }
+
+
+    #region Save Load
+    public List<WorkshopParams> GetPaperSaveInfo()
+    {
+        List<WorkshopParams> workshopParams = new();
+        for (int i = 0; i < _paperAreas.Count; i++)
+        {
+            WorkshopParams workshopParam = new()
+            {
+                PaperState = _paperAreas[i].PaperState,
+                CurrentFlowers = _paperAreas[i].BouquetModel,
+                // SelectedPaperIndex = _paperAreas[i].SelectedPaperIndex,
+            };
+            workshopParams.Add(workshopParam);
+        }
+        return workshopParams;
+    }
+
+    private void Load(List<WorkshopParams> workshopParams)
+    {
+        Debug.Log("Load");
+
+        _finishedBouquetModels.Clear();
+
+        for (int i = 0; i < workshopParams.Count; i++)
+        {
+            PaperArea.State paperState = workshopParams[i].PaperState;
+            PaperArea paperArea = _paperAreas[i];
+
+            _paperAreas[i].SetState(paperState);
+
+            switch (paperState)
+            {
+                case PaperArea.State.None:
+                    paperArea.gameObject.SetActive(false);
+                    paperArea.SetAvailable(false);
+                    break;
+                case PaperArea.State.WaitingForPaper:
+                    paperArea.gameObject.SetActive(false);
+                    paperArea.SetAvailable(true);
+                    break;
+                case PaperArea.State.AddingFlowers:
+                case PaperArea.State.ScissorUsed:
+                    SetFlowers(paperArea, workshopParams[i]);
+                    break;
+                case PaperArea.State.ScissorInUse:
+                    SetFlowers(paperArea, workshopParams[i]);
+                    paperArea.SetState(PaperArea.State.ScissorUsed);
+                    break;
+                case PaperArea.State.InMachine:
+                    SetFlowers(paperArea, workshopParams[i]);
+                    StartCoroutine(SendPaperToMachine(paperArea));
+                    _wrappingMachine.StartMachine(paperArea);
+                    break;
+                case PaperArea.State.MachineDone:
+                    SetFlowers(paperArea, workshopParams[i]);
+                    StartCoroutine(SendPaperToMachine(paperArea));
+                    paperArea.OnMachineDone();
+                    _wrappingMachine.OpenMachine();
+                    break;
+                case PaperArea.State.InRibbonArea:
+                    SetFlowers(paperArea, workshopParams[i]);
+                    StartCoroutine(SendPaperToRibbon(paperArea));
+                    break;
+                case PaperArea.State.Done:
+                    SetFlowers(paperArea, workshopParams[i]);
+                    StartCoroutine(SendPaperToRibbon(paperArea));
+                    paperArea.SetRibbonType(workshopParams[i].CurrentFlowers.RibbonType);
+                    OnFlowerReady(workshopParams[i].CurrentFlowers, paperArea.gameObject);
+                    break;
+                default:
+                    Debug.LogWarning($"#dukkan# Load: Unknown DukkanSaveState: {paperState}");
+                    break;
+            }
+        }
+
+        CheckCanAddFlowers();
+
+    }
+
+    private void SetFlowers(PaperArea paperArea, WorkshopParams workshopParams)
+    {
+        paperArea.gameObject.SetActive(true);
+        paperArea.SetFlowers(workshopParams.CurrentFlowers);
+        // TODO: set wrapping paper type
+        // paperArea.SetPaperType(true);
+    }
+
+    private IEnumerator SendPaperToMachine(PaperArea paperArea)
+    {
+        var targetPosX = _trashBin.rect.width + _flowerTable.rect.width + _machineTable.rect.width / 2;
+        targetPosX += _tableLayout.spacing * 2f;
+        targetPosX -= Screen.width / 2f;
+        _scrollTween?.Kill();
+
+        yield return new WaitForEndOfFrame();
+
+        _scrollContent.localPosition = new Vector3(-targetPosX, _scrollContent.localPosition.y, _scrollContent.localPosition.z);
+        _wrappingMachine.TakeBouquet(paperArea);
+    }
+
+    private IEnumerator SendPaperToRibbon(PaperArea paperArea)
+    {
+        var targetPosX = _trashBin.rect.width + _flowerTable.rect.width + _machineTable.rect.width + _ribbonTableRect.rect.width / 2;
+        targetPosX += _tableLayout.spacing * 2f;
+        targetPosX -= Screen.width / 2f;
+        _scrollTween?.Kill();
+
+        yield return new WaitForEndOfFrame();
+
+        _scrollTween = _scrollContent.DOLocalMoveX(-targetPosX, DURATION).SetEase(MACHINE_EASE);
+        _ribbonTable.AddFlowerToRibbonArea(paperArea, _totalOrderCount, _unfinishedOrderCount - 1);
+    }
+
+    #endregion
 }

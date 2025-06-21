@@ -28,18 +28,18 @@ namespace MelenitasDev.SoundsGood.Demo
 
     public partial class SG_DemoMusic : MonoBehaviour
     {
-        void OnEnable ()
+        void OnEnable()
         {
             clipNameLabel.text = "------";
-            
-            music = new Music(Track.guitarLoop);
-            music.OnComplete(() => playerProgressBar.fillAmount = 1);
+
+            // music = new Music(Track.guitarLoop);
+            // music.OnComplete(() => playerProgressBar.fillAmount = 1);
         }
 
-        void Update ()
+        void Update()
         {
             if (!music.Playing) return;
-            
+
             playedTimeLabel.text = FormatSecsToTime(music.CurrentLoopCycleTime);
             playerProgressBar.fillAmount = music.CurrentLoopCycleTime / music.ClipDuration;
         }
@@ -47,49 +47,49 @@ namespace MelenitasDev.SoundsGood.Demo
 
     public partial class SG_DemoMusic // Public Methods
     {
-        public void Play ()
+        public void Play()
         {
             if (music.Paused)
             {
                 music.Resume();
                 return;
             }
-            
+
             music
                 .SetLoop(loopToggle.isOn)
                 .SetVolume(volumeSlider.value)
                 .SetSpatialSound(false)
                 .SetFadeOut(Int32.Parse(fadeOutInput.text))
                 .Play(Int32.Parse(fadeInInput.text));
-            
+
             clipNameLabel.text = music.Clip.name;
             clipDurationLabel.text = FormatSecsToTime(music.ClipDuration);
         }
-        
-        public void Pause ()
+
+        public void Pause()
         {
             music.Pause();
         }
 
-        public void Stop ()
+        public void Stop()
         {
             music.Stop(Int32.Parse(fadeOutInput.text));
-            
+
             playedTimeLabel.text = "0:00";
             playerProgressBar.fillAmount = 0;
         }
 
-        public void ChangeVolume (float volume)
+        public void ChangeVolume(float volume)
         {
             if (!music.Playing) return;
-            
+
             music.ChangeVolume(volume);
         }
     }
 
     public partial class SG_DemoMusic // Private Methods
     {
-        private string FormatSecsToTime (float secs)
+        private string FormatSecsToTime(float secs)
         {
             int formatMins = (int)((secs % 3600) / 60);
             int formatSecs = Mathf.CeilToInt(secs % 60);

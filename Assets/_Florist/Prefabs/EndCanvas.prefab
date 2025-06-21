@@ -2378,6 +2378,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4f2b67acd841e4ca293dea554f9299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _pageType: 4
   _endDayPanel: {fileID: 4468275789116722918}
   _fadeImage: {fileID: 1961530811733160394}

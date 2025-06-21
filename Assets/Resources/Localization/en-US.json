@@ -61,6 +61,26 @@
         "shop": "Shop",
         "play": "Play",
         "laptop": "Laptop",
-        "level": "Level"
+        "level": "Level",
+        "wrapper_1": "Newspaper",
+        "wrapper_2": "Rainbow",
+        "wrapper_3": "Sunset",
+        "wrapper_4": "Valentine",
+        "wrapper_5": "Grid",
+        "wrapper_6": "Red",
+        "wrapper_7": "Brown",
+        "wrapper_8": "Purple",
+        "wrapper_9": "Pink",
+        "wrapper_10": "Polka Dot",
+        "wrapper_11": "Yellow",
+        "wrapper_12": "Black",
+        "ribbon_1": "Yellow",
+        "ribbon_2": "Polka Dot",
+        "ribbon_3": "Pink",
+        "ribbon_4": "Purple",
+        "ribbon_5": "Red",
+        "ribbon_6": "Grid",
+        "ribbon_7": "Valentine",
+        "ribbon_8": "Gray"
     }
 }

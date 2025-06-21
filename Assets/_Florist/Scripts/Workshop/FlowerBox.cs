@@ -52,6 +52,7 @@ public class FlowerBox : MonoBehaviour
 
     public void OnBoxSelected()
     {
+        HapticsController.PlayMediumHaptic();
         References.WorkshopPage.OnBoxSelected(_flowerPrefab, _index);
     }
 }

@@ -14,17 +14,21 @@ public class DayTimeManager : MonoBehaviour
     private float _totalTimePassed;
     private float _timeTickInGameTime = 60;
 
-    private void OnEnable()
+    public void StartDayTimeCountdown(float totalTimePassed)
     {
-        Timer.TimeTickMiliseconds += TimeTickHandler;
-
         _totalMinutesInDay = (Configs.LevelConfig.DayTimeInfo.DayEndTime - Configs.LevelConfig.DayTimeInfo.DayStartTime) * 60;
 
         _timeTickInGameTime = _totalMinutesInDay / (Configs.LevelConfig.DayTimeInfo.DayDuration * 60 * 10f);
-        _totalTimePassed = 0;
+        _totalTimePassed = totalTimePassed;
+
+        int hour = Configs.LevelConfig.DayTimeInfo.DayStartTime + (int)(_totalTimePassed / 60);
+        int minutes = (int)(_totalTimePassed % 60);
 
         SetDay(SaveSystem.Inst.GeneralData.CurrentDayIndex);
-        SetTime(Configs.LevelConfig.DayTimeInfo.DayStartTime, 0);
+        SetTime(hour, minutes);
+
+        Timer.TimeTickMiliseconds -= TimeTickHandler;
+        Timer.TimeTickMiliseconds += TimeTickHandler;
     }
 
     private void OnDisable()

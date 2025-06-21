@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DefaultExecutionOrder(-501)]
 public class References : MonoBehaviour
 {
     private static References s_instance;
