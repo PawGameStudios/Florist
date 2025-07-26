@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -99,6 +100,26 @@ public class ShopButton : MonoBehaviour
             _scrolls[0].Close();
             _arrowObjects[0].SetActive(false);
         }
+    }
+
+    public void SetScrollToItem(int scrollIndex, int itemIndex, Action<Transform> onItemSelected = null)
+    {
+        if (scrollIndex < 0 || scrollIndex >= _scrolls.Count)
+        {
+            Debug.LogError($"Scroll index {scrollIndex} is out of range.");
+            return;
+        }
+
+        Debug.LogError($"Setting scroll to item. Scroll index: {scrollIndex}, Item index: {itemIndex}");
+        _scrolls[scrollIndex].SetScrollToItem(itemIndex, onComplete: () =>
+        {
+            onItemSelected?.Invoke(_scrolls[scrollIndex].GetItemTransform(itemIndex));
+        });
+    }
+
+    public void SimulateItemButtonClick(int scrollIndex, int itemIndex)
+    {
+        _scrolls[scrollIndex].SimulateButtonClick(itemIndex);
     }
 
     private void ToggleSubButtons()

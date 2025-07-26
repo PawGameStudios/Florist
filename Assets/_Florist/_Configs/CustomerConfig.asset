@@ -1,0 +1,260 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa6401037283a3428e9bbe4a6c494d3, type: 3}
+  m_Name: CustomerConfig
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: afb0c86114f39fb42a0d15695025bec6, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: GoodbyeConversations
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[Config.HappinessState, Assembly-CSharp],[Conversa.Runtime.Conversation,
+        Conversa.Runtime]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Config.HappinessState,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 4
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 8
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 16
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 32
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  Customers:
+  - Sprite: {fileID: 21300000, guid: 25a82116f19fb354e95e1efd30491452, type: 3}
+    CustomerType: 3
+    Name: teacher
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 0
+      WrappingPaperType: 0
+      CustomFlowers:
+      - FlowerType: 0
+        Count: 2
+        FlowerColor: 0
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 1
+        Count: 1
+        FlowerColor: 0
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 142fe8fb71598704aa054898ae56943b, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 1
+        Value: {fileID: 11400000, guid: a17a151bbc7aaf34695bd058044e59e9, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: a17a151bbc7aaf34695bd058044e59e9, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 0efa670cd97871442a177908e947cb77, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: e59ab51ac1679e04f939b98c779e8f0e, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: a17a151bbc7aaf34695bd058044e59e9, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: a17a151bbc7aaf34695bd058044e59e9, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList:
+        - Key: 0
+          Value: 0
+        - Key: 1
+          Value: 50
+        - Key: 2
+          Value: -10
+        - Key: 4
+          Value: -10
+        - Key: 8
+          Value: -10
+        - Key: 16
+          Value: 20
+        - Key: 32
+          Value: 50
+      HappinessTipLimit: 60
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 04a49d24ceae25b4db3a04357a7111ad, type: 3}
+    CustomerType: 3
+    Name: student_1
+    Gender: 1
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 0
+      WrappingPaperType: 0
+      CustomFlowers:
+      - FlowerType: 0
+        Count: 1
+        FlowerColor: 0
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 1
+        Count: 2
+        FlowerColor: 0
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 57a05b9d6ce497141a3c6cc5f2f4830b, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 8dabc593c281b514aa661284971dcb9a, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 8dabc593c281b514aa661284971dcb9a, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 8dabc593c281b514aa661284971dcb9a, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 27e2ba4d027c8d344bc56e97a025ff89, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 445ac8e2363331b4ab67e9bc7881cdd1, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 8dabc593c281b514aa661284971dcb9a, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 8dabc593c281b514aa661284971dcb9a, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 60
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  DefaultGoodbyeConversation: {fileID: 11400000, guid: 0b15906f54b28c1459e338882f58ff67, type: 2}
+  InitialConversations:
+  - {fileID: 11400000, guid: 8a3f9885c3635c344b7b9667cd598621, type: 2}
+  DefaultOrderHappiness:
+    HappinessChange:
+      _serializedList:
+      - Key: 0
+        Value: 0
+      - Key: 1
+        Value: 50
+      - Key: 2
+        Value: -10
+      - Key: 4
+        Value: -10
+      - Key: 8
+        Value: -10
+      - Key: 16
+        Value: 20
+      - Key: 32
+        Value: 50
+    HappinessTipLimit: 60
+    TipPercentage: {x: 10, y: 50}
+    AcceptableWaitTime: 60

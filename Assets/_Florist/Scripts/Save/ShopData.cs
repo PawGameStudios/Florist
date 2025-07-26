@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
+using DecorationType = DecorationManager.DecorationType;
 
 public enum ItemType
 {
@@ -9,19 +10,9 @@ public enum ItemType
     Wrapper,
     Ribbon,
     Upgrade,
-    Accessory,
-    Wallpaper,
-    Floor,
-    Sign,
-    Counter,
     SpeechBubble,
     SpeechBubbleButton,
-    OutsideDukkan,
-    Door,
-    FlowerStand,
     Decor,
-    Pc,
-    Pos
 }
 
 [Serializable]
@@ -81,26 +72,6 @@ public class ShopData
         {
             Items.Add(Configs.ShopConfig.UpgradeItems[i].Id, new ItemData(ItemType.Upgrade, i, Configs.ShopConfig.UpgradeItems[i].DefaultItemState));
         }
-        for (int i = 0; i < Configs.ShopConfig.AccessoryItems.Count; i++)
-        {
-            Items.Add(Configs.ShopConfig.AccessoryItems[i].Id, new ItemData(ItemType.Accessory, i, Configs.ShopConfig.AccessoryItems[i].DefaultItemState));
-        }
-        for (int i = 0; i < Configs.ShopConfig.WallpaperItems.Count; i++)
-        {
-            Items.Add(Configs.ShopConfig.WallpaperItems[i].Id, new ItemData(ItemType.Wallpaper, i, Configs.ShopConfig.WallpaperItems[i].DefaultItemState));
-        }
-        for (int i = 0; i < Configs.ShopConfig.FloorItems.Count; i++)
-        {
-            Items.Add(Configs.ShopConfig.FloorItems[i].Id, new ItemData(ItemType.Floor, i, Configs.ShopConfig.FloorItems[i].DefaultItemState));
-        }
-        for (int i = 0; i < Configs.ShopConfig.SignItems.Count; i++)
-        {
-            Items.Add(Configs.ShopConfig.SignItems[i].Id, new ItemData(ItemType.Sign, i, Configs.ShopConfig.SignItems[i].DefaultItemState));
-        }
-        for (int i = 0; i < Configs.ShopConfig.CounterItems.Count; i++)
-        {
-            Items.Add(Configs.ShopConfig.CounterItems[i].Id, new ItemData(ItemType.Counter, i, Configs.ShopConfig.CounterItems[i].DefaultItemState));
-        }
         for (int i = 0; i < Configs.ShopConfig.SpeechBubbleItems.Count; i++)
         {
             Items.Add(Configs.ShopConfig.SpeechBubbleItems[i].Id, new ItemData(ItemType.SpeechBubble, i, Configs.ShopConfig.SpeechBubbleItems[i].DefaultItemState));
@@ -109,29 +80,12 @@ public class ShopData
         {
             Items.Add(Configs.ShopConfig.SpeechBubbleButtonItems[i].Id, new ItemData(ItemType.SpeechBubbleButton, i, Configs.ShopConfig.FlowerItems[i].DefaultItemState));
         }
-        for (int i = 0; i < Configs.ShopConfig.OutsideDukkanItems.Count; i++)
+        foreach (var decorationType in Configs.ShopConfig.DecorationItems.Keys)
         {
-            Items.Add(Configs.ShopConfig.OutsideDukkanItems[i].Id, new ItemData(ItemType.OutsideDukkan, i, Configs.ShopConfig.OutsideDukkanItems[i].DefaultItemState));
-        }
-        for (int i = 0; i < Configs.ShopConfig.DoorItems.Count; i++)
-        {
-            Items.Add(Configs.ShopConfig.DoorItems[i].Id, new ItemData(ItemType.Door, i, Configs.ShopConfig.DoorItems[i].DefaultItemState));
-        }
-        for (int i = 0; i < Configs.ShopConfig.FlowerStandItems.Count; i++)
-        {
-            Items.Add(Configs.ShopConfig.FlowerStandItems[i].Id, new ItemData(ItemType.FlowerStand, i, Configs.ShopConfig.FlowerStandItems[i].DefaultItemState));
-        }
-        for (int i = 0; i < Configs.ShopConfig.DecorItems.Count; i++)
-        {
-            Items.Add(Configs.ShopConfig.DecorItems[i].Id, new ItemData(ItemType.Decor, i, Configs.ShopConfig.DecorItems[i].DefaultItemState));
-        }
-        for (int i = 0; i < Configs.ShopConfig.PcItems.Count; i++)
-        {
-            Items.Add(Configs.ShopConfig.PcItems[i].Id, new ItemData(ItemType.Pc, i, Configs.ShopConfig.PcItems[i].DefaultItemState));
-        }
-        for (int i = 0; i < Configs.ShopConfig.PosItems.Count; i++)
-        {
-            Items.Add(Configs.ShopConfig.PosItems[i].Id, new ItemData(ItemType.Pos, i, Configs.ShopConfig.PosItems[i].DefaultItemState));
+            for (int i = 0; i < Configs.ShopConfig.DecorationItems[decorationType].Count; i++)
+            {
+                Items.Add(Configs.ShopConfig.DecorationItems[decorationType][i].Id, new ItemData(ItemType.Decor, i, Configs.ShopConfig.DecorationItems[decorationType][i].DefaultItemState));
+            }
         }
 
         IsInitialized = true;
@@ -172,12 +126,26 @@ public class ShopData
         return Items[itemId].ItemState == ItemState.Purchasable;
     }
 
-    public ItemState GetItemState(string itemId)
+    public ItemState GetItemState(string itemId, int unlockDay = 0)
     {
+        if (!Items.ContainsKey(itemId))
+        {
+            Debug.LogError($"Item with ID {itemId} does not exist in ShopData.");
+            return ItemState.Locked;
+        }
+
+        ItemData itemData = Items[itemId];
+
+        // If the item is locked, check if it should be unlocked based on the day
+        if (itemData.ItemState == ItemState.Locked && unlockDay >= itemData.ConfigIndex)
+        {
+            itemData.ItemState = ItemState.Purchasable;
+            return ItemState.Purchasable;
+        }
         return Items[itemId].ItemState;
     }
 
-    public Sprite GetSelectedItemSprite(ItemType itemType)
+    public Sprite GetSelectedItemSprite(ItemType itemType, DecorationType decorationType = DecorationType.None)
     {
         foreach (var item in Items)
         {
@@ -193,32 +161,12 @@ public class ShopData
                         return Configs.ShopConfig.RibbonItems[item.Value.ConfigIndex].Icon;
                     case ItemType.Upgrade:
                         return Configs.ShopConfig.UpgradeItems[item.Value.ConfigIndex].Icon;
-                    case ItemType.Accessory:
-                        return Configs.ShopConfig.AccessoryItems[item.Value.ConfigIndex].Icon;
-                    case ItemType.Wallpaper:
-                        return Configs.ShopConfig.WallpaperItems[item.Value.ConfigIndex].Icon;
-                    case ItemType.Floor:
-                        return Configs.ShopConfig.FloorItems[item.Value.ConfigIndex].Icon;
-                    case ItemType.Sign:
-                        return Configs.ShopConfig.SignItems[item.Value.ConfigIndex].Icon;
-                    case ItemType.Counter:
-                        return Configs.ShopConfig.CounterItems[item.Value.ConfigIndex].Icon;
                     case ItemType.SpeechBubble:
                         return Configs.ShopConfig.SpeechBubbleItems[item.Value.ConfigIndex].Icon;
                     case ItemType.SpeechBubbleButton:
                         return Configs.ShopConfig.SpeechBubbleButtonItems[item.Value.ConfigIndex].Icon;
-                    case ItemType.OutsideDukkan:
-                        return Configs.ShopConfig.OutsideDukkanItems[item.Value.ConfigIndex].Icon;
-                    case ItemType.Door:
-                        return Configs.ShopConfig.DoorItems[item.Value.ConfigIndex].Icon;
-                    case ItemType.FlowerStand:
-                        return Configs.ShopConfig.FlowerStandItems[item.Value.ConfigIndex].Icon;
                     case ItemType.Decor:
-                        return Configs.ShopConfig.DecorItems[item.Value.ConfigIndex].Icon;
-                    case ItemType.Pc:
-                        return Configs.ShopConfig.PcItems[item.Value.ConfigIndex].Icon;
-                    case ItemType.Pos:
-                        return Configs.ShopConfig.PosItems[item.Value.ConfigIndex].Icon;
+                        return Configs.ShopConfig.DecorationItems[decorationType][item.Value.ConfigIndex].Icon;
                 }
             }
         }

@@ -5,6 +5,19 @@ public class HapticsController : MonoBehaviour
 {
     public static HapticsController Instance { get; private set; }
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public static void PlayButtonHaptic()
     {
         if (Instance == null)

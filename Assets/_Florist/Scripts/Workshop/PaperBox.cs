@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PaperBox : MonoBehaviour
 {
+    public Vector3 FirstPaperPos => _paperImages[0].transform.position;
     [SerializeField] private List<Image> _paperImages;
     [SerializeField] private Sprite _lockSprite;
     private List<WrappingPaperInfo> _papers;
@@ -28,12 +29,18 @@ public class PaperBox : MonoBehaviour
         }
     }
 
+    public void SelectTutorialPaper()
+    {
+        var selectedPaper = _papers[0];
+        References.WorkshopPage.OnPaperSelected(selectedPaper.PaperSprite, selectedPaper.PaperRollSprite, selectedPaper.WrappingPaperType);
+    }
+
     public void OnPaperClicked(int index)
     {
         if (index >= _papers.Count)
             return;
 
         var selectedPaper = _papers[index];
-        References.WorkshopPage.OnPaperSelected(selectedPaper.PaperOpenAnimation, selectedPaper.WrappingPaperType);
+        References.WorkshopPage.OnPaperSelected(selectedPaper.PaperSprite, selectedPaper.PaperRollSprite, selectedPaper.WrappingPaperType);
     }
 }

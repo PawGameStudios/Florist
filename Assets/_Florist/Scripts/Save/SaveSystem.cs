@@ -37,6 +37,11 @@ public class SaveSystem : MonoBehaviour
         ShopData.Initialize();
     }
 
+    void OnDisable()
+    {
+        GeneralData?.StopTimeTick();
+    }
+
     public void Load()
     {
         Debug.Log("#save# SaveSystem.Load");
@@ -49,11 +54,11 @@ public class SaveSystem : MonoBehaviour
                 return;
             }
 
-            GeneralData = FileManager.Load<GeneralData>(_generalDataKey);
-            ShopData = FileManager.Load<ShopData>(_shopDataKey);
-            SaveData = FileManager.Load<SaveData>(_saveDataKey);
+            // GeneralData = FileManager.Load<GeneralData>(_generalDataKey);
+            // ShopData = FileManager.Load<ShopData>(_shopDataKey);
+            // SaveData = FileManager.Load<SaveData>(_saveDataKey);
 
-            SaveData.LoadGame();
+            // SaveData.LoadGame();
         }
         catch (Exception ex)
         {
@@ -66,8 +71,7 @@ public class SaveSystem : MonoBehaviour
         Debug.Log("#save# SaveSystem.Save");
         try
         {
-            GeneralData.IsFirstSession = false;
-
+            SaveData.IsFirstSession = false;
             SaveData.SaveGame();
 
             FileManager.Save(_generalDataKey, GeneralData);

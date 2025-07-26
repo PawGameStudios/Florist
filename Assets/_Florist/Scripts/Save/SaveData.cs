@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Config;
-using UnityEngine;
 
 public enum PageType
 {
@@ -26,6 +25,7 @@ public class DukkanParams
 {
     public CustomerInfo CurrentCustomerInfo;
     public List<BouquetModel> CurrentOrder;
+    public List<string> ConvoHistory;
     public OrderInfo OrderInfo;
     public EarningsInfo EarningsInfo;
     public DayInfo DayInfo;
@@ -47,6 +47,8 @@ public class WorkshopParams
 [Serializable]
 public class SaveData
 {
+    public bool IsFirstSession;
+    public bool IsTutorialFinished;
     public PageType LastPage;
     public DukkanParams DukkanParams;
     public List<WorkshopParams> WorkshopParams;
@@ -55,6 +57,8 @@ public class SaveData
     public SaveData()
     {
         LastPage = PageType.MainPage;
+        IsFirstSession = true;
+        IsTutorialFinished = false;
     }
 
     public void SaveGame()
@@ -78,9 +82,13 @@ public class SaveData
 
     public void LoadGame()
     {
-        References.MainPage.gameObject.SetActive(false);
-        if (LastPage == PageType.Dukkan)
+        if (LastPage == PageType.MainPage)
         {
+            References.MainPage.gameObject.SetActive(true);
+        }
+        else if (LastPage == PageType.Dukkan)
+        {
+            References.MainPage.gameObject.SetActive(false);
             References.DukkanPage.Open(new PageParams
             {
                 LoadFromSaveData = true,
@@ -89,11 +97,13 @@ public class SaveData
         }
         else if (LastPage == PageType.EndDay)
         {
-            References.EndDayPage.SetData(EarningsInfo);
+            // References.EndDayPage.SetData(EarningsInfo);
+            References.MainPage.gameObject.SetActive(false);
             References.EndDayPage.Open();
         }
         else if (LastPage == PageType.Workshop)
         {
+            References.MainPage.gameObject.SetActive(false);
             References.DukkanPage.Open(new PageParams
             {
                 LoadFromSaveData = true,
@@ -108,6 +118,7 @@ public class SaveData
         {
             CurrentCustomerInfo = References.DukkanPage.CurrentCustomerInfo,
             CurrentOrder = References.DukkanPage.CurrentOrder,
+            ConvoHistory = References.DukkanPage.ConvoHistory,
             OrderInfo = References.DukkanPage.OrderInfo,
             EarningsInfo = References.DukkanPage.EarningsInfo,
             DayInfo = References.DukkanPage.DayInfo,

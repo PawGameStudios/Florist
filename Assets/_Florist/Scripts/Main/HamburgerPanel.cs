@@ -29,4 +29,10 @@ public class HamburgerPanel : MonoBehaviour
         // TODO: Open achievements page
     }
 
+    public void OnDecorationClicked()
+    {
+        HapticsController.PlayButtonHaptic();
+        References.DecorationManager.OpenDecorationPage();
+    }
+
 }

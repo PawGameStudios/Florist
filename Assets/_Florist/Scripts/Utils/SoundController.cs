@@ -20,7 +20,7 @@ public class SoundController : MonoSingleton<SoundController>
     protected override void VirtualAwake()
     {
         _sounds = new Sound[5];
-        _music = new(_mainMusicTrack);
+        // _music = new(_mainMusicTrack);
     }
 
     public static void PlaySound(SFX sfx, float cooldown)

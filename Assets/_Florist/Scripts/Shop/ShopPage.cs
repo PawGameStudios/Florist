@@ -2,6 +2,7 @@ using TMPro;
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Config;
 
 public class ShopPage : Page
 {
@@ -15,7 +16,6 @@ public class ShopPage : Page
     public Transform ShopScrollParent;
     [SerializeField] private TextMeshProUGUI _moneyAmount, _diamondAmount;
     [SerializeField] private ShopButton _flowersButton, _bouquetsButton, _upgradesButton, _decorationsButton;
-    private ShopScroll _currentScroll;
     private ShopButtonType _currentButtonType;
     private ShopButton _currentButton;
 
@@ -76,6 +76,42 @@ public class ShopPage : Page
             ShopButtonType.Decorations => _decorationsButton,
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
+    }
+    #endregion
+
+
+    #region Tutorial
+    public void SimulateFlowerButtonClick(FlowerType flowerType, FlowerColor flowerColor, Action<Transform> onScrollSet)
+    {
+        _flowersButton.OnButtonClicked();
+        _flowersButton.SetScrollToItem(scrollIndex: 0, itemIndex: Configs.WorkshopConfig.GetFlowerItemIndex(flowerType, flowerColor), onItemSelected: onScrollSet);
+    }
+
+    public void SimulateWrapperButtonClick(WrappingPaperType paperType, Action<Transform> onScrollSet)
+    {
+        _bouquetsButton.OnButtonClicked();
+        _bouquetsButton.SetScrollToItem(scrollIndex: 0, itemIndex: Configs.WorkshopConfig.GetWrappingPaperItemIndex(paperType), onItemSelected: onScrollSet);
+    }
+
+    public void SimulateRibbonButtonClick(RibbonType ribbonType, Action<Transform> onScrollSet)
+    {
+        _bouquetsButton.OnButtonClicked();
+        _bouquetsButton.SetScrollToItem(scrollIndex: 1, itemIndex: Configs.WorkshopConfig.GetRibbonItemIndex(ribbonType), onItemSelected: onScrollSet);
+    }
+
+    public void SimulateFlowerBuyButtonClick(FlowerType flowerType, FlowerColor flowerColor)
+    {
+        _flowersButton.SimulateItemButtonClick(scrollIndex: 0, itemIndex: Configs.WorkshopConfig.GetFlowerItemIndex(flowerType, flowerColor));
+    }
+
+    public void SimulateWrapperBuyButtonClick(WrappingPaperType paperType)
+    {
+        _bouquetsButton.SimulateItemButtonClick(scrollIndex: 0, itemIndex: Configs.WorkshopConfig.GetWrappingPaperItemIndex(paperType));
+    }
+
+    public void SimulateRibbonBuyButtonClick(RibbonType ribbonType)
+    {
+        _bouquetsButton.SimulateItemButtonClick(scrollIndex: 1, itemIndex: Configs.WorkshopConfig.GetRibbonItemIndex(ribbonType));
     }
     #endregion
 

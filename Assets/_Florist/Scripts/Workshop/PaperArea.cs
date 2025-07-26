@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Config;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -26,12 +28,19 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     public bool IsEmpty => _state == State.WaitingForPaper;
     public bool CanUseScissor => _state == State.AddingFlowers;
     [SerializeField] private RectTransform _paperArea;
+    [SerializeField] private Image _paperImage;
+    [SerializeField] private Image _paperRollImage;
+    [SerializeField] private Image _guideImage;
     [SerializeField] private RectTransform _saplingArea;
     [SerializeField] private Transform _scissorPosRef;
     [SerializeField] private Canvas _canvas;
     [SerializeField] private GameObject _bouquetObject;
     [SerializeField] private Material _maskMaterial;
     [SerializeField] private Flower _flowerForLoad;
+    [SerializeField] private Transform _rollImageInitRef;
+    [SerializeField] private Transform _paperImageInitRef;
+    [SerializeField] private Transform _rollImageFinalRef;
+    [SerializeField] private Transform _paperImageFinalRef;
     private float _bottomMostY;
     private float _saplingRightMostPosX;
     private float _saplingLeftMostPosX;
@@ -42,19 +51,22 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     private bool _isDragging = false;
     private Vector2 _offset;
     private Vector3 _startPosition;
-    private Sequence _sequence;
+    private Sequence _sequence, _paperOpenSequence;
     private Tween _moveTween;
     private BouquetModel _bouquetModel = new();
     private State _state = State.None;
     private const float ANGLE_LIMIT = 40f;
     private Vector3 _lastEventDataPosition;
     private GameObject _scissorObject;
-    private List<Flower> _unCutFlowers = new();
+    private readonly List<Flower> _allFlowers = new();
+    private readonly List<Flower> _unCutFlowers = new();
+    private const float PAPER_OPEN_DURATION = 1f;
 
     void OnDisable()
     {
         _moveTween?.Kill();
         _sequence?.Kill();
+        _paperOpenSequence?.Kill();
         _isPosCalculated = false;
         _isDragging = false;
     }
@@ -75,21 +87,56 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
             _state = State.None;
     }
 
-    public void GetPaperToArea(GameObject paper, WrappingPaperType paperType, int index)
+    public void Reset()
     {
-        // TODO: Implement paper animation and position setting
-        // TODO: use index to set position
-        // paper.SetParent(_paperArea);
-        // paper.localPosition = Vector3.zero;
-        // paper.localEulerAngles = Vector3.zero;
+        _state = State.None;
+        _bouquetModel.Clear();
+        _unCutFlowers.Clear();
+        _paperRollImage.gameObject.SetActive(false);
+        _paperImage.gameObject.SetActive(false);
+        _guideImage.color = new Color(1, 1, 1, 0);
 
+        _paperImage.transform.position = _paperImageInitRef.position;
+        _paperRollImage.transform.position = _rollImageInitRef.position;
+        _paperRollImage.transform.localScale = new Vector3(1, 1, 1);
+
+        for (int i = 0; i < _allFlowers.Count; i++)
+        {
+            Destroy(_allFlowers[i].gameObject);
+        }
+        Destroy(_scissorObject);
+
+        _allFlowers.Clear();
+    }
+
+    public void GetPaperToArea(Sprite paperSprite, Sprite rollSprite, WrappingPaperType paperType, Action onCompleted)
+    {
+        _paperImage.sprite = paperSprite;
+        _paperRollImage.sprite = rollSprite;
         _bouquetModel = new BouquetModel
         {
             Flowers = new List<BouquetFlowerInfo>(),
             WrappingPaperType = paperType
         };
 
-        _state = State.AddingFlowers;
+        _paperRollImage.gameObject.SetActive(true);
+        _paperImage.gameObject.SetActive(true);
+
+        _paperImage.transform.position = _paperImageInitRef.position;
+        _paperRollImage.transform.position = _rollImageInitRef.position;
+
+        _guideImage.color = new Color(1, 1, 1, 0);
+
+        _paperOpenSequence?.Kill();
+        _paperOpenSequence = DOTween.Sequence();
+        _paperOpenSequence.Append(_paperRollImage.transform.DOMove(_rollImageFinalRef.position, PAPER_OPEN_DURATION).SetEase(Ease.OutSine));
+        _paperOpenSequence.Join(_paperRollImage.transform.DOScaleY(0, PAPER_OPEN_DURATION).SetEase(Ease.OutSine));
+        _paperOpenSequence.Join(_paperImage.transform.DOMove(_paperImageFinalRef.position, PAPER_OPEN_DURATION).SetEase(Ease.OutSine));
+        _paperOpenSequence.Append(_guideImage.DOColor(new Color(1, 1, 1, 1), .1f).SetEase(Ease.OutSine).OnComplete(() =>
+        {
+            _state = State.AddingFlowers;
+            onCompleted?.Invoke();
+        }));
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -154,6 +201,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
                 IsFlowerCut = false
             });
             _unCutFlowers.Add(newFlower);
+            _allFlowers.Add(newFlower);
         }
     }
 
@@ -199,8 +247,12 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         if (References.WorkshopPage.CheckIfInTrashArea(transform.position))
         {
             _state = State.WaitingForPaper;
-            transform.localPosition = _startPosition;
+            _guideImage.color = new Color(1, 1, 1, 0);
+            _paperRollImage.gameObject.SetActive(false);
             _bouquetModel.Clear();
+
+            transform.localPosition = _startPosition;
+
             for (int i = 0; i < _bouquetObject.transform.childCount; i++)
             {
                 Destroy(_bouquetObject.transform.GetChild(i).gameObject);
@@ -218,6 +270,8 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
             if (References.WorkshopPage.CheckIfInMachineArea(transform.position))
             {
                 _state = State.InMachine;
+                _guideImage.color = new Color(1, 1, 1, 0);
+                _paperRollImage.gameObject.SetActive(false);
                 References.WorkshopPage.OnFlowerGivenToMachine(this);
             }
             else
@@ -262,7 +316,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
 
         // TODO: play ribbon animation
 
-        References.WorkshopPage.OnFlowerReady(_bouquetModel, _bouquetObject);
+        References.WorkshopPage.OnFlowerReady(_bouquetModel, this.gameObject);
     }
 
     public void OnScissorClicked(Transform scissor)
@@ -277,9 +331,9 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         float time = 0;
         Vector3 p0 = scissor.position;
         Vector3 p1 = scissor.position + new Vector3(Random.Range(0, 300), Random.Range(-300, 300), 0);
-        Vector3 p2 = new(_saplingRightMostPosX, _scissorPosRef.position.y, _scissorPosRef.position.z);
-        Vector3 destination = new(_saplingRightMostPosX, _scissorPosRef.position.y, _scissorPosRef.position.z);
-        Vector3 finalDestination = new(_saplingLeftMostPosX, _scissorPosRef.position.y, _scissorPosRef.position.z);
+        Vector3 p2 = new(_saplingLeftMostPosX, _scissorPosRef.position.y, _scissorPosRef.position.z);
+        Vector3 destination = new(_saplingLeftMostPosX, _scissorPosRef.position.y, _scissorPosRef.position.z);
+        Vector3 finalDestination = new(_saplingRightMostPosX, _scissorPosRef.position.y, _scissorPosRef.position.z);
 
         var initTween = DOTween.To(() => time, t => time = t, 1, 1).OnUpdate(() =>
         {
@@ -289,6 +343,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         _sequence?.Kill();
         _sequence = DOTween.Sequence();
         _sequence.Append(initTween.SetEase(Ease.InSine));
+        _sequence.Join(scissor.DOLocalRotate(new Vector3(0, 0, -180), .5f).SetEase(Ease.InSine));
         _sequence.Append(scissor.DOMove(finalDestination, .1f).SetEase(Ease.OutSine).OnComplete(() =>
         {
             // TODO: sound

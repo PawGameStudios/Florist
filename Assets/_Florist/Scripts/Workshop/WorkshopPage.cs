@@ -6,6 +6,8 @@ using System;
 using Config;
 using Sirenix.OdinInspector;
 using System.Collections;
+using TMPro;
+using Unity.Burst.CompilerServices;
 
 [Serializable]
 public struct TableParams
@@ -23,6 +25,17 @@ public class WorkshopPage : Page
         AddingFlowers,
     }
 
+    private enum HintType
+    {
+        None,
+        PaperSelect,
+        FlowerSelect,
+        Scissor,
+        Machine,
+        RibbonTable,
+        Ribbon
+    }
+
     [Title("Flower Table")]
     [SerializeField] private Dictionary<int, TableParams> _flowerTableParamsByFlowerCount;
     [SerializeField] private Transform _flowerHand;
@@ -33,11 +46,16 @@ public class WorkshopPage : Page
 
     [Title("Paper Area")]
     [SerializeField] private List<PaperArea> _paperAreas;
+    [SerializeField] private List<Transform> _initialPaperRefs;
     [SerializeField] private PaperBox _paperBox;
 
     [Title("Ribbon Table")]
     [SerializeField] private RibbonTable _ribbonTable;
     [SerializeField] private RectTransform _ribbonTableRect;
+
+    [Title("Machine")]
+    [SerializeField] private RectTransform _machineTable;
+    [SerializeField] private WrappingMachine _wrappingMachine;
 
     [Title("Misc")]
     [SerializeField] private RectTransform _scrollContent;
@@ -46,15 +64,20 @@ public class WorkshopPage : Page
     [SerializeField] private RectTransform _trashBin;
     [SerializeField] private Transform _scissor;
     [SerializeField] private Transform _workshopPanel;
+    [SerializeField] private Tutorial _tutorial;
+    [SerializeField] private Transform _workshopPanelInitPosRef;
+    [SerializeField] private Transform _scrollContentInitPosRef;
 
-    [Title("Machine")]
-    [SerializeField] private RectTransform _machineTable;
-    [SerializeField] private WrappingMachine _wrappingMachine;
+    [Title("Convo History")]
+    [SerializeField] private ConvoHistory _convoHistoryPanel;
 
-    private readonly List<FlowerBox> _flowerBoxes = new();
-    private const float DURATION = .8f;
-    private const Ease SCROLL_INIT_EASE = Ease.OutBack;
-    private const Ease MACHINE_EASE = Ease.OutQuint;
+    [Title("Tutorial")]
+    [SerializeField] private Sprite _paperBoxSprite;
+    [SerializeField] private Sprite _flowerBoxSprite;
+    [SerializeField] private Sprite _ribbonSprite;
+    [SerializeField] private GameObject _gypsumPlaceHolder1, _gypsumPlaceHolder2;
+
+    private HintType _currentHintType = HintType.None;
     private bool _isInitialized = false;
     private bool _isInputWaiting = false;
     private Flower _selectedFlowerPrefab;
@@ -62,7 +85,16 @@ public class WorkshopPage : Page
     private bool _canFlowersBeSelected = false;
     private int _unfinishedOrderCount = 0;
     private int _totalOrderCount = 0;
-    private List<BouquetModel> _finishedBouquetModels = new();
+    private int _tutorialFlowerCount = 0;
+    private PaperArea _tutPaperArea;
+    private List<string> _convoHistory = new();
+    private readonly List<BouquetModel> _finishedBouquetModels = new();
+    private readonly List<FlowerBox> _flowerBoxes = new();
+    private const int TUT_MAX_FLOWER_COUNT = 2;
+    private const int HINT_WAIT_TIME = 12;
+    private const float DURATION = .8f;
+    private const Ease SCROLL_INIT_EASE = Ease.OutBack;
+    private const Ease MACHINE_EASE = Ease.OutQuint;
 
     void OnEnable()
     {
@@ -71,17 +103,29 @@ public class WorkshopPage : Page
 
     void OnDisable()
     {
+        CancelInvoke();
         _scrollTween?.Kill();
     }
 
     public override void Close(PageParams pageData = null, Action onCompleted = null)
     {
+        _tutorial.FinishTutorial();
+        _flowerHand.gameObject.SetActive(false);
+        _workshopPanel.localPosition = _workshopPanelInitPosRef.localPosition;
+        _scrollContent.localPosition = _scrollContentInitPosRef.localPosition;
         gameObject.SetActive(false);
     }
 
     public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
         base.Open(pageData, onCompleted);
+
+        for (int i = 0; i < _initialPaperRefs.Count; i++)
+        {
+            _paperAreas[i].transform.SetPositionAndRotation(_initialPaperRefs[i].position, _initialPaperRefs[i].rotation);
+            _paperAreas[i].gameObject.SetActive(false);
+            _paperAreas[i].Reset();
+        }
 
         if (pageData != null && pageData.LoadFromSaveData)
         {
@@ -117,6 +161,22 @@ public class WorkshopPage : Page
                 _scrollContent.sizeDelta = new(_tableContent.rect.width, _scrollContent.rect.height);
                 _wrappingMachine.OpenMachine();
                 onCompleted?.Invoke();
+
+                if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+                {
+                    _tutorial.Init()
+                            .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp, Tutorial.ObjectActivationOptions.Bg)
+                            .SetClickableState(Tutorial.ClickableState.HighlightArea)
+                            .PointTo(_paperBox.FirstPaperPos, Tutorial.PointDirection.Right)
+                            .Highlight(_paperBoxSprite, _paperBox.transform)
+                            .SetExplanation(LocalizationManager.GetLocalizedText("tut_select_paper"))
+                            .SetClickCallback(OnPaperSelected)
+                            .StartTutorial();
+                }
+                else
+                {
+                    PrepareHint(specificHintType: HintType.PaperSelect);
+                }
             });
 
             SetAvailableFlowers();
@@ -126,10 +186,17 @@ public class WorkshopPage : Page
         }
     }
 
-    public void SetOrderCount(int count)
+    public WorkshopPage SetOrderCount(int count)
     {
         _unfinishedOrderCount = count;
         _totalOrderCount = count;
+        return this;
+    }
+
+    public WorkshopPage SetConvoHistory(List<string> convoHistory)
+    {
+        _convoHistory = convoHistory;
+        return this;
     }
 
     public void OnBoxSelected(Flower flowerPrefab, int boxIndex)
@@ -145,17 +212,19 @@ public class WorkshopPage : Page
         _flowerHand.position = _flowerBoxes[boxIndex].transform.position + Vector3.up * 100f;
     }
 
-    public void OnPaperSelected(GameObject paperOpenAnimation, WrappingPaperType paperType)
+    public void OnPaperSelected(Sprite paperSprite, Sprite rollSprite, WrappingPaperType paperType)
     {
         for (int i = 0; i < _paperAreas.Count; i++)
         {
             if (_paperAreas[i].IsEmpty)
             {
                 HapticsController.PlayButtonHaptic();
-                _canFlowersBeSelected = true;
 
                 _paperAreas[i].gameObject.SetActive(true);
-                _paperAreas[i].GetPaperToArea(paperOpenAnimation, paperType, i);
+                _paperAreas[i].GetPaperToArea(paperSprite, rollSprite, paperType, () => _canFlowersBeSelected = true);
+
+                PrepareHint(specificHintType: HintType.FlowerSelect);
+
                 return;
             }
         }
@@ -170,6 +239,16 @@ public class WorkshopPage : Page
                 var scissor = Instantiate(_scissor, _flowerTable);
                 scissor.gameObject.SetActive(true);
                 _paperAreas[i].OnScissorClicked(scissor);
+
+                if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+                {
+                    OnScissorUsed();
+                }
+                else
+                {
+                    PrepareHint(specificHintType: HintType.Machine);
+                }
+
                 break;
             }
         }
@@ -181,6 +260,19 @@ public class WorkshopPage : Page
             return null;
 
         HapticsController.PlayMediumHaptic();
+
+        if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+        {
+            _tutorialFlowerCount++;
+            if (_tutorialFlowerCount >= TUT_MAX_FLOWER_COUNT)
+            {
+                CancelInvoke(nameof(FlowerPlaceLooper));
+                CancelInvoke(nameof(FlowerPlaceLooper2));
+                OnFlowersPlaced();
+            }
+        }
+
+        PrepareHint(specificHintType: HintType.Scissor);
 
         var newFlower = Instantiate(_selectedFlowerPrefab, targetPos, Quaternion.Euler(targetRotation), parent);
         newFlower.gameObject.SetActive(true);
@@ -279,13 +371,25 @@ public class WorkshopPage : Page
         var targetPosX = _trashBin.rect.width + _flowerTable.rect.width + _machineTable.rect.width / 2;
         targetPosX += _tableLayout.spacing * 2f;
         targetPosX -= Screen.width / 2f;
-        _scrollTween?.Kill();
+
+        _tutorial.FinishTutorial();
 
         HapticsController.PlayLightHaptic();
         _wrappingMachine.TakeBouquet(paperArea);
+
+        _scrollTween?.Kill();
         _scrollTween = _scrollContent.DOLocalMoveX(-targetPosX, DURATION).SetEase(MACHINE_EASE).OnComplete(() =>
         {
-            _wrappingMachine.StartMachine(paperArea);
+            if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+            {
+                _tutPaperArea = paperArea;
+                OnMachineIntro();
+            }
+            else
+            {
+                _wrappingMachine.StartMachine(paperArea);
+                PrepareHint(specificHintType: HintType.RibbonTable);
+            }
         });
 
         CheckCanAddFlowers();
@@ -300,19 +404,33 @@ public class WorkshopPage : Page
         paperArea.gameObject.SetActive(false);
 
         CheckCanAddFlowers();
+        PrepareHint(specificHintType: HintType.PaperSelect);
     }
 
     public void OnFlowerGivenToRibbon(PaperArea paperArea)
     {
         Debug.Log("Flower given to ribbon area.");
+        _ribbonTable.AddFlowerToRibbonArea(paperArea, _totalOrderCount, _unfinishedOrderCount - 1);
+
         var targetPosX = _trashBin.rect.width + _flowerTable.rect.width + _machineTable.rect.width + _ribbonTableRect.rect.width / 2;
         targetPosX += _tableLayout.spacing * 2f;
         targetPosX -= Screen.width / 2f;
-        _scrollTween?.Kill();
-        _scrollTween = _scrollContent.DOLocalMoveX(-targetPosX, DURATION).SetEase(MACHINE_EASE);
-        HapticsController.PlayLightHaptic();
 
-        _ribbonTable.AddFlowerToRibbonArea(paperArea, _totalOrderCount, _unfinishedOrderCount - 1);
+        _tutorial.FinishTutorial();
+
+        _scrollTween?.Kill();
+        _scrollTween = _scrollContent.DOLocalMoveX(-targetPosX, DURATION).SetEase(MACHINE_EASE).OnComplete(() =>
+        {
+            if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+            {
+                OnRibbonIntro();
+            }
+            else
+            {
+                PrepareHint(specificHintType: HintType.Ribbon);
+            }
+        });
+        HapticsController.PlayLightHaptic();
     }
 
     public void OnFlowerReady(BouquetModel bouquetModel, GameObject bouquetObject)
@@ -332,15 +450,18 @@ public class WorkshopPage : Page
         }
     }
 
-    public void OnBookClicked()
+    public void OnConvoHistoryClicked()
     {
-
+        _convoHistoryPanel.SetConvoHistory(_convoHistory);
     }
 
     private void SetAvailableFlowers()
     {
-        if (_isInitialized)
-            return;
+        for (int i = 0; i < _flowerBoxes.Count; i++)
+        {
+            Destroy(_flowerBoxes[i].gameObject);
+        }
+        _flowerBoxes.Clear();
 
         List<FlowerInfo> flowerInfos = new();
         List<ShopConfig.ShopItemInfo> flowerItems = Configs.ShopConfig.FlowerItems;
@@ -384,8 +505,8 @@ public class WorkshopPage : Page
 
     private void SetAvailablePapers()
     {
-        if (_isInitialized)
-            return;
+        // if (_isInitialized)
+        //     return;
 
         List<WrappingPaperInfo> paperInfos = new();
         List<ShopConfig.ShopItemInfo> paperItems = Configs.ShopConfig.WrapperItems;
@@ -409,8 +530,8 @@ public class WorkshopPage : Page
 
     private void SetAvailableRibbons()
     {
-        if (_isInitialized)
-            return;
+        // if (_isInitialized)
+        //     return;
 
         List<RibbonInfo> ribbonInfos = new();
         List<ShopConfig.ShopItemInfo> ribbonItems = Configs.ShopConfig.RibbonItems;
@@ -566,4 +687,247 @@ public class WorkshopPage : Page
     }
 
     #endregion
+
+
+    #region Tutorial
+    private void OnPaperSelected()
+    {
+        Debug.Log($"#tutorial# OnPaperSelected");
+        _paperBox.SelectTutorialPaper();
+
+        _tutorial.Init()
+                .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp, Tutorial.ObjectActivationOptions.Bg)
+                .SetClickableState(Tutorial.ClickableState.HighlightArea)
+                .PointTo(_flowerBoxes[0].transform.position, Tutorial.PointDirection.Right)
+                .Highlight(_flowerBoxSprite, _flowerBoxes[0].transform)
+                .SetExplanation(LocalizationManager.GetLocalizedText("tut_flower_explanation"))
+                .SetClickCallback(OnFlowerSelected)
+                .SetActivationDelay(1.1f)
+                .StartTutorial();
+    }
+
+    private void OnFlowerSelected()
+    {
+        Debug.Log($"#tutorial# OnFlowerSelected");
+        _gypsumPlaceHolder1.SetActive(false);
+        _gypsumPlaceHolder2.SetActive(false);
+
+        _flowerBoxes[0].OnBoxSelected();
+
+        _tutorial.Init()
+            .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp)
+            .SetExplanation(LocalizationManager.GetLocalizedText("tut_flower_place"))
+            .SetClickableState(Tutorial.ClickableState.All)
+            .StartTutorial();
+
+        FlowerPlaceLooper();
+    }
+
+    private void FlowerPlaceLooper()
+    {
+        Debug.Log($"#tutorial# FlowerPlaceLooper");
+        CancelInvoke(nameof(FlowerPlaceLooper));
+        CancelInvoke(nameof(FlowerPlaceLooper2));
+
+        _gypsumPlaceHolder1.SetActive(false);
+        _gypsumPlaceHolder2.SetActive(false);
+
+        _tutorial.PointTo(_gypsumPlaceHolder2.transform.position + new Vector3(0, 100, 0), Tutorial.PointDirection.Right)
+                .ResumeHandAnim()
+                .SetHandCallback(() =>
+                {
+                    Debug.Log("handcallback for gypsum placeholder 2");
+                    _gypsumPlaceHolder2.SetActive(true);
+                    _tutorial.StopHandAnim();
+                    Invoke(nameof(FlowerPlaceLooper2), 1f);
+                });
+    }
+
+    private void FlowerPlaceLooper2()
+    {
+        _tutorial.PointTo(_gypsumPlaceHolder1.transform.position + new Vector3(0, 100, 0), Tutorial.PointDirection.Right)
+                .ResumeHandAnim()
+                .SetHandCallback(() =>
+                {
+                    Debug.Log("handcallback for gypsum placeholder 1");
+                    _tutorial.StopHandAnim();
+                    _gypsumPlaceHolder1.SetActive(true);
+                    Invoke(nameof(FlowerPlaceLooper), 1f);
+                });
+    }
+
+    private void OnFlowersPlaced()
+    {
+        _gypsumPlaceHolder1.SetActive(false);
+        _gypsumPlaceHolder2.SetActive(false);
+
+        Debug.Log($"#tutorial# OnFlowersPlaced");
+        _tutorial.Init()
+            .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp)
+            .PointTo(_scissor.position, Tutorial.PointDirection.Right)
+            .SetExplanation(LocalizationManager.GetLocalizedText("tut_use_scissor"))
+            .StartTutorial();
+    }
+
+    private void OnScissorUsed()
+    {
+        Debug.Log($"#tutorial# OnScissorUsed");
+        _tutorial.Init()
+            .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp)
+            .SwipeBetween(_paperAreas[0].transform.position, _machineTable.transform.position)
+            .SetExplanation(LocalizationManager.GetLocalizedText("tut_place_machine"))
+            .SetActivationDelay(1.5f)
+            .StartTutorial();
+    }
+
+    private void OnMachineIntro()
+    {
+        Debug.Log($"#tutorial# OnMachineIntro");
+        _tutorial.Init()
+            .SetObjectActivation(Tutorial.ObjectActivationOptions.PopUp)
+            .SetClickCallback(OnMachineIntroFinished)
+            .SetDelayedCallback(2f, OnMachineIntroFinished)
+            .SetExplanation(LocalizationManager.GetLocalizedText("tut_machine_intro"))
+            .StartTutorial();
+    }
+
+    private void OnMachineIntroFinished()
+    {
+        Debug.Log($"#tutorial# OnMachineIntroFinished");
+        _wrappingMachine.StartMachine(_tutPaperArea);
+
+        float delay = Configs.WorkshopConfig.MachineInfo.CalculateDuration(SaveSystem.Inst.GeneralData.MachineLevel) + .75f;
+
+        _tutorial.Init()
+            .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp)
+            .SwipeBetween(_paperAreas[0].transform.position, _ribbonTable.transform.position)
+            .SetExplanation(LocalizationManager.GetLocalizedText("tut_place_ribbon"))
+            .SetActivationDelay(delay)
+            .StartTutorial();
+    }
+
+    private void OnRibbonIntro()
+    {
+        Debug.Log($"#tutorial# OnRibbonIntro");
+        Invoke(nameof(ExplainRibbon), .1f);
+    }
+
+    private void ExplainRibbon()
+    {
+        Debug.Log($"#tutorial# ExplainRibbon");
+        _tutorial.Init()
+            .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp, Tutorial.ObjectActivationOptions.Bg)
+            .SetClickableState(Tutorial.ClickableState.HighlightArea)
+            .PointTo(_ribbonTable.FirstRibbonTransform.position, Tutorial.PointDirection.Right)
+            .Highlight(_ribbonSprite, _ribbonTable.FirstRibbonTransform)
+            .Highlight2(_paperBoxSprite, _paperAreas[0].transform)
+            .SetExplanation(LocalizationManager.GetLocalizedText("tut_select_ribbon"))
+            .SetClickCallback(OnTutorialFinished)
+            .StartTutorial();
+    }
+
+    private void OnTutorialFinished()
+    {
+        Debug.Log($"#tutorial# OnTutorialFinished");
+
+        _tutorial.FinishTutorial();
+        _ribbonTable.OnRibbonClicked(0);
+
+        SaveSystem.Inst.SaveData.IsTutorialFinished = true;
+    }
+    #endregion
+
+
+    #region Hints
+    private void PrepareHint(bool isNext = false, HintType specificHintType = HintType.None)
+    {
+        if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+        {
+            return;
+        }
+
+        _tutorial.FinishTutorial();
+        CancelInvoke();
+
+        if (isNext)
+        {
+            _currentHintType++;
+        }
+        if (specificHintType != HintType.None)
+        {
+            _currentHintType = specificHintType;
+        }
+
+        switch (_currentHintType)
+        {
+            case HintType.PaperSelect:
+                Invoke(nameof(ShowPaperSelectHint), HINT_WAIT_TIME);
+                break;
+            case HintType.FlowerSelect:
+                Invoke(nameof(ShowFlowerSelectHint), HINT_WAIT_TIME);
+                break;
+            case HintType.Scissor:
+                Invoke(nameof(ShowScissorHint), HINT_WAIT_TIME);
+                break;
+            case HintType.Machine:
+                Invoke(nameof(ShowMachineHint), HINT_WAIT_TIME);
+                break;
+            case HintType.RibbonTable:
+                Invoke(nameof(ShowRibbonTableHint), HINT_WAIT_TIME);
+                break;
+            case HintType.Ribbon:
+                Invoke(nameof(ShowRibbonHint), HINT_WAIT_TIME);
+                break;
+        }
+    }
+
+    private void ShowPaperSelectHint()
+    {
+        _tutorial.Init()
+                .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
+                .PointTo(_paperBox.FirstPaperPos, Tutorial.PointDirection.Right)
+                .StartTutorial();
+    }
+
+    private void ShowFlowerSelectHint()
+    {
+        _tutorial.Init()
+                .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
+                .PointTo(_flowerBoxes[0].transform.position, Tutorial.PointDirection.Right)
+                .StartTutorial();
+    }
+
+    private void ShowScissorHint()
+    {
+        _tutorial.Init()
+                .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
+                .PointTo(_scissor.position, Tutorial.PointDirection.Right)
+                .StartTutorial();
+    }
+
+    private void ShowMachineHint()
+    {
+        _tutorial.Init()
+                .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
+                .SwipeBetween(_paperAreas[0].transform.position, _machineTable.transform.position)
+                .StartTutorial();
+    }
+
+    private void ShowRibbonTableHint()
+    {
+        _tutorial.Init()
+                .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
+                .SwipeBetween(_paperAreas[0].transform.position, _ribbonTable.transform.position)
+                .StartTutorial();
+    }
+
+    private void ShowRibbonHint()
+    {
+        _tutorial.Init()
+                .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
+                .PointTo(_ribbonTable.FirstRibbonTransform.position, Tutorial.PointDirection.Right)
+                .StartTutorial();
+    }
+    #endregion
+
 }

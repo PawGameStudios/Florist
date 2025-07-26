@@ -6,6 +6,7 @@ using System;
 public class WrappingMachine : MonoBehaviour
 {
     public Rect Rect => _rectTransform.rect;
+    [SerializeField] private Canvas _doorCanvas;
     [SerializeField] private Transform _paperSitPosition;
     [SerializeField] private Transform _door;
     [SerializeField] private RectTransform _rectTransform;
@@ -17,14 +18,17 @@ public class WrappingMachine : MonoBehaviour
         _progressTween?.Kill();
     }
 
-    public void OpenMachine()
+    public void OpenMachine(Action onComplete = null)
     {
         Debug.Log("Wrapping machine opened.");
         _progressTween?.Kill();
         _progressTween = _progressImage.DOFillAmount(0f, .1f).SetEase(Ease.Linear);
 
         _openTween?.Kill();
-        _openTween = _door.DOLocalMoveX(800f, .5f).SetEase(Ease.InCubic);
+        _openTween = _door.DOLocalMoveX(800f, .5f).SetEase(Ease.InCubic).OnComplete(() =>
+        {
+            onComplete?.Invoke();
+        });
     }
 
     public void CloseMachine(Action onComplete = null)
@@ -43,6 +47,8 @@ public class WrappingMachine : MonoBehaviour
     {
         Debug.Log("Wrapping machine started.");
 
+        _doorCanvas.sortingOrder = 10;
+
         CloseMachine(() =>
         {
             int level = SaveSystem.Inst.GeneralData.MachineLevel;
@@ -55,7 +61,10 @@ public class WrappingMachine : MonoBehaviour
                 HapticsController.PlayLightHaptic();
                 paperArea.OnMachineDone();
 
-                OpenMachine();
+                OpenMachine(() =>
+                {
+                    _doorCanvas.sortingOrder = 4;
+                });
                 Debug.Log("Wrapping machine process completed.");
             });
         });

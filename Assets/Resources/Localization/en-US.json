@@ -81,6 +81,16 @@
         "ribbon_5": "Red",
         "ribbon_6": "Grid",
         "ribbon_7": "Valentine",
-        "ribbon_8": "Gray"
+        "ribbon_8": "Gray",
+        "tut_select_paper": "Select a wrapping paper to start wrapping flowers.",
+        "tut_flower_explanation": "A good bouquet has a variety of flowers. Your first order is 2 gypsophilas. Do not add more than necessary. Remember each flowers costs money.",
+        "tut_flower_place": "",
+        "tut_use_scissor": "Use the scissors to cut the stems of the flowers.",
+        "tut_place_machine": "Place the bouquet on the table to start working.",
+        "tut_machine_intro": "This is the wrapping machine. It wraps the bouquet with a paper and ribbon.",
+        "tut_place_ribbon": "Place a ribbon on the bouquet to finish wrapping.",
+        "tut_select_ribbon": "Select a ribbon to wrap the bouquet.",
+        "tut_new_item_explanation": "You can buy new items from the shop. You can also upgrade your shop to unlock more items.",
+        "tut_next_day": "You can continue to the next day by clicking the Next Day button."
     }
 }

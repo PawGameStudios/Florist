@@ -21,6 +21,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  MaxLife: 5
+  LifeGainMinutes: 30
   Avatars:
   - {fileID: 21300000, guid: aa3eba12261157d4cbf8dc8e82629bd5, type: 3}
   - {fileID: 21300000, guid: 07ee09f91d936b8458ed54532a8c904a, type: 3}

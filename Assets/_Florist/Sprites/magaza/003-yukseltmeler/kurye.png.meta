@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d9c85b4cf4ddc234d8b5093f25e60e2c
+guid: b431d7a9a9f2f0347b053e256acab1b0
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -100,12 +100,12 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 51
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -116,10 +116,10 @@ TextureImporter:
       name: kurye_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 245
-        height: 303
+        x: 62
+        y: 17
+        width: 388
+        height: 478
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

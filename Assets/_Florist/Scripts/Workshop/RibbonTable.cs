@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class RibbonTable : MonoBehaviour
 {
+    public Transform FirstRibbonTransform => _ribbonImages[0].transform;
     [SerializeField] private List<Image> _ribbonImages;
+    [SerializeField] private GameObject _ribbonRodBottom;
     [SerializeField] private Sprite _lockSprite;
     [SerializeField] private Transform _paperSitPositionTop_1;
     [SerializeField] private Transform _paperSitPositionTop_2_1;
@@ -13,6 +15,7 @@ public class RibbonTable : MonoBehaviour
     [SerializeField] private Transform _paperSitPositionBottom_1;
     [SerializeField] private Transform _paperSitPositionBottom_2_1;
     [SerializeField] private Transform _paperSitPositionBottom_2_2;
+    private const int RIBBON_COUNT_IN_ROW = 4;
 
     private List<RibbonInfo> _ribbons = new();
     private PaperArea _paper = new();
@@ -33,7 +36,16 @@ public class RibbonTable : MonoBehaviour
         for (; i < _ribbonImages.Count; i++)
         {
             _ribbonImages[i].sprite = _lockSprite;
-            _ribbonImages[i].gameObject.SetActive(true);
+            _ribbonImages[i].gameObject.SetActive(false);
+        }
+
+        if (_ribbons.Count > RIBBON_COUNT_IN_ROW)
+        {
+            _ribbonRodBottom.SetActive(true);
+        }
+        else
+        {
+            _ribbonRodBottom.SetActive(false);
         }
     }
 
@@ -43,7 +55,7 @@ public class RibbonTable : MonoBehaviour
 
         _paper = paperArea;
 
-        if (_ribbons.Count <= 4)
+        if (_ribbons.Count <= RIBBON_COUNT_IN_ROW)
         {
             if (totalOrderCount > 1)
             {
@@ -59,14 +71,6 @@ public class RibbonTable : MonoBehaviour
             else
             {
                 _paper.transform.SetPositionAndRotation(_paperSitPositionTop_1.position, _paperSitPositionTop_1.rotation);
-
-                Debug.Log("_paper pos: " + _paper.transform.position);
-                Debug.Log("_paperSitPositionTop_1 pos: " + _paperSitPositionTop_1.position);
-
-
-
-                // _paper.GetComponent<RectTransform>().anchoredPosition = _paperSitPositionTop_1.GetComponent<RectTransform>().anchoredPosition;
-                // _paper.GetComponent<RectTransform>().rotation = _paperSitPositionTop_1.GetComponent<RectTransform>().rotation;
             }
         }
         else

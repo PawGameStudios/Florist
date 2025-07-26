@@ -1,0 +1,10 @@
+[1]
+Assets/_Florist/Prefabs/Workshop/WorkshopCanvas.prefab
+----------------------------------------------------------
+[old GUID: 1dfd385f3c30f5a40b9c7b39395c50b3] Assets/_Florist/Sprites/atolye/kurdele_cubugu.png
+[new GUID: 9584739a1fbd3fe40aafaa489b756135] Assets/_Florist/Sprites/atolye/Resize Pro/kurdele_cubugu.png
+ 
+
+# # #
+
+

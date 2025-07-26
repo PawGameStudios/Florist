@@ -15,124 +15,31 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: afb0c86114f39fb42a0d15695025bec6, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: GoodbyeConversations
-      Entry: 7
-      Data: 0|Unity.VisualScripting.FlexibleDictionary`2[[Config.HappinessState,
-        Assembly-CSharp],[Conversa.Runtime.Conversation, Conversa.Runtime]], Unity.VisualScripting.Core
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Config.HappinessState,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 1
-    - Name: $v
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-  Customers:
-  - Sprite: {fileID: 21300000, guid: d1ec1061db05a454aa04db5d54136152, type: 3}
-    CustomerType: 0
-    Name: Sophie
-    Gender: 2
-    ChoseOrderRandomly: 0
-    MaxOrderCount: 0
-    Orders:
-    - BouquetType: 2
-      RibbonType: 2
-      WrappingPaperType: 3
-      CustomFlowers: []
-    UseCustomConvo: 0
-    InitialConversation: {fileID: 0}
-    GoodbyeConversation: {fileID: 0}
-    HappinessChange:
-      _serializedList:
-      - Key: 0
-        Value: 0
-      - Key: 1
-        Value: 0
-      - Key: 2
-        Value: 0
-      - Key: 4
-        Value: 0
-      - Key: 8
-        Value: 0
-      - Key: 16
-        Value: 0
-    HappinessTipLimit: 50
-    TipPercentage: {x: 10, y: 50}
-    AcceptableWaitTime: 60
-  - Sprite: {fileID: 21300000, guid: 02a037f3f1b28c445943650324fa9f30, type: 3}
-    CustomerType: 0
-    Name: Mehmet
-    Gender: 0
-    ChoseOrderRandomly: 0
-    MaxOrderCount: 0
-    Orders:
-    - BouquetType: 2
-      RibbonType: 3
-      WrappingPaperType: 4
-      CustomFlowers: []
-    UseCustomConvo: 0
-    InitialConversation: {fileID: 0}
-    GoodbyeConversation: {fileID: 0}
-    HappinessChange:
-      _serializedList:
-      - Key: 0
-        Value: 0
-      - Key: 1
-        Value: 0
-      - Key: 2
-        Value: -20
-      - Key: 4
-        Value: -10
-      - Key: 8
-        Value: -10
-      - Key: 16
-        Value: 50
-      - Key: 32
-        Value: 100
-    HappinessTipLimit: 2
-    TipPercentage: {x: 10, y: 50}
-    AcceptableWaitTime: 100
+    SerializationNodes: []
   DayTimeInfo:
     DayStartTime: 7
     DayEndTime: 16
     DayDuration: 5
-  InitialConversations:
-  - {fileID: 11400000, guid: 8a3f9885c3635c344b7b9667cd598621, type: 2}
   Days:
   - Events:
     - IsEvent: 0
       EventType: 0
+      CustomerType: 3
+      CustomerName: teacher
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 1
+      EventType: 1
       CustomerType: 0
+      CustomerName: 
+      IntroducedFlowerType: 3
+      IntroducedFlowerColor: 1
+      PaperType: 0
+      RibbonType: 0

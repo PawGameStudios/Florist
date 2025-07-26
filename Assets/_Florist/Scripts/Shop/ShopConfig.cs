@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Config;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using DecorationType = DecorationManager.DecorationType;
 
 [CreateAssetMenu(fileName = "ShopConfig", menuName = "Paw/Configs/Shop")]
 public class ShopConfig : SerializedScriptableObject
@@ -22,6 +22,9 @@ public class ShopConfig : SerializedScriptableObject
         [VerticalGroup("Info")]
         public long Price;
 
+        [VerticalGroup("Info")]
+        public int UnlockDay;
+
         [VerticalGroup("State")]
         public bool IsSelectable;
 
@@ -32,40 +35,25 @@ public class ShopConfig : SerializedScriptableObject
 
     [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
     public List<ShopItemInfo> FlowerItems;
+
     [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
     public List<ShopItemInfo> WrapperItems;
+
     [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
     public List<ShopItemInfo> RibbonItems;
+
     [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
     public List<ShopItemInfo> UpgradeItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> AccessoryItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> WallpaperItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> FloorItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> SignItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> CounterItems;
+
     [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
     public List<ShopItemInfo> SpeechBubbleItems;
+
     [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
     public List<ShopItemInfo> SpeechBubbleButtonItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> OutsideDukkanItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> DoorItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> FlowerStandItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> DecorItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> PcItems;
-    [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
-    public List<ShopItemInfo> PosItems;
 
-    public List<ShopItemInfo> GetItems(ItemType itemType)
+    public Dictionary<DecorationType, List<ShopItemInfo>> DecorationItems;
+
+    public List<ShopItemInfo> GetItems(ItemType itemType, DecorationType decorationType = DecorationType.None)
     {
         return itemType switch
         {
@@ -73,19 +61,9 @@ public class ShopConfig : SerializedScriptableObject
             ItemType.Wrapper => WrapperItems,
             ItemType.Ribbon => RibbonItems,
             ItemType.Upgrade => UpgradeItems,
-            ItemType.Accessory => AccessoryItems,
-            ItemType.Wallpaper => WallpaperItems,
-            ItemType.Floor => FloorItems,
-            ItemType.Sign => SignItems,
-            ItemType.Counter => CounterItems,
             ItemType.SpeechBubble => SpeechBubbleItems,
             ItemType.SpeechBubbleButton => SpeechBubbleButtonItems,
-            ItemType.OutsideDukkan => OutsideDukkanItems,
-            ItemType.Door => DoorItems,
-            ItemType.FlowerStand => FlowerStandItems,
-            ItemType.Decor => DecorItems,
-            ItemType.Pc => PcItems,
-            ItemType.Pos => PosItems,
+            ItemType.Decor => DecorationItems.ContainsKey(decorationType) ? DecorationItems[decorationType] : null,
             _ => null
         };
     }

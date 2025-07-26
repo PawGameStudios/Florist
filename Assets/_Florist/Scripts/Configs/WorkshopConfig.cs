@@ -59,7 +59,7 @@ namespace Config
         [VerticalGroup("Info")]
         public string Id;
         [VerticalGroup("Info")]
-        public float Cost, Price;
+        public int Cost, Price;
     }
 
     [Serializable]
@@ -96,7 +96,10 @@ namespace Config
         public WrappingPaperType WrappingPaperType;
 
         [VerticalGroup("Info")]
-        public GameObject PaperOpenAnimation;
+        public Sprite PaperSprite;
+
+        [VerticalGroup("Info")]
+        public Sprite PaperRollSprite;
     }
 
     [Serializable]
@@ -166,7 +169,7 @@ namespace Config
             return null;
         }
 
-        public float GetFlowerCost(FlowerType flowerType)
+        public int GetFlowerCost(FlowerType flowerType)
         {
             foreach (var flowerInfo in FlowerInfo)
             {
@@ -179,7 +182,7 @@ namespace Config
             return -1;
         }
 
-        public float GetRibbonCost(RibbonType ribbonType)
+        public int GetRibbonCost(RibbonType ribbonType)
         {
             foreach (var ribbonInfo in RibbonInfo)
             {
@@ -192,7 +195,7 @@ namespace Config
             return -1;
         }
 
-        public float GetWrappingPaperCost(WrappingPaperType wrappingPaperType)
+        public int GetWrappingPaperCost(WrappingPaperType wrappingPaperType)
         {
             foreach (var wrappingPaperInfo in WrappingPaperInfo)
             {
@@ -205,7 +208,7 @@ namespace Config
             return -1;
         }
 
-        public float GetFlowerPrice(FlowerType flowerType)
+        public int GetFlowerPrice(FlowerType flowerType)
         {
             foreach (var flowerInfo in FlowerInfo)
             {
@@ -218,7 +221,7 @@ namespace Config
             return -1;
         }
 
-        public float GetRibbonPrice(RibbonType ribbonType)
+        public int GetRibbonPrice(RibbonType ribbonType)
         {
             foreach (var ribbonInfo in RibbonInfo)
             {
@@ -231,7 +234,7 @@ namespace Config
             return -1;
         }
 
-        public float GetWrappingPaperPrice(WrappingPaperType wrappingPaperType)
+        public int GetWrappingPaperPrice(WrappingPaperType wrappingPaperType)
         {
             foreach (var wrappingPaperInfo in WrappingPaperInfo)
             {
@@ -242,6 +245,42 @@ namespace Config
             }
             Debug.LogError($"Wrapping paper type {wrappingPaperType} not found in WrappingPaperInfo list.");
             return -1;
+        }
+
+        public int GetFlowerItemIndex(FlowerType flowerType, FlowerColor flowerColor)
+        {
+            for (int i = 0; i < FlowerInfo.Count; i++)
+            {
+                if (FlowerInfo[i].FlowerType == flowerType && FlowerInfo[i].Color == flowerColor)
+                {
+                    return i;
+                }
+            }
+            return -1; // Not found
+        }
+
+        public int GetWrappingPaperItemIndex(WrappingPaperType wrappingPaperType)
+        {
+            for (int i = 0; i < WrappingPaperInfo.Count; i++)
+            {
+                if (WrappingPaperInfo[i].WrappingPaperType == wrappingPaperType)
+                {
+                    return i;
+                }
+            }
+            return -1; // Not found
+        }
+
+        public int GetRibbonItemIndex(RibbonType ribbonType)
+        {
+            for (int i = 0; i < RibbonInfo.Count; i++)
+            {
+                if (RibbonInfo[i].RibbonType == ribbonType)
+                {
+                    return i;
+                }
+            }
+            return -1; // Not found
         }
     }
 }

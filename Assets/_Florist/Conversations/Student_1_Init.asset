@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e373d802544f3b90f235c7efebe5e1, type: 3}
+  m_Name: Student_1_Init
+  m_EditorClassIdentifier: 
+  version: 1.0
+  startNode:
+    <Guid>k__BackingField: 772b3afd-402c-47a2-bdb5-58816b4f964b
+    <NodeRect>k__BackingField:
+      serializedVersion: 2
+      x: 2
+      y: 27
+      width: 87
+      height: 40
+    name: Start
+  nodes:
+  - rid: 6072013889060733240
+  - rid: 6072013889060733241
+  - rid: 6072013889060733242
+  edges:
+  - rid: 6072013889060733243
+  - rid: 6072013889060733244
+  - rid: 6072013889060733245
+  - rid: 6072013889060733246
+  properties:
+  - rid: 6072013889060733247
+  - rid: 6072013889060733248
+  stickyNotes: []
+  groups: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6072013889060733240
+      type: {class: ChoiceNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
+      data:
+        <Guid>k__BackingField: f28b5ec6-62ed-43f8-91cb-6fe51aed4908
+        <NodeRect>k__BackingField:
+          serializedVersion: 2
+          x: 115.2
+          y: -38.399998
+          width: 208.00002
+          height: 210.40001
+        actorProfile: {fileID: 0}
+        useActorProfile: 0
+        message: "Cipso ve okaliptus alay\u0131m. Hani do\u011Fum g\xFCn\xFC i\xE7in.
+          1 cipso, 2 okaliptus yeterli olur."
+        key: Localization Key
+        parseOption1: 0
+        parseOption2: 0
+        parseOption3: 0
+        options:
+        - guid: no
+          label: sure
+        - guid: e6099b67-4095-40b7-b1c6-ebe197281864
+          label: what?
+    - rid: 6072013889060733241
+      type: {class: ChoiceNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
+      data:
+        <Guid>k__BackingField: dd88f83e-0eab-40e3-96b5-ca90d777994b
+        <NodeRect>k__BackingField:
+          serializedVersion: 2
+          x: 426.4
+          y: -32
+          width: 208.00003
+          height: 199.20001
+        actorProfile: {fileID: 0}
+        useActorProfile: 0
+        message: "1 tane cipso, 2 tane okaliptus istiyorum. Sade ama g\xFCzel."
+        key: Localization Key
+        parseOption1: 0
+        parseOption2: 0
+        parseOption3: 0
+        options:
+        - guid: yes
+          label: got_it
+    - rid: 6072013889060733242
+      type: {class: EventNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
+      data:
+        <Guid>k__BackingField: 68f61f56-5cc2-4ef6-afd4-5b5d5826c06a
+        <NodeRect>k__BackingField:
+          serializedVersion: 2
+          x: 338.4
+          y: -164.79999
+          width: 172.80002
+          height: 100.799995
+        stopsFlow: 1
+        eventGuid: 820efebf-084d-42bb-a8e9-a6c89b8c3be3
+        eventName: GoToWorkshop
+    - rid: 6072013889060733243
+      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
+      data:
+        output:
+          node: 772b3afd-402c-47a2-bdb5-58816b4f964b
+          port: next
+        input:
+          node: f28b5ec6-62ed-43f8-91cb-6fe51aed4908
+          port: previous
+    - rid: 6072013889060733244
+      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
+      data:
+        output:
+          node: f28b5ec6-62ed-43f8-91cb-6fe51aed4908
+          port: e6099b67-4095-40b7-b1c6-ebe197281864
+        input:
+          node: dd88f83e-0eab-40e3-96b5-ca90d777994b
+          port: previous
+    - rid: 6072013889060733245
+      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
+      data:
+        output:
+          node: dd88f83e-0eab-40e3-96b5-ca90d777994b
+          port: yes
+        input:
+          node: 68f61f56-5cc2-4ef6-afd4-5b5d5826c06a
+          port: previous
+    - rid: 6072013889060733246
+      type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
+      data:
+        output:
+          node: f28b5ec6-62ed-43f8-91cb-6fe51aed4908
+          port: no
+        input:
+          node: 68f61f56-5cc2-4ef6-afd4-5b5d5826c06a
+          port: previous
+    - rid: 6072013889060733247
+      type: {class: FloatProperty, ns: Conversa.Runtime.Properties, asm: Conversa.Runtime}
+      data:
+        <Guid>k__BackingField: 515234b4-7919-451d-862c-5faefcbe535a
+        name: Float
+        value: 0
+        initialValue: 0
+    - rid: 6072013889060733248
+      type: {class: EventProperty, ns: Conversa.Runtime.Properties, asm: Conversa.Runtime}
+      data:
+        <Guid>k__BackingField: 820efebf-084d-42bb-a8e9-a6c89b8c3be3
+        name: GoToWorkshop

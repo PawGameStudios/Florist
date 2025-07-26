@@ -102,6 +102,24 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: Pivot
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: IsFlowerCut
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -147,6 +165,24 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: Pivot
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: IsFlowerCut
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -192,6 +228,24 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: Pivot
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: IsFlowerCut
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 
@@ -309,73 +363,85 @@ MonoBehaviour:
     Cost: 0
     Price: 0
     WrappingPaperType: 1
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 3bd54e8f0d97be1488813a59a4ee6099, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: ef5a0973efaf20f478394bc76c992da9, type: 3}
   - Sprite: {fileID: 21300000, guid: 836b4681770bec240a6316ec7db7489c, type: 3}
     Id: wp_2
     Cost: 0
     Price: 0
     WrappingPaperType: 2
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 9b3bb6acd8abcb449922098806900d4f, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: 7231951d06eb31f4f82c1d0cceda938a, type: 3}
   - Sprite: {fileID: 21300000, guid: 83dfea964573ea24d90f18c485562b17, type: 3}
     Id: wp_3
     Cost: 0
     Price: 0
     WrappingPaperType: 3
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: eb0843f0c2f8c3b4eb59d64ae4fcb76e, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: bb7a3fe10cb58364d8da4f0fdfe52976, type: 3}
   - Sprite: {fileID: 21300000, guid: 49761f6690db1884c98439e2f677c9ed, type: 3}
     Id: wp_4
     Cost: 0
     Price: 0
     WrappingPaperType: 4
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 1d617b60b3c077b4ca0c3a22ecd86158, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: e60084351acc9ce4a85350b26aa08a54, type: 3}
   - Sprite: {fileID: 21300000, guid: ef5c80316dfcbd2458361b1e5a83f400, type: 3}
     Id: wp_5
     Cost: 0
     Price: 0
     WrappingPaperType: 5
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 709dfa45d65a5a846bd58d1f21a95a41, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: b6b25f302acc1e44faff827671fc9e0a, type: 3}
   - Sprite: {fileID: 21300000, guid: 8fe043a4a7b62c34ca51390db761549f, type: 3}
     Id: wp_6
     Cost: 0
     Price: 0
     WrappingPaperType: 6
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 0452f49077880974a9c12c1cc9829e02, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: e37c30bfa1aedf34880442d826741c84, type: 3}
   - Sprite: {fileID: 21300000, guid: 48b22dd9bb1c668468bf161ab50d70ad, type: 3}
     Id: wp_7
     Cost: 0
     Price: 0
     WrappingPaperType: 7
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 82cf1cdc7c119444ebd414df571e078f, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: 3ba183d2fac6fd54aa81cd7ea62aec87, type: 3}
   - Sprite: {fileID: 21300000, guid: a826f6c5d9e468447865638bfe820f3a, type: 3}
     Id: wp_8
     Cost: 0
     Price: 0
     WrappingPaperType: 8
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 17c3ca5598e258846b3ec7a82d1c28e1, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: b3c63df95f5315141b3adf57f18644e1, type: 3}
   - Sprite: {fileID: 21300000, guid: 949ccc512fdc89c459c1d7b05db97e97, type: 3}
     Id: wp_9
     Cost: 0
     Price: 0
     WrappingPaperType: 9
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 9cb52edc755648446adbf3fa66fb9ca4, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: dedc1164260d8c844ac11397bd0be016, type: 3}
   - Sprite: {fileID: 21300000, guid: 05a6c9205f327ee4bbc2dd844591d441, type: 3}
     Id: wp_10
     Cost: 0
     Price: 0
     WrappingPaperType: 10
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 048589d5a48b4ee479c939aa6be6e931, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: f212092cd7635f64089404cf2d9b9b24, type: 3}
   - Sprite: {fileID: 21300000, guid: 7cc39c37dbfae8e45b8f30a5b82805e3, type: 3}
     Id: wp_11
     Cost: 0
     Price: 0
     WrappingPaperType: 11
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 2f45b4e25ceebcb49ac3814bee9a0b16, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: f0bb32f403146144694ca612c324ca7e, type: 3}
   - Sprite: {fileID: 21300000, guid: 0e8281c6c12fe8b4ab985e4c9f038aef, type: 3}
     Id: wp_12
     Cost: 0
     Price: 0
     WrappingPaperType: 12
-    PaperOpenAnimation: {fileID: 0}
+    PaperSprite: {fileID: 21300000, guid: 1b10d29d2a5e4454781df881eccc3002, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: 467c324e9476b004eb9d46a86f94e187, type: 3}
   MachineInfo:
     BaseDuration: 2
     DurationGainPerLevel: 0.1
