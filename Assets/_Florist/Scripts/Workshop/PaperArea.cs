@@ -30,6 +30,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     [SerializeField] private RectTransform _paperArea;
     [SerializeField] private Image _paperImage;
     [SerializeField] private Image _paperRollImage;
+    [SerializeField] private Image _paperClosedImage;
     [SerializeField] private Image _guideImage;
     [SerializeField] private RectTransform _saplingArea;
     [SerializeField] private Transform _scissorPosRef;
@@ -57,7 +58,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     private State _state = State.None;
     private const float ANGLE_LIMIT = 40f;
     private Vector3 _lastEventDataPosition;
-    private GameObject _scissorObject;
+    private GameObject _scissorObject, _ribbonObject;
     private readonly List<Flower> _allFlowers = new();
     private readonly List<Flower> _unCutFlowers = new();
     private const float PAPER_OPEN_DURATION = 1f;
@@ -93,6 +94,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         _bouquetModel.Clear();
         _unCutFlowers.Clear();
         _paperRollImage.gameObject.SetActive(false);
+        _paperClosedImage.gameObject.SetActive(false);
         _paperImage.gameObject.SetActive(false);
         _guideImage.color = new Color(1, 1, 1, 0);
 
@@ -105,14 +107,16 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
             Destroy(_allFlowers[i].gameObject);
         }
         Destroy(_scissorObject);
+        Destroy(_ribbonObject);
 
         _allFlowers.Clear();
     }
 
-    public void GetPaperToArea(Sprite paperSprite, Sprite rollSprite, WrappingPaperType paperType, Action onCompleted)
+    public void GetPaperToArea(Sprite paperSprite, Sprite rollSprite, Sprite closedSprite, WrappingPaperType paperType, Action onCompleted)
     {
         _paperImage.sprite = paperSprite;
         _paperRollImage.sprite = rollSprite;
+        _paperClosedImage.sprite = closedSprite;
         _bouquetModel = new BouquetModel
         {
             Flowers = new List<BouquetFlowerInfo>(),
@@ -121,6 +125,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
 
         _paperRollImage.gameObject.SetActive(true);
         _paperImage.gameObject.SetActive(true);
+        _paperClosedImage.gameObject.SetActive(false);
 
         _paperImage.transform.position = _paperImageInitRef.position;
         _paperRollImage.transform.position = _rollImageInitRef.position;
@@ -249,6 +254,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
             _state = State.WaitingForPaper;
             _guideImage.color = new Color(1, 1, 1, 0);
             _paperRollImage.gameObject.SetActive(false);
+            _paperClosedImage.gameObject.SetActive(false);
             _bouquetModel.Clear();
 
             transform.localPosition = _startPosition;
@@ -301,20 +307,20 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         Debug.Log($"OnMachineDone");
         _state = State.MachineDone;
 
-        // TODO: show actual bouquet here
+        _paperImage.gameObject.SetActive(false);
+        _paperClosedImage.gameObject.SetActive(true);
     }
 
-    public void OnRibbonSelected(RibbonType ribbonType)
+    public void OnRibbonSelected(RibbonType ribbonType, GameObject ribbonObject)
     {
         if (_state != State.InRibbonArea)
             return;
 
         Debug.Log($"Selected ribbon type: {ribbonType}");
-        HapticsController.PlayMediumHaptic();
         _bouquetModel.RibbonType = ribbonType;
         _state = State.Done;
 
-        // TODO: play ribbon animation
+        _ribbonObject = ribbonObject;
 
         References.WorkshopPage.OnFlowerReady(_bouquetModel, this.gameObject);
     }

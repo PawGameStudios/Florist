@@ -114,202 +114,181 @@ MonoBehaviour:
     IsSelectable: 0
     DefaultItemState: 2
   - Icon: {fileID: 21300000, guid: aa9714ac61ce3be429ad938d8e6a0d54, type: 3}
-    Name: rose
+    Name: rose_red
     Id: f_3
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
-  - Icon: {fileID: 21300000, guid: d0c4139fa483ecc49a86f6c2cc5a10b2, type: 3}
-    Name: anemone
+  - Icon: {fileID: 21300000, guid: d856fe2328bd11a46b24103a5d646126, type: 3}
+    Name: rose_white
     Id: f_4
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
-  - Icon: {fileID: 21300000, guid: d0c4139fa483ecc49a86f6c2cc5a10b2, type: 3}
-    Name: anemone
+  - Icon: {fileID: 21300000, guid: b91cfb305092ba34cb4d059a49f4c108, type: 3}
+    Name: rose_pink
     Id: f_5
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
-  - Icon: {fileID: 21300000, guid: d0c4139fa483ecc49a86f6c2cc5a10b2, type: 3}
-    Name: anemone
+  - Icon: {fileID: 21300000, guid: 62ca99e83d64b5b4993722e2fcf29dfd, type: 3}
+    Name: rose_yellow
     Id: f_6
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
-  - Icon: {fileID: 21300000, guid: d0c4139fa483ecc49a86f6c2cc5a10b2, type: 3}
-    Name: anemone
+  - Icon: {fileID: 21300000, guid: 6a019ef77594b8947ad660ae0c6d325b, type: 3}
+    Name: anemone_red
     Id: f_7
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
-  - Icon: {fileID: 21300000, guid: d0c4139fa483ecc49a86f6c2cc5a10b2, type: 3}
-    Name: anemone
-    Id: f_8
-    Price: 0
-    UnlockDay: 0
-    IsSelectable: 0
-    DefaultItemState: 1
-  - Icon: {fileID: 21300000, guid: d0c4139fa483ecc49a86f6c2cc5a10b2, type: 3}
-    Name: anemone
-    Id: f_9
-    Price: 0
-    UnlockDay: 0
-    IsSelectable: 0
-    DefaultItemState: 1
-  - Icon: {fileID: 21300000, guid: d0c4139fa483ecc49a86f6c2cc5a10b2, type: 3}
-    Name: anemone
-    Id: f_10
-    Price: 0
-    UnlockDay: 0
-    IsSelectable: 0
-    DefaultItemState: 1
   WrapperItems:
+  - Icon: {fileID: 21300000, guid: 48b22dd9bb1c668468bf161ab50d70ad, type: 3}
+    Name: wrapper7
+    Id: wp_7
+    Price: 0
+    UnlockDay: 0
+    IsSelectable: 0
+    DefaultItemState: 2
   - Icon: {fileID: 21300000, guid: db85ece96322be3458ede3f4603e23c8, type: 3}
-    Name: wrapper_1
+    Name: wrapper1
     Id: wp_1
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
-    DefaultItemState: 2
+    DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 836b4681770bec240a6316ec7db7489c, type: 3}
-    Name: wrapper_2
+    Name: wrapper2
     Id: wp_2
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
-    DefaultItemState: 2
+    DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 83dfea964573ea24d90f18c485562b17, type: 3}
-    Name: wrapper_3
+    Name: wrapper3
     Id: wp_3
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 49761f6690db1884c98439e2f677c9ed, type: 3}
-    Name: wrapper_4
+    Name: wrapper4
     Id: wp_4
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: ef5c80316dfcbd2458361b1e5a83f400, type: 3}
-    Name: wrapper_5
+    Name: wrapper5
     Id: wp_5
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 8fe043a4a7b62c34ca51390db761549f, type: 3}
-    Name: wrapper_6
+    Name: wrapper6
     Id: wp_6
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
-  - Icon: {fileID: 21300000, guid: 48b22dd9bb1c668468bf161ab50d70ad, type: 3}
-    Name: wrapper_7
-    Id: wp_7
-    Price: 0
-    UnlockDay: 0
-    IsSelectable: 0
-    DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: a826f6c5d9e468447865638bfe820f3a, type: 3}
-    Name: wrapper_8
+    Name: wrapper8
     Id: wp_8
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 949ccc512fdc89c459c1d7b05db97e97, type: 3}
-    Name: wrapper_9
+    Name: wrapper9
     Id: wp_9
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 05a6c9205f327ee4bbc2dd844591d441, type: 3}
-    Name: wrapper_10
+    Name: wrapper10
     Id: wp_10
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 7cc39c37dbfae8e45b8f30a5b82805e3, type: 3}
-    Name: wrapper_11
+    Name: wrapper11
     Id: wp_11
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 0e8281c6c12fe8b4ab985e4c9f038aef, type: 3}
-    Name: wrapper_12
+    Name: wrapper12
     Id: wp_12
     Price: 0
     UnlockDay: 0
     IsSelectable: 0
     DefaultItemState: 1
   RibbonItems:
-  - Icon: {fileID: 21300000, guid: ac4383188d9dcc4499816ac4f60b354f, type: 3}
-    Name: ribbon_
-    Id: r_1
-    Price: 0
-    UnlockDay: 0
-    IsSelectable: 1
-    DefaultItemState: 2
-  - Icon: {fileID: 21300000, guid: 5b014294ccbbbba4286984c64950b85e, type: 3}
-    Name: Ribbon 2
-    Id: r_2
-    Price: 0
-    UnlockDay: 0
-    IsSelectable: 1
-    DefaultItemState: 2
   - Icon: {fileID: 21300000, guid: 52e674f7144428a4593f6740b1e8383a, type: 3}
-    Name: Ribbon 3
+    Name: ribbon3
     Id: r_3
     Price: 0
     UnlockDay: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 2
+  - Icon: {fileID: 21300000, guid: ac4383188d9dcc4499816ac4f60b354f, type: 3}
+    Name: ribbon1
+    Id: r_1
+    Price: 0
+    UnlockDay: 0
+    IsSelectable: 0
+    DefaultItemState: 1
+  - Icon: {fileID: 21300000, guid: 5b014294ccbbbba4286984c64950b85e, type: 3}
+    Name: ribbon2
+    Id: r_2
+    Price: 0
+    UnlockDay: 0
+    IsSelectable: 0
+    DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: ba44b42c6984e5443980e1a9e7c658bb, type: 3}
-    Name: Ribbon 4
+    Name: ribbon4
     Id: r_4
     Price: 0
     UnlockDay: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: f9dda01d2837774428dd25f65e706b5d, type: 3}
-    Name: Ribbon 5
+    Name: ribbon5
     Id: r_5
     Price: 0
     UnlockDay: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: a882971446e93a94684e43f9bca85ef8, type: 3}
-    Name: Ribbon 6
+    Name: ribbon6
     Id: r_6
     Price: 0
     UnlockDay: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 5b014294ccbbbba4286984c64950b85e, type: 3}
-    Name: Ribbon 7
+    Name: ribbon7
     Id: r_7
     Price: 0
     UnlockDay: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   - Icon: {fileID: 21300000, guid: 6fd473eda8c4bfa44bd1e7a0fd959e3f, type: 3}
-    Name: Ribbon 8
+    Name: ribbon8
     Id: r_8
     Price: 0
     UnlockDay: 0
-    IsSelectable: 1
+    IsSelectable: 0
     DefaultItemState: 1
   UpgradeItems:
   - Icon: {fileID: 21300000, guid: b431d7a9a9f2f0347b053e256acab1b0, type: 3}

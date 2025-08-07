@@ -8,9 +8,11 @@ public class GeneralData
 {
     public static Action MoneyAmountChanged, DiamondAmountChanged, LifeAmountChanged;
     public static Action AvatarChanged, PlayerNameChanged;
+    public static Action OnNotificationSettingsChanged;
     public float Money;
     public float Diamonds;
     public int CurrentDayIndex;
+    public int CurrentDayConfigIndex;
     public int SelectedAvatarIndexInConfig;
     public int SelectedFrameIndexInConfig;
     public int Life;
@@ -18,8 +20,14 @@ public class GeneralData
     public bool IsMusicOn;
     public bool IsSoundOn;
     public bool IsVibrationOn;
+    public bool IsNotificationsOn;
     public string PlayerName = "Player";
     public double LifeRefreshTime;
+    public bool IsUserConsentAsked;
+    public bool IsPrivacyPolicyAccepted;
+    public bool IsPrivacyPolicyShown;
+    public bool IsUserConsentForAds;
+    public bool AskRateUs;
     private double _currentRefreshTime;
 
     public GeneralData()
@@ -29,6 +37,10 @@ public class GeneralData
         IsMusicOn = true;
         IsSoundOn = true;
         IsVibrationOn = true;
+        IsUserConsentAsked = false;
+        IsPrivacyPolicyAccepted = false;
+        IsUserConsentForAds = true;
+        IsPrivacyPolicyShown = false;
         SelectedAvatarIndexInConfig = 0;
         SelectedFrameIndexInConfig = 0;
         Life = 5;
@@ -80,6 +92,12 @@ public class GeneralData
         IsVibrationOn = !IsVibrationOn;
     }
 
+    public void SwitchNotifications()
+    {
+        IsNotificationsOn = !IsNotificationsOn;
+        OnNotificationSettingsChanged?.Invoke();
+    }
+
     public void ChangeAvatar(int index)
     {
         SelectedAvatarIndexInConfig = index;
@@ -95,10 +113,10 @@ public class GeneralData
     public void IncreaseDayIndex()
     {
         CurrentDayIndex++;
+        CurrentDayConfigIndex++;
 
-        // TODO:
-        if (CurrentDayIndex >= Configs.LevelConfig.Days.Count)
-            CurrentDayIndex = 0;
+        if (CurrentDayConfigIndex >= Configs.LevelConfig.Days.Count)
+            CurrentDayConfigIndex = Configs.LevelConfig.Days.Count;
     }
 
     public void SetLife()

@@ -9,6 +9,7 @@ using FlowerDeliveredInfo = Customer.FlowerDeliveredInfo;
 using System.Collections.Generic;
 using System;
 using Config;
+using Unity.Burst.CompilerServices;
 
 [Serializable]
 public class EarningsInfo
@@ -47,6 +48,12 @@ public struct OrderInfo
 
 public class DukkanPage : Page
 {
+    private enum HintType
+    {
+        None,
+        GiveFlower
+    }
+
     public List<BouquetModel> CurrentOrder => _customer.CurrentOrder;
     public List<string> ConvoHistory => _convoHistory;
     public CustomerInfo CurrentCustomerInfo => _customer.CustomerInfo;
@@ -63,6 +70,7 @@ public class DukkanPage : Page
     [SerializeField] private PosController _posController;
     [SerializeField] private GameObject _contentObjects;
     [SerializeField] private Image _imageForLoad;
+    [SerializeField] private Tutorial _tutorial;
     private DayInfo _dayInfo;
     private ConversationRunner _convoRunner;
     private int _nextCustomerIndex;
@@ -74,6 +82,7 @@ public class DukkanPage : Page
     private List<string> _convoHistory = new();
     private const string GO_TO_WORKSHOP = "GoToWorkshop";
     private const string END_CONVO = "EndConvo";
+    private const int HINT_WAIT_TIME = 12;
 
 
     #region Decorations
@@ -162,7 +171,15 @@ public class DukkanPage : Page
                 onCompleted?.Invoke();
 
                 _nextCustomerIndex = 0;
-                _dayInfo = Configs.LevelConfig.Days[SaveSystem.Inst.GeneralData.CurrentDayIndex];
+                if (SaveSystem.Inst.GeneralData.CurrentDayConfigIndex == Configs.LevelConfig.Days.Count)
+                {
+                    _dayInfo = Configs.LevelConfig.RandomDayInfo;
+                }
+                else
+                {
+                    _dayInfo = Configs.LevelConfig.Days[SaveSystem.Inst.GeneralData.CurrentDayConfigIndex];
+                }
+
                 _customer.gameObject.SetActive(false);
                 _posController.ResetPos();
 
@@ -207,6 +224,9 @@ public class DukkanPage : Page
     {
         Debug.Log("Flower Delivered");
 
+        SaveSystem.Inst.SaveData.IsDukkanTutorialFinished = true;
+        StopHints();
+
         HapticsController.PlayMediumHaptic();
 
         _dukkanSaveState = DukkanSaveState.FlowerDelivered;
@@ -218,7 +238,7 @@ public class DukkanPage : Page
 
         var pricePaymentInfo = _customer.GetOrderPayment();
         _earningsInfo.Price = pricePaymentInfo.Item1;
-        _earningsInfo.GivenMoney += pricePaymentInfo.Item2;
+        _earningsInfo.GivenMoney = pricePaymentInfo.Item2;
         _posController.ReceivePayment(_earningsInfo.GivenMoney, _earningsInfo.Price, OnPaymentMade);
     }
 
@@ -256,6 +276,10 @@ public class DukkanPage : Page
 
     private void OnPaymentMade(int change)
     {
+        SaveSystem.Inst.GeneralData.ChangeMoney(_earningsInfo.GivenMoney - change);
+
+        _earningsInfo.Change = change;
+
         _flowerDeliveredInfo = _customer.GetOrderInfo(_bouquet.Order.BouquetModels, _earningsInfo);
 
         _convoRunner?.OnConversationEvent.RemoveAllListeners();
@@ -265,9 +289,16 @@ public class DukkanPage : Page
         _convoRunner.OnEnd.AddListener(HandleEndEvent);
         _convoRunner.Begin();
 
-        // TODO: tip animation
-        int tip = (int)((_earningsInfo.GivenMoney - _earningsInfo.Change) * _flowerDeliveredInfo.TipPercentage / 100f);
-        _earningsInfo.Tip += tip;
+        PrepareHint(HintType.GiveFlower);
+
+        if (!SaveSystem.Inst.SaveData.IsDukkanTutorialFinished)
+        {
+            ShowGiveFlowerTutorial();
+        }
+
+        // // TODO: tip animation
+        // int tip = (int)((_earningsInfo.GivenMoney - _earningsInfo.Change) * _flowerDeliveredInfo.TipPercentage / 100f);
+        // _earningsInfo.Tip += tip;
     }
 
     private void SetItems()
@@ -398,6 +429,8 @@ public class DukkanPage : Page
     private void GoToWorkshop()
     {
         Debug.Log("#dukkan# GoToWorkshop");
+
+        StopHints();
 
         _dukkanSaveState = DukkanSaveState.InWorkshop;
 
@@ -552,6 +585,47 @@ public class DukkanPage : Page
         _posController.ResetPos();
         _bouquet.SetOrder(orderInfo, bouquetParent.gameObject);
         _bouquet.gameObject.SetActive(activateBouquet);
+    }
+    #endregion
+
+
+    #region Tutorial & Hints
+    private void ShowGiveFlowerTutorial()
+    {
+        _tutorial.Init()
+                .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
+                .SwipeBetween(_bouquet.transform.position, _customer.transform.position)
+                .StartTutorial();
+    }
+
+    private void PrepareHint(HintType hintType)
+    {
+        if (!SaveSystem.Inst.SaveData.IsDukkanTutorialFinished)
+        {
+            return;
+        }
+
+        CancelInvoke();
+        switch (hintType)
+        {
+            case HintType.GiveFlower:
+                Invoke(nameof(GiveFlowerHint), HINT_WAIT_TIME);
+                break;
+        }
+    }
+
+    private void StopHints()
+    {
+        CancelInvoke();
+        _tutorial.FinishTutorial();
+    }
+
+    private void GiveFlowerHint()
+    {
+        _tutorial.Init()
+                .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
+                .SwipeBetween(_bouquet.transform.position, _customer.transform.position)
+                .StartTutorial();
     }
     #endregion
 }

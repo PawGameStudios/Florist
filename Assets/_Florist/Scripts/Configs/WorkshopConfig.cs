@@ -100,6 +100,8 @@ namespace Config
 
         [VerticalGroup("Info")]
         public Sprite PaperRollSprite;
+        [VerticalGroup("Info")]
+        public Sprite PaperClosedSprite;
     }
 
     [Serializable]
@@ -179,7 +181,7 @@ namespace Config
                 }
             }
             Debug.LogError($"Flower type {flowerType} not found in FlowerInfo list.");
-            return -1;
+            return 0;
         }
 
         public int GetRibbonCost(RibbonType ribbonType)
@@ -192,7 +194,7 @@ namespace Config
                 }
             }
             Debug.LogError($"Ribbon type {ribbonType} not found in RibbonInfo list.");
-            return -1;
+            return 0;
         }
 
         public int GetWrappingPaperCost(WrappingPaperType wrappingPaperType)
@@ -205,7 +207,7 @@ namespace Config
                 }
             }
             Debug.LogError($"Wrapping paper type {wrappingPaperType} not found in WrappingPaperInfo list.");
-            return -1;
+            return 0;
         }
 
         public int GetFlowerPrice(FlowerType flowerType)
@@ -218,7 +220,7 @@ namespace Config
                 }
             }
             Debug.LogError($"Flower type {flowerType} not found in FlowerInfo list.");
-            return -1;
+            return 0;
         }
 
         public int GetRibbonPrice(RibbonType ribbonType)
@@ -231,7 +233,7 @@ namespace Config
                 }
             }
             Debug.LogError($"Ribbon type {ribbonType} not found in RibbonInfo list.");
-            return -1;
+            return 0;
         }
 
         public int GetWrappingPaperPrice(WrappingPaperType wrappingPaperType)
@@ -244,7 +246,7 @@ namespace Config
                 }
             }
             Debug.LogError($"Wrapping paper type {wrappingPaperType} not found in WrappingPaperInfo list.");
-            return -1;
+            return 0;
         }
 
         public int GetFlowerItemIndex(FlowerType flowerType, FlowerColor flowerColor)

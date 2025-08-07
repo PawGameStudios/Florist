@@ -79,15 +79,21 @@ public class Bouquet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private Vector2 _offset;
     private Vector3 _startPosition;
     private OrderInfo _order;
+    private GameObject _currentBouquetObject;
 
     public void SetOrder(OrderInfo order, GameObject bouquetObject)
     {
-        _order = order;
-        var newBouquet = Instantiate(bouquetObject, transform);
-        newBouquet.transform.localPosition = Vector3.zero;
-        newBouquet.transform.localEulerAngles = Vector3.zero;
+        if (_currentBouquetObject != null)
+        {
+            Destroy(_currentBouquetObject);
+        }
 
-        newBouquet.TryGetComponent<PaperArea>(out var paperAreaComponent);
+        _order = order;
+        _currentBouquetObject = Instantiate(bouquetObject, transform);
+        _currentBouquetObject.transform.localPosition = Vector3.zero;
+        _currentBouquetObject.transform.localEulerAngles = Vector3.zero;
+
+        _currentBouquetObject.TryGetComponent<PaperArea>(out var paperAreaComponent);
         if (paperAreaComponent != null)
         {
             Destroy(paperAreaComponent);
@@ -112,6 +118,11 @@ public class Bouquet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         {
             References.DukkanPage.OnFlowerDelivered();
             transform.position = _startPosition;
+
+            if (_currentBouquetObject != null)
+            {
+                Destroy(_currentBouquetObject);
+            }
         }
         else
         {

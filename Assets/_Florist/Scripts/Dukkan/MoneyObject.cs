@@ -24,7 +24,7 @@ public class MoneyObject : MonoBehaviour
         return this;
     }
 
-    void OnMouseDown()
+    public void OnMoneyClicked()
     {
         References.PosController.OnMoneyObjectClicked(_value);
         Destroy(gameObject);

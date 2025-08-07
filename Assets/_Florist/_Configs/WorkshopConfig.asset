@@ -40,7 +40,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 
@@ -274,6 +274,301 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 7
+      Data: 8|Config.Recipe, Assembly-CSharp
+    - Name: Bouquet
+      Entry: 7
+      Data: 9|BouquetModel, Assembly-CSharp
+    - Name: Flowers
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[BouquetFlowerInfo, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 11|BouquetFlowerInfo, Assembly-CSharp
+    - Name: FlowerType
+      Entry: 3
+      Data: 0
+    - Name: Count
+      Entry: 3
+      Data: 2
+    - Name: FlowerColor
+      Entry: 3
+      Data: 0
+    - Name: Position
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Rotation
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Pivot
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: IsFlowerCut
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 12|BouquetFlowerInfo, Assembly-CSharp
+    - Name: FlowerType
+      Entry: 3
+      Data: 1
+    - Name: Count
+      Entry: 3
+      Data: 2
+    - Name: FlowerColor
+      Entry: 3
+      Data: 0
+    - Name: Position
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Rotation
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Pivot
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: IsFlowerCut
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 13|BouquetFlowerInfo, Assembly-CSharp
+    - Name: FlowerType
+      Entry: 3
+      Data: 3
+    - Name: Count
+      Entry: 3
+      Data: 1
+    - Name: FlowerColor
+      Entry: 3
+      Data: 1
+    - Name: Position
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Rotation
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Pivot
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: IsFlowerCut
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 14|BouquetFlowerInfo, Assembly-CSharp
+    - Name: FlowerType
+      Entry: 3
+      Data: 3
+    - Name: Count
+      Entry: 3
+      Data: 1
+    - Name: FlowerColor
+      Entry: 3
+      Data: 3
+    - Name: Position
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Rotation
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Pivot
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: IsFlowerCut
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: RibbonType
+      Entry: 3
+      Data: 0
+    - Name: WrappingPaperType
+      Entry: 3
+      Data: 0
+    - Name: BouquetType
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -363,85 +658,97 @@ MonoBehaviour:
     Cost: 0
     Price: 0
     WrappingPaperType: 1
-    PaperSprite: {fileID: 21300000, guid: 3bd54e8f0d97be1488813a59a4ee6099, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: ef5a0973efaf20f478394bc76c992da9, type: 3}
+    PaperSprite: {fileID: 21300000, guid: dd34c2878c86d364c8e9c6268e83d2c5, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: c42c737fe870973428034b542074ebab, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: 0c8d8503ff06d3d4aacbc83bdbbf96c2, type: 3}
   - Sprite: {fileID: 21300000, guid: 836b4681770bec240a6316ec7db7489c, type: 3}
     Id: wp_2
     Cost: 0
     Price: 0
     WrappingPaperType: 2
-    PaperSprite: {fileID: 21300000, guid: 9b3bb6acd8abcb449922098806900d4f, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: 7231951d06eb31f4f82c1d0cceda938a, type: 3}
+    PaperSprite: {fileID: 21300000, guid: 0efef45a8d20fed4984dd2beb97b0522, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: 53835807d7ead2440bc15e35a0852ad7, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: 90246754aa894a9498a97511c15d5ff1, type: 3}
   - Sprite: {fileID: 21300000, guid: 83dfea964573ea24d90f18c485562b17, type: 3}
     Id: wp_3
     Cost: 0
     Price: 0
     WrappingPaperType: 3
-    PaperSprite: {fileID: 21300000, guid: eb0843f0c2f8c3b4eb59d64ae4fcb76e, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: bb7a3fe10cb58364d8da4f0fdfe52976, type: 3}
+    PaperSprite: {fileID: 21300000, guid: 9dab13e64922eb543a77f5e7f2c66fb4, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: 5c7d02b6f072c3d438022d7774d947d4, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: 15bf4ba3b39ec4b4c89a06e9a53bdb94, type: 3}
   - Sprite: {fileID: 21300000, guid: 49761f6690db1884c98439e2f677c9ed, type: 3}
     Id: wp_4
     Cost: 0
     Price: 0
     WrappingPaperType: 4
-    PaperSprite: {fileID: 21300000, guid: 1d617b60b3c077b4ca0c3a22ecd86158, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: e60084351acc9ce4a85350b26aa08a54, type: 3}
+    PaperSprite: {fileID: 21300000, guid: dec10090f8ffba6459891dad48457f54, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: 99664000025a5384887329cdb6825960, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: 700b4eba18c967b4d8d6eca996e2cfe2, type: 3}
   - Sprite: {fileID: 21300000, guid: ef5c80316dfcbd2458361b1e5a83f400, type: 3}
     Id: wp_5
     Cost: 0
     Price: 0
     WrappingPaperType: 5
-    PaperSprite: {fileID: 21300000, guid: 709dfa45d65a5a846bd58d1f21a95a41, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: b6b25f302acc1e44faff827671fc9e0a, type: 3}
+    PaperSprite: {fileID: 21300000, guid: 34044a65d426f2b439d26509bb227160, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: 9ec0f944c9c40c547a26c29ef3237115, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: f7234b228d0040c45ade4d4899e271b5, type: 3}
   - Sprite: {fileID: 21300000, guid: 8fe043a4a7b62c34ca51390db761549f, type: 3}
     Id: wp_6
     Cost: 0
     Price: 0
     WrappingPaperType: 6
-    PaperSprite: {fileID: 21300000, guid: 0452f49077880974a9c12c1cc9829e02, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: e37c30bfa1aedf34880442d826741c84, type: 3}
+    PaperSprite: {fileID: 21300000, guid: aa4a2a8669546174d92889b8ba58a7db, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: aa48075361f1da24082bf9ecfa17392c, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: c31f9bb5a9d151244a117471d1de046c, type: 3}
   - Sprite: {fileID: 21300000, guid: 48b22dd9bb1c668468bf161ab50d70ad, type: 3}
     Id: wp_7
     Cost: 0
     Price: 0
     WrappingPaperType: 7
-    PaperSprite: {fileID: 21300000, guid: 82cf1cdc7c119444ebd414df571e078f, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: 3ba183d2fac6fd54aa81cd7ea62aec87, type: 3}
+    PaperSprite: {fileID: 21300000, guid: d21b369dae980dd4dab78ba59823cfbb, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: d8d82c3ede2677947b0f1e77b7866d0f, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: 1243b7193f56dec4bbcb9ca0001067e3, type: 3}
   - Sprite: {fileID: 21300000, guid: a826f6c5d9e468447865638bfe820f3a, type: 3}
     Id: wp_8
     Cost: 0
     Price: 0
     WrappingPaperType: 8
-    PaperSprite: {fileID: 21300000, guid: 17c3ca5598e258846b3ec7a82d1c28e1, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: b3c63df95f5315141b3adf57f18644e1, type: 3}
+    PaperSprite: {fileID: 21300000, guid: 96250b0680a80144e8ce8f834fb916d3, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: 2e8c3bad852fbda4ca47c713e0127a4b, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: 1e801680049b8484e988c304c8e3825f, type: 3}
   - Sprite: {fileID: 21300000, guid: 949ccc512fdc89c459c1d7b05db97e97, type: 3}
     Id: wp_9
     Cost: 0
     Price: 0
     WrappingPaperType: 9
-    PaperSprite: {fileID: 21300000, guid: 9cb52edc755648446adbf3fa66fb9ca4, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: dedc1164260d8c844ac11397bd0be016, type: 3}
+    PaperSprite: {fileID: 21300000, guid: 49112fc646730c145a587d534def0367, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: 64799a4db6710bf4babf8d885097dd54, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: 0afe0fc2fe0aec247a538717cce9c2d5, type: 3}
   - Sprite: {fileID: 21300000, guid: 05a6c9205f327ee4bbc2dd844591d441, type: 3}
     Id: wp_10
     Cost: 0
     Price: 0
     WrappingPaperType: 10
-    PaperSprite: {fileID: 21300000, guid: 048589d5a48b4ee479c939aa6be6e931, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: f212092cd7635f64089404cf2d9b9b24, type: 3}
+    PaperSprite: {fileID: 21300000, guid: 81076b8401e060f45af75b9cb56ee5de, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: f1a0533119e216943802083aab2b0302, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: 19ecf490ea7ed7c428c9a0dab343e9e1, type: 3}
   - Sprite: {fileID: 21300000, guid: 7cc39c37dbfae8e45b8f30a5b82805e3, type: 3}
     Id: wp_11
     Cost: 0
     Price: 0
     WrappingPaperType: 11
-    PaperSprite: {fileID: 21300000, guid: 2f45b4e25ceebcb49ac3814bee9a0b16, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: f0bb32f403146144694ca612c324ca7e, type: 3}
+    PaperSprite: {fileID: 21300000, guid: 60adda891d36d6e4e95dafa9447a1f10, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: 5c55d5bd60f9c3841adacc7823014004, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: d7af104518f89534ebb658e94b64778e, type: 3}
   - Sprite: {fileID: 21300000, guid: 0e8281c6c12fe8b4ab985e4c9f038aef, type: 3}
     Id: wp_12
     Cost: 0
     Price: 0
     WrappingPaperType: 12
-    PaperSprite: {fileID: 21300000, guid: 1b10d29d2a5e4454781df881eccc3002, type: 3}
-    PaperRollSprite: {fileID: 21300000, guid: 467c324e9476b004eb9d46a86f94e187, type: 3}
+    PaperSprite: {fileID: 21300000, guid: 98d5e22ea86d19545b14b0219e720aa8, type: 3}
+    PaperRollSprite: {fileID: 21300000, guid: e8af3def369f79b4b98cb7d1bc4d737a, type: 3}
+    PaperClosedSprite: {fileID: 21300000, guid: 9eec6065f881c004b827b270b7b9bb8d, type: 3}
   MachineInfo:
     BaseDuration: 2
     DurationGainPerLevel: 0.1

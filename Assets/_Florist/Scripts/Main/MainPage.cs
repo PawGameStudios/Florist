@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using TMPro;
+using Ads;
+using System.Collections.Generic;
+using UnityEngine.SocialPlatforms;
 
 public class MainPage : Page
 {
@@ -9,17 +12,14 @@ public class MainPage : Page
     [SerializeField] private Transform _playButtonTransform;
     [SerializeField] private Popup _lifePopup;
     [SerializeField] private TextMeshProUGUI _dayText;
-    [SerializeField] private TextMeshProUGUI _lifeText;
+    [SerializeField] private List<GameObject> _energyObjects;
     [SerializeField] private TextMeshProUGUI _lifeDurationText;
     [SerializeField] private Tutorial _tutorial;
+    private RateUsController _rateUsController;
     private double _remainingSecsForLife;
 
     void OnEnable()
     {
-        SaveSystem.Inst.GeneralData.SetLife();
-
-        CheckSaveData();
-        LifeChangedHandler();
         GeneralData.LifeAmountChanged += LifeChangedHandler;
         Timer.TimeTickSeconds += TimeTickHandler;
     }
@@ -32,29 +32,63 @@ public class MainPage : Page
 
     public override void Close(PageParams pageData = null, Action onCompleted = null)
     {
+        gameObject.SetActive(false);
     }
 
     public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
+        Debug.LogError("MainPage Opened");
         base.Open(pageData, onCompleted);
         gameObject.SetActive(true);
 
-        _dayText.text = $"Day {SaveSystem.Inst.GeneralData.CurrentDayIndex + 1}";
+        _dayText.text = $"{LocalizationManager.GetLocalizedText("day", LocalizationManager.TextType.TITLE)} {SaveSystem.Inst.GeneralData.CurrentDayIndex + 1}";
 
         _remainingSecsForLife = SaveSystem.Inst.GeneralData.GetRemainingLifeTime();
         TimeSpan timeSpan = TimeSpan.FromSeconds(_remainingSecsForLife);
-        _lifeDurationText.text = $"{GetTimeFormat(timeSpan)}";
-        _lifeText.text = $"{SaveSystem.Inst.GeneralData.Life}";
+
+        if (SaveSystem.Inst.GeneralData.Life == Configs.ProfileConfig.MaxLife)
+        {
+            _lifeDurationText.text = $"{LocalizationManager.GetLocalizedText("full_life", LocalizationManager.TextType.UPPER)}";
+        }
+        else
+        {
+            _lifeDurationText.text = $"{GetTimeFormat(timeSpan)}";
+        }
+
+        for (int i = 0; i < _energyObjects.Count; i++)
+        {
+            _energyObjects[i].SetActive(i < SaveSystem.Inst.GeneralData.Life);
+        }
 
         if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
         {
             _shopButton.SetActive(false);
             _pcButton.SetActive(false);
+
+            _tutorial.Init()
+                    .PointTo(_playButtonTransform.position, Tutorial.PointDirection.Right)
+                    .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
+                    .SetClickableState(Tutorial.ClickableState.None)
+                    .SetActivationDelay(2f)
+                    .StartTutorial();
         }
         else
         {
             _shopButton.SetActive(true);
             _pcButton.SetActive(true);
+        }
+
+        if (pageData != null)
+        {
+            if (pageData.PreviousPage == PageType.Bootstrapper)
+            {
+                _rateUsController = new();
+                _rateUsController.Initialize();
+            }
+            else
+            {
+                _rateUsController.TryShowRateUs();
+            }
         }
     }
 
@@ -71,6 +105,7 @@ public class MainPage : Page
         {
             gameObject.SetActive(false);
             References.DukkanPage.Open();
+            // Close();
 
             HapticsController.PlayButtonHaptic();
 
@@ -94,50 +129,22 @@ public class MainPage : Page
 
     public void OnLifeAdClicked()
     {
-        // TODO: ad
-        SaveSystem.Inst.GeneralData.ChangeLife(1);
-    }
-
-    private void CheckSaveData()
-    {
-        if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+        AdManager.Instance.ShowRewardedAd(isWatched =>
         {
-            _tutorial.Init()
-                    .PointTo(_playButtonTransform.position, Tutorial.PointDirection.Right)
-                    .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
-                    .SetClickableState(Tutorial.ClickableState.None)
-                    .SetActivationDelay(2f)
-                    .StartTutorial();
-        }
-
-        if (SaveSystem.Inst.SaveData.LastPage == PageType.MainPage)
-        {
-            // do nothing
-        }
-        else if (SaveSystem.Inst.SaveData.LastPage == PageType.Dukkan)
-        {
-            // TODO:
-            // gameObject.SetActive(false);
-            // PageData pageData = new()
-            // {
-            //     LoadFromSaveData = true,
-            // };
-            // References.DukkanPage.Open(pageData);
-        }
-        else if (SaveSystem.Inst.SaveData.LastPage == PageType.Workshop)
-        {
-            // TODO:
-        }
-        else if (SaveSystem.Inst.SaveData.LastPage == PageType.EndDay)
-        {
-            // TODO:
-        }
+            if (isWatched)
+            {
+                SaveSystem.Inst.GeneralData.ChangeLife(1);
+            }
+        });
     }
 
     private void LifeChangedHandler()
     {
         _remainingSecsForLife = SaveSystem.Inst.GeneralData.GetRemainingLifeTime();
-        _lifeText.text = $"{SaveSystem.Inst.GeneralData.Life}";
+        for (int i = 0; i < _energyObjects.Count; i++)
+        {
+            _energyObjects[i].SetActive(i < SaveSystem.Inst.GeneralData.Life);
+        }
     }
 
     private void TimeTickHandler()
@@ -159,33 +166,33 @@ public class MainPage : Page
         if (timeSpan.Days > 0)
         {
             if (limit == 3)
-                time = $"{msg}{timeSpan.Days}d {timeSpan.Hours}h {timeSpan.Minutes}m";
+                time = $"{msg}{timeSpan.Days}{LocalizationManager.GetLocalizedText("day_short")} {timeSpan.Hours}{LocalizationManager.GetLocalizedText("hour_short")} {timeSpan.Minutes}{LocalizationManager.GetLocalizedText("minute_short")}";
             else if (limit == 2)
-                time = $"{msg}{timeSpan.Days}d {timeSpan.Hours}h";
+                time = $"{msg}{timeSpan.Days}{LocalizationManager.GetLocalizedText("day_short")} {timeSpan.Hours}{LocalizationManager.GetLocalizedText("hour_short")}";
             else if (limit == 1)
-                time = $"{msg}{timeSpan.Days}d";
+                time = $"{msg}{timeSpan.Days}{LocalizationManager.GetLocalizedText("day_short")}";
             else
-                time = $"{msg}{timeSpan.Days}d {timeSpan.Hours}h {timeSpan.Minutes}m {timeSpan.Minutes}s";
+                time = $"{msg}{timeSpan.Days}{LocalizationManager.GetLocalizedText("day_short")} {timeSpan.Hours}{LocalizationManager.GetLocalizedText("hour_short")} {timeSpan.Minutes}{LocalizationManager.GetLocalizedText("minute_short")} {timeSpan.Seconds}{LocalizationManager.GetLocalizedText("second_short")}";
         }
         else if (timeSpan.Hours > 0)
         {
             if (limit == 2)
-                time = $"{msg}{timeSpan.Hours}h {timeSpan.Minutes}m";
+                time = $"{msg}{timeSpan.Hours}{LocalizationManager.GetLocalizedText("hour_short")} {timeSpan.Minutes}{LocalizationManager.GetLocalizedText("minute_short")}";
             else if (limit == 1)
-                time = $"{msg}{timeSpan.Hours}h";
+                time = $"{msg}{timeSpan.Hours}{LocalizationManager.GetLocalizedText("hour_short")}";
             else
-                time = $"{msg}{timeSpan.Hours}h {timeSpan.Minutes}m {timeSpan.Seconds}s";
+                time = $"{msg}{timeSpan.Hours}{LocalizationManager.GetLocalizedText("hour_short")} {timeSpan.Minutes}{LocalizationManager.GetLocalizedText("minute_short")} {timeSpan.Seconds}{LocalizationManager.GetLocalizedText("second_short")}";
         }
         else if (timeSpan.Minutes > 0)
         {
             if (limit == 2)
-                time = $"{msg}{timeSpan.Minutes}m";
+                time = $"{msg}{timeSpan.Minutes}{LocalizationManager.GetLocalizedText("minute_short")} {timeSpan.Seconds}{LocalizationManager.GetLocalizedText("second_short")}";
             else
-                time = $"{msg}{timeSpan.Minutes}m {timeSpan.Seconds}s";
+                time = $"{msg}{timeSpan.Minutes}{LocalizationManager.GetLocalizedText("minute_short")} {timeSpan.Seconds}{LocalizationManager.GetLocalizedText("second_short")}";
         }
         else
         {
-            time = $"{msg}{timeSpan.Seconds}s";
+            time = $"{msg}{timeSpan.Seconds}{LocalizationManager.GetLocalizedText("second_short")}";
         }
 
         return time;

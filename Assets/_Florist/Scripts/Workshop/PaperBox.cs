@@ -32,7 +32,7 @@ public class PaperBox : MonoBehaviour
     public void SelectTutorialPaper()
     {
         var selectedPaper = _papers[0];
-        References.WorkshopPage.OnPaperSelected(selectedPaper.PaperSprite, selectedPaper.PaperRollSprite, selectedPaper.WrappingPaperType);
+        References.WorkshopPage.OnPaperSelected(selectedPaper.PaperSprite, selectedPaper.PaperRollSprite, selectedPaper.PaperClosedSprite, selectedPaper.WrappingPaperType);
     }
 
     public void OnPaperClicked(int index)
@@ -41,6 +41,6 @@ public class PaperBox : MonoBehaviour
             return;
 
         var selectedPaper = _papers[index];
-        References.WorkshopPage.OnPaperSelected(selectedPaper.PaperSprite, selectedPaper.PaperRollSprite, selectedPaper.WrappingPaperType);
+        References.WorkshopPage.OnPaperSelected(selectedPaper.PaperSprite, selectedPaper.PaperRollSprite, selectedPaper.PaperClosedSprite, selectedPaper.WrappingPaperType);
     }
 }

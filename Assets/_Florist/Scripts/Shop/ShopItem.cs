@@ -23,8 +23,17 @@ public class ShopItem : MonoBehaviour
         _shopScroll = shopScroll;
         _index = index;
         _shopItemInfo = shopItemInfo;
-        _nameText.text = LocalizationManager.GetLocalizedText(shopItemInfo.Name);
         _icon.sprite = shopItemInfo.Icon;
+
+        string[] nameArray = shopItemInfo.Name.Split('_');
+        if (nameArray.Length > 1)
+        {
+            _nameText.text = $"{LocalizationManager.GetLocalizedText(nameArray[1])} {LocalizationManager.GetLocalizedText(nameArray[0])}";
+        }
+        else
+        {
+            _nameText.text = LocalizationManager.GetLocalizedText(shopItemInfo.Name);
+        }
 
         ShopData.ItemState itemState = SaveSystem.Inst.ShopData.GetItemState(_shopItemInfo.Id, _shopItemInfo.UnlockDay);
         float money = SaveSystem.Inst.GeneralData.Money;

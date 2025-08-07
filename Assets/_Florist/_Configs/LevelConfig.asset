@@ -35,11 +35,118 @@ MonoBehaviour:
       IntroducedFlowerColor: 0
       PaperType: 0
       RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: student_1
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: quiet_lady
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: rowdy
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
     - IsEvent: 1
       EventType: 1
       CustomerType: 0
       CustomerName: 
       IntroducedFlowerType: 3
       IntroducedFlowerColor: 1
+      PaperType: 0
+      RibbonType: 0
+  - Events:
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: woman_new_grad_1
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: net_1
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: student_highschool
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: net_2
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: student_2
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+  RandomDayInfo:
+    Events:
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 1
+      CustomerName: 
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 1
+      CustomerName: 
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 1
+      CustomerName: 
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 1
+      CustomerName: 
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 1
+      CustomerName: 
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
       PaperType: 0
       RibbonType: 0

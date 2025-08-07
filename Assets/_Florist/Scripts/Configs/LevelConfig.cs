@@ -20,8 +20,11 @@ namespace Config
         DifferentOrder = 1 << 3,
         MoreFlowers = 1 << 4,
         SameOrder = 1 << 5,
-        PaidMore = 1 << 6,
-        PaidLess = 1 << 7,
+    }
+
+    public enum PaymentState
+    {
+        None, Normal, NotPaid, Overpaid, Underpaid
     }
 
     public enum Gender
@@ -75,7 +78,6 @@ namespace Config
     {
         public DayTimeInfo DayTimeInfo;
         public List<DayInfo> Days;
-
-
+        public DayInfo RandomDayInfo;
     }
 }

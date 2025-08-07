@@ -4,6 +4,7 @@ using Config;
 
 public enum PageType
 {
+    Bootstrapper,
     MainPage,
     Shop,
     Dukkan,
@@ -49,6 +50,8 @@ public class SaveData
 {
     public bool IsFirstSession;
     public bool IsTutorialFinished;
+    public bool IsDukkanTutorialFinished;
+    public bool IsPosTutorialFinished;
     public PageType LastPage;
     public DukkanParams DukkanParams;
     public List<WorkshopParams> WorkshopParams;
@@ -59,6 +62,8 @@ public class SaveData
         LastPage = PageType.MainPage;
         IsFirstSession = true;
         IsTutorialFinished = false;
+        IsDukkanTutorialFinished = false;
+        IsPosTutorialFinished = false;
     }
 
     public void SaveGame()

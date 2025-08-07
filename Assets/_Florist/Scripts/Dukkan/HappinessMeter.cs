@@ -15,8 +15,16 @@ public class HappinessMeter : MonoBehaviour
 
     private void OnEnable()
     {
-        int currentday = SaveSystem.Inst.GeneralData.CurrentDayIndex;
-        int customerCount = Configs.LevelConfig.Days[currentday].Events.Count;
+        int currentday = SaveSystem.Inst.GeneralData.CurrentDayConfigIndex;
+        int customerCount;
+        if (currentday == Configs.LevelConfig.Days.Count)
+        {
+            customerCount = Configs.LevelConfig.RandomDayInfo.Events.Count;
+        }
+        else
+        {
+            customerCount = Configs.LevelConfig.Days[currentday].Events.Count;
+        }
         float totalTickCount = Configs.LevelConfig.DayTimeInfo.DayDuration * 60 * 10f;
         float ticksPerCustomer = totalTickCount / customerCount;
         _totalTicksForCustomer = (int)(ticksPerCustomer * 10);

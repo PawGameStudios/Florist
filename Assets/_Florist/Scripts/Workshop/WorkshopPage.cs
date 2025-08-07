@@ -6,8 +6,6 @@ using System;
 using Config;
 using Sirenix.OdinInspector;
 using System.Collections;
-using TMPro;
-using Unity.Burst.CompilerServices;
 
 [Serializable]
 public struct TableParams
@@ -75,6 +73,7 @@ public class WorkshopPage : Page
     [SerializeField] private Sprite _paperBoxSprite;
     [SerializeField] private Sprite _flowerBoxSprite;
     [SerializeField] private Sprite _ribbonSprite;
+    [SerializeField] private ScrollRect _scrollRect;
     [SerializeField] private GameObject _gypsumPlaceHolder1, _gypsumPlaceHolder2;
 
     private HintType _currentHintType = HintType.None;
@@ -83,12 +82,13 @@ public class WorkshopPage : Page
     private Flower _selectedFlowerPrefab;
     private Tween _scrollTween;
     private bool _canFlowersBeSelected = false;
+    private bool _isTutorialAllowFlowerSelect = true;
     private int _unfinishedOrderCount = 0;
     private int _totalOrderCount = 0;
     private int _tutorialFlowerCount = 0;
     private PaperArea _tutPaperArea;
     private List<string> _convoHistory = new();
-    private readonly List<BouquetModel> _finishedBouquetModels = new();
+    private List<BouquetModel> _finishedBouquetModels = new();
     private readonly List<FlowerBox> _flowerBoxes = new();
     private const int TUT_MAX_FLOWER_COUNT = 2;
     private const int HINT_WAIT_TIME = 12;
@@ -164,6 +164,8 @@ public class WorkshopPage : Page
 
                 if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
                 {
+                    _scrollRect.enabled = false;
+                    _isTutorialAllowFlowerSelect = false;
                     _tutorial.Init()
                             .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp, Tutorial.ObjectActivationOptions.Bg)
                             .SetClickableState(Tutorial.ClickableState.HighlightArea)
@@ -175,6 +177,8 @@ public class WorkshopPage : Page
                 }
                 else
                 {
+                    _scrollRect.enabled = true;
+                    _isTutorialAllowFlowerSelect = true;
                     PrepareHint(specificHintType: HintType.PaperSelect);
                 }
             });
@@ -183,6 +187,7 @@ public class WorkshopPage : Page
             SetAvailablePapers();
             SetAvailableRibbons();
             _isInitialized = true;
+            _finishedBouquetModels.Clear();
         }
     }
 
@@ -206,13 +211,18 @@ public class WorkshopPage : Page
             return;
         }
 
+        if (!_isTutorialAllowFlowerSelect)
+        {
+            return;
+        }
+
         _isInputWaiting = true;
         _selectedFlowerPrefab = flowerPrefab;
         _flowerHand.gameObject.SetActive(true);
         _flowerHand.position = _flowerBoxes[boxIndex].transform.position + Vector3.up * 100f;
     }
 
-    public void OnPaperSelected(Sprite paperSprite, Sprite rollSprite, WrappingPaperType paperType)
+    public void OnPaperSelected(Sprite paperSprite, Sprite rollSprite, Sprite closedSprite, WrappingPaperType paperType)
     {
         for (int i = 0; i < _paperAreas.Count; i++)
         {
@@ -221,7 +231,7 @@ public class WorkshopPage : Page
                 HapticsController.PlayButtonHaptic();
 
                 _paperAreas[i].gameObject.SetActive(true);
-                _paperAreas[i].GetPaperToArea(paperSprite, rollSprite, paperType, () => _canFlowersBeSelected = true);
+                _paperAreas[i].GetPaperToArea(paperSprite, rollSprite, closedSprite, paperType, () => _canFlowersBeSelected = true);
 
                 PrepareHint(specificHintType: HintType.FlowerSelect);
 
@@ -259,18 +269,22 @@ public class WorkshopPage : Page
         if (!_isInputWaiting)
             return null;
 
-        HapticsController.PlayMediumHaptic();
-
         if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
         {
             _tutorialFlowerCount++;
-            if (_tutorialFlowerCount >= TUT_MAX_FLOWER_COUNT)
+            if (_tutorialFlowerCount == TUT_MAX_FLOWER_COUNT)
             {
                 CancelInvoke(nameof(FlowerPlaceLooper));
                 CancelInvoke(nameof(FlowerPlaceLooper2));
                 OnFlowersPlaced();
             }
+            else if (_tutorialFlowerCount > TUT_MAX_FLOWER_COUNT)
+            {
+                return null;
+            }
         }
+
+        HapticsController.PlayMediumHaptic();
 
         PrepareHint(specificHintType: HintType.Scissor);
 
@@ -322,6 +336,11 @@ public class WorkshopPage : Page
 
     public bool CheckIfInTrashArea(Vector2 pos)
     {
+        if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+        {
+            return false;
+        }
+
         Rect rect = _trashBin.rect;
 
         // Get the left, right, top, and bottom boundaries of the rect
@@ -690,10 +709,24 @@ public class WorkshopPage : Page
 
 
     #region Tutorial
+    private bool _isTutorialStarted = false;
     private void OnPaperSelected()
     {
+        if (_isTutorialStarted)
+        {
+            return;
+        }
+
+        _isTutorialStarted = true;
         Debug.Log($"#tutorial# OnPaperSelected");
+        _tutorial.FinishTutorialStep();
         _paperBox.SelectTutorialPaper();
+        Invoke(nameof(OnPaperSelectedHelper), 1.1f);
+    }
+
+    private void OnPaperSelectedHelper()
+    {
+        Debug.Log($"#tutorial# OnPaperSelectedHelper");
 
         _tutorial.Init()
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp, Tutorial.ObjectActivationOptions.Bg)
@@ -702,17 +735,18 @@ public class WorkshopPage : Page
                 .Highlight(_flowerBoxSprite, _flowerBoxes[0].transform)
                 .SetExplanation(LocalizationManager.GetLocalizedText("tut_flower_explanation"))
                 .SetClickCallback(OnFlowerSelected)
-                .SetActivationDelay(1.1f)
                 .StartTutorial();
     }
-
     private void OnFlowerSelected()
     {
         Debug.Log($"#tutorial# OnFlowerSelected");
+
         _gypsumPlaceHolder1.SetActive(false);
         _gypsumPlaceHolder2.SetActive(false);
 
+        _isTutorialAllowFlowerSelect = true;
         _flowerBoxes[0].OnBoxSelected();
+        _isTutorialAllowFlowerSelect = false;
 
         _tutorial.Init()
             .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp)
@@ -764,7 +798,7 @@ public class WorkshopPage : Page
         Debug.Log($"#tutorial# OnFlowersPlaced");
         _tutorial.Init()
             .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp)
-            .PointTo(_scissor.position, Tutorial.PointDirection.Right)
+            .PointTo(_scissor.position - new Vector3(0, _scissor.GetComponent<RectTransform>().sizeDelta.x / 2f, 0), Tutorial.PointDirection.Right)
             .SetExplanation(LocalizationManager.GetLocalizedText("tut_use_scissor"))
             .StartTutorial();
     }

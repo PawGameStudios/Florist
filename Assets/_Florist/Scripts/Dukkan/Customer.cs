@@ -20,6 +20,7 @@ public class Customer : MonoBehaviour
     {
         public Conversation Conversation;
         public HappinessState HappinessState;
+        public PaymentState PaymentState;
         public float TipPercentage;
         public int HappinessChange;
         public List<OrderContentResult> OrderContentResults;
@@ -391,6 +392,7 @@ public class Customer : MonoBehaviour
 
         int happinessChange = 0;
         HappinessState happinessState = HappinessState.None;
+        PaymentState paymentState;
         for (int i = 0; i < orderContentResults.Count; i++)
         {
             OrderContentResult result = orderContentResults[i];
@@ -423,11 +425,15 @@ public class Customer : MonoBehaviour
         float customerExtraPay = earningsInfo.GivenMoney - earningsInfo.Change - earningsInfo.Price;
         if (customerExtraPay > 0)
         {
-            happinessState |= HappinessState.PaidMore;
+            paymentState = PaymentState.Overpaid;
         }
         else if (customerExtraPay < 0)
         {
-            happinessState |= HappinessState.PaidLess;
+            paymentState = PaymentState.Underpaid;
+        }
+        else
+        {
+            paymentState = PaymentState.Normal;
         }
 
         float totalWaitTimeInSeconds = Time.time - _waitingStartTime;
@@ -443,12 +449,16 @@ public class Customer : MonoBehaviour
             tip = Random.Range(_customerInfo.OrderHappiness.TipPercentage.x, _customerInfo.OrderHappiness.TipPercentage.y);
         }
 
+        HappinessState prominentHappinessState = GetProminentHappinessState(happinessState);
+
+        Debug.Log($"#customer# Happiness state: {happinessState}, Happiness change: {happinessChange}, prominentHappinessState: {prominentHappinessState}, paymentState: {paymentState}");
         return new FlowerDeliveredInfo()
         {
-            Conversation = Configs.CustomerConfig.GetGoodbyeConvo(_customerInfo, happinessState),
+            Conversation = Configs.CustomerConfig.GetGoodbyeConvo(_customerInfo, prominentHappinessState),
             TipPercentage = tip,
             HappinessChange = happinessChange,
             HappinessState = happinessState,
+            PaymentState = paymentState,
             OrderContentResults = orderContentResults,
         };
     }
@@ -669,12 +679,14 @@ public class Customer : MonoBehaviour
                     }
                     else if (receivedFlowerCount < orderedFlowerCount)
                     {
-                        result.MissingFlowers.Add(orderedFlowerType, orderedFlowerCount - receivedFlowerCount);
+                        if (!result.MissingFlowers.ContainsKey(orderedFlowerType))
+                            result.MissingFlowers.Add(orderedFlowerType, orderedFlowerCount - receivedFlowerCount);
                     }
                 }
                 else
                 {
-                    result.MissingFlowers.Add(orderedFlowerType, orderedFlowerCount);
+                    if (!result.MissingFlowers.ContainsKey(orderedFlowerType))
+                        result.MissingFlowers.Add(orderedFlowerType, orderedFlowerCount);
                 }
             }
 
@@ -720,5 +732,34 @@ public class Customer : MonoBehaviour
         buttonsParentTransform.position = new Vector3(buttonsParentTransform.position.x,
                                             _speechBubbleBgImage.transform.position.y - height - 50,
                                             buttonsParentTransform.position.z);
+    }
+
+    private HappinessState GetProminentHappinessState(HappinessState happinessState)
+    {
+        if (happinessState.HasFlag(HappinessState.Happy))
+        {
+            return HappinessState.Happy;
+        }
+        if (happinessState.HasFlag(HappinessState.DifferentOrder))
+        {
+            return HappinessState.DifferentOrder;
+        }
+        if (happinessState.HasFlag(HappinessState.MissingFlowers))
+        {
+            return HappinessState.MissingFlowers;
+        }
+        if (happinessState.HasFlag(HappinessState.MoreFlowers))
+        {
+            return HappinessState.MoreFlowers;
+        }
+        if (happinessState.HasFlag(HappinessState.SameOrder))
+        {
+            return HappinessState.SameOrder;
+        }
+        if (happinessState.HasFlag(HappinessState.WaitedLong))
+        {
+            return HappinessState.WaitedLong;
+        }
+        return HappinessState.Happy;
     }
 }

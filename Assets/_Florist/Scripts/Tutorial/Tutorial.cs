@@ -32,12 +32,10 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private Button _bgButton;
     [SerializeField] private Button _skipButton;
     [SerializeField] private Image _bgImage;
-    [SerializeField] private Sprite _catSprite, _dogSprite;
 
     [Header("Popup")]
     [SerializeField] private GameObject _popup;
     [SerializeField] private CanvasGroup _popupCanvasGroup;
-    [SerializeField] private Image _charImage;
     [SerializeField] private Transform _popupTopRef;
     [SerializeField] private Transform _popupBottomRef;
     [SerializeField] private RectTransform _popupRect;

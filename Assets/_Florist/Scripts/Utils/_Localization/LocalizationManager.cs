@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using AYellowpaper.SerializedCollections;
 
@@ -56,18 +55,19 @@ public static class LocalizationManager
     #region Private Methods
     static LocalizationManager()
     {
-        if (Application.systemLanguage == SystemLanguage.Turkish)
-        {
-            LoadLocalizedText("tr-TR");
-        }
-        else if (Application.systemLanguage == SystemLanguage.Spanish)
-        {
-            LoadLocalizedText("es-ES");
-        }
-        else
-        {
-            LoadLocalizedText("en-US");
-        }
+        LoadLocalizedText("en-US");
+        // if (Application.systemLanguage == SystemLanguage.Turkish)
+        // {
+        //     LoadLocalizedText("tr-TR");
+        // }
+        // else if (Application.systemLanguage == SystemLanguage.Spanish)
+        // {
+        //     LoadLocalizedText("es-ES");
+        // }
+        // else
+        // {
+        //     LoadLocalizedText("en-US");
+        // }
     }
 
     private static void LoadLocalizedText(string lang)

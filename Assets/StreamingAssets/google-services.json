@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "850459288207",
+    "project_id": "florist-1d961",
+    "storage_bucket": "florist-1d961.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850459288207:android:5cb44c098b1a42de9086fa",
+        "android_client_info": {
+          "package_name": "com.paw.florist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnZb7VNcYuu1VQ52aHaGd4WdlaozkiSyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

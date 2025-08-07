@@ -1,9 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using Config;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RibbonTable : MonoBehaviour
+public class RibbonTable : SerializedMonoBehaviour
 {
     public Transform FirstRibbonTransform => _ribbonImages[0].transform;
     [SerializeField] private List<Image> _ribbonImages;
@@ -15,10 +17,14 @@ public class RibbonTable : MonoBehaviour
     [SerializeField] private Transform _paperSitPositionBottom_1;
     [SerializeField] private Transform _paperSitPositionBottom_2_1;
     [SerializeField] private Transform _paperSitPositionBottom_2_2;
+    [SerializeField] private Dictionary<RibbonType, Animator> _ribbonAnimators;
     private const int RIBBON_COUNT_IN_ROW = 4;
 
     private List<RibbonInfo> _ribbons = new();
-    private PaperArea _paper = new();
+    private PaperArea _paper;
+    private RibbonType _selectedRibbon;
+    private Animator _ribbonAnimator = null;
+    private bool _isRibbonUsed = false;
 
     public void Initialize(List<RibbonInfo> ribbons)
     {
@@ -54,6 +60,7 @@ public class RibbonTable : MonoBehaviour
         Debug.Log($"Adding flowers to ribbon area. Total orders: {totalOrderCount}, Order index: {orderIndex}");
 
         _paper = paperArea;
+        _isRibbonUsed = false;
 
         if (_ribbons.Count <= RIBBON_COUNT_IN_ROW)
         {
@@ -99,9 +106,37 @@ public class RibbonTable : MonoBehaviour
     public void OnRibbonClicked(int index)
     {
         if (index >= _ribbons.Count)
+        {
             return;
+        }
 
-        var selectedRibbon = _ribbons[index];
-        _paper.OnRibbonSelected(selectedRibbon.RibbonType);
+        if (_isRibbonUsed)
+        {
+            return;
+        }
+
+        _isRibbonUsed = true;
+
+        HapticsController.PlayMediumHaptic();
+
+        _selectedRibbon = _ribbons[index].RibbonType;
+        _ribbonAnimator = Instantiate(_ribbonAnimators[_selectedRibbon], _paper.transform);
+
+        StartCoroutine(PlayRibbonAnimation());
+    }
+
+    private IEnumerator PlayRibbonAnimation()
+    {
+        yield return new WaitForEndOfFrame();
+
+        _ribbonAnimator.Play("RibbonSelected");
+
+        // get anim duration
+        Invoke(nameof(OnRibbonAnimCompleted), 1.5f);
+    }
+
+    private void OnRibbonAnimCompleted()
+    {
+        _paper.OnRibbonSelected(_selectedRibbon, _ribbonAnimator.gameObject);
     }
 }

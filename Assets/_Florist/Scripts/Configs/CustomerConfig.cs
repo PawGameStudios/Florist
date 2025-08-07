@@ -30,8 +30,10 @@ namespace Config
         [VerticalGroup("Flowers")]
         [LabelWidth(150)] public bool ChoseOrderRandomly;
         [VerticalGroup("Flowers")]
-        [ShowIf("ChoseOrderRandomly")] public int MaxOrderCount;
+        [ShowIf("ChoseOrderRandomly")]
+        public int MaxOrderCount;
         [VerticalGroup("Flowers")]
+        [DisableIf("CustomerType", CustomerType.Random)]
         public List<Order> Orders;
 
         [VerticalGroup("Conversations")]
@@ -67,7 +69,7 @@ namespace Config
     [CreateAssetMenu(fileName = "CustomerConfig", menuName = "Paw/Configs/Customer")]
     public class CustomerConfig : SerializedScriptableObject
     {
-        [TableList(ShowIndexLabels = true)]
+        [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
         public List<CustomerInfo> Customers;
         public Dictionary<HappinessState, Conversation> GoodbyeConversations;
         public Conversation DefaultGoodbyeConversation;
@@ -84,7 +86,22 @@ namespace Config
                     customerList.Add(customer);
                 }
             }
-            return customerList[Random.Range(0, customerList.Count)];
+
+            CustomerInfo customerInfo = customerList[Random.Range(0, customerList.Count)];
+            if (customerInfo.CustomerType == CustomerType.Random)
+            {
+                customerInfo.Sprite = Customers[Random.Range(0, Customers.Count)].Sprite;
+                customerInfo.Orders = new List<Order>()
+                {
+                    new Order()
+                    {
+                        BouquetType = (BouquetType)Random.Range(2, Enum.GetNames(typeof(BouquetType)).Length),
+                        WrappingPaperType = (WrappingPaperType)Random.Range(0, Enum.GetNames(typeof(WrappingPaperType)).Length),
+                        RibbonType = (RibbonType)Random.Range(0, Enum.GetNames(typeof(RibbonType)).Length)
+                    }
+                };
+            }
+            return customerInfo;
         }
 
         public CustomerInfo GetCustomerByName(string name)
