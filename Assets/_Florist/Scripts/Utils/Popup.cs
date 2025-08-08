@@ -82,4 +82,14 @@ public class Popup : MonoBehaviour
     {
         Close();
     }
+
+    public void OnPositiveButtonPressed()
+    {
+        _buttonPositive.onClick.Invoke();
+    }
+
+    public void OnNegativeButtonPressed()
+    {
+        _buttonNegative.onClick.Invoke();
+    }
 }

@@ -34,7 +34,7 @@ namespace Config
 
     public enum SpecialEvents
     {
-        None, InroduceFlower, IntroducePaper, IntroduceRibbon
+        None, InroduceFlower, IntroducePaper, IntroduceRibbon, IntroduceGarden
     }
 
     [Serializable]

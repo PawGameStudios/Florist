@@ -14,6 +14,7 @@ public class MainPage : Page
     [SerializeField] private TextMeshProUGUI _dayText;
     [SerializeField] private List<GameObject> _energyObjects;
     [SerializeField] private TextMeshProUGUI _lifeDurationText;
+    [SerializeField] private PrivacyController _privacyController;
     [SerializeField] private Tutorial _tutorial;
     private RateUsController _rateUsController;
     private double _remainingSecsForLife;
@@ -74,6 +75,7 @@ public class MainPage : Page
         }
         else
         {
+            _privacyController.ShowPrivacyScreen();
             _shopButton.SetActive(true);
             _pcButton.SetActive(true);
         }
@@ -99,7 +101,22 @@ public class MainPage : Page
         if (SaveSystem.Inst.GeneralData.Life <= 0)
         {
             SaveSystem.Inst.GeneralData.Life = 0;
-            _lifePopup.Open();
+            _lifePopup.SetPositiveButtonListener(() =>
+                    {
+                        AdManager.Instance.ShowRewardedAd(isWatched =>
+                        {
+                            if (isWatched)
+                            {
+                                SaveSystem.Inst.GeneralData.ChangeLife(1);
+                            }
+                        });
+                        _lifePopup.Close();
+                    })
+                    .SetNegaiveButtonListener(() =>
+                    {
+                        _lifePopup.Close();
+                    })
+                    .Open();
         }
         else
         {

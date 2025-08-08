@@ -108,6 +108,63 @@ MonoBehaviour:
       IntroducedFlowerColor: 0
       PaperType: 0
       RibbonType: 0
+  - Events:
+    - IsEvent: 1
+      EventType: 0
+      CustomerType: 0
+      CustomerName: 
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: woman_1
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: man_1
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: old_lady_1
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: net_3
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: ambiguous_1
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: net_4
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
   RandomDayInfo:
     Events:
     - IsEvent: 0

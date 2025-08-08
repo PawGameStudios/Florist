@@ -7,7 +7,14 @@ public class PrivacyController : MonoBehaviour
 
     public void ShowPrivacyScreen()
     {
-        _popUp.Open();
+        if (SaveSystem.Inst.GeneralData.IsPrivacyPolicyShown)
+        {
+            return;
+        }
+
+        _popUp.SetPositiveButtonListener(OnAcceptClicked)
+            .SetNegaiveButtonListener(OnDeclineClicked)
+            .Open();
         FirebaseController.Instance.SendCustomEvent($"privacy_displayed");
     }
 
@@ -19,7 +26,7 @@ public class PrivacyController : MonoBehaviour
         _popUp.Close();
     }
 
-    public void OnAcceptClicked()
+    private void OnAcceptClicked()
     {
         SaveSystem.Inst.GeneralData.IsPrivacyPolicyAccepted = true;
         SaveSystem.Inst.GeneralData.IsPrivacyPolicyShown = true;
@@ -31,7 +38,7 @@ public class PrivacyController : MonoBehaviour
         FirebaseController.Instance.SendCustomEvent($"privacy_accepted");
     }
 
-    public void OnDeclineClicked()
+    private void OnDeclineClicked()
     {
         SaveSystem.Inst.GeneralData.IsPrivacyPolicyAccepted = false;
         SaveSystem.Inst.GeneralData.IsPrivacyPolicyShown = true;
@@ -44,10 +51,10 @@ public class PrivacyController : MonoBehaviour
         OnCloseClicked();
     }
 
-    public void OnPrivacyLinkClicked()
+    private void OnPrivacyLinkClicked()
     {
         // SoundController.PlaySound(SFX.ButtonClick);
         HapticsController.PlayButtonHaptic();
-        Application.OpenURL("???");
+        Application.OpenURL("https://paw-games.com/privacy-policy");
     }
 }
