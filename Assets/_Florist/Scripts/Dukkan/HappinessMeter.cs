@@ -69,7 +69,9 @@ public class HappinessMeter : MonoBehaviour
 
     public void ChangeHappinessAfterOrderReceived(float happinessValue)
     {
+        Debug.Log("happinessValue: " + happinessValue);
         _happinessValue += happinessValue;
+        _happinessValue = Mathf.Clamp(_happinessValue, 0, 100);
         _happinessText.text = $"{_happinessValue}%";
         SetEmojiText();
     }

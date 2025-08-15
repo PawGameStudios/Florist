@@ -121,6 +121,7 @@ public class RibbonTable : SerializedMonoBehaviour
 
         _selectedRibbon = _ribbons[index].RibbonType;
         _ribbonAnimator = Instantiate(_ribbonAnimators[_selectedRibbon], _paper.transform);
+        _ribbonAnimator.transform.SetPositionAndRotation(_paper.RibbonPosRef.position, _paper.RibbonPosRef.rotation);
 
         StartCoroutine(PlayRibbonAnimation());
     }

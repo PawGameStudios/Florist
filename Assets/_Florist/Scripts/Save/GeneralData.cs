@@ -117,6 +117,8 @@ public class GeneralData
 
         if (CurrentDayConfigIndex >= Configs.LevelConfig.Days.Count)
             CurrentDayConfigIndex = Configs.LevelConfig.Days.Count;
+
+        FirebaseController.Instance.SendCustomEvent($"day_reached_{CurrentDayIndex}");
     }
 
     public void SetLife()

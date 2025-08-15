@@ -1061,6 +1061,192 @@ MonoBehaviour:
       HappinessTipLimit: 0
       TipPercentage: {x: 10, y: 50}
       AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 408872753ebc39d409dae1c28516732c, type: 3}
+    CustomerType: 0
+    Name: new_grad_2
+    Gender: 0
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 1
+        Count: 1
+        FlowerColor: 0
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        Count: 2
+        FlowerColor: 3
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 8a044b10c914e1b49bc65fa29a1d0118, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 40df8876c06f5c947a1bb2bab01ae277, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 40df8876c06f5c947a1bb2bab01ae277, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 40df8876c06f5c947a1bb2bab01ae277, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: ae6b6e810498a4c4186d8f9764d93f62, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: dcd6b40fa54c79944b48cae3b34f2cd3, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 40df8876c06f5c947a1bb2bab01ae277, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 40df8876c06f5c947a1bb2bab01ae277, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 0a58ae3c6e53b0649830ddf0bda3d902, type: 3}
+    CustomerType: 0
+    Name: emotional_couple
+    Gender: 0
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 0
+      WrappingPaperType: 0
+      CustomFlowers:
+      - FlowerType: 0
+        Count: 1
+        FlowerColor: 0
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        Count: 1
+        FlowerColor: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        Count: 1
+        FlowerColor: 3
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 893f7ec05e16e674999f6e79a26eb204, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 29e24f0b3f1352243af62a4127e8dd61, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 29e24f0b3f1352243af62a4127e8dd61, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 29e24f0b3f1352243af62a4127e8dd61, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 3d84ef619e9b1ad4c8c682a3b89d89a6, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 80d3ecda89e12ba40b34dd40e5c896ea, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 29e24f0b3f1352243af62a4127e8dd61, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 29e24f0b3f1352243af62a4127e8dd61, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: bdba957fb1164ca4eb9fdd63c965cb90, type: 3}
+    CustomerType: 0
+    Name: woman_corporate
+    Gender: 0
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 0
+        Count: 1
+        FlowerColor: 0
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 1
+        Count: 1
+        FlowerColor: 0
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        Count: 2
+        FlowerColor: 3
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: dfd1f20ddd3657a4898f99bd8cbe5ce9, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 0016ef72d62e1374e9e7a7d0db3acc98, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 0016ef72d62e1374e9e7a7d0db3acc98, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 0016ef72d62e1374e9e7a7d0db3acc98, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 7322169ebf8254b42b43e77fc8a7f70f, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: cddf75a0a94ce36428eddec61d06e097, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 0016ef72d62e1374e9e7a7d0db3acc98, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 0016ef72d62e1374e9e7a7d0db3acc98, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 8d3d5e9db2eeea44ea35fb08816e239e, type: 3}
+    CustomerType: 0
+    Name: 
+    Gender: 0
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders: []
+    CustomInitConvo: 0
+    CustomGoodbyeConvo: 0
+    InitialConversation: {fileID: 0}
+    GoodbyeConversations:
+      _serializedList: []
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
   DefaultGoodbyeConversation: {fileID: 11400000, guid: f4cde4ba971dd674d8ffb5e087452b95, type: 2}
   InitialConversations:
   - {fileID: 11400000, guid: 8a3f9885c3635c344b7b9667cd598621, type: 2}

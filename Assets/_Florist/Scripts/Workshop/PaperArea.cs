@@ -27,6 +27,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     public bool CanAddFlowers => _state == State.AddingFlowers;
     public bool IsEmpty => _state == State.WaitingForPaper;
     public bool CanUseScissor => _state == State.AddingFlowers;
+    public Transform RibbonPosRef => _ribbonPosRef;
     [SerializeField] private RectTransform _paperArea;
     [SerializeField] private Image _paperImage;
     [SerializeField] private Image _paperRollImage;
@@ -42,6 +43,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     [SerializeField] private Transform _paperImageInitRef;
     [SerializeField] private Transform _rollImageFinalRef;
     [SerializeField] private Transform _paperImageFinalRef;
+    [SerializeField] private Transform _ribbonPosRef;
     private float _bottomMostY;
     private float _saplingRightMostPosX;
     private float _saplingLeftMostPosX;
@@ -56,12 +58,12 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     private Tween _moveTween;
     private BouquetModel _bouquetModel = new();
     private State _state = State.None;
-    private const float ANGLE_LIMIT = 40f;
     private Vector3 _lastEventDataPosition;
     private GameObject _scissorObject, _ribbonObject;
     private readonly List<Flower> _allFlowers = new();
     private readonly List<Flower> _unCutFlowers = new();
     private const float PAPER_OPEN_DURATION = 1f;
+    private const float ANGLE_LIMIT = 40f, Y_POS_LIMIT = 350;
 
     void OnDisable()
     {
@@ -188,6 +190,15 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         {
             return;
         }
+        Debug.Log($"Adding flower at position: {eventData.position.y}, rotation: {targetRot}");
+        if (eventData.position.y < Y_POS_LIMIT)
+        {
+            var pos = eventData.position;
+            pos.y = Y_POS_LIMIT;
+            eventData.position = pos;
+        }
+
+        Debug.Log($"Adding flower at position: {eventData.position.y}, rotation: {targetRot}");
 
         Flower newFlower = References.WorkshopPage.CreateNewFlower(targetPos: eventData.position,
                                                         targetRotation: targetRot,
@@ -259,10 +270,12 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
 
             transform.localPosition = _startPosition;
 
-            for (int i = 0; i < _bouquetObject.transform.childCount; i++)
+            for (int i = 2; i < _bouquetObject.transform.childCount; i++)
             {
                 Destroy(_bouquetObject.transform.GetChild(i).gameObject);
             }
+            _unCutFlowers.Clear();
+            _allFlowers.Clear();
             References.WorkshopPage.OnFlowerGivenToTrash(this);
             return;
         }

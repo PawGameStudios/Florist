@@ -16,6 +16,7 @@ public abstract class Page : SerializedMonoBehaviour
     public virtual void Open(PageParams pageData = null, Action onCompleted = null)
     {
         SaveSystem.Inst.SaveData.LastPage = _pageType;
+        FirebaseController.Instance.SendCustomEvent($"page_opened_{_pageType}");
     }
 
     public abstract void Close(PageParams pageData = null, Action onCompleted = null);

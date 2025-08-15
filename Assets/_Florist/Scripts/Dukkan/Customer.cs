@@ -54,7 +54,7 @@ public class Customer : MonoBehaviour
     [SerializeField] private Image _customerImage;
     [SerializeField] private TypewriterCore _typeWriter;
     [SerializeField] private List<BouquetModel> _bouquetsToOrder = new();
-    private const float LINE_HEIGHT = 42;
+    private const float LINE_HEIGHT = 52;
     private const float ENTER_SCALE_Y = 1.06f;
     private const float IDLE_SCALE_Y = 1.015f;
     private const float IDLE_SCALE_X = .985f;

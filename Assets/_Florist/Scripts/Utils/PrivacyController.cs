@@ -1,4 +1,3 @@
-using MelenitasDev.SoundsGood;
 using UnityEngine;
 
 public class PrivacyController : MonoBehaviour

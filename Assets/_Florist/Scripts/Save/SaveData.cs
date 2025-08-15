@@ -9,7 +9,8 @@ public enum PageType
     Shop,
     Dukkan,
     Workshop,
-    EndDay
+    EndDay,
+    OpeningPage,
 }
 
 public enum DukkanSaveState

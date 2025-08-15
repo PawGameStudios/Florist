@@ -77,7 +77,7 @@ public class MainPage : Page
         {
             _privacyController.ShowPrivacyScreen();
             _shopButton.SetActive(true);
-            _pcButton.SetActive(true);
+            // _pcButton.SetActive(true);
         }
 
         if (pageData != null)
@@ -98,25 +98,28 @@ public class MainPage : Page
     {
         SaveSystem.Inst.GeneralData.ChangeLife(-1);
 
+        FirebaseController.Instance.SendCustomEvent($"play_clicked");
+
         if (SaveSystem.Inst.GeneralData.Life <= 0)
         {
             SaveSystem.Inst.GeneralData.Life = 0;
             _lifePopup.SetPositiveButtonListener(() =>
+            {
+                AdManager.Instance.ShowRewardedAd(isWatched =>
+                {
+                    if (isWatched)
                     {
-                        AdManager.Instance.ShowRewardedAd(isWatched =>
-                        {
-                            if (isWatched)
-                            {
-                                SaveSystem.Inst.GeneralData.ChangeLife(1);
-                            }
-                        });
-                        _lifePopup.Close();
-                    })
-                    .SetNegaiveButtonListener(() =>
-                    {
-                        _lifePopup.Close();
-                    })
-                    .Open();
+                        FirebaseController.Instance.SendCustomEvent($"ad_watched_life");
+                        SaveSystem.Inst.GeneralData.ChangeLife(1);
+                    }
+                });
+                _lifePopup.Close();
+            })
+            .SetNegaiveButtonListener(() =>
+            {
+                _lifePopup.Close();
+            })
+            .Open();
         }
         else
         {
@@ -150,6 +153,7 @@ public class MainPage : Page
         {
             if (isWatched)
             {
+                FirebaseController.Instance.SendCustomEvent($"ad_clicked_life");
                 SaveSystem.Inst.GeneralData.ChangeLife(1);
             }
         });

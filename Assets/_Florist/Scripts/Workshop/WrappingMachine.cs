@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using System.Collections;
+using MEC;
+using System.Collections.Generic;
 
 public class WrappingMachine : MonoBehaviour
 {
@@ -11,6 +14,8 @@ public class WrappingMachine : MonoBehaviour
     [SerializeField] private Transform _door;
     [SerializeField] private RectTransform _rectTransform;
     [SerializeField] private Image _progressImage;
+    [SerializeField] private GameObject _dotsStartObject, _dotsFinalObject;
+    [SerializeField] private GameObject[] _dotObjects;
     private Tween _progressTween, _openTween;
 
     private void OnDisable()
@@ -55,6 +60,8 @@ public class WrappingMachine : MonoBehaviour
             float duration = Configs.WorkshopConfig.MachineInfo.CalculateDuration(level);
             _progressImage.fillAmount = 0f;
 
+            var handle = Timing.RunCoroutine(ShowDots(), tag: "WrappingMachineDots");
+
             _progressTween?.Kill();
             _progressTween = _progressImage.DOFillAmount(1f, duration).SetEase(Ease.Linear).OnComplete(() =>
             {
@@ -63,10 +70,44 @@ public class WrappingMachine : MonoBehaviour
 
                 OpenMachine(() =>
                 {
+                    if (handle != null && handle.IsValid)
+                        Timing.KillCoroutines(handle);
+
+                    ResetDots();
+                    _dotsStartObject.SetActive(false);
+                    _dotsFinalObject.SetActive(false);
                     _doorCanvas.sortingOrder = 4;
                 });
                 Debug.Log("Wrapping machine process completed.");
             });
         });
+    }
+
+    private void ResetDots()
+    {
+        foreach (var dot in _dotObjects)
+        {
+            dot.SetActive(false);
+        }
+    }
+
+    private IEnumerator<float> ShowDots()
+    {
+        ResetDots();
+
+        _dotsStartObject.SetActive(true);
+        _dotsFinalObject.SetActive(true);
+
+        while (true)
+        {
+            for (int i = 0; i < _dotObjects.Length; i++)
+            {
+                _dotObjects[i].SetActive(true);
+                yield return Timing.WaitForSeconds(.13f);
+            }
+
+            ResetDots();
+            yield return Timing.WaitForSeconds(.13f);
+        }
     }
 }

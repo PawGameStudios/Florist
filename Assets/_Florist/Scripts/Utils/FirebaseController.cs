@@ -93,7 +93,7 @@ public class FirebaseController : MonoBehaviour
                 _firebaseReady = true;
 
 #if UNITY_IOS
-                    FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
+                FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
 #endif
 
                 //check event to send

@@ -1678,14 +1678,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6150943, g: 0.6150943, b: 0.6150943, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -142549394694913837, guid: 72473e78e2105b341ba145f1c66f75b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5362,6 +5362,10 @@ PrefabInstance:
     - target: {fileID: 4068296105150914120, guid: 1edd644a62683e648b573e3ab8876847, type: 3}
       propertyPath: m_Name
       value: PaperBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 4068296105150914120, guid: 1edd644a62683e648b573e3ab8876847, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7796520443742379872, guid: 1edd644a62683e648b573e3ab8876847, type: 3}
       propertyPath: m_Pivot.x

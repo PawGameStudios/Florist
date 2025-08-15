@@ -5,9 +5,22 @@ public class Bootstrapper : MonoBehaviour
     void Start()
     {
         SaveSystem.Inst.GeneralData.SetLife();
-        References.MainPage.Open(new PageParams
+
+        if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
         {
-            PreviousPage = PageType.Bootstrapper
-        });
+            References.OpeningPage.Open(new PageParams
+            {
+                PreviousPage = PageType.Bootstrapper
+            });
+        }
+        else
+        {
+            References.MainPage.Open(new PageParams
+            {
+                PreviousPage = PageType.Bootstrapper
+            });
+        }
+
+
     }
 }

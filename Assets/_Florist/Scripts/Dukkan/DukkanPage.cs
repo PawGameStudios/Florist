@@ -9,7 +9,6 @@ using FlowerDeliveredInfo = Customer.FlowerDeliveredInfo;
 using System.Collections.Generic;
 using System;
 using Config;
-using Unity.Burst.CompilerServices;
 
 [Serializable]
 public class EarningsInfo
@@ -32,6 +31,7 @@ public class EarningsInfo
         Refund = 0;
         Cost = 0;
         Profit = 0;
+        Price = 0;
     }
 
     public void CalculateProfit()
@@ -218,6 +218,8 @@ public class DukkanPage : Page
             cost += Configs.WorkshopConfig.GetWrappingPaperCost(bouquet.WrappingPaperType);
         }
         _earningsInfo.Cost += cost;
+
+        PrepareHint(HintType.GiveFlower);
     }
 
     public void OnFlowerDelivered()
@@ -233,13 +235,12 @@ public class DukkanPage : Page
 
         _bouquet.gameObject.SetActive(false);
 
-        References.HappinessMeter.ChangeHappinessAfterOrderReceived(_flowerDeliveredInfo.HappinessChange);
         References.HappinessMeter.StopHappinessCountdown();
 
         var pricePaymentInfo = _customer.GetOrderPayment();
-        _earningsInfo.Price = pricePaymentInfo.Item1;
-        _earningsInfo.GivenMoney = pricePaymentInfo.Item2;
-        _posController.ReceivePayment(_earningsInfo.GivenMoney, _earningsInfo.Price, OnPaymentMade);
+        _earningsInfo.Price += pricePaymentInfo.Item1;
+        _earningsInfo.GivenMoney += pricePaymentInfo.Item2;
+        _posController.ReceivePayment(pricePaymentInfo.Item1, pricePaymentInfo.Item2, OnPaymentMade);
     }
 
     public bool CheckIfInCustomerArea(Vector2 pos)
@@ -274,13 +275,15 @@ public class DukkanPage : Page
         _convoHistory.Add(message);
     }
 
-    private void OnPaymentMade(int change)
+    private void OnPaymentMade(int change, long moneyChange)
     {
-        SaveSystem.Inst.GeneralData.ChangeMoney(_earningsInfo.GivenMoney - change);
+        SaveSystem.Inst.GeneralData.ChangeMoney(moneyChange);
 
-        _earningsInfo.Change = change;
+        _earningsInfo.Change += change;
 
         _flowerDeliveredInfo = _customer.GetOrderInfo(_bouquet.Order.BouquetModels, _earningsInfo);
+
+        References.HappinessMeter.ChangeHappinessAfterOrderReceived(_flowerDeliveredInfo.HappinessChange);
 
         _convoRunner?.OnConversationEvent.RemoveAllListeners();
         _convoRunner?.OnEnd.RemoveAllListeners();
@@ -288,8 +291,6 @@ public class DukkanPage : Page
         _convoRunner.OnConversationEvent.AddListener(HandleConversationEvent);
         _convoRunner.OnEnd.AddListener(HandleEndEvent);
         _convoRunner.Begin();
-
-        PrepareHint(HintType.GiveFlower);
 
         if (!SaveSystem.Inst.SaveData.IsDukkanTutorialFinished)
         {
@@ -359,6 +360,7 @@ public class DukkanPage : Page
     private void StartNextEvent()
     {
         Debug.Log($"#dukkan# StartNextEvent, _currentCustomerIndex: {_nextCustomerIndex}, _dayInfo.Events.Count: {_dayInfo.Events.Count}");
+        FirebaseController.Instance.SendCustomEvent($"day_{SaveSystem.Inst.GeneralData.CurrentDayIndex}_customer_{_nextCustomerIndex}");
 
         _convoHistory.Clear();
 
@@ -366,7 +368,7 @@ public class DukkanPage : Page
         {
             _dukkanSaveState = DukkanSaveState.CustomerProgress;
 
-            References.HappinessMeter.ResetHappinessMeter();
+            // References.HappinessMeter.ResetHappinessMeter();
 
             DayEvent dayEvent = _dayInfo.Events[_nextCustomerIndex];
             if (dayEvent.IsEvent)
@@ -592,6 +594,7 @@ public class DukkanPage : Page
     #region Tutorial & Hints
     private void ShowGiveFlowerTutorial()
     {
+        FirebaseController.Instance.SendCustomEvent($"tutorial_dukkan_give_flower");
         _tutorial.Init()
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
                 .SwipeBetween(_bouquet.transform.position, _customer.transform.position)
@@ -622,9 +625,10 @@ public class DukkanPage : Page
 
     private void GiveFlowerHint()
     {
+        FirebaseController.Instance.SendCustomEvent($"hint_dukkan_give_flower");
         _tutorial.Init()
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
-                .SwipeBetween(_bouquet.transform.position, _customer.transform.position)
+                .SwipeBetween(_bouquet.transform.position, _flowerDeliveryArea.position)
                 .StartTutorial();
     }
     #endregion

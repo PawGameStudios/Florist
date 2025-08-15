@@ -23,19 +23,19 @@ MonoBehaviour:
       height: 40
     name: Start
   nodes:
-  - rid: 782348828199879187
-  - rid: 782348828199879188
+  - rid: 782348937986834819
+  - rid: 782348937986834820
   edges:
-  - rid: 782348828199879189
-  - rid: 782348828199879190
+  - rid: 782348937986834821
+  - rid: 782348937986834822
   properties:
-  - rid: 782348828199879191
+  - rid: 782348937986834823
   stickyNotes: []
   groups: []
   references:
     version: 2
     RefIds:
-    - rid: 782348828199879187
+    - rid: 782348937986834819
       type: {class: LocalizedMessageNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: ff3c9643-ca4c-4ec9-8bc0-b68b00f8f587
@@ -45,15 +45,14 @@ MonoBehaviour:
           y: -1.5999985
           width: 208.00002
           height: 167.2
-        key: woman_1_missing_flowers
-        message: "Tek say\u0131lar g\xF6z\xFCm\xFC rahats\u0131z ediyor. Orant\u0131
-          \u015Fa\u015Fm\u0131\u015F."
+        key: new_grad_2_missing_flowers
+        message: 
         options:
         - guid: yes
           label: Yes
         - guid: no
           label: No
-    - rid: 782348828199879188
+    - rid: 782348937986834820
       type: {class: EventNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: 76396e05-54d3-4841-934a-1130b3263a0c
@@ -66,7 +65,7 @@ MonoBehaviour:
         stopsFlow: 1
         eventGuid: 1809a739-bf37-493f-9194-3a6fc016f4d4
         eventName: EndConvo
-    - rid: 782348828199879189
+    - rid: 782348937986834821
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -75,7 +74,7 @@ MonoBehaviour:
         input:
           node: ff3c9643-ca4c-4ec9-8bc0-b68b00f8f587
           port: previous
-    - rid: 782348828199879190
+    - rid: 782348937986834822
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -84,7 +83,7 @@ MonoBehaviour:
         input:
           node: 76396e05-54d3-4841-934a-1130b3263a0c
           port: previous
-    - rid: 782348828199879191
+    - rid: 782348937986834823
       type: {class: EventProperty, ns: Conversa.Runtime.Properties, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: 1809a739-bf37-493f-9194-3a6fc016f4d4

@@ -110,7 +110,7 @@ MonoBehaviour:
       RibbonType: 0
   - Events:
     - IsEvent: 1
-      EventType: 0
+      EventType: 4
       CustomerType: 0
       CustomerName: 
       IntroducedFlowerType: 0
@@ -161,6 +161,39 @@ MonoBehaviour:
       EventType: 0
       CustomerType: 3
       CustomerName: net_4
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 1
+      EventType: 1
+      CustomerType: 0
+      CustomerName: 
+      IntroducedFlowerType: 3
+      IntroducedFlowerColor: 3
+      PaperType: 0
+      RibbonType: 0
+  - Events:
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: new_grad_2
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: emotional_couple
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 0
+      RibbonType: 0
+    - IsEvent: 0
+      EventType: 0
+      CustomerType: 3
+      CustomerName: woman_corporate
       IntroducedFlowerType: 0
       IntroducedFlowerColor: 0
       PaperType: 0

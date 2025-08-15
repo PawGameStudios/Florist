@@ -23,19 +23,19 @@ MonoBehaviour:
       height: 40
     name: Start
   nodes:
-  - rid: 782348828199879158
-  - rid: 782348828199879159
+  - rid: 782348937986834767
+  - rid: 782348937986834768
   edges:
-  - rid: 782348828199879160
-  - rid: 782348828199879161
+  - rid: 782348937986834769
+  - rid: 782348937986834770
   properties:
-  - rid: 782348828199879162
+  - rid: 782348937986834771
   stickyNotes: []
   groups: []
   references:
     version: 2
     RefIds:
-    - rid: 782348828199879158
+    - rid: 782348937986834767
       type: {class: LocalizedMessageNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: ff3c9643-ca4c-4ec9-8bc0-b68b00f8f587
@@ -45,14 +45,14 @@ MonoBehaviour:
           y: -1.5999985
           width: 208.00002
           height: 152.8
-        key: woman_1_happy
-        message: "M\xFCkemmel! Tam hayalimdeki gibi."
+        key: new_grad_2_happy
+        message: 
         options:
         - guid: yes
           label: Yes
         - guid: no
           label: No
-    - rid: 782348828199879159
+    - rid: 782348937986834768
       type: {class: EventNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: 76396e05-54d3-4841-934a-1130b3263a0c
@@ -65,7 +65,7 @@ MonoBehaviour:
         stopsFlow: 1
         eventGuid: 1809a739-bf37-493f-9194-3a6fc016f4d4
         eventName: EndConvo
-    - rid: 782348828199879160
+    - rid: 782348937986834769
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -74,7 +74,7 @@ MonoBehaviour:
         input:
           node: ff3c9643-ca4c-4ec9-8bc0-b68b00f8f587
           port: previous
-    - rid: 782348828199879161
+    - rid: 782348937986834770
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -83,7 +83,7 @@ MonoBehaviour:
         input:
           node: 76396e05-54d3-4841-934a-1130b3263a0c
           port: previous
-    - rid: 782348828199879162
+    - rid: 782348937986834771
       type: {class: EventProperty, ns: Conversa.Runtime.Properties, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: 1809a739-bf37-493f-9194-3a6fc016f4d4

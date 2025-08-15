@@ -21,9 +21,10 @@ public class PosController : MonoBehaviour
     [SerializeField] private Sprite _posOpenSprite;
     [SerializeField] private Sprite _posCloseSprite;
     [SerializeField] private SerializedDictionary<int, Sprite> _billSprites;
-    private Action<int> _onCompleted;
+    private Action<int, long> _onCompleted;
     private int _targetChange = 0;
     private int _currentChange = 0;
+    private int _payment;
     private List<GameObject> _moneyObjects = new();
 
     public void ResetPos()
@@ -32,7 +33,7 @@ public class PosController : MonoBehaviour
         _targetChange = 0;
     }
 
-    public void ReceivePayment(int payment, int price, Action<int> onCompleted)
+    public void ReceivePayment(int payment, int price, Action<int, long> onCompleted)
     {
         _posAnimator.Play("Open");
 
@@ -43,6 +44,7 @@ public class PosController : MonoBehaviour
         _moneyObjects.Clear();
 
         _currentChange = 0;
+        _payment = payment;
         _targetChange = payment - price;
         _onCompleted = onCompleted;
         _paymentText.text = $"{payment}";
@@ -81,7 +83,7 @@ public class PosController : MonoBehaviour
 
     public void OnConfirmButtonClicked()
     {
-        _onCompleted?.Invoke(_currentChange);
+        _onCompleted?.Invoke(_currentChange, _payment - _currentChange);
         _posImage.sprite = _posCloseSprite;
         _posAnimator.Play("Close");
     }
