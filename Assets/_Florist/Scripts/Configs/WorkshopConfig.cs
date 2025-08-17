@@ -87,6 +87,9 @@ namespace Config
     {
         [VerticalGroup("Info")]
         public RibbonType RibbonType;
+
+        [VerticalGroup("Info")]
+        public Animator RibbonAnimator;
     }
 
     [Serializable]
@@ -158,13 +161,27 @@ namespace Config
             return null;
         }
 
+        public Sprite GetWrappingPaperClosedSprite(WrappingPaperType wrappingPaperType)
+        {
+            Debug.LogError($"Wrapping paper type {wrappingPaperType}");
+            foreach (var wrappingPaperInfo in WrappingPaperInfo)
+            {
+                if (wrappingPaperInfo.WrappingPaperType == wrappingPaperType)
+                {
+                    return wrappingPaperInfo.PaperClosedSprite;
+                }
+            }
+            Debug.LogError($"Wrapping paper type {wrappingPaperType} not found in WrappingPaperInfo list.");
+            return null;
+        }
+
         public Sprite GetWrappingPaperSprite(WrappingPaperType wrappingPaperType)
         {
             foreach (var wrappingPaperInfo in WrappingPaperInfo)
             {
                 if (wrappingPaperInfo.WrappingPaperType == wrappingPaperType)
                 {
-                    return wrappingPaperInfo.Sprite;
+                    return wrappingPaperInfo.PaperSprite;
                 }
             }
             Debug.LogError($"Wrapping paper type {wrappingPaperType} not found in WrappingPaperInfo list.");
@@ -283,6 +300,60 @@ namespace Config
                 }
             }
             return -1; // Not found
+        }
+
+        public Animator GetRibbonAnimator(RibbonType ribbonType)
+        {
+            foreach (var ribbonInfo in RibbonInfo)
+            {
+                if (ribbonInfo.RibbonType == ribbonType)
+                {
+                    return ribbonInfo.RibbonAnimator;
+                }
+            }
+            Debug.LogError($"Ribbon type {ribbonType} not found in RibbonInfo list.");
+            return null;
+        }
+
+
+
+        public string GetFlowerId(FlowerType flowerType, FlowerColor flowerColor)
+        {
+            foreach (var flowerInfo in FlowerInfo)
+            {
+                if (flowerInfo.FlowerType == flowerType && flowerInfo.Color == flowerColor)
+                {
+                    return flowerInfo.Id;
+                }
+            }
+            Debug.LogError($"Flower type {flowerType} with color {flowerColor} not found in FlowerInfo list.");
+            return null;
+        }
+
+        public string GetRibbonId(RibbonType ribbonType)
+        {
+            foreach (var ribbonInfo in RibbonInfo)
+            {
+                if (ribbonInfo.RibbonType == ribbonType)
+                {
+                    return ribbonInfo.Id;
+                }
+            }
+            Debug.LogError($"Ribbon type {ribbonType} not found in RibbonInfo list.");
+            return null;
+        }
+
+        public string GetWrappingPaperId(WrappingPaperType wrappingPaperType)
+        {
+            foreach (var wrappingPaperInfo in WrappingPaperInfo)
+            {
+                if (wrappingPaperInfo.WrappingPaperType == wrappingPaperType)
+                {
+                    return wrappingPaperInfo.Id;
+                }
+            }
+            Debug.LogError($"Wrapping paper type {wrappingPaperType} not found in WrappingPaperInfo list.");
+            return null;
         }
     }
 }

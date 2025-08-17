@@ -111,6 +111,7 @@ public class ShopButton : MonoBehaviour
         }
 
         Debug.LogError($"Setting scroll to item. Scroll index: {scrollIndex}, Item index: {itemIndex}");
+        _scrolls[scrollIndex].SetItemUnlocked(itemIndex);
         _scrolls[scrollIndex].SetScrollToItem(itemIndex, onComplete: () =>
         {
             onItemSelected?.Invoke(_scrolls[scrollIndex].GetItemTransform(itemIndex));

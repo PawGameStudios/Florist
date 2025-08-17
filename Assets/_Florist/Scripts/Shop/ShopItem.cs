@@ -129,6 +129,13 @@ public class ShopItem : MonoBehaviour
 
         Init(_shopItemInfo, _shopScroll, _index, _itemBg);
     }
+
+    public void SetItemUnlocked()
+    {
+        _lock.SetActive(false);
+        _button.interactable = true;
+        _buttonText.text = $"<sprite=0> {_shopItemInfo.Price}";
+    }
 }
 
 

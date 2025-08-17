@@ -16,12 +16,12 @@ public struct BouquetSaveInfo
 public class BouquetFlowerInfo
 {
     public FlowerType FlowerType;
-    public int Count;
     public FlowerColor FlowerColor;
-    [HideInInspector] public Vector3 Position;
-    [HideInInspector] public Vector3 Rotation;
-    [HideInInspector] public Vector3 Pivot;
-    [HideInInspector] public bool IsFlowerCut;
+    public int Count;
+    public Vector3 Position;
+    public Vector3 Rotation;
+    public Vector3 Pivot;
+    public bool IsFlowerCut;
 }
 
 [Serializable]
@@ -92,6 +92,7 @@ public class Bouquet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         _currentBouquetObject = Instantiate(bouquetObject, transform);
         _currentBouquetObject.transform.localPosition = Vector3.zero;
         _currentBouquetObject.transform.localEulerAngles = Vector3.zero;
+        _currentBouquetObject.SetActive(true);
 
         _currentBouquetObject.TryGetComponent<PaperArea>(out var paperAreaComponent);
         if (paperAreaComponent != null)
@@ -114,6 +115,7 @@ public class Bouquet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.LogError("OneEndDrag, position: " + References.DukkanPage.CheckIfInCustomerArea(transform.position));
         if (References.DukkanPage.CheckIfInCustomerArea(transform.position))
         {
             References.DukkanPage.OnFlowerDelivered();

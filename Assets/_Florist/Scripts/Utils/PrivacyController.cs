@@ -12,7 +12,7 @@ public class PrivacyController : MonoBehaviour
         }
 
         _popUp.SetPositiveButtonListener(OnAcceptClicked)
-            .SetNegaiveButtonListener(OnDeclineClicked)
+            // .SetNegaiveButtonListener(OnDeclineClicked)
             .Open();
         FirebaseController.Instance.SendCustomEvent($"privacy_displayed");
     }
@@ -21,6 +21,7 @@ public class PrivacyController : MonoBehaviour
     {
         // SoundController.PlaySound(SFX.ButtonClick);
         HapticsController.PlayButtonHaptic();
+        OnDeclineClicked();
 
         _popUp.Close();
     }

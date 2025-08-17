@@ -15,6 +15,8 @@ public class OpeningPage : Page
     [SerializeField] private float _balloonMoveDuration = 2.5f;
     [SerializeField] private Ease _balloonMoveEase = Ease.Linear;
 
+    [SerializeField] private Tutorial _tutorial;
+    [SerializeField] private Transform _playButtonTransform;
     [SerializeField] private Transform _parent;
     [SerializeField] private GameObject _lightParent;
     [SerializeField] private GameObject _playButton;
@@ -40,6 +42,16 @@ public class OpeningPage : Page
         base.Open(pageData, onCompleted);
         gameObject.SetActive(true);
 
+        if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+        {
+            _tutorial.Init()
+                    .PointTo(_playButtonTransform.position, Tutorial.PointDirection.Right)
+                    .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
+                    .SetClickableState(Tutorial.ClickableState.None)
+                    .SetActivationDelay(2f)
+                    .StartTutorial();
+        }
+
         InvokeRepeating(nameof(PlayLightAnimation), 0f, _lightAnimPause);
     }
 
@@ -47,6 +59,11 @@ public class OpeningPage : Page
     {
         _playButton.SetActive(false);
         OpenDukkan();
+
+        if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+        {
+            _tutorial.FinishTutorial();
+        }
     }
 
     private void OpenDukkan()

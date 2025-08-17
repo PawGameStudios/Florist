@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Config;
 
 public enum PageType
@@ -19,7 +20,8 @@ public enum DukkanSaveState
     CustomerProgress,
     InWorkshop,
     FlowerReady,
-    FlowerDelivered
+    Payment,
+    Done
 }
 
 [Serializable]
@@ -27,6 +29,7 @@ public class DukkanParams
 {
     public CustomerInfo CurrentCustomerInfo;
     public List<BouquetModel> CurrentOrder;
+    public BouquetModel DeliveredBouquet;
     public List<string> ConvoHistory;
     public OrderInfo OrderInfo;
     public EarningsInfo EarningsInfo;
@@ -43,7 +46,6 @@ public class WorkshopParams
 {
     public PaperArea.State PaperState;
     public BouquetModel CurrentFlowers;
-    public int SelectedPaperIndex;
 }
 
 [Serializable]
@@ -73,6 +75,7 @@ public class SaveData
         {
             EarningsInfo = null;
             SetDukkanParams();
+            WorkshopParams = References.WorkshopPage.GetPaperSaveInfo();
         }
         else if (LastPage == PageType.EndDay)
         {
@@ -88,9 +91,10 @@ public class SaveData
 
     public void LoadGame()
     {
+        Debug.LogError("LoadGame, LastPage: " + LastPage);
         if (LastPage == PageType.MainPage)
         {
-            References.MainPage.gameObject.SetActive(true);
+            References.MainPage.Open();
         }
         else if (LastPage == PageType.Dukkan)
         {
@@ -124,6 +128,7 @@ public class SaveData
         {
             CurrentCustomerInfo = References.DukkanPage.CurrentCustomerInfo,
             CurrentOrder = References.DukkanPage.CurrentOrder,
+            DeliveredBouquet = References.DukkanPage.DeliveredBouquet,
             ConvoHistory = References.DukkanPage.ConvoHistory,
             OrderInfo = References.DukkanPage.OrderInfo,
             EarningsInfo = References.DukkanPage.EarningsInfo,

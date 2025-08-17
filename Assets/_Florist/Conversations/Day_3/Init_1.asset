@@ -23,23 +23,23 @@ MonoBehaviour:
       height: 40
     name: Start
   nodes:
-  - rid: 782348937986834772
-  - rid: 782348937986834773
-  - rid: 782348937986834774
+  - rid: 782348828199879148
+  - rid: 782348828199879149
+  - rid: 782348828199879150
   edges:
-  - rid: 782348937986834775
-  - rid: 782348937986834776
-  - rid: 782348937986834777
-  - rid: 782348937986834778
+  - rid: 782348828199879151
+  - rid: 782348828199879152
+  - rid: 782348828199879153
+  - rid: 782348828199879154
   properties:
-  - rid: 782348937986834779
-  - rid: 782348937986834780
+  - rid: 782348828199879155
+  - rid: 782348828199879156
   stickyNotes: []
   groups: []
   references:
     version: 2
     RefIds:
-    - rid: 782348937986834772
+    - rid: 782348828199879148
       type: {class: ChoiceNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: f28b5ec6-62ed-43f8-91cb-6fe51aed4908
@@ -51,8 +51,9 @@ MonoBehaviour:
           height: 210.40001
         actorProfile: {fileID: 0}
         useActorProfile: 0
-        message: 
-        key: new_grad_2_init_1
+        message: "M\xFCkemmeli ar\u0131yorum: 2 k\u0131rm\u0131z\u0131 g\xFCl, 2
+          cipso. L\xFCtfen \xE7ift say\u0131lar\u0131n dengesi bozulmas\u0131n."
+        key: woman_1_init_1
         parseOption1: 0
         parseOption2: 0
         parseOption3: 0
@@ -61,7 +62,7 @@ MonoBehaviour:
           label: sure
         - guid: e6099b67-4095-40b7-b1c6-ebe197281864
           label: what?
-    - rid: 782348937986834773
+    - rid: 782348828199879149
       type: {class: ChoiceNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: dd88f83e-0eab-40e3-96b5-ca90d777994b
@@ -73,15 +74,15 @@ MonoBehaviour:
           height: 199.20001
         actorProfile: {fileID: 0}
         useActorProfile: 0
-        message: 
-        key: new_grad_2_init_2
+        message: "2 k\u0131rm\u0131z\u0131 g\xFCl, 2 cipso. Simetri her \u015Feydir."
+        key: woman_1_init_2
         parseOption1: 0
         parseOption2: 0
         parseOption3: 0
         options:
         - guid: yes
           label: got_it
-    - rid: 782348937986834774
+    - rid: 782348828199879150
       type: {class: EventNode, ns: Conversa.Runtime.Nodes, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: 68f61f56-5cc2-4ef6-afd4-5b5d5826c06a
@@ -94,7 +95,7 @@ MonoBehaviour:
         stopsFlow: 1
         eventGuid: 820efebf-084d-42bb-a8e9-a6c89b8c3be3
         eventName: GoToWorkshop
-    - rid: 782348937986834775
+    - rid: 782348828199879151
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -103,7 +104,7 @@ MonoBehaviour:
         input:
           node: f28b5ec6-62ed-43f8-91cb-6fe51aed4908
           port: previous
-    - rid: 782348937986834776
+    - rid: 782348828199879152
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -112,7 +113,7 @@ MonoBehaviour:
         input:
           node: dd88f83e-0eab-40e3-96b5-ca90d777994b
           port: previous
-    - rid: 782348937986834777
+    - rid: 782348828199879153
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -121,7 +122,7 @@ MonoBehaviour:
         input:
           node: 68f61f56-5cc2-4ef6-afd4-5b5d5826c06a
           port: previous
-    - rid: 782348937986834778
+    - rid: 782348828199879154
       type: {class: EdgeData, ns: Conversa.Runtime, asm: Conversa.Runtime}
       data:
         output:
@@ -130,14 +131,14 @@ MonoBehaviour:
         input:
           node: 68f61f56-5cc2-4ef6-afd4-5b5d5826c06a
           port: previous
-    - rid: 782348937986834779
+    - rid: 782348828199879155
       type: {class: FloatProperty, ns: Conversa.Runtime.Properties, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: 515234b4-7919-451d-862c-5faefcbe535a
         name: Float
         value: 0
         initialValue: 0
-    - rid: 782348937986834780
+    - rid: 782348828199879156
       type: {class: EventProperty, ns: Conversa.Runtime.Properties, asm: Conversa.Runtime}
       data:
         <Guid>k__BackingField: 820efebf-084d-42bb-a8e9-a6c89b8c3be3

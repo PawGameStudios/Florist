@@ -66,12 +66,12 @@ MonoBehaviour:
     - Name: FlowerType
       Entry: 3
       Data: 0
-    - Name: Count
-      Entry: 3
-      Data: 4
     - Name: FlowerColor
       Entry: 3
       Data: 0
+    - Name: Count
+      Entry: 3
+      Data: 4
     - Name: Position
       Entry: 7
       Data: UnityEngine.Vector3, UnityEngine.CoreModule
@@ -129,12 +129,12 @@ MonoBehaviour:
     - Name: FlowerType
       Entry: 3
       Data: 1
-    - Name: Count
-      Entry: 3
-      Data: 4
     - Name: FlowerColor
       Entry: 3
       Data: 0
+    - Name: Count
+      Entry: 3
+      Data: 4
     - Name: Position
       Entry: 7
       Data: UnityEngine.Vector3, UnityEngine.CoreModule
@@ -192,12 +192,12 @@ MonoBehaviour:
     - Name: FlowerType
       Entry: 3
       Data: 2
-    - Name: Count
-      Entry: 3
-      Data: 2
     - Name: FlowerColor
       Entry: 3
       Data: 3
+    - Name: Count
+      Entry: 3
+      Data: 2
     - Name: Position
       Entry: 7
       Data: UnityEngine.Vector3, UnityEngine.CoreModule
@@ -298,12 +298,12 @@ MonoBehaviour:
     - Name: FlowerType
       Entry: 3
       Data: 0
-    - Name: Count
-      Entry: 3
-      Data: 2
     - Name: FlowerColor
       Entry: 3
       Data: 0
+    - Name: Count
+      Entry: 3
+      Data: 2
     - Name: Position
       Entry: 7
       Data: UnityEngine.Vector3, UnityEngine.CoreModule
@@ -361,12 +361,12 @@ MonoBehaviour:
     - Name: FlowerType
       Entry: 3
       Data: 1
-    - Name: Count
-      Entry: 3
-      Data: 2
     - Name: FlowerColor
       Entry: 3
       Data: 0
+    - Name: Count
+      Entry: 3
+      Data: 2
     - Name: Position
       Entry: 7
       Data: UnityEngine.Vector3, UnityEngine.CoreModule
@@ -424,10 +424,10 @@ MonoBehaviour:
     - Name: FlowerType
       Entry: 3
       Data: 3
-    - Name: Count
+    - Name: FlowerColor
       Entry: 3
       Data: 1
-    - Name: FlowerColor
+    - Name: Count
       Entry: 3
       Data: 1
     - Name: Position
@@ -487,12 +487,12 @@ MonoBehaviour:
     - Name: FlowerType
       Entry: 3
       Data: 3
-    - Name: Count
-      Entry: 3
-      Data: 1
     - Name: FlowerColor
       Entry: 3
       Data: 3
+    - Name: Count
+      Entry: 3
+      Data: 1
     - Name: Position
       Entry: 7
       Data: UnityEngine.Vector3, UnityEngine.CoreModule
@@ -617,41 +617,49 @@ MonoBehaviour:
     Cost: 0
     Price: 0
     RibbonType: 1
+    RibbonAnimator: {fileID: 1185301575773585700, guid: fc7f44d7b7c6ec94c8e40b68361b6e8f, type: 3}
   - Sprite: {fileID: 21300000, guid: 5b014294ccbbbba4286984c64950b85e, type: 3}
     Id: r_2
     Cost: 0
     Price: 0
     RibbonType: 2
+    RibbonAnimator: {fileID: 1185301575773585700, guid: 0ff660e60e542e145b0c3a9d49bdfc8a, type: 3}
   - Sprite: {fileID: 21300000, guid: 52e674f7144428a4593f6740b1e8383a, type: 3}
     Id: r_3
     Cost: 0
     Price: 0
     RibbonType: 3
+    RibbonAnimator: {fileID: 1185301575773585700, guid: a7dd0a15c4aaba54ab77cfe430a1c169, type: 3}
   - Sprite: {fileID: 21300000, guid: ba44b42c6984e5443980e1a9e7c658bb, type: 3}
     Id: r_4
     Cost: 0
     Price: 0
     RibbonType: 4
+    RibbonAnimator: {fileID: 1185301575773585700, guid: 5db94f6024f5bf144acba11a7ac377f5, type: 3}
   - Sprite: {fileID: 21300000, guid: f9dda01d2837774428dd25f65e706b5d, type: 3}
     Id: r_5
     Cost: 0
     Price: 0
     RibbonType: 5
+    RibbonAnimator: {fileID: 1185301575773585700, guid: f4e442a0e48285149aff84891dd3a655, type: 3}
   - Sprite: {fileID: 21300000, guid: a882971446e93a94684e43f9bca85ef8, type: 3}
     Id: r_6
     Cost: 0
     Price: 0
     RibbonType: 6
+    RibbonAnimator: {fileID: 1185301575773585700, guid: 0daa7467872cdd244bbbf7d0dbb50dfd, type: 3}
   - Sprite: {fileID: 21300000, guid: 006bb8cb4facb274c9bd11021cc9078c, type: 3}
     Id: r_7
     Cost: 0
     Price: 0
     RibbonType: 7
+    RibbonAnimator: {fileID: 1185301575773585700, guid: 80e0237cf02827e4ea3af089d5b6460a, type: 3}
   - Sprite: {fileID: 21300000, guid: 6fd473eda8c4bfa44bd1e7a0fd959e3f, type: 3}
     Id: r_8
     Cost: 0
     Price: 0
     RibbonType: 8
+    RibbonAnimator: {fileID: 1185301575773585700, guid: 0daa7467872cdd244bbbf7d0dbb50dfd, type: 3}
   WrappingPaperInfo:
   - Sprite: {fileID: 21300000, guid: db85ece96322be3458ede3f4603e23c8, type: 3}
     Id: wp_1

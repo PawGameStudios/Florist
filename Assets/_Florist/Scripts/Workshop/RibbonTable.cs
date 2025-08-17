@@ -17,7 +17,7 @@ public class RibbonTable : SerializedMonoBehaviour
     [SerializeField] private Transform _paperSitPositionBottom_1;
     [SerializeField] private Transform _paperSitPositionBottom_2_1;
     [SerializeField] private Transform _paperSitPositionBottom_2_2;
-    [SerializeField] private Dictionary<RibbonType, Animator> _ribbonAnimators;
+    // [SerializeField] private Dictionary<RibbonType, Animator> _ribbonAnimators;
     private const int RIBBON_COUNT_IN_ROW = 4;
 
     private List<RibbonInfo> _ribbons = new();
@@ -120,7 +120,7 @@ public class RibbonTable : SerializedMonoBehaviour
         HapticsController.PlayMediumHaptic();
 
         _selectedRibbon = _ribbons[index].RibbonType;
-        _ribbonAnimator = Instantiate(_ribbonAnimators[_selectedRibbon], _paper.transform);
+        _ribbonAnimator = Instantiate(Configs.WorkshopConfig.GetRibbonAnimator(_selectedRibbon), _paper.transform);
         _ribbonAnimator.transform.SetPositionAndRotation(_paper.RibbonPosRef.position, _paper.RibbonPosRef.rotation);
 
         StartCoroutine(PlayRibbonAnimation());

@@ -378,7 +378,7 @@ public class Customer : MonoBehaviour
 
         Debug.Log($"Flower price: {price}");
         Debug.Log($"Given money: {bestSum}");
-        return (price, bestSum);
+        return (bestSum, price);
     }
 
     public void StartTimer()
@@ -691,10 +691,10 @@ public class Customer : MonoBehaviour
             }
 
             // check ribbon similarity
-            result.IsRibbonCorrect = orderedBouqet.RibbonType == receivedBouquetModels[mostSimilarIndex].RibbonType;
+            result.IsRibbonCorrect = orderedBouqet.RibbonType == RibbonType.None || orderedBouqet.RibbonType == receivedBouquetModels[mostSimilarIndex].RibbonType;
 
             // check wrapping paper similarity
-            result.IsWrappingPaperCorrect = orderedBouqet.WrappingPaperType == receivedBouquetModels[mostSimilarIndex].WrappingPaperType;
+            result.IsWrappingPaperCorrect = orderedBouqet.WrappingPaperType == WrappingPaperType.None || orderedBouqet.WrappingPaperType == receivedBouquetModels[mostSimilarIndex].WrappingPaperType;
 
             // add similarity percentage to result
             result.OrderSimilarity = mostSimilarPercentage;

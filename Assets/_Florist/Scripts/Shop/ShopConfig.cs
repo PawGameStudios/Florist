@@ -22,15 +22,16 @@ public class ShopConfig : SerializedScriptableObject
         [VerticalGroup("Info")]
         public long Price;
 
-        [VerticalGroup("Info")]
-        public int UnlockDay;
-
         [VerticalGroup("State")]
         public bool IsSelectable;
 
         [VerticalGroup("State")]
         [LabelText("State")]
         public ShopData.ItemState DefaultItemState = ShopData.ItemState.Purchasable;
+
+        [VerticalGroup("State")]
+        [ShowIf("DefaultItemState", ShopData.ItemState.Locked)]
+        public int UnlockDay = 0;
     }
 
     [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
@@ -66,6 +67,18 @@ public class ShopConfig : SerializedScriptableObject
             ItemType.Decor => DecorationItems.ContainsKey(decorationType) ? DecorationItems[decorationType] : null,
             _ => null
         };
+    }
+
+    public ShopItemInfo GetItemById(ItemType itemType, string id)
+    {
+        foreach (var item in GetItems(itemType))
+        {
+            if (item.Id == id)
+            {
+                return item;
+            }
+        }
+        return null;
     }
 
 }

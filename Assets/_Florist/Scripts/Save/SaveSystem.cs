@@ -54,11 +54,9 @@ public class SaveSystem : MonoBehaviour
                 return;
             }
 
-            // GeneralData = FileManager.Load<GeneralData>(_generalDataKey);
-            // ShopData = FileManager.Load<ShopData>(_shopDataKey);
-            // SaveData = FileManager.Load<SaveData>(_saveDataKey);
-
-            // SaveData.LoadGame();
+            GeneralData = FileManager.Load<GeneralData>(_generalDataKey);
+            ShopData = FileManager.Load<ShopData>(_shopDataKey);
+            SaveData = FileManager.Load<SaveData>(_saveDataKey);
         }
         catch (Exception ex)
         {
@@ -102,11 +100,11 @@ public class SaveSystem : MonoBehaviour
         errLog += $"SaveData: {SaveData != null}\n";
         errLog += $"ex: {ex}";
 
-        // if (FirebaseController.Instance != null)
-        // {
-        //     FirebaseController.Instance.SetCrashlyticsLog(errLog);
-        //     FirebaseController.Instance.SendException(ex);
-        // }
+        if (FirebaseController.Instance != null)
+        {
+            FirebaseController.Instance.SetCrashlyticsLog(errLog);
+            FirebaseController.Instance.SendException(ex);
+        }
         Debug.LogError(errLog);
     }
 

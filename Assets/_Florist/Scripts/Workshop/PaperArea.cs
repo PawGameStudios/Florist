@@ -23,6 +23,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     }
 
     public State PaperState => _state;
+    public GameObject BouquetObject => _bouquetObject;
     public BouquetModel BouquetModel => _bouquetModel;
     public bool CanAddFlowers => _state == State.AddingFlowers;
     public bool IsEmpty => _state == State.WaitingForPaper;
@@ -190,15 +191,12 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         {
             return;
         }
-        Debug.Log($"Adding flower at position: {eventData.position.y}, rotation: {targetRot}");
         if (eventData.position.y < Y_POS_LIMIT)
         {
             var pos = eventData.position;
             pos.y = Y_POS_LIMIT;
             eventData.position = pos;
         }
-
-        Debug.Log($"Adding flower at position: {eventData.position.y}, rotation: {targetRot}");
 
         Flower newFlower = References.WorkshopPage.CreateNewFlower(targetPos: eventData.position,
                                                         targetRotation: targetRot,
@@ -347,6 +345,17 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         _scissorObject.SetActive(true);
         scissor.SetParent(_paperArea);
 
+        if (!_isPosCalculated)
+        {
+            _bottomMostY = _paperArea.position.y - _paperArea.rect.height / 2f;
+            _saplingRightMostPosX = _saplingArea.position.x + _saplingArea.rect.width / 2f;
+            _saplingLeftMostPosX = _saplingArea.position.x - _saplingArea.rect.width / 2f;
+            _paperRightMostX = _paperArea.position.x + _paperArea.rect.width / 2f;
+            _paperLeftMostX = _paperArea.position.x - _paperArea.rect.width / 2f;
+            _paperMiddleX = _paperArea.position.x;
+            _isPosCalculated = true;
+        }
+
         float time = 0;
         Vector3 p0 = scissor.position;
         Vector3 p1 = scissor.position + new Vector3(Random.Range(0, 300), Random.Range(-300, 300), 0);
@@ -396,10 +405,27 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
 
 
     #region Save/Load
-    public void SetPaperType(WrappingPaperType paperType)
+    public void SetPaper(WrappingPaperType paperType)
     {
-        _state = State.AddingFlowers;
+        _paperRollImage.gameObject.SetActive(false);
+        _paperImage.gameObject.SetActive(true);
+        _paperClosedImage.gameObject.SetActive(false);
+
         _bouquetModel.WrappingPaperType = paperType;
+
+        _paperImage.sprite = Configs.WorkshopConfig.GetWrappingPaperSprite(paperType);
+        _paperImage.transform.position = _paperImageFinalRef.position;
+    }
+
+    public void SetClosedPaper(WrappingPaperType paperType)
+    {
+        _paperRollImage.gameObject.SetActive(false);
+        _paperImage.gameObject.SetActive(false);
+        _paperClosedImage.gameObject.SetActive(true);
+
+        _bouquetModel.WrappingPaperType = paperType;
+
+        _paperClosedImage.sprite = Configs.WorkshopConfig.GetWrappingPaperClosedSprite(paperType);
     }
 
     public void SetFlowers(BouquetModel bouquetModel)
@@ -432,9 +458,20 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         _state = state;
     }
 
-    public void SetRibbonType(RibbonType ribbonType)
+    public void SetRibbon(RibbonType ribbonType)
     {
+        Debug.Log("Setting ribbon type: " + ribbonType);
+
         _bouquetModel.RibbonType = ribbonType;
+        var ribbonAnimator = Instantiate(Configs.WorkshopConfig.GetRibbonAnimator(ribbonType), transform);
+        _ribbonObject = ribbonAnimator.gameObject;
+        Invoke(nameof(PlayRibbonAnimation), 0.1f);
+    }
+
+    private void PlayRibbonAnimation()
+    {
+        _ribbonObject.transform.SetPositionAndRotation(_ribbonPosRef.position, _ribbonPosRef.rotation);
+        _ribbonObject.GetComponent<Animator>().Play("Idle");
     }
     #endregion
 }

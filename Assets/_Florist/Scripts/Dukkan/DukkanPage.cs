@@ -57,6 +57,25 @@ public class DukkanPage : Page
     public List<BouquetModel> CurrentOrder => _customer.CurrentOrder;
     public List<string> ConvoHistory => _convoHistory;
     public CustomerInfo CurrentCustomerInfo => _customer.CustomerInfo;
+    public BouquetModel DeliveredBouquet
+    {
+        get
+        {
+            if (_bouquet == null)
+            {
+                return null;
+            }
+            if (_bouquet.Order.BouquetModels == null)
+            {
+                return null;
+            }
+            if (_bouquet.Order.BouquetModels.Count == 0)
+            {
+                return null;
+            }
+            return _bouquet.Order.BouquetModels[0];
+        }
+    }
     public OrderInfo OrderInfo => _bouquet != null ? _bouquet.Order : new OrderInfo();
     public DayInfo DayInfo => _dayInfo;
     public DukkanSaveState DukkanState => _dukkanSaveState;
@@ -69,7 +88,7 @@ public class DukkanPage : Page
     [SerializeField] private Bouquet _bouquet;
     [SerializeField] private PosController _posController;
     [SerializeField] private GameObject _contentObjects;
-    [SerializeField] private Image _imageForLoad;
+    [SerializeField] private PaperArea _paperAreaForLoad;
     [SerializeField] private Tutorial _tutorial;
     private DayInfo _dayInfo;
     private ConversationRunner _convoRunner;
@@ -219,7 +238,14 @@ public class DukkanPage : Page
         }
         _earningsInfo.Cost += cost;
 
-        PrepareHint(HintType.GiveFlower);
+        if (!SaveSystem.Inst.SaveData.IsDukkanTutorialFinished)
+        {
+            ShowGiveFlowerTutorial();
+        }
+        else
+        {
+            PrepareHint(HintType.GiveFlower);
+        }
     }
 
     public void OnFlowerDelivered()
@@ -231,7 +257,7 @@ public class DukkanPage : Page
 
         HapticsController.PlayMediumHaptic();
 
-        _dukkanSaveState = DukkanSaveState.FlowerDelivered;
+        _dukkanSaveState = DukkanSaveState.Payment;
 
         _bouquet.gameObject.SetActive(false);
 
@@ -277,6 +303,8 @@ public class DukkanPage : Page
 
     private void OnPaymentMade(int change, long moneyChange)
     {
+        _dukkanSaveState = DukkanSaveState.Done;
+
         SaveSystem.Inst.GeneralData.ChangeMoney(moneyChange);
 
         _earningsInfo.Change += change;
@@ -292,12 +320,7 @@ public class DukkanPage : Page
         _convoRunner.OnEnd.AddListener(HandleEndEvent);
         _convoRunner.Begin();
 
-        if (!SaveSystem.Inst.SaveData.IsDukkanTutorialFinished)
-        {
-            ShowGiveFlowerTutorial();
-        }
-
-        // // TODO: tip animation
+        // TODO: tip animation
         // int tip = (int)((_earningsInfo.GivenMoney - _earningsInfo.Change) * _flowerDeliveredInfo.TipPercentage / 100f);
         // _earningsInfo.Tip += tip;
     }
@@ -502,6 +525,7 @@ public class DukkanPage : Page
         References.HappinessMeter.ContinueHappinessCountdown(dukkanParams.CurrentTick, dukkanParams.HappinessValue);
         References.DayTimeManager.StartDayTimeCountdown(dukkanParams.TotalTimePassed);
 
+        _posController.ResetPos();
         _earningsInfo = dukkanParams.EarningsInfo;
         _dayInfo = dukkanParams.DayInfo;
         _nextCustomerIndex = dukkanParams.NextCustomerIndex;
@@ -517,21 +541,25 @@ public class DukkanPage : Page
                 break;
             case DukkanSaveState.FlowerReady:
                 LoadCustomer(dukkanParams.CurrentCustomerInfo, dukkanParams.CurrentOrder);
-                LoadFlower(dukkanParams.OrderInfo, true);
+                LoadFlower(dukkanParams.OrderInfo, dukkanParams.DeliveredBouquet, true);
                 break;
-            case DukkanSaveState.FlowerDelivered:
+            case DukkanSaveState.Payment:
+                LoadCustomer(dukkanParams.CurrentCustomerInfo, dukkanParams.CurrentOrder);
+                LoadFlower(dukkanParams.OrderInfo, dukkanParams.DeliveredBouquet, false);
+                var pricePaymentInfo = _customer.GetOrderPayment();
+                _posController.ReceivePayment(pricePaymentInfo.Item1, pricePaymentInfo.Item2, OnPaymentMade);
+                break;
+            case DukkanSaveState.Done:
                 StartNextEvent();
                 break;
             case DukkanSaveState.InWorkshop:
                 LoadCustomer(dukkanParams.CurrentCustomerInfo, dukkanParams.CurrentOrder);
-                LoadFlower(dukkanParams.OrderInfo, false);
                 References.WorkshopPage.SetOrderCount(dukkanParams.CurrentOrder.Count)
                                         .SetConvoHistory(dukkanParams.ConvoHistory)
                                         .Open(new PageParams
                                         {
                                             LoadFromSaveData = true,
-                                            PreviousPage = PageType.MainPage
-                                            // PreviousPage = PageType.Dukkan ?? 
+                                            PreviousPage = PageType.Dukkan
                                         });
                 break;
             default:
@@ -548,45 +576,22 @@ public class DukkanPage : Page
         References.HappinessMeter.StartNewHappinessCountdown();
     }
 
-    private void LoadFlower(OrderInfo orderInfo, bool activateBouquet)
+    private void LoadFlower(OrderInfo orderInfo, BouquetModel bouquetModel, bool activateBouquet)
     {
-        Image bouquetParent = Instantiate(_imageForLoad, transform);
-        bouquetParent.enabled = false;
-        bouquetParent.gameObject.SetActive(activateBouquet);
-        Debug.Log(activateBouquet);
-
-        for (int i = 0; i < orderInfo.BouquetModels.Count; i++)
+        if (bouquetModel == null)
         {
-            BouquetModel bouquetModel = orderInfo.BouquetModels[i];
-            for (int j = 0; j < bouquetModel.Flowers.Count; j++)
-            {
-                BouquetFlowerInfo flowerInfo = bouquetModel.Flowers[j];
-                Image flowerObject = Instantiate(_imageForLoad, bouquetParent.transform);
-                flowerObject.GetComponent<RectTransform>().pivot = flowerInfo.Pivot;
-                flowerObject.transform.SetLocalPositionAndRotation(flowerInfo.Position, Quaternion.Euler(flowerInfo.Rotation));
-                flowerObject.sprite = Configs.WorkshopConfig.GetFlowerSprite(flowerInfo.FlowerType, flowerInfo.FlowerColor);
-                flowerObject.name = $"{flowerInfo.FlowerType}_{flowerInfo.FlowerColor}";
-                flowerObject.gameObject.SetActive(true);
-            }
-
-            // TODO: Uncomment when ribbon and paper images are available
-
-            // Image ribbonObject = Instantiate(_imageForLoad, bouquetParent.transform);
-            // ribbonObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-            // ribbonObject.sprite = Configs.WorkshopConfig.GetRibbonSprite(bouquetModel.RibbonType);
-            // ribbonObject.name = bouquetModel.RibbonType.ToString();
-            // ribbonObject.gameObject.SetActive(true);
-
-            // Image paperObject = Instantiate(_imageForLoad, bouquetParent.transform);
-            // paperObject.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-            // paperObject.sprite = Configs.WorkshopConfig.GetWrappingPaperSprite(bouquetModel.WrappingPaperType);
-            // paperObject.name = bouquetModel.WrappingPaperType.ToString();
-            // paperObject.gameObject.SetActive(true);
+            StartNextEvent();
+            return;
         }
 
-        _posController.ResetPos();
-        _bouquet.SetOrder(orderInfo, bouquetParent.gameObject);
+        _paperAreaForLoad.SetFlowers(bouquetModel);
+        _paperAreaForLoad.SetClosedPaper(bouquetModel.WrappingPaperType);
+        _paperAreaForLoad.SetRibbon(bouquetModel.RibbonType);
+        _paperAreaForLoad.gameObject.SetActive(true);
+
+        _bouquet.SetOrder(orderInfo, _paperAreaForLoad.gameObject);
         _bouquet.gameObject.SetActive(activateBouquet);
+        _paperAreaForLoad.gameObject.SetActive(false);
     }
     #endregion
 

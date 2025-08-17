@@ -55,19 +55,14 @@ public static class LocalizationManager
     #region Private Methods
     static LocalizationManager()
     {
-        LoadLocalizedText("en-US");
-        // if (Application.systemLanguage == SystemLanguage.Turkish)
-        // {
-        //     LoadLocalizedText("tr-TR");
-        // }
-        // else if (Application.systemLanguage == SystemLanguage.Spanish)
-        // {
-        //     LoadLocalizedText("es-ES");
-        // }
-        // else
-        // {
-        //     LoadLocalizedText("en-US");
-        // }
+        if (Application.systemLanguage == SystemLanguage.Turkish)
+        {
+            LoadLocalizedText("tr-TR");
+        }
+        else
+        {
+            LoadLocalizedText("en-US");
+        }
     }
 
     private static void LoadLocalizedText(string lang)

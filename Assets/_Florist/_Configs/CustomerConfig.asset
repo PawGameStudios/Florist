@@ -184,8 +184,8 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 2
         FlowerColor: 0
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -240,15 +240,15 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 1
-        Count: 2
         FlowerColor: 0
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -305,15 +305,15 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 1
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -370,15 +370,15 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 1
-        Count: 2
         FlowerColor: 0
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 0
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -435,15 +435,15 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 2
         FlowerColor: 1
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -500,15 +500,15 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 3
-        Count: 1
         FlowerColor: 1
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 1
-        Count: 2
         FlowerColor: 0
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -565,15 +565,15 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 2
         FlowerColor: 0
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 1
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -630,15 +630,15 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 2
         FlowerColor: 0
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 1
         FlowerColor: 1
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -695,22 +695,22 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 1
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 1
         FlowerColor: 1
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -767,38 +767,38 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 2
         FlowerColor: 0
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 2
         FlowerColor: 1
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
     CustomInitConvo: 1
     CustomGoodbyeConvo: 1
-    InitialConversation: {fileID: 11400000, guid: 8a044b10c914e1b49bc65fa29a1d0118, type: 2}
+    InitialConversation: {fileID: 11400000, guid: a73b4545ecd4efa49bf6791ec4bebfd7, type: 2}
     GoodbyeConversations:
       _serializedList:
       - Key: 0
-        Value: {fileID: 11400000, guid: 40df8876c06f5c947a1bb2bab01ae277, type: 2}
+        Value: {fileID: 11400000, guid: 3350eb9dd45a9c24e850cf7f452db5b8, type: 2}
       - Key: 1
-        Value: {fileID: 11400000, guid: 40df8876c06f5c947a1bb2bab01ae277, type: 2}
+        Value: {fileID: 11400000, guid: 3350eb9dd45a9c24e850cf7f452db5b8, type: 2}
       - Key: 2
-        Value: {fileID: 11400000, guid: 40df8876c06f5c947a1bb2bab01ae277, type: 2}
+        Value: {fileID: 11400000, guid: 3350eb9dd45a9c24e850cf7f452db5b8, type: 2}
       - Key: 4
-        Value: {fileID: 11400000, guid: ae6b6e810498a4c4186d8f9764d93f62, type: 2}
+        Value: {fileID: 11400000, guid: dd3a363d3a3a2fd409098c0e788614dc, type: 2}
       - Key: 8
-        Value: {fileID: 11400000, guid: dcd6b40fa54c79944b48cae3b34f2cd3, type: 2}
+        Value: {fileID: 11400000, guid: da4bade61321cd24bbcd635c9308fdc4, type: 2}
       - Key: 16
-        Value: {fileID: 11400000, guid: 40df8876c06f5c947a1bb2bab01ae277, type: 2}
+        Value: {fileID: 11400000, guid: 3350eb9dd45a9c24e850cf7f452db5b8, type: 2}
       - Key: 32
-        Value: {fileID: 11400000, guid: 40df8876c06f5c947a1bb2bab01ae277, type: 2}
+        Value: {fileID: 11400000, guid: 3350eb9dd45a9c24e850cf7f452db5b8, type: 2}
     OrderHappinessType: 0
     OrderHappiness:
       HappinessChange:
@@ -818,38 +818,38 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 1
-        Count: 2
         FlowerColor: 0
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 1
         FlowerColor: 1
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
     CustomInitConvo: 1
     CustomGoodbyeConvo: 1
-    InitialConversation: {fileID: 11400000, guid: 893f7ec05e16e674999f6e79a26eb204, type: 2}
+    InitialConversation: {fileID: 11400000, guid: d8c9f7203a1cb104895d24517871bff1, type: 2}
     GoodbyeConversations:
       _serializedList:
       - Key: 0
-        Value: {fileID: 11400000, guid: 29e24f0b3f1352243af62a4127e8dd61, type: 2}
+        Value: {fileID: 11400000, guid: 2a2e75c8109188c4f917e58289766a4e, type: 2}
       - Key: 1
-        Value: {fileID: 11400000, guid: 29e24f0b3f1352243af62a4127e8dd61, type: 2}
+        Value: {fileID: 11400000, guid: 2a2e75c8109188c4f917e58289766a4e, type: 2}
       - Key: 2
-        Value: {fileID: 11400000, guid: 29e24f0b3f1352243af62a4127e8dd61, type: 2}
+        Value: {fileID: 11400000, guid: 2a2e75c8109188c4f917e58289766a4e, type: 2}
       - Key: 4
-        Value: {fileID: 11400000, guid: 3d84ef619e9b1ad4c8c682a3b89d89a6, type: 2}
+        Value: {fileID: 11400000, guid: 9c1087e03bb428e4eafa4293901adc71, type: 2}
       - Key: 8
-        Value: {fileID: 11400000, guid: 80d3ecda89e12ba40b34dd40e5c896ea, type: 2}
+        Value: {fileID: 11400000, guid: 071a5d5236ce7dc45b6b5a2ab2f10184, type: 2}
       - Key: 16
-        Value: {fileID: 11400000, guid: 29e24f0b3f1352243af62a4127e8dd61, type: 2}
+        Value: {fileID: 11400000, guid: 2a2e75c8109188c4f917e58289766a4e, type: 2}
       - Key: 32
-        Value: {fileID: 11400000, guid: 29e24f0b3f1352243af62a4127e8dd61, type: 2}
+        Value: {fileID: 11400000, guid: 2a2e75c8109188c4f917e58289766a4e, type: 2}
     OrderHappinessType: 0
     OrderHappiness:
       HappinessChange:
@@ -870,23 +870,23 @@ MonoBehaviour:
       CustomFlowers: []
     CustomInitConvo: 1
     CustomGoodbyeConvo: 1
-    InitialConversation: {fileID: 11400000, guid: dfd1f20ddd3657a4898f99bd8cbe5ce9, type: 2}
+    InitialConversation: {fileID: 11400000, guid: cb64cebb2ebe9a9428ed1d67d8a920d1, type: 2}
     GoodbyeConversations:
       _serializedList:
       - Key: 0
-        Value: {fileID: 11400000, guid: 0016ef72d62e1374e9e7a7d0db3acc98, type: 2}
+        Value: {fileID: 11400000, guid: 77d73696756c7dd43983fa7bd2ef88b7, type: 2}
       - Key: 1
-        Value: {fileID: 11400000, guid: 0016ef72d62e1374e9e7a7d0db3acc98, type: 2}
+        Value: {fileID: 11400000, guid: 77d73696756c7dd43983fa7bd2ef88b7, type: 2}
       - Key: 2
-        Value: {fileID: 11400000, guid: 0016ef72d62e1374e9e7a7d0db3acc98, type: 2}
+        Value: {fileID: 11400000, guid: 77d73696756c7dd43983fa7bd2ef88b7, type: 2}
       - Key: 4
-        Value: {fileID: 11400000, guid: 7322169ebf8254b42b43e77fc8a7f70f, type: 2}
+        Value: {fileID: 11400000, guid: 042e1d8e8b9962942a7cb5e14f264c4e, type: 2}
       - Key: 8
-        Value: {fileID: 11400000, guid: cddf75a0a94ce36428eddec61d06e097, type: 2}
+        Value: {fileID: 11400000, guid: f9b54a93ac9bf4c4daa4a4a980b2a80f, type: 2}
       - Key: 16
-        Value: {fileID: 11400000, guid: 0016ef72d62e1374e9e7a7d0db3acc98, type: 2}
+        Value: {fileID: 11400000, guid: 77d73696756c7dd43983fa7bd2ef88b7, type: 2}
       - Key: 32
-        Value: {fileID: 11400000, guid: 0016ef72d62e1374e9e7a7d0db3acc98, type: 2}
+        Value: {fileID: 11400000, guid: 77d73696756c7dd43983fa7bd2ef88b7, type: 2}
     OrderHappinessType: 0
     OrderHappiness:
       HappinessChange:
@@ -906,38 +906,38 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 1
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 2
         FlowerColor: 1
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
     CustomInitConvo: 1
     CustomGoodbyeConvo: 1
-    InitialConversation: {fileID: 11400000, guid: 3e65ac60a6057db4b9addef5c87f01a9, type: 2}
+    InitialConversation: {fileID: 11400000, guid: c8fb0d308ee2cff4d997be1e2b4b3e36, type: 2}
     GoodbyeConversations:
       _serializedList:
       - Key: 0
-        Value: {fileID: 11400000, guid: 7ef48e451380e0a49985b1c73e5767b1, type: 2}
+        Value: {fileID: 11400000, guid: 7f7fd1ef66d613a4883577647acc9736, type: 2}
       - Key: 1
-        Value: {fileID: 11400000, guid: 7ef48e451380e0a49985b1c73e5767b1, type: 2}
+        Value: {fileID: 11400000, guid: 7f7fd1ef66d613a4883577647acc9736, type: 2}
       - Key: 2
-        Value: {fileID: 11400000, guid: 7ef48e451380e0a49985b1c73e5767b1, type: 2}
+        Value: {fileID: 11400000, guid: 7f7fd1ef66d613a4883577647acc9736, type: 2}
       - Key: 4
-        Value: {fileID: 11400000, guid: f227f368b5463d7428e4e1148ed9abab, type: 2}
+        Value: {fileID: 11400000, guid: 04506aa4b6562bc40b8ef5dc4a5468fa, type: 2}
       - Key: 8
-        Value: {fileID: 11400000, guid: 477cd593f00ebb741a4f553386f647a5, type: 2}
+        Value: {fileID: 11400000, guid: e13e34d537c8d4d42b6ba0527a4ae737, type: 2}
       - Key: 16
-        Value: {fileID: 11400000, guid: 7ef48e451380e0a49985b1c73e5767b1, type: 2}
+        Value: {fileID: 11400000, guid: 7f7fd1ef66d613a4883577647acc9736, type: 2}
       - Key: 32
-        Value: {fileID: 11400000, guid: 7ef48e451380e0a49985b1c73e5767b1, type: 2}
+        Value: {fileID: 11400000, guid: 7f7fd1ef66d613a4883577647acc9736, type: 2}
     OrderHappinessType: 0
     OrderHappiness:
       HappinessChange:
@@ -957,22 +957,22 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 2
         FlowerColor: 0
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 1
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 1
         FlowerColor: 1
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -1015,22 +1015,22 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 2
         FlowerColor: 0
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 1
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 1
         FlowerColor: 1
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -1062,7 +1062,7 @@ MonoBehaviour:
       TipPercentage: {x: 10, y: 50}
       AcceptableWaitTime: 60
   - Sprite: {fileID: 21300000, guid: 408872753ebc39d409dae1c28516732c, type: 3}
-    CustomerType: 0
+    CustomerType: 3
     Name: new_grad_2
     Gender: 0
     ChoseOrderRandomly: 0
@@ -1073,15 +1073,15 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 1
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 2
         FlowerColor: 3
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -1113,7 +1113,7 @@ MonoBehaviour:
       TipPercentage: {x: 10, y: 50}
       AcceptableWaitTime: 60
   - Sprite: {fileID: 21300000, guid: 0a58ae3c6e53b0649830ddf0bda3d902, type: 3}
-    CustomerType: 0
+    CustomerType: 3
     Name: emotional_couple
     Gender: 0
     ChoseOrderRandomly: 0
@@ -1124,22 +1124,22 @@ MonoBehaviour:
       WrappingPaperType: 0
       CustomFlowers:
       - FlowerType: 0
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 1
         FlowerColor: 1
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 1
         FlowerColor: 3
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -1171,9 +1171,9 @@ MonoBehaviour:
       TipPercentage: {x: 10, y: 50}
       AcceptableWaitTime: 60
   - Sprite: {fileID: 21300000, guid: bdba957fb1164ca4eb9fdd63c965cb90, type: 3}
-    CustomerType: 0
+    CustomerType: 3
     Name: woman_corporate
-    Gender: 0
+    Gender: 2
     ChoseOrderRandomly: 0
     MaxOrderCount: 0
     Orders:
@@ -1182,22 +1182,22 @@ MonoBehaviour:
       WrappingPaperType: 7
       CustomFlowers:
       - FlowerType: 0
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 1
-        Count: 1
         FlowerColor: 0
+        Count: 1
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
         IsFlowerCut: 0
       - FlowerType: 3
-        Count: 2
         FlowerColor: 3
+        Count: 2
         Position: {x: 0, y: 0, z: 0}
         Rotation: {x: 0, y: 0, z: 0}
         Pivot: {x: 0, y: 0, z: 0}
@@ -1229,17 +1229,1060 @@ MonoBehaviour:
       TipPercentage: {x: 10, y: 50}
       AcceptableWaitTime: 60
   - Sprite: {fileID: 21300000, guid: 8d3d5e9db2eeea44ea35fb08816e239e, type: 3}
-    CustomerType: 0
-    Name: 
-    Gender: 0
+    CustomerType: 3
+    Name: clear_order_5
+    Gender: 2
     ChoseOrderRandomly: 0
     MaxOrderCount: 0
-    Orders: []
-    CustomInitConvo: 0
-    CustomGoodbyeConvo: 0
-    InitialConversation: {fileID: 0}
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 1
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 3e65ac60a6057db4b9addef5c87f01a9, type: 2}
     GoodbyeConversations:
-      _serializedList: []
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 7ef48e451380e0a49985b1c73e5767b1, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 7ef48e451380e0a49985b1c73e5767b1, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 7ef48e451380e0a49985b1c73e5767b1, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: f227f368b5463d7428e4e1148ed9abab, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 477cd593f00ebb741a4f553386f647a5, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 7ef48e451380e0a49985b1c73e5767b1, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 7ef48e451380e0a49985b1c73e5767b1, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 76eecd1e26895c447b611f1b8d077d5e, type: 3}
+    CustomerType: 3
+    Name: plain_guy
+    Gender: 1
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 1
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 15204e22631d61d42aa9ea4d9f9298fd, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 15ccf9824150ac9428e72ed88c7c9618, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 15ccf9824150ac9428e72ed88c7c9618, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 15ccf9824150ac9428e72ed88c7c9618, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 9d9b8b4205e15064e9834f1bb3d340f9, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 690197b39021b924fba6c6dce2808cda, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 15ccf9824150ac9428e72ed88c7c9618, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 15ccf9824150ac9428e72ed88c7c9618, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 9021e76d571f3eb4db0409378b8d207f, type: 3}
+    CustomerType: 3
+    Name: clear_order_6
+    Gender: 1
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 20ac530422bd96e47955eebf47e0f6dd, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 72dbd4b7a3b0564438648983ea5acf63, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 72dbd4b7a3b0564438648983ea5acf63, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 72dbd4b7a3b0564438648983ea5acf63, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: abc099c22f840e04e9218d1b00307d07, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: a5c1f8de417de6b48901874be814f270, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 72dbd4b7a3b0564438648983ea5acf63, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 72dbd4b7a3b0564438648983ea5acf63, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 8557006e9b6dac94a9e85f6375823a04, type: 3}
+    CustomerType: 3
+    Name: woman_clean
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 5
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 95b2e0fd0b3c7d44eb4cdca1abf24d9c, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 9b15f4f4d4296b643aba6cc30bf6f3cf, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 9b15f4f4d4296b643aba6cc30bf6f3cf, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 9b15f4f4d4296b643aba6cc30bf6f3cf, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: fc7f417568936f24fa5ff28ba381d9a9, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 2314c5ede4f67184ea5beafb3b13ce4b, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 9b15f4f4d4296b643aba6cc30bf6f3cf, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 9b15f4f4d4296b643aba6cc30bf6f3cf, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 67ad2732e7fffa0419e324f2cdbcbbf6, type: 3}
+    CustomerType: 3
+    Name: man_2
+    Gender: 1
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 0
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 1
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 1
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: ac2442fd77378e7489a7ff39e752e022, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: de455fbc1f66afd44b39800b833207f5, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: de455fbc1f66afd44b39800b833207f5, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: de455fbc1f66afd44b39800b833207f5, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 4d196aab995f1034a84063c11ec81b71, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 6d05019649f38884a8047c1a90748071, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: de455fbc1f66afd44b39800b833207f5, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: de455fbc1f66afd44b39800b833207f5, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 73c21ca42dd479e45a7c303144b4fac1, type: 3}
+    CustomerType: 3
+    Name: woman_retro
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 0
+      WrappingPaperType: 0
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 52b6246f538c62b4a84c8a4291d0d4e6, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 16b0e0c0f5b5fb24690c35d5318a3903, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 16b0e0c0f5b5fb24690c35d5318a3903, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 16b0e0c0f5b5fb24690c35d5318a3903, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 4fcf2e7b798da1e4688c4ac436789ec8, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: e54b20f02275db94fb81926c75a40ac0, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 16b0e0c0f5b5fb24690c35d5318a3903, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 16b0e0c0f5b5fb24690c35d5318a3903, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 8d3d5e9db2eeea44ea35fb08816e239e, type: 3}
+    CustomerType: 3
+    Name: clear_order_7
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 0
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 1
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 1
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: f1753635a1a5cb84f86957289d336495, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: cab33453e5e1c914987e8f93f164afd9, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: cab33453e5e1c914987e8f93f164afd9, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: cab33453e5e1c914987e8f93f164afd9, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 97e1cd5fb4ad12242926449aee8c5ec1, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: b86e33e8aa251e349a6498667637ed39, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: cab33453e5e1c914987e8f93f164afd9, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: cab33453e5e1c914987e8f93f164afd9, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: cee03892a331171439c433d66557991e, type: 3}
+    CustomerType: 3
+    Name: woman_young
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 183cc3f24ec5b374da0e499f2d8dfa38, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: caca2ba0b11b3f94b97002e0e787fbc6, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: caca2ba0b11b3f94b97002e0e787fbc6, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: cab33453e5e1c914987e8f93f164afd9, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 87ca487adbf6bf04192d496dd1e0f16b, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 7c4c5f8ae018db34d99ff574e058cca8, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: caca2ba0b11b3f94b97002e0e787fbc6, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: fdb3b33849e02b84b8766033c2ddf6e3, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 07353e46cf6209242b558203b59abd52, type: 3}
+    CustomerType: 3
+    Name: man_rough
+    Gender: 1
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 1
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 1
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 7935c778600def34aa2fd2081f0938c1, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: fdb3b33849e02b84b8766033c2ddf6e3, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: fdb3b33849e02b84b8766033c2ddf6e3, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: fdb3b33849e02b84b8766033c2ddf6e3, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 68c7ec8160512954eb8c3bb58b2d19cc, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: a28e790bdca9bca458d7293dafafdf07, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: fdb3b33849e02b84b8766033c2ddf6e3, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: fdb3b33849e02b84b8766033c2ddf6e3, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 10bc858ff33df9a419625a7881908990, type: 3}
+    CustomerType: 3
+    Name: woman_bimbo
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 5
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 1
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 6b50acf1a85dfce4e9d2e3574508fc0d, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 204be8197648a5448ba8fb1a7f914eed, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 204be8197648a5448ba8fb1a7f914eed, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 204be8197648a5448ba8fb1a7f914eed, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 098049b3e7fada44c839144dcef70991, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 4c55b72ff948563409e6336d37a276a3, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 204be8197648a5448ba8fb1a7f914eed, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 204be8197648a5448ba8fb1a7f914eed, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 69c2d379d220285448227e14d9dc1e8b, type: 3}
+    CustomerType: 3
+    Name: clear_order_8
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 0
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 1
+        FlowerColor: 0
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 1
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 2b9a0bfb80211de4e91e64abe93af502, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 498f3172986a47140af32f7783163aaa, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 498f3172986a47140af32f7783163aaa, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 498f3172986a47140af32f7783163aaa, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 076f812c19d015e49a37f626348f4d27, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 3f17fdf9ca351c04d852cc26663a9410, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 498f3172986a47140af32f7783163aaa, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 498f3172986a47140af32f7783163aaa, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 543b0a62684405a4eabeaf2dbe5dfe6e, type: 3}
+    CustomerType: 3
+    Name: oblivious
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 1
+        FlowerColor: 0
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 59b6b6ea0c3fb2f488562694f754111b, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 0bfc4e4df8c8c2f40b2f9caea9597d23, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 0bfc4e4df8c8c2f40b2f9caea9597d23, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 0bfc4e4df8c8c2f40b2f9caea9597d23, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 74b2deea55404c4469219782390b1ed3, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 6045302d701912449b43cf600bd8cf28, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 0bfc4e4df8c8c2f40b2f9caea9597d23, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 0bfc4e4df8c8c2f40b2f9caea9597d23, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 016e5b6c6162a534b94ec8778daef04f, type: 3}
+    CustomerType: 3
+    Name: boy_1
+    Gender: 1
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 0
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 1
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: c8c0bc5a1ca832b49a4faa35960efc12, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: e36284179fca797429817b3a12a002b6, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: e36284179fca797429817b3a12a002b6, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: e36284179fca797429817b3a12a002b6, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 947d72cc72cbd234881f74c574c0ed25, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 52a41cf6c815a4547aec67f72b7b686b, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: e36284179fca797429817b3a12a002b6, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: e36284179fca797429817b3a12a002b6, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 8557006e9b6dac94a9e85f6375823a04, type: 3}
+    CustomerType: 3
+    Name: influencer
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 5
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 1
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 8af62e39dfca3554cbfa7d365101b52a, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 09453b3c19cb9ba49897487fdc89deed, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 09453b3c19cb9ba49897487fdc89deed, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 09453b3c19cb9ba49897487fdc89deed, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 51285db34a2650e49a16454974d04e6d, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 8e8d196fde3bbae40af735f8c7902b7b, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 09453b3c19cb9ba49897487fdc89deed, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 09453b3c19cb9ba49897487fdc89deed, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 408872753ebc39d409dae1c28516732c, type: 3}
+    CustomerType: 3
+    Name: indecisive
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 5
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 1
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 1
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: d0ce517deb894844eb0405f36762b88a, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 7120c8c6cdd3df741b042a9e38b08978, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 7120c8c6cdd3df741b042a9e38b08978, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 7120c8c6cdd3df741b042a9e38b08978, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 06de08109d3a10742aa723c44bb87d6d, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 254af0bdf7e6ac147b7e2e79e903a33b, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 7120c8c6cdd3df741b042a9e38b08978, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 7120c8c6cdd3df741b042a9e38b08978, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 10bc858ff33df9a419625a7881908990, type: 3}
+    CustomerType: 3
+    Name: woman_romantic
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 9
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 2
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: cdb71e5e7880e4148b6acae1d3d26884, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: bf4fd13b6dbc39d4f93e8a0a476a752f, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: bf4fd13b6dbc39d4f93e8a0a476a752f, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: bf4fd13b6dbc39d4f93e8a0a476a752f, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 7b04be86556c301408cd8202077303ef, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 7949c55dcc1797b4399211dbcc16207a, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: bf4fd13b6dbc39d4f93e8a0a476a752f, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: bf4fd13b6dbc39d4f93e8a0a476a752f, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: bdba957fb1164ca4eb9fdd63c965cb90, type: 3}
+    CustomerType: 3
+    Name: woman_corporate_2
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 1
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 20dc16ef9bd34724985c112d42a0fc1a, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: eced858a32ac81e408af39b4448fdf16, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: eced858a32ac81e408af39b4448fdf16, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: eced858a32ac81e408af39b4448fdf16, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: c068762de25c28441b71439c3c80ba6a, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: e5943eb2dff56694cab6867391f55641, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: eced858a32ac81e408af39b4448fdf16, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: eced858a32ac81e408af39b4448fdf16, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 8ef5819824166d5459116b3e1aaa42d2, type: 3}
+    CustomerType: 3
+    Name: woman_corporate_3
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 9
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 3
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 2
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 04e04b0917b995042b6dfeb10bf6cfef, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 32637b53c6e4b37469fcd81d11dab0b9, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 32637b53c6e4b37469fcd81d11dab0b9, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 32637b53c6e4b37469fcd81d11dab0b9, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: 743b8eec3d7f2274696768694cda2595, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 470d7324ed3310e458e73ddb2e2910ac, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 32637b53c6e4b37469fcd81d11dab0b9, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 32637b53c6e4b37469fcd81d11dab0b9, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: 8d3d5e9db2eeea44ea35fb08816e239e, type: 3}
+    CustomerType: 3
+    Name: clear_order_9
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 5
+      WrappingPaperType: 7
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 1
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: 9b8aa70b5e33c454ca03a9e9190a574b, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: d2703afc0de19664b806e291ab62fe09, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: d2703afc0de19664b806e291ab62fe09, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: d2703afc0de19664b806e291ab62fe09, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: c258c8fbe7dcabb4baa862a4978735df, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: b94f5c38f8993044d8a813546858f0f8, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: d2703afc0de19664b806e291ab62fe09, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: d2703afc0de19664b806e291ab62fe09, type: 2}
+    OrderHappinessType: 0
+    OrderHappiness:
+      HappinessChange:
+        _serializedList: []
+      HappinessTipLimit: 0
+      TipPercentage: {x: 10, y: 50}
+      AcceptableWaitTime: 60
+  - Sprite: {fileID: 21300000, guid: f4895ecddd30998418c396e876108e76, type: 3}
+    CustomerType: 3
+    Name: influencer_2
+    Gender: 2
+    ChoseOrderRandomly: 0
+    MaxOrderCount: 0
+    Orders:
+    - BouquetType: 1
+      RibbonType: 3
+      WrappingPaperType: 9
+      CustomFlowers:
+      - FlowerType: 0
+        FlowerColor: 0
+        Count: 2
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+      - FlowerType: 3
+        FlowerColor: 2
+        Count: 1
+        Position: {x: 0, y: 0, z: 0}
+        Rotation: {x: 0, y: 0, z: 0}
+        Pivot: {x: 0, y: 0, z: 0}
+        IsFlowerCut: 0
+    CustomInitConvo: 1
+    CustomGoodbyeConvo: 1
+    InitialConversation: {fileID: 11400000, guid: ea91e30829966e8439339f86bece12bf, type: 2}
+    GoodbyeConversations:
+      _serializedList:
+      - Key: 0
+        Value: {fileID: 11400000, guid: 81de31c45b01eff47af9fa3c454d8387, type: 2}
+      - Key: 1
+        Value: {fileID: 11400000, guid: 81de31c45b01eff47af9fa3c454d8387, type: 2}
+      - Key: 2
+        Value: {fileID: 11400000, guid: 81de31c45b01eff47af9fa3c454d8387, type: 2}
+      - Key: 4
+        Value: {fileID: 11400000, guid: b868d8ad2107f834e84788ec6221f4f0, type: 2}
+      - Key: 8
+        Value: {fileID: 11400000, guid: 35c0d0a3c4a932e4b913d0da1616a377, type: 2}
+      - Key: 16
+        Value: {fileID: 11400000, guid: 81de31c45b01eff47af9fa3c454d8387, type: 2}
+      - Key: 32
+        Value: {fileID: 11400000, guid: 81de31c45b01eff47af9fa3c454d8387, type: 2}
     OrderHappinessType: 0
     OrderHappiness:
       HappinessChange:

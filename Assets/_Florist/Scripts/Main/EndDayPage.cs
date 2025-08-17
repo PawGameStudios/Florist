@@ -95,8 +95,15 @@ public class EndDayPage : Page
 
         if (_newItemIntroductionEvent != null)
         {
-            References.ShopPage.Open();
-            PlayEvent();
+            if (_newItemIntroductionEvent.TriggerAnimation)
+            {
+                References.ShopPage.Open();
+                PlayEvent();
+            }
+            else
+            {
+                EnableNewItem();
+            }
         }
         else
         {
@@ -164,21 +171,33 @@ public class EndDayPage : Page
         _newItemIntroductionEvent = null;
         _nextDayButtonObject.SetActive(true);
         _tutorial.FinishTutorial();
-
-        // _tutorial.Init()
-        //         .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp, Tutorial.ObjectActivationOptions.Bg)
-        //         .SetClickableState(Tutorial.ClickableState.HighlightArea)
-        //         .PointTo(_nextDayButtonObject.transform.position, Tutorial.PointDirection.Right)
-        //         .Highlight(_nextDayButtonSprite, _nextDayButtonObject.transform)
-        //         .SetExplanation(LocalizationManager.GetLocalizedText("tut_next_day"))
-        //         .SetClickCallback(OnNextDayTutorialButtonClicked)
-        //         .StartTutorial();
     }
 
-    private void OnNextDayTutorialButtonClicked()
+    private void EnableNewItem()
     {
-        _newItemIntroductionEvent = null;
-        _tutorial.FinishTutorial();
-        OnNextDayButtonClicked();
+        if (_newItemIntroductionEvent.EventType == SpecialEvents.InroduceFlower)
+        {
+            string itemId = Configs.WorkshopConfig.GetFlowerId(_newItemIntroductionEvent.IntroducedFlowerType, _newItemIntroductionEvent.IntroducedFlowerColor);
+            ShopConfig.ShopItemInfo itemInfo = Configs.ShopConfig.GetItemById(ItemType.Flower, itemId);
+
+            SaveSystem.Inst.GeneralData.ChangeMoney(-itemInfo.Price);
+            SaveSystem.Inst.ShopData.SetPurchasedState(itemInfo.Id);
+        }
+        else if (_newItemIntroductionEvent.EventType == SpecialEvents.IntroducePaper)
+        {
+            string itemId = Configs.WorkshopConfig.GetWrappingPaperId(_newItemIntroductionEvent.PaperType);
+            ShopConfig.ShopItemInfo itemInfo = Configs.ShopConfig.GetItemById(ItemType.Wrapper, itemId);
+
+            SaveSystem.Inst.GeneralData.ChangeMoney(-itemInfo.Price);
+            SaveSystem.Inst.ShopData.SetPurchasedState(itemInfo.Id);
+        }
+        else // if (_newItemIntroductionEvent.EventType == SpecialEvents.IntroduceRibbon)
+        {
+            string itemId = Configs.WorkshopConfig.GetRibbonId(_newItemIntroductionEvent.RibbonType);
+            ShopConfig.ShopItemInfo itemInfo = Configs.ShopConfig.GetItemById(ItemType.Ribbon, itemId);
+
+            SaveSystem.Inst.GeneralData.ChangeMoney(-itemInfo.Price);
+            SaveSystem.Inst.ShopData.SetPurchasedState(itemInfo.Id);
+        }
     }
 }

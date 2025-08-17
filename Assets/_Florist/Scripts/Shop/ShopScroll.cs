@@ -81,6 +81,16 @@ public class ShopScroll : MonoBehaviour
         return _items[itemIndex].transform;
     }
 
+    public void SetItemUnlocked(int itemIndex)
+    {
+        if (itemIndex < 0 || itemIndex >= _items.Count)
+        {
+            Debug.LogError($"Item index {itemIndex} is out of range.");
+            return;
+        }
+        _items[itemIndex].SetItemUnlocked();
+    }
+
     public void SimulateButtonClick(int itemIndex)
     {
         if (itemIndex < 0 || itemIndex >= _items.Count)

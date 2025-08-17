@@ -100,7 +100,12 @@ public class WorkshopPage : Page
 
     void OnEnable()
     {
-        Open();
+        for (int i = 0; i < _initialPaperRefs.Count; i++)
+        {
+            _paperAreas[i].transform.SetPositionAndRotation(_initialPaperRefs[i].position, _initialPaperRefs[i].rotation);
+            _paperAreas[i].gameObject.SetActive(false);
+            _paperAreas[i].Reset();
+        }
     }
 
     void OnDisable()
@@ -120,14 +125,8 @@ public class WorkshopPage : Page
 
     public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
+        Debug.Log($"Open WorkshopPage, LoadFromSaveData: {pageData?.LoadFromSaveData}");
         base.Open(pageData, onCompleted);
-
-        for (int i = 0; i < _initialPaperRefs.Count; i++)
-        {
-            _paperAreas[i].transform.SetPositionAndRotation(_initialPaperRefs[i].position, _initialPaperRefs[i].rotation);
-            _paperAreas[i].gameObject.SetActive(false);
-            _paperAreas[i].Reset();
-        }
 
         if (pageData != null && pageData.LoadFromSaveData)
         {
@@ -542,9 +541,6 @@ public class WorkshopPage : Page
 
     private void SetAvailablePapers()
     {
-        // if (_isInitialized)
-        //     return;
-
         List<WrappingPaperInfo> paperInfos = new();
         List<ShopConfig.ShopItemInfo> paperItems = Configs.ShopConfig.WrapperItems;
         List<int> purchasedPaperIndexes = SaveSystem.Inst.ShopData.GetPurchasedItems(ItemType.Wrapper);
@@ -620,7 +616,6 @@ public class WorkshopPage : Page
             {
                 PaperState = _paperAreas[i].PaperState,
                 CurrentFlowers = _paperAreas[i].BouquetModel,
-                // SelectedPaperIndex = _paperAreas[i].SelectedPaperIndex,
             };
             workshopParams.Add(workshopParam);
         }
@@ -632,6 +627,7 @@ public class WorkshopPage : Page
         Debug.Log("Load");
 
         _finishedBouquetModels.Clear();
+        _wrappingMachine.OpenMachine();
 
         for (int i = 0; i < workshopParams.Count; i++)
         {
@@ -653,30 +649,37 @@ public class WorkshopPage : Page
                 case PaperArea.State.AddingFlowers:
                 case PaperArea.State.ScissorUsed:
                     SetFlowers(paperArea, workshopParams[i]);
+                    paperArea.SetPaper(workshopParams[i].CurrentFlowers.WrappingPaperType);
                     break;
                 case PaperArea.State.ScissorInUse:
                     SetFlowers(paperArea, workshopParams[i]);
                     paperArea.SetState(PaperArea.State.ScissorUsed);
+                    paperArea.SetPaper(workshopParams[i].CurrentFlowers.WrappingPaperType);
                     break;
                 case PaperArea.State.InMachine:
                     SetFlowers(paperArea, workshopParams[i]);
                     StartCoroutine(SendPaperToMachine(paperArea));
+                    paperArea.SetPaper(workshopParams[i].CurrentFlowers.WrappingPaperType);
+                    paperArea.SetClosedPaper(workshopParams[i].CurrentFlowers.WrappingPaperType);
                     _wrappingMachine.StartMachine(paperArea);
                     break;
                 case PaperArea.State.MachineDone:
                     SetFlowers(paperArea, workshopParams[i]);
                     StartCoroutine(SendPaperToMachine(paperArea));
+                    paperArea.SetClosedPaper(workshopParams[i].CurrentFlowers.WrappingPaperType);
                     paperArea.OnMachineDone();
                     _wrappingMachine.OpenMachine();
                     break;
                 case PaperArea.State.InRibbonArea:
                     SetFlowers(paperArea, workshopParams[i]);
+                    paperArea.SetClosedPaper(workshopParams[i].CurrentFlowers.WrappingPaperType);
                     StartCoroutine(SendPaperToRibbon(paperArea));
                     break;
                 case PaperArea.State.Done:
                     SetFlowers(paperArea, workshopParams[i]);
                     StartCoroutine(SendPaperToRibbon(paperArea));
-                    paperArea.SetRibbonType(workshopParams[i].CurrentFlowers.RibbonType);
+                    paperArea.SetClosedPaper(workshopParams[i].CurrentFlowers.WrappingPaperType);
+                    paperArea.SetRibbon(workshopParams[i].CurrentFlowers.RibbonType);
                     OnFlowerReady(workshopParams[i].CurrentFlowers, paperArea.gameObject);
                     break;
                 default:
@@ -693,8 +696,6 @@ public class WorkshopPage : Page
     {
         paperArea.gameObject.SetActive(true);
         paperArea.SetFlowers(workshopParams.CurrentFlowers);
-        // TODO: set wrapping paper type
-        // paperArea.SetPaperType(true);
     }
 
     private IEnumerator SendPaperToMachine(PaperArea paperArea)

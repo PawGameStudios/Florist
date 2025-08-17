@@ -56,6 +56,9 @@ namespace Config
 
         [ShowIf("@this.EventType == SpecialEvents.IntroduceRibbon && IsEvent")]
         public RibbonType RibbonType;
+
+        [ShowIf("IsEvent")]
+        public bool TriggerAnimation;
     }
 
 

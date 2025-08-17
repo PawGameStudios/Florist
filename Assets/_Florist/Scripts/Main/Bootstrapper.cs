@@ -15,12 +15,7 @@ public class Bootstrapper : MonoBehaviour
         }
         else
         {
-            References.MainPage.Open(new PageParams
-            {
-                PreviousPage = PageType.Bootstrapper
-            });
+            SaveSystem.Inst.SaveData.LoadGame();
         }
-
-
     }
 }
