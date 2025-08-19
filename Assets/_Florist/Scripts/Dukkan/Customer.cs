@@ -378,7 +378,7 @@ public class Customer : MonoBehaviour
 
         Debug.Log($"Flower price: {price}");
         Debug.Log($"Given money: {bestSum}");
-        return (bestSum, price);
+        return (price, bestSum);
     }
 
     public void StartTimer()

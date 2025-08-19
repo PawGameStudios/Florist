@@ -14,6 +14,8 @@ public class OpeningPage : Page
     [SerializeField] private float _balloonMoveY = 250f;
     [SerializeField] private float _balloonMoveDuration = 2.5f;
     [SerializeField] private Ease _balloonMoveEase = Ease.Linear;
+    [SerializeField] private float _balloonOscillationVariation = 0.3f; // 30% variation in oscillation
+    [SerializeField] private float _balloonDurationVariation = 0.2f; // 20% variation in duration
 
     [SerializeField] private Tutorial _tutorial;
     [SerializeField] private Transform _playButtonTransform;
@@ -32,15 +34,9 @@ public class OpeningPage : Page
         CancelInvoke();
     }
 
-    public override void Close(PageParams pageData = null, Action onCompleted = null)
-    {
-        gameObject.SetActive(false);
-    }
-
     public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
         base.Open(pageData, onCompleted);
-        gameObject.SetActive(true);
 
         if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
         {
@@ -87,7 +83,7 @@ public class OpeningPage : Page
         {
             PlayBalloonAnimation(balloonTransform);
         }
-        _openAnimSequence.Append(_parent.DOScale(_zoomAmount, _balloonMoveDuration * 4));
+        _openAnimSequence.Append(_parent.DOScale(_zoomAmount, _balloonMoveDuration));
         _openAnimSequence.AppendCallback(OnAnimFinished);
     }
 
@@ -101,11 +97,19 @@ public class OpeningPage : Page
         Sequence ballonSequence = DOTween.Sequence();
         Vector3 originalPosition = balloonTransform.localPosition;
         int randDirection = UnityEngine.Random.Range(0, 2) == 0 ? -1 : 1;
+
+        // Generate random oscillation amounts for this balloon
+        float oscillation1 = _balloonMoveX * (1f + UnityEngine.Random.Range(-_balloonOscillationVariation, _balloonOscillationVariation));
+        float oscillation2 = _balloonMoveX * (1f + UnityEngine.Random.Range(-_balloonOscillationVariation, _balloonOscillationVariation));
+
+        float duration = _balloonMoveDuration * (1f + UnityEngine.Random.Range(-_balloonDurationVariation, _balloonDurationVariation)) / 4f;
+
+        // Build the sequence with custom durations and oscillations
         ballonSequence.Append(balloonTransform.DOLocalMove(originalPosition, _zoomDuration + _candleDuration + _ribbonDuration));
-        ballonSequence.Append(balloonTransform.DOLocalMove(new Vector3(originalPosition.x + _balloonMoveX * randDirection, originalPosition.y + _balloonMoveY, 0), _balloonMoveDuration).SetEase(_balloonMoveEase));
-        ballonSequence.Append(balloonTransform.DOLocalMove(new Vector3(originalPosition.x, originalPosition.y + _balloonMoveY * 2, 0), _balloonMoveDuration).SetEase(_balloonMoveEase));
-        ballonSequence.Append(balloonTransform.DOLocalMove(new Vector3(originalPosition.x + _balloonMoveX * randDirection - 1, originalPosition.y + _balloonMoveY * 3, 0), _balloonMoveDuration).SetEase(_balloonMoveEase));
-        ballonSequence.Append(balloonTransform.DOLocalMove(new Vector3(originalPosition.x, originalPosition.y + _balloonMoveY * 4, 0), _balloonMoveDuration).SetEase(_balloonMoveEase));
+        ballonSequence.Append(balloonTransform.DOLocalMove(new Vector3(originalPosition.x + oscillation1 * randDirection, originalPosition.y + _balloonMoveY, 0), duration).SetEase(_balloonMoveEase));
+        ballonSequence.Append(balloonTransform.DOLocalMove(new Vector3(originalPosition.x, originalPosition.y + _balloonMoveY * 2, 0), duration).SetEase(_balloonMoveEase));
+        ballonSequence.Append(balloonTransform.DOLocalMove(new Vector3(originalPosition.x + oscillation2 * randDirection, originalPosition.y + _balloonMoveY * 3, 0), duration).SetEase(_balloonMoveEase));
+        ballonSequence.Append(balloonTransform.DOLocalMove(new Vector3(originalPosition.x, originalPosition.y + _balloonMoveY * 4, 0), duration).SetEase(_balloonMoveEase));
     }
 
     private void OnAnimFinished()

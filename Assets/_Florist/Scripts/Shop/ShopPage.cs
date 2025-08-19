@@ -40,17 +40,6 @@ public class ShopPage : Page
         GeneralData.DiamondAmountChanged -= OnDiamondAmountChanged;
     }
 
-    public override void Close(PageParams pageData = null, Action onCompleted = null)
-    {
-        gameObject.SetActive(false);
-    }
-
-    public override void Open(PageParams pageData = null, Action onCompleted = null)
-    {
-        base.Open(pageData, onCompleted);
-        gameObject.SetActive(true);
-    }
-
 
     #region Buttons
     public void OnCloseClicked()

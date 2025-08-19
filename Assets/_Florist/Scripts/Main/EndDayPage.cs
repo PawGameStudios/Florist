@@ -40,7 +40,6 @@ public class EndDayPage : Page
 
         SaveSystem.Inst.GeneralData.IncreaseDayIndex();
 
-        gameObject.SetActive(true);
         _endDayPanel.SetActive(true);
 
         _fadeImage.gameObject.SetActive(true);
@@ -87,6 +86,8 @@ public class EndDayPage : Page
         _refundText.text = $"-{earningsInfo.Refund:0.00}";
         _flowerCostText.text = $"-{earningsInfo.Cost:0.00}";
         _profitText.text = earningsInfo.Profit.ToString("0.00");
+
+        SaveSystem.Inst.GeneralData.ChangeMoney(earningsInfo.Profit);
     }
 
     public void OnNextDayButtonClicked()
@@ -103,6 +104,8 @@ public class EndDayPage : Page
             else
             {
                 EnableNewItem();
+                References.MainPage.Open();
+                Close();
             }
         }
         else

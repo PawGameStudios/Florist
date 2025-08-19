@@ -62,6 +62,7 @@ public class GeneralData
     public void ChangeMoney(long amount)
     {
         Money += amount;
+        Debug.LogError($"ChangeMoney called with amount: {amount}, new Money value: {Money}");
         MoneyAmountChanged?.Invoke();
     }
 

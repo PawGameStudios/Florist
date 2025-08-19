@@ -422,6 +422,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3519691697600040772}
+  - {fileID: 677120264007717600}
   - {fileID: 3376089107680626878}
   m_Father: {fileID: 9050593848149423894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -468,6 +469,81 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3012937407747228615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 677120264007717600}
+  - component: {fileID: 5749909757132285680}
+  - component: {fileID: 1280837563306836784}
+  m_Layer: 5
+  m_Name: MaskParent_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &677120264007717600
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3012937407747228615}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7236414, y: 0.7236414, z: 0.7236414}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2157871184856855937}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.711, y: 20.387808}
+  m_SizeDelta: {x: 704.3786, y: 392.7757}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &5749909757132285680
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3012937407747228615}
+  m_CullTransparentMesh: 1
+--- !u!114 &1280837563306836784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3012937407747228615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 7fe40258126af4299911517a6e8745ba, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d671e395a6b9c904f81c6c977670b229, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 1
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 1
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3350717126714103363
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,8 +578,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -18}
-  m_SizeDelta: {x: 470.4836, y: 401.5122}
+  m_AnchoredPosition: {x: -0.71097, y: 76}
+  m_SizeDelta: {x: 469.7445, y: 198.0544}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4766259894836779263
 CanvasRenderer:
@@ -533,7 +609,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cfdbade112946a344a4c7c4e33c4dc83, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8ca0809aa622b2446a47f3e5aa542326, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -896,6 +972,7 @@ MonoBehaviour:
   _scissorPosRef: {fileID: 1131117467121933546}
   _canvas: {fileID: 7707790940943676451}
   _bouquetObject: {fileID: 2515144101132735194}
+  _paperMaskObject: {fileID: 3012937407747228615}
   _maskMaterial: {fileID: 2100000, guid: ef4b0101bbf3e44f7b21ad6fce2bd7db, type: 2}
   _flowerForLoad: {fileID: 8462149695180776197}
   _rollImageInitRef: {fileID: 7185721097641624249}
@@ -1188,6 +1265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flower
       objectReference: {fileID: 0}
+    - target: {fileID: 8896125047312462426, guid: 81ec6cbea1419424984b3464ccb70213, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: ef4b0101bbf3e44f7b21ad6fce2bd7db, type: 2}
     - target: {fileID: 9096282666630889059, guid: 81ec6cbea1419424984b3464ccb70213, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

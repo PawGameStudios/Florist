@@ -12,6 +12,7 @@ public enum PageType
     Workshop,
     EndDay,
     OpeningPage,
+    TopCanvas
 }
 
 public enum DukkanSaveState
@@ -119,6 +120,10 @@ public class SaveData
                 LoadFromSaveData = true,
                 PreviousPage = PageType.MainPage
             });
+        }
+        else
+        {
+            References.MainPage.Open();
         }
     }
 

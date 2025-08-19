@@ -38,6 +38,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     [SerializeField] private Transform _scissorPosRef;
     [SerializeField] private Canvas _canvas;
     [SerializeField] private GameObject _bouquetObject;
+    [SerializeField] private GameObject _paperMaskObject;
     [SerializeField] private Material _maskMaterial;
     [SerializeField] private Flower _flowerForLoad;
     [SerializeField] private Transform _rollImageInitRef;
@@ -64,7 +65,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     private readonly List<Flower> _allFlowers = new();
     private readonly List<Flower> _unCutFlowers = new();
     private const float PAPER_OPEN_DURATION = 1f;
-    private const float ANGLE_LIMIT = 40f, Y_POS_LIMIT = 350;
+    private const float ANGLE_LIMIT = 40f, Y_POS_LIMIT = 400;
 
     void OnDisable()
     {
@@ -99,6 +100,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         _paperRollImage.gameObject.SetActive(false);
         _paperClosedImage.gameObject.SetActive(false);
         _paperImage.gameObject.SetActive(false);
+        _paperMaskObject.SetActive(false);
         _guideImage.color = new Color(1, 1, 1, 0);
 
         _paperImage.transform.position = _paperImageInitRef.position;
@@ -129,6 +131,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         _paperRollImage.gameObject.SetActive(true);
         _paperImage.gameObject.SetActive(true);
         _paperClosedImage.gameObject.SetActive(false);
+        _paperMaskObject.SetActive(false);
 
         _paperImage.transform.position = _paperImageInitRef.position;
         _paperRollImage.transform.position = _rollImageInitRef.position;
@@ -264,11 +267,12 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
             _guideImage.color = new Color(1, 1, 1, 0);
             _paperRollImage.gameObject.SetActive(false);
             _paperClosedImage.gameObject.SetActive(false);
+            _paperImage.gameObject.SetActive(false);
             _bouquetModel.Clear();
 
             transform.localPosition = _startPosition;
 
-            for (int i = 2; i < _bouquetObject.transform.childCount; i++)
+            for (int i = 3; i < _bouquetObject.transform.childCount; i++)
             {
                 Destroy(_bouquetObject.transform.GetChild(i).gameObject);
             }
@@ -320,6 +324,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
 
         _paperImage.gameObject.SetActive(false);
         _paperClosedImage.gameObject.SetActive(true);
+        _paperMaskObject.SetActive(true);
     }
 
     public void OnRibbonSelected(RibbonType ribbonType, GameObject ribbonObject)
@@ -410,6 +415,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         _paperRollImage.gameObject.SetActive(false);
         _paperImage.gameObject.SetActive(true);
         _paperClosedImage.gameObject.SetActive(false);
+        _paperMaskObject.SetActive(false);
 
         _bouquetModel.WrappingPaperType = paperType;
 
@@ -422,6 +428,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         _paperRollImage.gameObject.SetActive(false);
         _paperImage.gameObject.SetActive(false);
         _paperClosedImage.gameObject.SetActive(true);
+        _paperMaskObject.SetActive(true);
 
         _bouquetModel.WrappingPaperType = paperType;
 
@@ -465,11 +472,12 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         _bouquetModel.RibbonType = ribbonType;
         var ribbonAnimator = Instantiate(Configs.WorkshopConfig.GetRibbonAnimator(ribbonType), transform);
         _ribbonObject = ribbonAnimator.gameObject;
-        Invoke(nameof(PlayRibbonAnimation), 0.1f);
+        Invoke(nameof(PlayRibbonAnimation), 0.01f);
     }
 
     private void PlayRibbonAnimation()
     {
+        Debug.Log("PlayRibbonAnimation");
         _ribbonObject.transform.SetPositionAndRotation(_ribbonPosRef.position, _ribbonPosRef.rotation);
         _ribbonObject.GetComponent<Animator>().Play("Idle");
     }

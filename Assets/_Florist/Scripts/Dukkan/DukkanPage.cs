@@ -9,6 +9,7 @@ using FlowerDeliveredInfo = Customer.FlowerDeliveredInfo;
 using System.Collections.Generic;
 using System;
 using Config;
+using System.Collections;
 
 [Serializable]
 public class EarningsInfo
@@ -157,7 +158,6 @@ public class DukkanPage : Page
             _posController.ResetPos();
             _contentObjects.SetActive(true);
             _customer.gameObject.SetActive(false);
-            gameObject.SetActive(true);
             References.TopCanvas.Open();
 
             Load(SaveSystem.Inst.SaveData.DukkanParams);
@@ -168,7 +168,6 @@ public class DukkanPage : Page
 
             References.HappinessMeter.ResetHappinessMeter();
 
-            gameObject.SetActive(true);
             _contentObjects.SetActive(false);
             References.TopCanvas.Close();
 
@@ -301,11 +300,11 @@ public class DukkanPage : Page
         _convoHistory.Add(message);
     }
 
-    private void OnPaymentMade(int change, long moneyChange)
+    private void OnPaymentMade(int change)
     {
         _dukkanSaveState = DukkanSaveState.Done;
 
-        SaveSystem.Inst.GeneralData.ChangeMoney(moneyChange);
+        // SaveSystem.Inst.GeneralData.ChangeMoney(moneyChange);
 
         _earningsInfo.Change += change;
 
@@ -584,13 +583,34 @@ public class DukkanPage : Page
             return;
         }
 
-        _paperAreaForLoad.SetFlowers(bouquetModel);
-        _paperAreaForLoad.SetClosedPaper(bouquetModel.WrappingPaperType);
-        _paperAreaForLoad.SetRibbon(bouquetModel.RibbonType);
-        _paperAreaForLoad.gameObject.SetActive(true);
+        try
+        {
+            _paperAreaForLoad.SetFlowers(bouquetModel);
+            _paperAreaForLoad.SetClosedPaper(bouquetModel.WrappingPaperType);
+            _paperAreaForLoad.SetRibbon(bouquetModel.RibbonType);
+            _paperAreaForLoad.gameObject.SetActive(true);
 
+            Debug.Log("LoadFlower");
+            // _bouquet.SetOrder(orderInfo, _paperAreaForLoad.gameObject);
+            // _bouquet.gameObject.SetActive(activateBouquet);
+            // _paperAreaForLoad.gameObject.SetActive(false);
+            _bouquet.gameObject.SetActive(activateBouquet);
+            StartCoroutine(SetBouquetRibbon(orderInfo, activateBouquet));
+        }
+        catch (Exception)
+        {
+            StartNextEvent();
+        }
+    }
+
+    private IEnumerator SetBouquetRibbon(OrderInfo orderInfo, bool activateBouquet)
+    {
+        Debug.Log("SetBouquetRibbon 1");
+        // yield return new WaitForEndOfFrame();
+        // yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(.1f);
+        Debug.Log("SetBouquetRibbon 2");
         _bouquet.SetOrder(orderInfo, _paperAreaForLoad.gameObject);
-        _bouquet.gameObject.SetActive(activateBouquet);
         _paperAreaForLoad.gameObject.SetActive(false);
     }
     #endregion
@@ -602,7 +622,7 @@ public class DukkanPage : Page
         FirebaseController.Instance.SendCustomEvent($"tutorial_dukkan_give_flower");
         _tutorial.Init()
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
-                .SwipeBetween(_bouquet.transform.position, _customer.transform.position)
+                .SwipeBetween(_bouquet.transform.position, _flowerDeliveryArea.transform.position)
                 .StartTutorial();
     }
 
@@ -624,6 +644,7 @@ public class DukkanPage : Page
 
     private void StopHints()
     {
+        FirebaseController.Instance.SendCustomEvent($"StopHints");
         CancelInvoke();
         _tutorial.FinishTutorial();
     }

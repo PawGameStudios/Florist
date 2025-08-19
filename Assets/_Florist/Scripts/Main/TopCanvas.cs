@@ -1,11 +1,9 @@
-using System;
 using TMPro;
 using UnityEngine;
 
 public class TopCanvas : Page
 {
     [SerializeField] private TextMeshProUGUI _moneyAmount, _diamondAmount;
-
 
     private void OnEnable()
     {
@@ -20,16 +18,6 @@ public class TopCanvas : Page
         GeneralData.MoneyAmountChanged -= OnMoneyAmountChanged;
         GeneralData.DiamondAmountChanged -= OnDiamondAmountChanged;
         CancelInvoke();
-    }
-
-    public override void Close(PageParams pageData = null, Action onCompleted = null)
-    {
-        gameObject.SetActive(false);
-    }
-
-    public override void Open(PageParams pageData = null, Action onCompleted = null)
-    {
-        gameObject.SetActive(true);
     }
 
     private void OnMoneyAmountChanged()

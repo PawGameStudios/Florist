@@ -160,6 +160,7 @@ public class Tutorial : MonoBehaviour
 
     public Tutorial SetObjectActivation(params ObjectActivationOptions[] options)
     {
+        Debug.Log($"#tutorial# SetObjectActivation, options: {string.Join(", ", options)}");
         _objectActivationOptionsArray = options;
         return this;
     }
@@ -267,7 +268,7 @@ public class Tutorial : MonoBehaviour
 
     public void StartTutorial()
     {
-        Invoke(nameof(SetObjectActivation), _activationDelay);
+        Invoke(nameof(SetObjectActivation2), _activationDelay);
     }
 
     public void FinishTutorial()
@@ -276,6 +277,11 @@ public class Tutorial : MonoBehaviour
         {
             _tutorialParent.SetActive(false);
         });
+    }
+
+    public void CloseTutorial()
+    {
+        _tutorialParent.SetActive(false);
     }
 
     public void ButtonClick()
@@ -316,6 +322,7 @@ public class Tutorial : MonoBehaviour
 
     public void SetDefaultValues(Action onComplete = null)
     {
+        Debug.Log($"#tutorial# SetDefaultValues");
         _activationDelay = 0;
         _delay = 0;
         _bgTween?.Kill();
@@ -349,8 +356,9 @@ public class Tutorial : MonoBehaviour
         _hand.localScale = new Vector3(1, 1, 1);
     }
 
-    private void SetObjectActivation()
+    private void SetObjectActivation2()
     {
+        Debug.Log($"#tutorial# SetObjectActivation2");
         _tutorialParent.SetActive(true);
         for (int i = 0; i < _objectActivationOptionsArray.Length; i++)
         {

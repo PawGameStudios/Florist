@@ -1,0 +1,3653 @@
+fileFormatVersion: 2
+guid: 8ca0809aa622b2446a47f3e5aa542326
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6824812819753216410
+    second: new_guide_0
+  - first:
+      213: 6477786208484187627
+    second: new_guide_1
+  - first:
+      213: 2469713482616342006
+    second: new_guide_2
+  - first:
+      213: 200428651536135417
+    second: new_guide_3
+  - first:
+      213: -4945431145923715176
+    second: new_guide_4
+  - first:
+      213: 5141141220929542926
+    second: new_guide_5
+  - first:
+      213: -331718955041007608
+    second: new_guide_6
+  - first:
+      213: 1079818498589687373
+    second: new_guide_7
+  - first:
+      213: 9163026737718498709
+    second: new_guide_8
+  - first:
+      213: 8308450159515489044
+    second: new_guide_9
+  - first:
+      213: -7557941465327065729
+    second: new_guide_10
+  - first:
+      213: 1419961822886693022
+    second: new_guide_11
+  - first:
+      213: -4285048480015065306
+    second: new_guide_12
+  - first:
+      213: 338081286114133386
+    second: new_guide_13
+  - first:
+      213: -3271405160681629543
+    second: new_guide_14
+  - first:
+      213: 6842890371754536889
+    second: new_guide_15
+  - first:
+      213: 6698630249900485433
+    second: new_guide_16
+  - first:
+      213: -6784974721612352356
+    second: new_guide_17
+  - first:
+      213: 6561656328183411783
+    second: new_guide_18
+  - first:
+      213: -5366708765992192631
+    second: new_guide_19
+  - first:
+      213: -1574093525387028416
+    second: new_guide_20
+  - first:
+      213: -6841964690242915467
+    second: new_guide_21
+  - first:
+      213: -9109074936138699985
+    second: new_guide_22
+  - first:
+      213: 5766374263200794394
+    second: new_guide_23
+  - first:
+      213: 343022527036065591
+    second: new_guide_24
+  - first:
+      213: 8843573068623644126
+    second: new_guide_25
+  - first:
+      213: -6747737072509977054
+    second: new_guide_26
+  - first:
+      213: -2377519379561678418
+    second: new_guide_27
+  - first:
+      213: 8728841838656092026
+    second: new_guide_28
+  - first:
+      213: -4529633563638048778
+    second: new_guide_29
+  - first:
+      213: -5155206492747938008
+    second: new_guide_30
+  - first:
+      213: -6871882373611149185
+    second: new_guide_31
+  - first:
+      213: -6505501554819450480
+    second: new_guide_32
+  - first:
+      213: -8412356807212366300
+    second: new_guide_33
+  - first:
+      213: 3992309900358827992
+    second: new_guide_34
+  - first:
+      213: -933582774422283988
+    second: new_guide_35
+  - first:
+      213: -4288127977365658233
+    second: new_guide_36
+  - first:
+      213: -2067230368564989117
+    second: new_guide_37
+  - first:
+      213: 2591384293209167962
+    second: new_guide_38
+  - first:
+      213: 4503563726182077986
+    second: new_guide_39
+  - first:
+      213: 5222224061752483531
+    second: new_guide_40
+  - first:
+      213: -1450323872326338911
+    second: new_guide_41
+  - first:
+      213: -2786178221494362589
+    second: new_guide_42
+  - first:
+      213: 8376265742366820314
+    second: new_guide_43
+  - first:
+      213: -7977864216454084653
+    second: new_guide_44
+  - first:
+      213: -8905954417139633375
+    second: new_guide_45
+  - first:
+      213: 4201490021573098582
+    second: new_guide_46
+  - first:
+      213: 5719523189498087228
+    second: new_guide_47
+  - first:
+      213: 6097985543959359544
+    second: new_guide_48
+  - first:
+      213: 1487326789162649325
+    second: new_guide_49
+  - first:
+      213: -410405436863651470
+    second: new_guide_50
+  - first:
+      213: -4816250334036929149
+    second: new_guide_51
+  - first:
+      213: -2900475690887130099
+    second: new_guide_52
+  - first:
+      213: -7058963842547937966
+    second: new_guide_53
+  - first:
+      213: -4571817159830593495
+    second: new_guide_54
+  - first:
+      213: -7803029273086377565
+    second: new_guide_55
+  - first:
+      213: 3719456391413782747
+    second: new_guide_56
+  - first:
+      213: 6275221935802805328
+    second: new_guide_57
+  - first:
+      213: 7719875962740914483
+    second: new_guide_58
+  - first:
+      213: -4726588581044328545
+    second: new_guide_59
+  - first:
+      213: -280481842536870210
+    second: new_guide_60
+  - first:
+      213: 672896172716953970
+    second: new_guide_61
+  - first:
+      213: -2708794633071118590
+    second: new_guide_62
+  - first:
+      213: -7158193178479428055
+    second: new_guide_63
+  - first:
+      213: 6408516702813272072
+    second: new_guide_64
+  - first:
+      213: -6487153975473255871
+    second: new_guide_65
+  - first:
+      213: -52902344925335755
+    second: new_guide_66
+  - first:
+      213: -7515295580016974394
+    second: new_guide_67
+  - first:
+      213: 2434112076228229474
+    second: new_guide_68
+  - first:
+      213: 7773490366842842608
+    second: new_guide_69
+  - first:
+      213: -8514340888188552016
+    second: new_guide_70
+  - first:
+      213: -765569000505927462
+    second: new_guide_71
+  - first:
+      213: -8364874014740482394
+    second: new_guide_72
+  - first:
+      213: 5470080820895517403
+    second: new_guide_73
+  - first:
+      213: 728465841604709137
+    second: new_guide_74
+  - first:
+      213: 2492354953653130029
+    second: new_guide_75
+  - first:
+      213: -722477619647850394
+    second: new_guide_76
+  - first:
+      213: 3275695849311234268
+    second: new_guide_77
+  - first:
+      213: -5897666769191582949
+    second: new_guide_78
+  - first:
+      213: 2024683121965751345
+    second: new_guide_79
+  - first:
+      213: 2939343375062802368
+    second: new_guide_80
+  - first:
+      213: 6717150762686263470
+    second: new_guide_81
+  - first:
+      213: 8279764100384634697
+    second: new_guide_82
+  - first:
+      213: 4613227110607306220
+    second: new_guide_83
+  - first:
+      213: 1862840510114776998
+    second: new_guide_84
+  - first:
+      213: 2474397532762740325
+    second: new_guide_85
+  - first:
+      213: -1452031268502446449
+    second: new_guide_86
+  - first:
+      213: 7222742439366189149
+    second: new_guide_87
+  - first:
+      213: 8806041833643972575
+    second: new_guide_88
+  - first:
+      213: 8321604263178087634
+    second: new_guide_89
+  - first:
+      213: 5927305545894953752
+    second: new_guide_90
+  - first:
+      213: 1100461336985935455
+    second: new_guide_91
+  - first:
+      213: -1886721392948787523
+    second: new_guide_92
+  - first:
+      213: 7265026289307469087
+    second: new_guide_93
+  - first:
+      213: -7608600118158342664
+    second: new_guide_94
+  - first:
+      213: 6256655065721739571
+    second: new_guide_95
+  - first:
+      213: 800953059375521267
+    second: new_guide_96
+  - first:
+      213: -5818037663009315168
+    second: new_guide_97
+  - first:
+      213: -7566230691552319258
+    second: new_guide_98
+  - first:
+      213: 4759350505149911971
+    second: new_guide_99
+  - first:
+      213: -739362679643215030
+    second: new_guide_100
+  - first:
+      213: 8516622998956288076
+    second: new_guide_101
+  - first:
+      213: -2801916864880970380
+    second: new_guide_102
+  - first:
+      213: 2907860159367546917
+    second: new_guide_103
+  - first:
+      213: -3518526045642562336
+    second: new_guide_104
+  - first:
+      213: 8452028681686349145
+    second: new_guide_105
+  - first:
+      213: -808944735250162835
+    second: new_guide_106
+  - first:
+      213: 5137535234894815364
+    second: new_guide_107
+  - first:
+      213: 4739826871210213617
+    second: new_guide_108
+  - first:
+      213: -4193594905279912638
+    second: new_guide_109
+  - first:
+      213: -4086681623089427624
+    second: new_guide_110
+  - first:
+      213: -894980689529113182
+    second: new_guide_111
+  - first:
+      213: -3119796885415504044
+    second: new_guide_112
+  - first:
+      213: 3480979202051621025
+    second: new_guide_113
+  - first:
+      213: -7461772996690503879
+    second: new_guide_114
+  - first:
+      213: 8864434374107691196
+    second: new_guide_115
+  - first:
+      213: 7587260801703692361
+    second: new_guide_116
+  - first:
+      213: 4686612413357852508
+    second: new_guide_117
+  - first:
+      213: 1940611829897735533
+    second: new_guide_118
+  - first:
+      213: 1995629503235532977
+    second: new_guide_119
+  - first:
+      213: 6110738812825576173
+    second: new_guide_120
+  - first:
+      213: -6799999396536423369
+    second: new_guide_121
+  - first:
+      213: 7252702875886786327
+    second: new_guide_122
+  - first:
+      213: -402899994538570057
+    second: new_guide_123
+  - first:
+      213: 3860909954823829350
+    second: new_guide_124
+  - first:
+      213: -152171845739789805
+    second: new_guide_125
+  - first:
+      213: -1797740466043992590
+    second: new_guide_126
+  - first:
+      213: 7523553353153342342
+    second: new_guide_127
+  - first:
+      213: -1996268040678183570
+    second: new_guide_128
+  - first:
+      213: -6489528266623086019
+    second: new_guide_129
+  - first:
+      213: -8756851508425531931
+    second: new_guide_130
+  - first:
+      213: 3775046411339598802
+    second: new_guide_131
+  - first:
+      213: -5527092397204115018
+    second: new_guide_132
+  - first:
+      213: -8705189693077976575
+    second: new_guide_133
+  - first:
+      213: -2328421812893418371
+    second: new_guide_134
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: 51
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: new_guide_0
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 374
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a992ce3a91b96be50800000000000000
+      internalID: 6824812819753216410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_1
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 376
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beddf9f5c38b5e950800000000000000
+      internalID: 6477786208484187627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_2
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 378
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f5075cc35f264220800000000000000
+      internalID: 2469713482616342006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_3
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 379
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f43f91fbc018c200800000000000000
+      internalID: 200428651536135417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_4
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 381
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89f5016239c4e5bb0800000000000000
+      internalID: -4945431145923715176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_5
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 382
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0b9f9593b0095740800000000000000
+      internalID: 5141141220929542926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_6
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 382
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 808548f2e5f756bf0800000000000000
+      internalID: -331718955041007608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_7
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 383
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4e755e04394cfe00800000000000000
+      internalID: 1079818498589687373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_8
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 383
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5951e19254c992f70800000000000000
+      internalID: 9163026737718498709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_9
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 382
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41355f7666b8d4370800000000000000
+      internalID: 8308450159515489044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_10
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 381
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f752cfde74ccc1790800000000000000
+      internalID: -7557941465327065729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_11
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 380
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9807cf21c7b4b310800000000000000
+      internalID: 1419961822886693022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_12
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 378
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62fdf5f4c137884c0800000000000000
+      internalID: -4285048480015065306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_13
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 376
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a854a04732b11b400800000000000000
+      internalID: 338081286114133386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_14
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 374
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9981139c652a992d0800000000000000
+      internalID: -3271405160681629543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_15
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 362
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bfae55b984d6fe50800000000000000
+      internalID: 6842890371754536889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_16
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 365
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93b210fa8b056fc50800000000000000
+      internalID: 6698630249900485433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_17
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 368
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c947a44607de6d1a0800000000000000
+      internalID: -6784974721612352356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_18
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 371
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 744f0935aafaf0b50800000000000000
+      internalID: 6561656328183411783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_19
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 372
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9857f06bfce9585b0800000000000000
+      internalID: -5366708765992192631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_20
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 369
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04850105742b72ae0800000000000000
+      internalID: -1574093525387028416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_21
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 366
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5733e405d557c01a0800000000000000
+      internalID: -6841964690242915467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_22
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 363
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2be9078b90169180800000000000000
+      internalID: -9109074936138699985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_23
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 350
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a17c90047d6460050800000000000000
+      internalID: 5766374263200794394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_24
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 354
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73701f1cb29a2c400800000000000000
+      internalID: 343022527036065591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_25
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 358
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed50684c9deaaba70800000000000000
+      internalID: 8843573068623644126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_26
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 359
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22efe4332e83b52a0800000000000000
+      internalID: -6747737072509977054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_27
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 355
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea97e9e88ba510fd0800000000000000
+      internalID: -2377519379561678418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_28
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 351
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a77f9a5a763132970800000000000000
+      internalID: 8728841838656092026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_29
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 340
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f7daacd5428321c0800000000000000
+      internalID: -4529633563638048778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_30
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 345
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 827c8ff12070578b0800000000000000
+      internalID: -5155206492747938008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_31
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 347
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f78a3a6d36b22a0a0800000000000000
+      internalID: -6871882373611149185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_32
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 342
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0993c33bdc0d7b5a0800000000000000
+      internalID: -6505501554819450480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_33
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 337
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 426844eed0e414b80800000000000000
+      internalID: -8412356807212366300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_34
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 324
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dfb924c3b8876730800000000000000
+      internalID: 3992309900358827992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_35
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 330
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c29d22ab96f3b03f0800000000000000
+      internalID: -933582774422283988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_36
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 335
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 785a4b5f2528d74c0800000000000000
+      internalID: -4288127977365658233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_37
+      rect:
+        serializedVersion: 2
+        x: 739
+        y: 332
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 343b8c4bee8bf43e0800000000000000
+      internalID: -2067230368564989117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_38
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 326
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a585241f84276f320800000000000000
+      internalID: 2591384293209167962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_39
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 312
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 226da6a195fdf7e30800000000000000
+      internalID: 4503563726182077986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_40
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 319
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bce114a9d11197840800000000000000
+      internalID: 5222224061752483531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_41
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 320
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a638bc4f1a6fdbe0800000000000000
+      internalID: -1450323872326338911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_42
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 314
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32e16ea5ba18559d0800000000000000
+      internalID: -2786178221494362589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_43
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 299
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad74c0630597e3470800000000000000
+      internalID: 8376265742366820314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_44
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 306
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d744ff73cee84190800000000000000
+      internalID: -7977864216454084653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_45
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 308
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1233294b4a1b76480800000000000000
+      internalID: -8905954417139633375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_46
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 301
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c76370ae0be4a30800000000000000
+      internalID: 4201490021573098582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_47
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 285
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3784aa9904df5f40800000000000000
+      internalID: 5719523189498087228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_48
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 292
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8303a213b8560a450800000000000000
+      internalID: 6097985543959359544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_49
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 294
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de646f4a5db04a410800000000000000
+      internalID: 1487326789162649325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_50
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 287
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2716ad9fd62fd4af0800000000000000
+      internalID: -410405436863651470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_51
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 270
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3855f5ab6dd392db0800000000000000
+      internalID: -4816250334036929149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_52
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 278
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d04540df9b07fb7d0800000000000000
+      internalID: -2900475690887130099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_53
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 279
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25d8a9209c5890e90800000000000000
+      internalID: -7058963842547937966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_54
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 272
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92023420484ad80c0800000000000000
+      internalID: -4571817159830593495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_55
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 254
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a146b5e73216b390800000000000000
+      internalID: -7803029273086377565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_56
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 262
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd856c7a1e92e9330800000000000000
+      internalID: 3719456391413782747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_57
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 264
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05ce3426a11161750800000000000000
+      internalID: 6275221935802805328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_58
+      rect:
+        serializedVersion: 2
+        x: 898
+        y: 256
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 339bf355942822b60800000000000000
+      internalID: 7719875962740914483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_59
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 242
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f976f636ab8c76eb0800000000000000
+      internalID: -4726588581044328545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_60
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 245
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebe84a110478b1cf0800000000000000
+      internalID: -280481842536870210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_61
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 228
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2719381018b965900800000000000000
+      internalID: 672896172716953970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_62
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 231
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 207bf4e02ad686ad0800000000000000
+      internalID: -2708794633071118590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_63
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 215
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92efb1bda3df8ac90800000000000000
+      internalID: -7158193178479428055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_64
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 203
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 808b758ccff9fe850800000000000000
+      internalID: 6408516702813272072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_65
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 217
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14a47a864dff8f5a0800000000000000
+      internalID: -6487153975473255871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_66
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 202
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53fa0faf89d044ff0800000000000000
+      internalID: -52902344925335755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_67
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 188
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c5660bdc7e44b790800000000000000
+      internalID: -7515295580016974394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_68
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 190
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 269721f6904b7c120800000000000000
+      internalID: 2434112076228229474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_69
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 175
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fda69c8d4cf0eb60800000000000000
+      internalID: 7773490366842842608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_70
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 162
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bcffe6b21cf6d980800000000000000
+      internalID: -8514340888188552016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_71
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 176
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad81bc9dc072065f0800000000000000
+      internalID: -765569000505927462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_72
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 162
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a67f70176ff9eb80800000000000000
+      internalID: -8364874014740482394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_73
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 148
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bda872e5681a9eb40800000000000000
+      internalID: 5470080820895517403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_74
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 149
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11bcad7c2d70c1a00800000000000000
+      internalID: 728465841604709137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_75
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 135
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d231ea210af969220800000000000000
+      internalID: 2492354953653130029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_76
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 121
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66858bace6e39f5f0800000000000000
+      internalID: -722477619647850394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_77
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 121
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd8ea62050c957d20800000000000000
+      internalID: 3275695849311234268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_78
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 135
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b13c5b21257472ea0800000000000000
+      internalID: -5897666769191582949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_79
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 108
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c5f7b729e191c10800000000000000
+      internalID: 2024683121965751345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_80
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 95
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cf148fe935aac820800000000000000
+      internalID: 2939343375062802368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_81
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 94
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea0b8a8970d183d50800000000000000
+      internalID: 6717150762686263470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_82
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 108
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 947357bc491a7e270800000000000000
+      internalID: 8279764100384634697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_83
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 81
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ced33fb7d99750040800000000000000
+      internalID: 4613227110607306220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_84
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 80
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a7499ef2932ad910800000000000000
+      internalID: 1862840510114776998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_85
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 83
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5661d653273d65220800000000000000
+      internalID: 2474397532762740325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_86
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 85
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8ed626214959dbe0800000000000000
+      internalID: -1452031268502446449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_87
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 86
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d506f8a1bf55c3460800000000000000
+      internalID: 7222742439366189149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_88
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 88
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd7149b2468553a70800000000000000
+      internalID: 8806041833643972575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_89
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 88
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dc2b14dcf64c7370800000000000000
+      internalID: 8321604263178087634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_90
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 88
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81385426df4024250800000000000000
+      internalID: 5927305545894953752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_91
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 87
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5e191861cf954f00800000000000000
+      internalID: 1100461336985935455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_92
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 86
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db6482fa3e401d5e0800000000000000
+      internalID: -1886721392948787523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_93
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 84
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f15cb0a1bee82d460800000000000000
+      internalID: 7265026289307469087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_94
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 82
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f54d2f2182d86690800000000000000
+      internalID: -7608600118158342664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_95
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 79
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3391e7212aa14d650800000000000000
+      internalID: 6256655065721739571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_96
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 81
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd17d9509e8d1b00800000000000000
+      internalID: 800953059375521267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_97
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 68
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a66c7e129d224fa0800000000000000
+      internalID: -5818037663009315168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_98
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 70
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e8ad5d06495ff690800000000000000
+      internalID: -7566230691552319258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_99
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 73
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a3590d711c9c0240800000000000000
+      internalID: 4759350505149911971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_100
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 77
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4b6fa76f814db5f0800000000000000
+      internalID: -739362679643215030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_101
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 76
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4826ba9e7f113670800000000000000
+      internalID: 8516622998956288076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_102
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 73
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 475f792e4779d19d0800000000000000
+      internalID: -2801916864880970380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_103
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 69
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5280d9f886bca5820800000000000000
+      internalID: 2907860159367546917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_104
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 67
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e4e384143fab2fc0800000000000000
+      internalID: -3518526045642562336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_105
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 54
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 955f3532e43ab4570800000000000000
+      internalID: 8452028681686349145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_106
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 55
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6bdd7c9c0d06c4f0800000000000000
+      internalID: -808944735250162835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_107
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 60
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48065f883113c4740800000000000000
+      internalID: 5137535234894815364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_108
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 65
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f0065b3d6f37c140800000000000000
+      internalID: 4739826871210213617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_109
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 64
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24527eaf6ab5dc5c0800000000000000
+      internalID: -4193594905279912638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_110
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 60
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85b43a947b03947c0800000000000000
+      internalID: -4086681623089427624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_111
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 55
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a578cffdc36493f0800000000000000
+      internalID: -894980689529113182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_112
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 53
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4575079134144b4d0800000000000000
+      internalID: -3119796885415504044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_113
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 41
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a04fc8242cee4030800000000000000
+      internalID: 3480979202051621025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_114
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 44
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93719a16ef4727890800000000000000
+      internalID: -7461772996690503879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_115
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 50
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb87373f81cc40b70800000000000000
+      internalID: 8864434374107691196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_116
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 49
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9484bc7008d5b4960800000000000000
+      internalID: 7587260801703692361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_117
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 43
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c578122c8213a0140800000000000000
+      internalID: 4686612413357852508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_118
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 40
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6da9ff6d207eea10800000000000000
+      internalID: 1940611829897735533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_119
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 28
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b8a4abb576e1bb10800000000000000
+      internalID: 1995629503235532977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_120
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 31
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de229adf294bdc450800000000000000
+      internalID: 6110738812825576173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_121
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 38
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73c6398a39c81a1a0800000000000000
+      internalID: -6799999396536423369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_122
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 37
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7179fa2d6d6c6a460800000000000000
+      internalID: 7252702875886786327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_123
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 30
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7be8581f69c986af0800000000000000
+      internalID: -402899994538570057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_124
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 26
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6673b0fd525b49530800000000000000
+      internalID: 3860909954823829350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_125
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 14
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3124dd5338063edf0800000000000000
+      internalID: -152171845739789805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_126
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 17
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f54a1b22942d07e0800000000000000
+      internalID: -1797740466043992590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_127
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 24
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68b6767c9e7096860800000000000000
+      internalID: 7523553353153342342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_128
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 23
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6d69ee2bc4db44e0800000000000000
+      internalID: -1996268040678183570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_129
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 15
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d32131cac6090f5a0800000000000000
+      internalID: -6489528266623086019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_130
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 12
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5edd379e2f9697680800000000000000
+      internalID: -8756851508425531931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_131
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 1
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2db8286c5b8a36430800000000000000
+      internalID: 3775046411339598802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_132
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 9
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b1f2ef9fb2db43b0800000000000000
+      internalID: -5527092397204115018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_133
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 7
+        width: 14
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10a02b1a814f03780800000000000000
+      internalID: -8705189693077976575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: new_guide_134
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 0
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7c773b92b8cfafd0800000000000000
+      internalID: -2328421812893418371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      new_guide_0: 6824812819753216410
+      new_guide_1: 6477786208484187627
+      new_guide_10: -7557941465327065729
+      new_guide_100: -739362679643215030
+      new_guide_101: 8516622998956288076
+      new_guide_102: -2801916864880970380
+      new_guide_103: 2907860159367546917
+      new_guide_104: -3518526045642562336
+      new_guide_105: 8452028681686349145
+      new_guide_106: -808944735250162835
+      new_guide_107: 5137535234894815364
+      new_guide_108: 4739826871210213617
+      new_guide_109: -4193594905279912638
+      new_guide_11: 1419961822886693022
+      new_guide_110: -4086681623089427624
+      new_guide_111: -894980689529113182
+      new_guide_112: -3119796885415504044
+      new_guide_113: 3480979202051621025
+      new_guide_114: -7461772996690503879
+      new_guide_115: 8864434374107691196
+      new_guide_116: 7587260801703692361
+      new_guide_117: 4686612413357852508
+      new_guide_118: 1940611829897735533
+      new_guide_119: 1995629503235532977
+      new_guide_12: -4285048480015065306
+      new_guide_120: 6110738812825576173
+      new_guide_121: -6799999396536423369
+      new_guide_122: 7252702875886786327
+      new_guide_123: -402899994538570057
+      new_guide_124: 3860909954823829350
+      new_guide_125: -152171845739789805
+      new_guide_126: -1797740466043992590
+      new_guide_127: 7523553353153342342
+      new_guide_128: -1996268040678183570
+      new_guide_129: -6489528266623086019
+      new_guide_13: 338081286114133386
+      new_guide_130: -8756851508425531931
+      new_guide_131: 3775046411339598802
+      new_guide_132: -5527092397204115018
+      new_guide_133: -8705189693077976575
+      new_guide_134: -2328421812893418371
+      new_guide_14: -3271405160681629543
+      new_guide_15: 6842890371754536889
+      new_guide_16: 6698630249900485433
+      new_guide_17: -6784974721612352356
+      new_guide_18: 6561656328183411783
+      new_guide_19: -5366708765992192631
+      new_guide_2: 2469713482616342006
+      new_guide_20: -1574093525387028416
+      new_guide_21: -6841964690242915467
+      new_guide_22: -9109074936138699985
+      new_guide_23: 5766374263200794394
+      new_guide_24: 343022527036065591
+      new_guide_25: 8843573068623644126
+      new_guide_26: -6747737072509977054
+      new_guide_27: -2377519379561678418
+      new_guide_28: 8728841838656092026
+      new_guide_29: -4529633563638048778
+      new_guide_3: 200428651536135417
+      new_guide_30: -5155206492747938008
+      new_guide_31: -6871882373611149185
+      new_guide_32: -6505501554819450480
+      new_guide_33: -8412356807212366300
+      new_guide_34: 3992309900358827992
+      new_guide_35: -933582774422283988
+      new_guide_36: -4288127977365658233
+      new_guide_37: -2067230368564989117
+      new_guide_38: 2591384293209167962
+      new_guide_39: 4503563726182077986
+      new_guide_4: -4945431145923715176
+      new_guide_40: 5222224061752483531
+      new_guide_41: -1450323872326338911
+      new_guide_42: -2786178221494362589
+      new_guide_43: 8376265742366820314
+      new_guide_44: -7977864216454084653
+      new_guide_45: -8905954417139633375
+      new_guide_46: 4201490021573098582
+      new_guide_47: 5719523189498087228
+      new_guide_48: 6097985543959359544
+      new_guide_49: 1487326789162649325
+      new_guide_5: 5141141220929542926
+      new_guide_50: -410405436863651470
+      new_guide_51: -4816250334036929149
+      new_guide_52: -2900475690887130099
+      new_guide_53: -7058963842547937966
+      new_guide_54: -4571817159830593495
+      new_guide_55: -7803029273086377565
+      new_guide_56: 3719456391413782747
+      new_guide_57: 6275221935802805328
+      new_guide_58: 7719875962740914483
+      new_guide_59: -4726588581044328545
+      new_guide_6: -331718955041007608
+      new_guide_60: -280481842536870210
+      new_guide_61: 672896172716953970
+      new_guide_62: -2708794633071118590
+      new_guide_63: -7158193178479428055
+      new_guide_64: 6408516702813272072
+      new_guide_65: -6487153975473255871
+      new_guide_66: -52902344925335755
+      new_guide_67: -7515295580016974394
+      new_guide_68: 2434112076228229474
+      new_guide_69: 7773490366842842608
+      new_guide_7: 1079818498589687373
+      new_guide_70: -8514340888188552016
+      new_guide_71: -765569000505927462
+      new_guide_72: -8364874014740482394
+      new_guide_73: 5470080820895517403
+      new_guide_74: 728465841604709137
+      new_guide_75: 2492354953653130029
+      new_guide_76: -722477619647850394
+      new_guide_77: 3275695849311234268
+      new_guide_78: -5897666769191582949
+      new_guide_79: 2024683121965751345
+      new_guide_8: 9163026737718498709
+      new_guide_80: 2939343375062802368
+      new_guide_81: 6717150762686263470
+      new_guide_82: 8279764100384634697
+      new_guide_83: 4613227110607306220
+      new_guide_84: 1862840510114776998
+      new_guide_85: 2474397532762740325
+      new_guide_86: -1452031268502446449
+      new_guide_87: 7222742439366189149
+      new_guide_88: 8806041833643972575
+      new_guide_89: 8321604263178087634
+      new_guide_9: 8308450159515489044
+      new_guide_90: 5927305545894953752
+      new_guide_91: 1100461336985935455
+      new_guide_92: -1886721392948787523
+      new_guide_93: 7265026289307469087
+      new_guide_94: -7608600118158342664
+      new_guide_95: 6256655065721739571
+      new_guide_96: 800953059375521267
+      new_guide_97: -5818037663009315168
+      new_guide_98: -7566230691552319258
+      new_guide_99: 4759350505149911971
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

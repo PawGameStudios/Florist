@@ -15,11 +15,18 @@ public abstract class Page : SerializedMonoBehaviour
 
     public virtual void Open(PageParams pageData = null, Action onCompleted = null)
     {
-        SaveSystem.Inst.SaveData.LastPage = _pageType;
+        if (_pageType != PageType.TopCanvas && _pageType != PageType.Shop)
+        {
+            SaveSystem.Inst.SaveData.LastPage = _pageType;
+        }
+        gameObject.SetActive(true);
         FirebaseController.Instance.SendCustomEvent($"page_opened_{_pageType}");
     }
 
-    public abstract void Close(PageParams pageData = null, Action onCompleted = null);
+    public virtual void Close(PageParams pageData = null, Action onCompleted = null)
+    {
+        gameObject.SetActive(false);
+    }
 
     [Button("OpenPage")]
     public void OpenPage()

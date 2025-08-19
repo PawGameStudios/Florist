@@ -31,16 +31,10 @@ public class MainPage : Page
         Timer.TimeTickSeconds -= TimeTickHandler;
     }
 
-    public override void Close(PageParams pageData = null, Action onCompleted = null)
-    {
-        gameObject.SetActive(false);
-    }
-
     public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
         Debug.LogError("MainPage Opened");
         base.Open(pageData, onCompleted);
-        gameObject.SetActive(true);
 
         _dayText.text = $"{LocalizationManager.GetLocalizedText("day", LocalizationManager.TextType.TITLE)} {SaveSystem.Inst.GeneralData.CurrentDayIndex + 1}";
 

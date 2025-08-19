@@ -101,8 +101,9 @@ public class ShopData
         Items[itemId].ItemState = ItemState.Selected;
     }
 
-    public void UnlockedItem(string itemId)
+    public void UnlockItem(string itemId)
     {
+        Debug.LogWarning($"Unlocking item: {itemId}");
         Items[itemId].ItemState = ItemState.Purchasable;
     }
 
@@ -126,7 +127,7 @@ public class ShopData
         return Items[itemId].ItemState == ItemState.Purchasable;
     }
 
-    public ItemState GetItemState(string itemId, int unlockDay = 0)
+    public ItemState GetItemState(string itemId, int unlockDay)
     {
         if (!Items.ContainsKey(itemId))
         {
@@ -137,7 +138,7 @@ public class ShopData
         ItemData itemData = Items[itemId];
 
         // If the item is locked, check if it should be unlocked based on the day
-        if (itemData.ItemState == ItemState.Locked && unlockDay >= itemData.ConfigIndex)
+        if (itemData.ItemState == ItemState.Locked && SaveSystem.Inst.GeneralData.CurrentDayIndex >= unlockDay)
         {
             itemData.ItemState = ItemState.Purchasable;
             return ItemState.Purchasable;

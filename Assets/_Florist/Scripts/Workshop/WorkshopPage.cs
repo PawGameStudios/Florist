@@ -116,11 +116,12 @@ public class WorkshopPage : Page
 
     public override void Close(PageParams pageData = null, Action onCompleted = null)
     {
+        base.Close(pageData, onCompleted);
+
         _tutorial.FinishTutorial();
         _flowerHand.gameObject.SetActive(false);
         _workshopPanel.localPosition = _workshopPanelInitPosRef.localPosition;
         _scrollContent.localPosition = _scrollContentInitPosRef.localPosition;
-        gameObject.SetActive(false);
     }
 
     public override void Open(PageParams pageData = null, Action onCompleted = null)
@@ -130,7 +131,6 @@ public class WorkshopPage : Page
 
         if (pageData != null && pageData.LoadFromSaveData)
         {
-            gameObject.SetActive(true);
             int screenWidth = Screen.width;
             _workshopPanel.localPosition = new Vector3(-screenWidth / 2f, _workshopPanel.localPosition.y, _workshopPanel.localPosition.z);
 
@@ -166,7 +166,6 @@ public class WorkshopPage : Page
                 _isTutorialAllowFlowerSelect = true;
             }
 
-            gameObject.SetActive(true);
             int screenWidth = Screen.width;
             _workshopPanel.localPosition = new Vector3(screenWidth / 2f + 400, _workshopPanel.localPosition.y, _workshopPanel.localPosition.z);
             _scrollTween?.Kill();
@@ -481,8 +480,8 @@ public class WorkshopPage : Page
                 BouquetModels = _finishedBouquetModels,
             };
 
-            References.DukkanPage.OnFlowerReady(orderInfo, bouquetObject);
             Close();
+            References.DukkanPage.OnFlowerReady(orderInfo, bouquetObject);
         }
     }
 
@@ -747,7 +746,6 @@ public class WorkshopPage : Page
         FirebaseController.Instance.SendCustomEvent($"tutorial_workshop_paper_selected");
 
         _isTutorialStarted = true;
-        Debug.Log($"#tutorial# OnPaperSelected");
         _tutorial.FinishTutorialStep();
         _paperBox.SelectTutorialPaper();
         Invoke(nameof(OnPaperSelectedHelper), 1.1f);
@@ -755,8 +753,6 @@ public class WorkshopPage : Page
 
     private void OnPaperSelectedHelper()
     {
-        Debug.Log($"#tutorial# OnPaperSelectedHelper");
-
         _tutorial.Init()
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp, Tutorial.ObjectActivationOptions.Bg)
                 .SetClickableState(Tutorial.ClickableState.HighlightArea)
@@ -769,8 +765,6 @@ public class WorkshopPage : Page
 
     private void OnFlowerSelected()
     {
-        Debug.Log($"#tutorial# OnFlowerSelected");
-
         _gypsumPlaceHolder1.SetActive(false);
         _gypsumPlaceHolder2.SetActive(false);
 
@@ -791,7 +785,6 @@ public class WorkshopPage : Page
 
     private void FlowerPlaceLooper()
     {
-        Debug.Log($"#tutorial# FlowerPlaceLooper");
         CancelInvoke(nameof(FlowerPlaceLooper));
         CancelInvoke(nameof(FlowerPlaceLooper2));
 
@@ -827,7 +820,6 @@ public class WorkshopPage : Page
         _gypsumPlaceHolder1.SetActive(false);
         _gypsumPlaceHolder2.SetActive(false);
 
-        Debug.Log($"#tutorial# OnFlowersPlaced");
         FirebaseController.Instance.SendCustomEvent($"tutorial_workshop_flowers_placed");
 
         _tutorial.Init()
@@ -839,7 +831,6 @@ public class WorkshopPage : Page
 
     private void OnScissorUsed()
     {
-        Debug.Log($"#tutorial# OnScissorUsed");
         FirebaseController.Instance.SendCustomEvent($"tutorial_workshop_scissor_used");
 
         _canPaperBeDragged = true;
@@ -854,20 +845,19 @@ public class WorkshopPage : Page
 
     private void OnMachineIntro()
     {
-        Debug.Log($"#tutorial# OnMachineIntro");
         FirebaseController.Instance.SendCustomEvent($"tutorial_workshop_machine_intro");
 
         _tutorial.Init()
             .SetObjectActivation(Tutorial.ObjectActivationOptions.PopUp)
             .SetClickCallback(OnMachineIntroFinished)
             .SetDelayedCallback(2f, OnMachineIntroFinished)
+            .SetClickableState(Tutorial.ClickableState.HighlightArea)
             .SetExplanation(LocalizationManager.GetLocalizedText("tut_machine_intro"))
             .StartTutorial();
     }
 
     private void OnMachineIntroFinished()
     {
-        Debug.Log($"#tutorial# OnMachineIntroFinished");
         FirebaseController.Instance.SendCustomEvent($"tutorial_workshop_machine_intro_finished");
 
         _wrappingMachine.StartMachine(_tutPaperArea);
@@ -884,13 +874,11 @@ public class WorkshopPage : Page
 
     private void OnRibbonIntro()
     {
-        Debug.Log($"#tutorial# OnRibbonIntro");
         Invoke(nameof(ExplainRibbon), .1f);
     }
 
     private void ExplainRibbon()
     {
-        Debug.Log($"#tutorial# ExplainRibbon");
         FirebaseController.Instance.SendCustomEvent($"tutorial_workshop_ribbon_intro");
 
         _tutorial.Init()
@@ -906,10 +894,9 @@ public class WorkshopPage : Page
 
     private void OnTutorialFinished()
     {
-        Debug.Log($"#tutorial# OnTutorialFinished");
-
         FirebaseController.Instance.SendCustomEvent($"tutorial_workshop_finished");
 
+        _tutorial.CloseTutorial();
         _tutorial.FinishTutorial();
         _ribbonTable.OnRibbonClicked(0);
 

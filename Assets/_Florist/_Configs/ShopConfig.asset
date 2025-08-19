@@ -209,7 +209,7 @@ MonoBehaviour:
     Price: 0
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 0
+    UnlockDay: 100
   - Icon: {fileID: 21300000, guid: d39f5c19974bf454fb343290d6c28c96, type: 3}
     Name: carnation_pink
     Id: f_17
