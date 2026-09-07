@@ -109,7 +109,7 @@ TextureImporter:
 AssetOrigin:
   serializedVersion: 1
   productId: 254677
-  packageName: Text Animator for Unity
-  packageVersion: 2.3.1
+  packageName: Text Animator for Unity (2.X)
+  packageVersion: 2.3.2
   assetPath: Assets/Plugins/Febucci/Text Animator/Example/Sprites/example_dialoguebox_body.png
-  uploadId: 740466
+  uploadId: 821174

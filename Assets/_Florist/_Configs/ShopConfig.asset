@@ -20,83 +20,7 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: DecorationItems
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[DecorationManager+DecorationType,
-        Assembly-CSharp],[System.Collections.Generic.List`1[[ShopConfig+ShopItemInfo,
-        Assembly-CSharp]], mscorlib]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[DecorationManager+DecorationType,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 1
-    - Name: $v
-      Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[ShopConfig+ShopItemInfo, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 3|ShopConfig+ShopItemInfo, Assembly-CSharp
-    - Name: Icon
-      Entry: 6
-      Data: 
-    - Name: Name
-      Entry: 1
-      Data: test
-    - Name: Id
-      Entry: 1
-      Data: t_1
-    - Name: Price
-      Entry: 3
-      Data: 0
-    - Name: IsSelectable
-      Entry: 5
-      Data: false
-    - Name: DefaultItemState
-      Entry: 3
-      Data: 1
-    - Name: UnlockDay
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   FlowerItems:
   - Icon: {fileID: 21300000, guid: 2549810d1db61ed43b899d71c4048e25, type: 3}
     Name: gypsum
@@ -418,3 +342,152 @@ MonoBehaviour:
     UnlockDay: 0
   SpeechBubbleItems: []
   SpeechBubbleButtonItems: []
+  DecorationItems:
+  - Type: 0
+    Items:
+    - Icon: {fileID: 21300000, guid: 238fc73c406734e4daac0eb37b3a8715, type: 3}
+      Name: Standart Avize
+      Id: decor_chandelier_standard
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 3
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: 238fc73c406734e4daac0eb37b3a8715, type: 3}
+    - Icon: {fileID: 21300000, guid: ef4e51d3df5dbde42868ceccd09c633b, type: 3}
+      Name: Çiçek Avize
+      Id: decor_chandelier_flower
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: ef4e51d3df5dbde42868ceccd09c633b, type: 3}
+    - Icon: {fileID: 21300000, guid: 6466cc89a13728e4eb9f8a88dfb57f84, type: 3}
+      Name: Kağıt Avize
+      Id: decor_chandelier_paper
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: 6466cc89a13728e4eb9f8a88dfb57f84, type: 3}
+    - Icon: {fileID: 21300000, guid: 6e31187cdd529d64b9d42ffed4e0cdad, type: 3}
+      Name: Retro Avize
+      Id: decor_chandelier_retro
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: 6e31187cdd529d64b9d42ffed4e0cdad, type: 3}
+  - Type: 1
+    Items:
+    - Icon: {fileID: 21300000, guid: 72d56a2400e1ec64ea14c6306cd99211, type: 3}
+      Name: Sarı Duvar
+      Id: decor_wall_yellow
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 3
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: 634fb6a1f88acdb449e20ce7db4622ec, type: 3}
+    - Icon: {fileID: 21300000, guid: c3cf9e4264fd93d42bd905bd1af58e72, type: 3}
+      Name: Yeşil Duvar
+      Id: decor_wall_green
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: b05c0348481109e4d9bd932fda9e61b9, type: 3}
+    - Icon: {fileID: 21300000, guid: ce3d5c641a9bc5e43ac3f8fa9b3feb50, type: 3}
+      Name: Pembe Duvar
+      Id: decor_wall_pink
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: de37836680e7e814c8686c8b2e06d2b9, type: 3}
+  - Type: 2
+    Items:
+    - Icon: {fileID: 21300000, guid: a430dfb9c74297246b23590bb7b9df28, type: 3}
+      Name: Standart Perde
+      Id: decor_curtain_standard
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 3
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: a430dfb9c74297246b23590bb7b9df28, type: 3}
+    - Icon: {fileID: 21300000, guid: 8c53c81e159d4884baa4956e8e441069, type: 3}
+      Name: Dantelli Perde
+      Id: decor_curtain_lace
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: 8c53c81e159d4884baa4956e8e441069, type: 3}
+    - Icon: {fileID: 21300000, guid: 22efd7f208d9beb45a4727ad5308d9b6, type: 3}
+      Name: Koyu Perde
+      Id: decor_curtain_dark
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: 22efd7f208d9beb45a4727ad5308d9b6, type: 3}
+  - Type: 3
+    Items:
+    - Icon: {fileID: 21300000, guid: 8eed025d0efdc2a4fa5b2ef66a3d30c2, type: 3}
+      Name: Standart Raf
+      Id: decor_shelf_standard
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 3
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: 8eed025d0efdc2a4fa5b2ef66a3d30c2, type: 3}
+    - Icon: {fileID: 21300000, guid: 0166c27ec8f0aaa40b7052e0a7654615, type: 3}
+      Name: Çift Raf
+      Id: decor_shelf_double
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: 0166c27ec8f0aaa40b7052e0a7654615, type: 3}
+  - Type: 4
+    Items:
+    - Icon: {fileID: 21300000, guid: af40b829d019cfd4683c9a3e8936de6e, type: 3}
+      Name: Not Panosu
+      Id: decor_painting_board
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 3
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: af40b829d019cfd4683c9a3e8936de6e, type: 3}
+    - Icon: {fileID: 21300000, guid: d8e30149f9f85ce4680fc338da7df9a3, type: 3}
+      Name: Çiçek Tablosu
+      Id: decor_painting_flower
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: d8e30149f9f85ce4680fc338da7df9a3, type: 3}
+  - Type: 5
+    Items:
+    - Icon: {fileID: 21300000, guid: 5fc87e65b63b24a4e9ca95f17196a39e, type: 3}
+      Name: Ahşap Şerit
+      Id: decor_trim_wooden
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 3
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: 6f55e48dc23d25e43a6e1e5376dce124, type: 3}
+    - Icon: {fileID: 21300000, guid: 1c02d1bb3191ffa4e84313e3de4e804d, type: 3}
+      Name: Yeşil Şerit
+      Id: decor_trim_green
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 21300000, guid: 33221a1430d19924bac56d959c1cdaa8, type: 3}
+    - Icon: {fileID: 21300000, guid: 49c536e31ece11f4cb329fef56b42a7d, type: 3}
+      Name: Sade Şerit
+      Id: decor_trim_plain
+      Price: 0
+      IsSelectable: 1
+      DefaultItemState: 2
+      UnlockDay: 0
+      DecorationSprite: {fileID: 0}

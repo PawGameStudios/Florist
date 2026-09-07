@@ -132,6 +132,7 @@ public class DukkanPage : Page
 
     public override void Close(PageParams pageData = null, Action onCompleted = null)
     {
+        References.DecorationManager.CloseDecorationPageImmediately();
         _contentObjects.SetActive(true);
         References.TopCanvas.Open();
 

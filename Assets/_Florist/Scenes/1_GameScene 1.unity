@@ -825,64 +825,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319879119}
   m_CullTransparentMesh: 1
---- !u!1 &324020828
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 324020830}
-  - component: {fileID: 324020829}
-  m_Layer: 0
-  m_Name: DecorationManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &324020829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324020828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6c62e3da58441a7b4fdcf03ef3b6c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _decorarionButtonsParent: {fileID: 0}
-  _decoCanvas: {fileID: 0}
-  _decorationScrollPrefab: {fileID: 0}
-  _decorationItemPrefab: {fileID: 0}
-  _decorationScrollParent: {fileID: 0}
-  _mainCanvas: {fileID: 0}
-  _mainCanvasOriginalPlaceholder: {fileID: 0}
-  _decoCanvasPlaceholders: []
-  _decoScrollPlaceholders: []
-  _decorationButtons: []
-  _decorationSprites:
-    _serializedList: []
-  _decorationImages:
-    _serializedList: []
---- !u!4 &324020830
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324020828}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 956.9075, y: 618.8029, z: 2.3708127}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &349438595
 GameObject:
   m_ObjectHideFlags: 0
@@ -4743,7 +4685,7 @@ MonoBehaviour:
   _dayTimeManager: {fileID: 1484740407218251864}
   _happinessMeter: {fileID: 3761997916474182447}
   _profileMenu: {fileID: 1248793803}
-  _decorationManager: {fileID: 324020829}
+  _decorationManager: {fileID: 9100000000000000001}
 --- !u!4 &1311227299
 Transform:
   m_ObjectHideFlags: 0
@@ -430815,6 +430757,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &9100000000000000001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7000000000001, guid: e4f54b4a622806a4396834968e2aa870, type: 3}
+  m_PrefabInstance: {fileID: 349133037452527309}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6c62e3da58441a7b4fdcf03ef3b6c1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -430829,7 +430782,6 @@ SceneRoots:
   - {fileID: 1311227299}
   - {fileID: 666758274}
   - {fileID: 1387279197}
-  - {fileID: 324020830}
   - {fileID: 425748724}
   - {fileID: 860907720}
   - {fileID: 290041645}
