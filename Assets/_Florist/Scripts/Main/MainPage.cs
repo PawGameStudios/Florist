@@ -9,6 +9,7 @@ public class MainPage : Page
 {
     [SerializeField] private GameObject _shopButton;
     [SerializeField] private GameObject _pcButton;
+    [SerializeField] private GameObject _mergeButton;
     [SerializeField] private Transform _playButtonTransform;
     [SerializeField] private Popup _lifePopup;
     [SerializeField] private TextMeshProUGUI _dayText;
@@ -33,7 +34,6 @@ public class MainPage : Page
 
     public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
-        Debug.LogError("MainPage Opened");
         base.Open(pageData, onCompleted);
 
         _dayText.text = $"{LocalizationManager.GetLocalizedText("day", LocalizationManager.TextType.TITLE)} {SaveSystem.Inst.GeneralData.CurrentDayIndex + 1}";
@@ -57,6 +57,7 @@ public class MainPage : Page
 
         if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
         {
+            _mergeButton.SetActive(false);
             _shopButton.SetActive(false);
             _pcButton.SetActive(false);
 
@@ -71,6 +72,7 @@ public class MainPage : Page
         {
             _privacyController.ShowPrivacyScreen();
             _shopButton.SetActive(true);
+            _mergeButton.SetActive(true);
             // _pcButton.SetActive(true);
         }
 
@@ -90,13 +92,12 @@ public class MainPage : Page
 
     public void OnPlayClicked()
     {
-        SaveSystem.Inst.GeneralData.ChangeLife(-1);
+        int lifeCost = Mathf.Max(0, Configs.EconomyConfig.DayEntryLifeCost);
 
         FirebaseController.Instance.SendCustomEvent($"play_clicked");
 
-        if (SaveSystem.Inst.GeneralData.Life <= 0)
+        if (SaveSystem.Inst.GeneralData.Life < lifeCost)
         {
-            SaveSystem.Inst.GeneralData.Life = 0;
             _lifePopup.SetPositiveButtonListener(() =>
             {
                 AdManager.Instance.ShowRewardedAd(isWatched =>
@@ -104,7 +105,7 @@ public class MainPage : Page
                     if (isWatched)
                     {
                         FirebaseController.Instance.SendCustomEvent($"ad_watched_life");
-                        SaveSystem.Inst.GeneralData.ChangeLife(1);
+                        SaveSystem.Inst.GeneralData.ChangeLife(Mathf.Max(0, Configs.EconomyConfig.RewardedAdLife));
                     }
                 });
                 _lifePopup.Close();
@@ -117,6 +118,7 @@ public class MainPage : Page
         }
         else
         {
+            SaveSystem.Inst.GeneralData.ChangeLife(-lifeCost);
             gameObject.SetActive(false);
             References.DukkanPage.Open();
             // Close();
@@ -141,6 +143,12 @@ public class MainPage : Page
         HapticsController.PlayButtonHaptic();
     }
 
+    public void OnMergeClicked()
+    {
+        HapticsController.PlayButtonHaptic();
+        References.MergeScenePortal.OpenMerge();
+    }
+
     public void OnLifeAdClicked()
     {
         AdManager.Instance.ShowRewardedAd(isWatched =>
@@ -148,7 +156,7 @@ public class MainPage : Page
             if (isWatched)
             {
                 FirebaseController.Instance.SendCustomEvent($"ad_clicked_life");
-                SaveSystem.Inst.GeneralData.ChangeLife(1);
+                SaveSystem.Inst.GeneralData.ChangeLife(Mathf.Max(0, Configs.EconomyConfig.RewardedAdLife));
             }
         });
     }

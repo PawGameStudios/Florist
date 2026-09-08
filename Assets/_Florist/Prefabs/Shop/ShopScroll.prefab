@@ -82,6 +82,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scrollContent: {fileID: 5954449396837359247}
   _shopItemParent: {fileID: 5954449396837359247}
+  _scrollRect: {fileID: 757974722654105517}
+  _viewport: {fileID: 5682747890267830811}
 --- !u!1 &8065059089227708872
 GameObject:
   m_ObjectHideFlags: 0

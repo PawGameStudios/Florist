@@ -18,17 +18,25 @@ public class EarningsInfo
     public int Change;
     public int Tip;
     public int Rent;
-    public int Refund;
+    public int Refund; // Legacy save field; refunds are no longer part of settlement.
     public int Cost;
     public int Profit;
     public int Price;
+    public int DayNumber;
+    public int CurrentCustomerPrice;
+    public int CurrentCustomerCash;
+
+    public EarningsInfo Copy() => (EarningsInfo)MemberwiseClone();
 
     public void Reset()
     {
+        DayNumber = SaveSystem.Inst.GeneralData.CurrentDayIndex + 1;
+        CurrentCustomerPrice = 0;
+        CurrentCustomerCash = 0;
         GivenMoney = 0;
         Change = 0;
         Tip = 0;
-        Rent = 0;
+        Rent = Mathf.Max(0, Configs.EconomyConfig.DailyRent);
         Refund = 0;
         Cost = 0;
         Profit = 0;
@@ -37,7 +45,7 @@ public class EarningsInfo
 
     public void CalculateProfit()
     {
-        Profit = GivenMoney + Tip - Rent - Refund - Cost - Change;
+        Profit = GivenMoney + Tip - Change - Rent - Cost;
     }
 }
 
@@ -58,6 +66,7 @@ public class DukkanPage : Page
     public List<BouquetModel> CurrentOrder => _customer.CurrentOrder;
     public List<string> ConvoHistory => _convoHistory;
     public CustomerInfo CurrentCustomerInfo => _customer.CustomerInfo;
+    public float CustomerServiceSeconds => _customer.ServiceSeconds;
     public BouquetModel DeliveredBouquet
     {
         get
@@ -102,7 +111,6 @@ public class DukkanPage : Page
     private List<string> _convoHistory = new();
     private const string GO_TO_WORKSHOP = "GoToWorkshop";
     private const string END_CONVO = "EndConvo";
-    private const int HINT_WAIT_TIME = 12;
 
 
     #region Decorations
@@ -211,7 +219,15 @@ public class DukkanPage : Page
     public void OnDayTimeEnded()
     {
         Debug.Log("Day Ended");
-        EndDay();
+        // Finish the current customer's delivery, payment and farewell first.
+        // StartNextEvent checks the clock at the next service boundary.
+    }
+
+    public void SetDecorationPaused(bool paused)
+    {
+        References.DayTimeManager.SetDecorationPaused(paused);
+        References.HappinessMeter.SetDecorationPaused(paused);
+        _customer.SetServiceTimerPaused(paused);
     }
 
     public void OnFlowerReady(OrderInfo orderInfo, GameObject bouquetObject)
@@ -230,7 +246,7 @@ public class DukkanPage : Page
         {
             foreach (var flower in bouquet.Flowers)
             {
-                cost += flower.Count * Configs.WorkshopConfig.GetFlowerCost(flower.FlowerType);
+                cost += flower.Count * Configs.WorkshopConfig.GetFlowerCost(flower.FlowerType, flower.FlowerColor);
             }
 
             cost += Configs.WorkshopConfig.GetRibbonCost(bouquet.RibbonType);
@@ -262,8 +278,11 @@ public class DukkanPage : Page
         _bouquet.gameObject.SetActive(false);
 
         References.HappinessMeter.StopHappinessCountdown();
+        _customer.StopServiceTimer();
 
         var pricePaymentInfo = _customer.GetOrderPayment();
+        _earningsInfo.CurrentCustomerPrice = pricePaymentInfo.Item1;
+        _earningsInfo.CurrentCustomerCash = pricePaymentInfo.Item2;
         _earningsInfo.Price += pricePaymentInfo.Item1;
         _earningsInfo.GivenMoney += pricePaymentInfo.Item2;
         _posController.ReceivePayment(pricePaymentInfo.Item1, pricePaymentInfo.Item2, OnPaymentMade);
@@ -303,15 +322,18 @@ public class DukkanPage : Page
 
     private void OnPaymentMade(int change)
     {
+        if (_dukkanSaveState == DukkanSaveState.Done) return;
         _dukkanSaveState = DukkanSaveState.Done;
 
         // SaveSystem.Inst.GeneralData.ChangeMoney(moneyChange);
 
         _earningsInfo.Change += change;
 
-        _flowerDeliveredInfo = _customer.GetOrderInfo(_bouquet.Order.BouquetModels, _earningsInfo);
+        _flowerDeliveredInfo = _customer.GetOrderInfo(_bouquet.Order.BouquetModels, new EarningsInfo
+        { Price = _earningsInfo.CurrentCustomerPrice, GivenMoney = _earningsInfo.CurrentCustomerCash, Change = change });
 
-        References.HappinessMeter.ChangeHappinessAfterOrderReceived(_flowerDeliveredInfo.HappinessChange);
+        References.HappinessMeter.SetOrderSatisfaction(_flowerDeliveredInfo.Satisfaction);
+        _earningsInfo.Tip += Mathf.RoundToInt(_customer.GetOrderPrice() * _flowerDeliveredInfo.TipPercentage / 100f);
 
         _convoRunner?.OnConversationEvent.RemoveAllListeners();
         _convoRunner?.OnEnd.RemoveAllListeners();
@@ -320,9 +342,7 @@ public class DukkanPage : Page
         _convoRunner.OnEnd.AddListener(HandleEndEvent);
         _convoRunner.Begin();
 
-        // TODO: tip animation
-        // int tip = (int)((_earningsInfo.GivenMoney - _earningsInfo.Change) * _flowerDeliveredInfo.TipPercentage / 100f);
-        // _earningsInfo.Tip += tip;
+
     }
 
     private void SetItems()
@@ -380,8 +400,15 @@ public class DukkanPage : Page
         _customer.SetSpeechBubbleSprites();
     }
 
-    private void StartNextEvent()
+    private void StartNextEvent() => BeginNextEvent(false);
+
+    private void BeginNextEvent(bool resumeCurrentCustomer)
     {
+        if (!resumeCurrentCustomer && References.DayTimeManager.IsDayTimeEnded)
+        {
+            EndDay();
+            return;
+        }
         Debug.Log($"#dukkan# StartNextEvent, _currentCustomerIndex: {_nextCustomerIndex}, _dayInfo.Events.Count: {_dayInfo.Events.Count}");
         FirebaseController.Instance.SendCustomEvent($"day_{SaveSystem.Inst.GeneralData.CurrentDayIndex}_customer_{_nextCustomerIndex}");
 
@@ -396,9 +423,9 @@ public class DukkanPage : Page
             DayEvent dayEvent = _dayInfo.Events[_nextCustomerIndex];
             if (dayEvent.IsEvent)
             {
-                _newItemInroduceEvent = dayEvent;
                 _nextCustomerIndex++;
                 StartNextEvent();
+                return;
             }
             else
             {
@@ -415,6 +442,8 @@ public class DukkanPage : Page
                 {
                     customer = Configs.CustomerConfig.GetCustomer(customerType);
                 }
+                customer = CustomerOrderFactory.Prepare(customer, Configs.CustomerConfig, Configs.WorkshopConfig,
+                    Configs.ShopConfig, SaveSystem.Inst.ShopData, Configs.EconomyConfig);
                 Conversation initialConversation = Configs.CustomerConfig.GetInitialConvo(customer);
 
                 _customer.SetCustomer(customer);
@@ -437,6 +466,7 @@ public class DukkanPage : Page
 
     private void EndDay()
     {
+        if (SaveSystem.Inst.SaveData.LastPage == PageType.EndDay) return;
         Debug.Log("#dukkan# EndDay");
 
         _earningsInfo.CalculateProfit();
@@ -458,6 +488,7 @@ public class DukkanPage : Page
         StopHints();
 
         _dukkanSaveState = DukkanSaveState.InWorkshop;
+        _customer.StartTimer();
 
         _convoRunner.OnConversationEvent.RemoveAllListeners();
         _customer.StopTalking();
@@ -494,8 +525,7 @@ public class DukkanPage : Page
                 else if (userEvent.Name == END_CONVO)
                 {
                     _customer.StopTalking();
-                    _customer.PlayExitAnimation();
-                    Invoke(nameof(StartNextEvent), 1);
+                    _customer.PlayExitAnimation(() => StartNextEvent());
                 }
                 break;
         }
@@ -537,7 +567,7 @@ public class DukkanPage : Page
             case DukkanSaveState.None:
             case DukkanSaveState.CustomerProgress:
                 _nextCustomerIndex--;
-                StartNextEvent();
+                BeginNextEvent(resumeCurrentCustomer: true);
                 break;
             case DukkanSaveState.FlowerReady:
                 LoadCustomer(dukkanParams.CurrentCustomerInfo, dukkanParams.CurrentOrder);
@@ -546,8 +576,13 @@ public class DukkanPage : Page
             case DukkanSaveState.Payment:
                 LoadCustomer(dukkanParams.CurrentCustomerInfo, dukkanParams.CurrentOrder);
                 LoadFlower(dukkanParams.OrderInfo, dukkanParams.DeliveredBouquet, false);
-                var pricePaymentInfo = _customer.GetOrderPayment();
-                _posController.ReceivePayment(pricePaymentInfo.Item1, pricePaymentInfo.Item2, OnPaymentMade);
+                // Keep the original receipt on resume; never roll a second cash amount.
+                if (_earningsInfo.CurrentCustomerPrice == 0)
+                {
+                    _earningsInfo.CurrentCustomerPrice = _customer.GetOrderPrice();
+                    _earningsInfo.CurrentCustomerCash = _earningsInfo.CurrentCustomerPrice;
+                }
+                _posController.ReceivePayment(_earningsInfo.CurrentCustomerPrice, _earningsInfo.CurrentCustomerCash, OnPaymentMade);
                 break;
             case DukkanSaveState.Done:
                 StartNextEvent();
@@ -572,6 +607,8 @@ public class DukkanPage : Page
     {
         Sprite customerSprite = Configs.CustomerConfig.GetCustomerSprite(customer.Name);
         _customer.LoadCustomer(customer, customerSprite, currentOrder);
+        _customer.RestoreServiceTimer(SaveSystem.Inst.SaveData.DukkanParams.CustomerServiceSeconds,
+            _dukkanSaveState == DukkanSaveState.Payment || _dukkanSaveState == DukkanSaveState.Done);
         _customer.EnterWithoutAnimation();
         References.HappinessMeter.StartNewHappinessCountdown();
     }
@@ -638,7 +675,7 @@ public class DukkanPage : Page
         switch (hintType)
         {
             case HintType.GiveFlower:
-                Invoke(nameof(GiveFlowerHint), HINT_WAIT_TIME);
+                Invoke(nameof(GiveFlowerHint), Configs.WorkshopConfig.GetHintDelay(SaveSystem.Inst.GeneralData.CurrentDayIndex));
                 break;
         }
     }

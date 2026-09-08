@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2d4ceb1f8346c4a2b7be4a48c0fb1f, type: 3}
+  m_Name: MergeEconomyConfig
+  m_EditorClassIdentifier:
+  MaxLevelCellColor: {r: 0.2, g: 1, b: 0.2, a: 0.3}
+  MergeTargetCellColor: {r: 0, g: 0, b: 0, a: 0}
+  MaxEnergy: 100
+  StartingEnergy: 100
+  ProducerEnergyCost: 1
+  EnergyRechargeSeconds: 120
+  UseItemSpawnChances: 0
+  InventoryCapacity: 24
+  MaxActiveOrders: 3
+  InitialOrders: 2
+  OrderGenerationSeconds: 30
+  RegularRewardMultiplier: 1
+  VipRewardMultiplier: 2
+  RareRewardMultiplier: 3
+  EnableEnergyAds: 1
+  RewardedEnergy: 20
+  EnergyAdCooldownSeconds: 60
+  EnergyAdsPerUtcDay: 5

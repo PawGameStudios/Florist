@@ -1,9 +1,9 @@
 ﻿<Solution>
   <Project Path="Febucci.TextAnimator.Runtime.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="SingularityGroup.HotReload.Runtime.csproj" />
   <Project Path="SingularityGroup.HotReload.Editor.csproj" />
   <Project Path="Conversa.Editor.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="SoundsGood.Application.csproj" />
   <Project Path="AYellowpaper.SerializedCollections.csproj" />
   <Project Path="Conversa.Runtime.csproj" />

@@ -66,6 +66,8 @@ public class Tutorial : MonoBehaviour
     private Tween _handTween = null;
     private Tween _bgTween = null;
     private Sequence _popupSequence = null;
+    private Transform _handCoordinateSpace;
+    private Vector3 _handLocalPosition;
 
     private void OnEnable()
     {
@@ -118,7 +120,21 @@ public class Tutorial : MonoBehaviour
         _handTween?.Kill();
         _handAnimToPlay = "Click";
         _hand.transform.position = targetPos;
+        if (_handCoordinateSpace != null)
+            _handLocalPosition = _handCoordinateSpace.InverseTransformPoint(targetPos);
         return this;
+    }
+
+    public Tutorial SetHandCoordinateSpace(Transform coordinateSpace)
+    {
+        _handCoordinateSpace = coordinateSpace;
+        return this;
+    }
+
+    public void RefreshHandPosition()
+    {
+        if (_handCoordinateSpace != null)
+            _hand.position = _handCoordinateSpace.TransformPoint(_handLocalPosition);
     }
 
     public Tutorial SetHandCallback(Action callback)
@@ -133,14 +149,22 @@ public class Tutorial : MonoBehaviour
         _handTween?.Kill();
         _hand.transform.position = swipeStartPos;
 
-        if (loop)
+        if (_handCoordinateSpace != null)
         {
-            _handTween = _hand.DOMove(swipeTargetPos, duration).SetLoops(loopCount, LoopType.Restart);
+            _handLocalPosition = _handCoordinateSpace.InverseTransformPoint(swipeStartPos);
+            Vector3 localTarget = _handCoordinateSpace.InverseTransformPoint(swipeTargetPos);
+            _handTween = DOTween.To(() => _handLocalPosition, position =>
+            {
+                _handLocalPosition = position;
+                RefreshHandPosition();
+            }, localTarget, duration);
         }
         else
         {
             _handTween = _hand.DOMove(swipeTargetPos, duration);
         }
+        if (loop)
+            _handTween.SetLoops(loopCount, LoopType.Restart);
         return this;
     }
 
@@ -234,19 +258,33 @@ public class Tutorial : MonoBehaviour
     public Tutorial Highlight(Sprite sprite, Transform transform)
     {
         _highlightImage.sprite = sprite;
-        _highlightImage.transform.position = transform.position;
-        _highlightImage.transform.localScale = transform.localScale;
-        _highlightImage.GetComponent<RectTransform>().sizeDelta = transform.GetComponent<RectTransform>().sizeDelta;
-
-        _highlightButton.GetComponent<Image>().sprite = sprite;
-        _highlightButton.transform.position = transform.position;
-        _highlightButton.transform.localScale = transform.localScale;
-        _highlightButton.GetComponent<RectTransform>().sizeDelta = transform.GetComponent<RectTransform>().sizeDelta;
+        var source = (RectTransform)transform;
+        MatchHighlightRect(_highlightImage.rectTransform, source);
+        if (_highlightButton.targetGraphic is Image buttonImage)
+            buttonImage.sprite = sprite;
+        MatchHighlightRect((RectTransform)_highlightButton.transform, source);
 
         _highlightButton.gameObject.SetActive(true);
         _highlightImage.gameObject.SetActive(true);
         // _highlightBg.gameObject.SetActive(true);
         return this;
+    }
+
+    private static void MatchHighlightRect(RectTransform target, RectTransform source)
+    {
+        // The card and tutorial can have different parent scales, anchors and pivots.
+        var corners = new Vector3[4];
+        source.GetWorldCorners(corners);
+        var bounds = new Bounds(target.parent.InverseTransformPoint(corners[0]), Vector3.zero);
+        for (int i = 1; i < corners.Length; i++)
+            bounds.Encapsulate(target.parent.InverseTransformPoint(corners[i]));
+
+        target.anchorMin = target.anchorMax = new Vector2(.5f, .5f);
+        target.pivot = new Vector2(.5f, .5f);
+        target.localScale = Vector3.one;
+        target.localRotation = Quaternion.identity;
+        target.sizeDelta = new Vector2(bounds.size.x, bounds.size.y);
+        target.localPosition = bounds.center;
     }
 
     public Tutorial Highlight2(Sprite sprite, Transform transform)
@@ -322,6 +360,8 @@ public class Tutorial : MonoBehaviour
 
     public void SetDefaultValues(Action onComplete = null)
     {
+        CancelInvoke();
+        _handCoordinateSpace = null;
         Debug.Log($"#tutorial# SetDefaultValues");
         _activationDelay = 0;
         _delay = 0;

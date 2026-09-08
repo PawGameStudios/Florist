@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf481d73a00fe443a3cb221086f1508, type: 3}
+  m_Name: Customer3
+  m_EditorClassIdentifier:
+  customerName: Name-1
+  customerSprite: {fileID: 21300000, guid: 07353e46cf6209242b558203b59abd52, type: 3}
+  description:
+  preferredItems:
+  - {fileID: 11400000, guid: 200d15464a0433a43a38689b95f4b3b5, type: 2}
+  - {fileID: 11400000, guid: d70ff1bbea9b1274b9a10106ab6ca793, type: 2}
+  - {fileID: 11400000, guid: 08390b21139b469bbf040c094f28e76f, type: 2}
+  - {fileID: 11400000, guid: 4c0eecbf40214ba7b94f708da5510dda, type: 2}
+  baseReward: 125
+  customerType: 0
+  displayName: "\u00c7i\u00e7ek\u00e7i"
+  minimumCompletedOrders: 4
+  selectionWeight: 3
+  maxProductTypes: 2

@@ -23,6 +23,7 @@ public class Customer : MonoBehaviour
         public PaymentState PaymentState;
         public float TipPercentage;
         public int HappinessChange;
+        public int Satisfaction;
         public List<OrderContentResult> OrderContentResults;
     }
 
@@ -63,12 +64,23 @@ public class Customer : MonoBehaviour
     private Sequence _sequence, _idleSequence;
     private CustomerInfo _customerInfo;
     private float _waitingStartTime = 0;
+    private float _finishedServiceSeconds = -1;
+    private float _servicePauseStarted = -1;
+    public float ServiceSeconds => _finishedServiceSeconds >= 0 ? _finishedServiceSeconds
+        : Mathf.Max(0, (_servicePauseStarted >= 0 ? _servicePauseStarted : Time.time) - _waitingStartTime);
     private Action _onTalkEnd;
     private bool _isWaitingForSpeechEnd = false, _showAnswersAfterSpeech = false;
     private List<Option> _answerOptions;
+    private int _lastSpeechSkipFrame = -1;
+
+    private void OnEnable()
+    {
+        InputManager.PointerReleased += OnSkipClicked;
+    }
 
     private void OnDisable()
     {
+        InputManager.PointerReleased -= OnSkipClicked;
         _typeWriter.onTextShowed.RemoveAllListeners();
         _sequence?.Kill();
         _idleSequence?.Kill();
@@ -99,6 +111,7 @@ public class Customer : MonoBehaviour
             _customerInfo.OrderHappiness = Configs.CustomerConfig.DefaultOrderHappiness;
         }
 
+        StartTimer();
         DetermineOrder();
     }
 
@@ -329,7 +342,14 @@ public class Customer : MonoBehaviour
 
     public (int, int) GetOrderPayment()
     {
-        // calculate flower price
+        int price = GetOrderPrice();
+
+        // add random money so that we can give back change
+        return GetCashPayment(price);
+    }
+
+    public int GetOrderPrice()
+    {
         int price = 0;
 
         // add price of each flower type
@@ -337,16 +357,21 @@ public class Customer : MonoBehaviour
         {
             foreach (var flowers in bouquet.Flowers)
             {
-                price += flowers.Count * Configs.WorkshopConfig.GetFlowerPrice(flowers.FlowerType);
+                price += flowers.Count * Configs.WorkshopConfig.GetFlowerPrice(flowers.FlowerType, flowers.FlowerColor);
             }
             price += Configs.WorkshopConfig.GetRibbonPrice(bouquet.RibbonType);
             price += Configs.WorkshopConfig.GetWrappingPaperPrice(bouquet.WrappingPaperType);
         }
 
-        // add random money so that we can give back change
-        // and round up to whole money bill
+        return price;
+    }
+
+    private (int, int) GetCashPayment(int price)
+    {
+        // Round the overpayment target up to the available banknotes.
         int[] bills = new int[] { 5, 10, 20, 50, 100 };
-        float extraMoney = price + (int)price * Random.Range(0.05f, 0.25f);
+        Vector2 extraCash = Configs.EconomyConfig.CustomerExtraCashFraction;
+        float extraMoney = price + (int)price * Random.Range(Mathf.Max(0, extraCash.x), Mathf.Max(0, Mathf.Max(extraCash.x, extraCash.y)));
         int target = Mathf.RoundToInt(extraMoney);
 
         int max = target + 100; // Some margin above target
@@ -384,6 +409,33 @@ public class Customer : MonoBehaviour
     public void StartTimer()
     {
         _waitingStartTime = Time.time;
+        _finishedServiceSeconds = -1;
+        if (_servicePauseStarted >= 0)
+            _servicePauseStarted = Time.time;
+    }
+
+    public void SetServiceTimerPaused(bool paused)
+    {
+        if (paused)
+        {
+            if (_servicePauseStarted < 0)
+                _servicePauseStarted = Time.time;
+        }
+        else if (_servicePauseStarted >= 0)
+        {
+            _waitingStartTime += Time.time - _servicePauseStarted;
+            _servicePauseStarted = -1;
+        }
+    }
+
+    public void StopServiceTimer() => _finishedServiceSeconds = ServiceSeconds;
+
+    public void RestoreServiceTimer(float elapsed, bool stopped)
+    {
+        _waitingStartTime = Time.time - Mathf.Max(0, elapsed);
+        _finishedServiceSeconds = stopped ? Mathf.Max(0, elapsed) : -1;
+        if (_servicePauseStarted >= 0)
+            _servicePauseStarted = Time.time;
     }
 
     public FlowerDeliveredInfo GetOrderInfo(List<BouquetModel> bouquetModels, EarningsInfo earningsInfo)
@@ -422,6 +474,8 @@ public class Customer : MonoBehaviour
             }
         }
 
+        happinessChange = Mathf.RoundToInt((float)happinessChange / Mathf.Max(1, orderContentResults.Count));
+
         float customerExtraPay = earningsInfo.GivenMoney - earningsInfo.Change - earningsInfo.Price;
         if (customerExtraPay > 0)
         {
@@ -436,17 +490,21 @@ public class Customer : MonoBehaviour
             paymentState = PaymentState.Normal;
         }
 
-        float totalWaitTimeInSeconds = Time.time - _waitingStartTime;
-        if (_customerInfo.OrderHappiness.AcceptableWaitTime > totalWaitTimeInSeconds)
+        float totalWaitTimeInSeconds = ServiceSeconds;
+        if (totalWaitTimeInSeconds > _customerInfo.OrderHappiness.AcceptableWaitTime)
         {
             happinessState |= HappinessState.WaitedLong;
             happinessChange += _customerInfo.OrderHappiness.HappinessChange[HappinessState.WaitedLong];
         }
 
+        var happiness = _customerInfo.OrderHappiness;
+        int satisfaction = Mathf.Clamp(happiness.InitialSatisfaction + happinessChange, 0, 100);
         float tip = 0;
-        if (happinessChange > _customerInfo.OrderHappiness.HappinessTipLimit)
+        bool correctOrder = (happinessState & (HappinessState.DifferentOrder | HappinessState.MissingFlowers)) == 0;
+        if (correctOrder && paymentState == PaymentState.Normal && satisfaction >= happiness.HappinessTipLimit)
         {
-            tip = Random.Range(_customerInfo.OrderHappiness.TipPercentage.x, _customerInfo.OrderHappiness.TipPercentage.y);
+            float quality = Mathf.InverseLerp(happiness.HappinessTipLimit, 100, satisfaction);
+            tip = Mathf.Lerp(Mathf.Max(0, happiness.TipPercentage.x), Mathf.Max(happiness.TipPercentage.x, happiness.TipPercentage.y), quality);
         }
 
         HappinessState prominentHappinessState = GetProminentHappinessState(happinessState);
@@ -457,6 +515,7 @@ public class Customer : MonoBehaviour
             Conversation = Configs.CustomerConfig.GetGoodbyeConvo(_customerInfo, prominentHappinessState),
             TipPercentage = tip,
             HappinessChange = happinessChange,
+            Satisfaction = satisfaction,
             HappinessState = happinessState,
             PaymentState = paymentState,
             OrderContentResults = orderContentResults,
@@ -465,6 +524,11 @@ public class Customer : MonoBehaviour
 
     public void OnSkipClicked()
     {
+        if (!_speechBubbleObjects.activeInHierarchy || !_typeWriter.isShowingText ||
+            References.WorkshopPage.gameObject.activeInHierarchy || _lastSpeechSkipFrame == Time.frameCount)
+            return;
+
+        _lastSpeechSkipFrame = Time.frameCount;
         HapticsController.PlayButtonHaptic();
         _typeWriter.SkipTypewriter();
     }

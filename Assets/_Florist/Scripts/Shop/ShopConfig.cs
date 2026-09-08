@@ -6,6 +6,7 @@ using DecorationType = DecorationManager.DecorationType;
 [CreateAssetMenu(fileName = "ShopConfig", menuName = "Paw/Configs/Shop")]
 public class ShopConfig : SerializedScriptableObject
 {
+    public enum UpgradeEffectType { None, WrappingMachineLevelBonus, DayDurationMultiplier }
     [System.Serializable]
     public class ShopItemInfo
     {
@@ -16,11 +17,17 @@ public class ShopConfig : SerializedScriptableObject
         [VerticalGroup("Info")]
         public string Name;
 
+        [Tooltip("Optional full localization key; bypasses the legacy color_name naming convention.")]
+        public string NameLocalizationKey;
+
         [VerticalGroup("Info")]
         public string Id;
 
         [VerticalGroup("Info")]
         public long Price;
+
+        [Tooltip("Keep unfinished products visible, but prevent charging for an effect that is not implemented.")]
+        public bool PurchaseDisabled;
 
         [VerticalGroup("State")]
         public bool IsSelectable;
@@ -32,6 +39,10 @@ public class ShopConfig : SerializedScriptableObject
         [VerticalGroup("State")]
         [ShowIf("DefaultItemState", ShopData.ItemState.Locked)]
         public int UnlockDay = 0;
+
+        [Tooltip("Only applies to UpgradeItems. None means no gameplay effect is connected.")]
+        public UpgradeEffectType UpgradeEffect;
+        [Min(0)] public float UpgradeValue = 1;
     }
 
     [System.Serializable]
@@ -68,6 +79,33 @@ public class ShopConfig : SerializedScriptableObject
 
     [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 6)]
     public List<DecorationItemGroup> DecorationItems = new();
+
+    public int GetMachineLevelBonus(ShopData ownership)
+    {
+        float bonus = 0;
+        if (UpgradeItems != null)
+            foreach (var item in UpgradeItems)
+                if (IsOwnedUpgrade(item, ownership) && item.UpgradeEffect == UpgradeEffectType.WrappingMachineLevelBonus)
+                    bonus += Mathf.Max(0, item.UpgradeValue);
+        return Mathf.FloorToInt(bonus);
+    }
+
+    public float GetDayDurationMultiplier(ShopData ownership)
+    {
+        float multiplier = 1;
+        if (UpgradeItems != null)
+            foreach (var item in UpgradeItems)
+                if (IsOwnedUpgrade(item, ownership) && item.UpgradeEffect == UpgradeEffectType.DayDurationMultiplier)
+                    multiplier *= Mathf.Max(0.01f, item.UpgradeValue);
+        return multiplier;
+    }
+
+    private static bool IsOwnedUpgrade(ShopItemInfo item, ShopData ownership)
+    {
+        return item != null && !string.IsNullOrEmpty(item.Id) && ownership?.Items != null &&
+            ownership.Items.TryGetValue(item.Id, out var saved) && saved.ItemType == ItemType.Upgrade &&
+            (saved.ItemState == ShopData.ItemState.Purchased || saved.ItemState == ShopData.ItemState.Selected);
+    }
 
     public List<ShopItemInfo> GetItems(ItemType itemType, DecorationType decorationType = default)
     {

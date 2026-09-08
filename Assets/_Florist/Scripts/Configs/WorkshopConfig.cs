@@ -122,6 +122,11 @@ namespace Config
     [CreateAssetMenu(fileName = "WorkshopConfig", menuName = "Paw/Configs/Workshop")]
     public class WorkshopConfig : SerializedScriptableObject
     {
+        [Min(0f)] public float EarlyDayHintDelay = 4f;
+        [Min(0f)] public float LaterDayHintDelay = 12f;
+
+        public float GetHintDelay(int dayIndex) => dayIndex < 2 ? EarlyDayHintDelay : LaterDayHintDelay;
+
         public Dictionary<BouquetType, Recipe> BouquetRecipes;
 
         [TableList(ShowIndexLabels = true, ShowPaging = true, NumberOfItemsPerPage = 10)]
@@ -188,11 +193,11 @@ namespace Config
             return null;
         }
 
-        public int GetFlowerCost(FlowerType flowerType)
+        public int GetFlowerCost(FlowerType flowerType, FlowerColor color)
         {
             foreach (var flowerInfo in FlowerInfo)
             {
-                if (flowerInfo.FlowerType == flowerType)
+                if (flowerInfo.FlowerType == flowerType && flowerInfo.Color == color)
                 {
                     return flowerInfo.Cost;
                 }
@@ -227,11 +232,11 @@ namespace Config
             return 0;
         }
 
-        public int GetFlowerPrice(FlowerType flowerType)
+        public int GetFlowerPrice(FlowerType flowerType, FlowerColor color)
         {
             foreach (var flowerInfo in FlowerInfo)
             {
-                if (flowerInfo.FlowerType == flowerType)
+                if (flowerInfo.FlowerType == flowerType && flowerInfo.Color == color)
                 {
                     return flowerInfo.Price;
                 }

@@ -53,7 +53,7 @@ public class DecorationManager : MonoBehaviour
             _decorationButtons[i].onClick.AddListener(() => OnDecorationTypeChangeButtonClicked(categoryIndex));
         }
 
-        _decorationOverlay.Initialize(OpenDecorationPage, CloseDecorationPage, OnDecorationCloseClicked);
+        _decorationOverlay.Initialize(OpenDecorationPage, CloseDecorationPage, OnDecorationBackClicked);
     }
 
     private void Start()
@@ -66,11 +66,17 @@ public class DecorationManager : MonoBehaviour
         _dukkanContent.DOKill();
     }
 
+    private void OnDisable()
+    {
+        CloseDecorationPageImmediately();
+    }
+
     public void OpenDecorationPage()
     {
         if (_isDecorationModeOpen)
             return;
 
+        References.DukkanPage.SetDecorationPaused(true);
         _customerWasActive = _customerRoot.activeSelf;
         _customerRoot.SetActive(false);
         _isDecorationModeOpen = true;
@@ -89,6 +95,7 @@ public class DecorationManager : MonoBehaviour
         _decorationOverlay.HideMode();
         MoveContent(_mainCanvasOriginalPlaceholder);
         _customerRoot.SetActive(_customerWasActive);
+        References.DukkanPage.SetDecorationPaused(false);
     }
 
     public void CloseDecorationPageImmediately()
@@ -102,6 +109,7 @@ public class DecorationManager : MonoBehaviour
         _dukkanContent.DOKill();
         CopyTransform(_dukkanContent, _mainCanvasOriginalPlaceholder);
         _customerRoot.SetActive(_customerWasActive);
+        References.DukkanPage.SetDecorationPaused(false);
     }
 
     public void OnCloseButtonClicked()
@@ -129,11 +137,11 @@ public class DecorationManager : MonoBehaviour
         CopyTransform(_activeScroll.Root, _decoScrollPlaceholders[id]);
         _activeScroll.Initialize(group.Items, _decorationItemPrefab, TrySelectDecoration);
 
-        _decorationOverlay.ShowCategory(decorationType);
+        _decorationOverlay.ShowCategory();
         MoveContent(_decoCanvasPlaceholders[id]);
     }
 
-    public void OnDecorationCloseClicked()
+    public void OnDecorationBackClicked()
     {
         if (!_isDecorationModeOpen)
             return;
@@ -197,13 +205,29 @@ public class DecorationManager : MonoBehaviour
 
     private void ApplyDecoration(DecorationType type, Sprite sprite)
     {
+        if (_decorationImages == null)
+            return;
+
         foreach (DecorationImageGroup imageGroup in _decorationImages)
         {
-            if (imageGroup.Type != type)
+            if (imageGroup == null || imageGroup.Type != type)
                 continue;
 
-            foreach (Image image in imageGroup.Images)
+            if (imageGroup.Images == null)
             {
+                Debug.LogWarning($"DecorationManager: No image array assigned for {type}.", this);
+                return;
+            }
+
+            for (int i = 0; i < imageGroup.Images.Length; i++)
+            {
+                Image image = imageGroup.Images[i];
+                if (image == null)
+                {
+                    Debug.LogWarning($"DecorationManager: Missing image for {type} at index {i}. Assign it in the Decoration Images list.", this);
+                    continue;
+                }
+
                 image.sprite = sprite;
                 image.enabled = sprite != null;
             }

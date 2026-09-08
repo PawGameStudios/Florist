@@ -39,150 +39,150 @@ MonoBehaviour:
   - Icon: {fileID: 21300000, guid: aa9714ac61ce3be429ad938d8e6a0d54, type: 3}
     Name: rose_red
     Id: f_3
-    Price: 0
+    Price: 10
     IsSelectable: 0
     DefaultItemState: 0
     UnlockDay: 1
   - Icon: {fileID: 21300000, guid: d856fe2328bd11a46b24103a5d646126, type: 3}
     Name: rose_white
     Id: f_4
-    Price: 0
+    Price: 20
     IsSelectable: 0
     DefaultItemState: 0
     UnlockDay: 3
   - Icon: {fileID: 21300000, guid: b91cfb305092ba34cb4d059a49f4c108, type: 3}
     Name: rose_pink
     Id: f_5
-    Price: 0
+    Price: 25
     IsSelectable: 0
     DefaultItemState: 0
     UnlockDay: 6
   - Icon: {fileID: 21300000, guid: 62ca99e83d64b5b4993722e2fcf29dfd, type: 3}
     Name: rose_yellow
     Id: f_6
-    Price: 0
+    Price: 20
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 10
   - Icon: {fileID: 21300000, guid: 6a019ef77594b8947ad660ae0c6d325b, type: 3}
     Name: anemone_red
     Id: f_7
-    Price: 0
+    Price: 25
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 14
   - Icon: {fileID: 21300000, guid: d0c4139fa483ecc49a86f6c2cc5a10b2, type: 3}
     Name: anemone_purple
     Id: f_8
-    Price: 0
+    Price: 30
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 16
   - Icon: {fileID: 21300000, guid: 073e3e69907d80e4b90c5479d741879b, type: 3}
     Name: anemone_pink
     Id: f_9
-    Price: 0
+    Price: 25
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 12
   - Icon: {fileID: 21300000, guid: a1faa3cadbccda545bb5cbeb0ecbc96f, type: 3}
     Name: gladiolus_white
     Id: f_10
-    Price: 0
+    Price: 45
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 34
   - Icon: {fileID: 21300000, guid: 309ac2ef76e336949a2176677a1ba0ff, type: 3}
     Name: gladiolus_red
     Id: f_11
-    Price: 0
+    Price: 50
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 36
   - Icon: {fileID: 21300000, guid: 699afc06b52dd2240b6ed65e0954b8b6, type: 3}
     Name: gladiolus_purple
     Id: f_12
-    Price: 0
+    Price: 50
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 37
   - Icon: {fileID: 21300000, guid: 56cbdde9cc45e764d8753120838b1a90, type: 3}
     Name: gladiolus_pink
     Id: f_13
-    Price: 0
+    Price: 50
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 38
   - Icon: {fileID: 21300000, guid: 2f7053ad5468bf249a63e3ae1a72b1e2, type: 3}
     Name: gladiolus_yellow
     Id: f_14
-    Price: 0
+    Price: 50
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 39
   - Icon: {fileID: 21300000, guid: b3578e5ca7de96b40aceb37d53cfd24a, type: 3}
     Name: carnation_white
     Id: f_15
-    Price: 0
+    Price: 40
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 26
   - Icon: {fileID: 21300000, guid: da8789acf7addbb48aa24d5607dbc6f4, type: 3}
     Name: carnation_red
     Id: f_16
-    Price: 0
+    Price: 40
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 28
   - Icon: {fileID: 21300000, guid: d39f5c19974bf454fb343290d6c28c96, type: 3}
     Name: carnation_pink
     Id: f_17
-    Price: 0
+    Price: 40
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 30
   - Icon: {fileID: 21300000, guid: c7275aeaa3e8b5f44a4d327ed102685e, type: 3}
     Name: carnation_yellow
     Id: f_18
-    Price: 0
+    Price: 45
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 32
   - Icon: {fileID: 21300000, guid: d10c3666bad5f3d428cbefc18dd02e43, type: 3}
     Name: tulip_white
     Id: f_19
-    Price: 0
+    Price: 30
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 18
   - Icon: {fileID: 21300000, guid: be99ed4ae1e0102428575f14d61d7af8, type: 3}
     Name: tulip_red
     Id: f_20
-    Price: 0
+    Price: 30
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 20
   - Icon: {fileID: 21300000, guid: c27ec26f5a69f9540b47355e07faa8a3, type: 3}
     Name: tulip_pink
     Id: f_21
-    Price: 0
+    Price: 35
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 22
   - Icon: {fileID: 21300000, guid: 89331037906461f488e1a4448b6c7603, type: 3}
     Name: tulip_yellow
     Id: f_22
-    Price: 0
+    Price: 35
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 24
   - Icon: {fileID: 21300000, guid: 59e6ca4980b738149b890110fffe2446, type: 3}
     Name: daisy
     Id: f_23
-    Price: 0
+    Price: 20
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 8
   WrapperItems:
   - Icon: {fileID: 21300000, guid: 48b22dd9bb1c668468bf161ab50d70ad, type: 3}
     Name: wrapper7
@@ -194,80 +194,80 @@ MonoBehaviour:
   - Icon: {fileID: 21300000, guid: 949ccc512fdc89c459c1d7b05db97e97, type: 3}
     Name: wrapper9
     Id: wp_9
-    Price: 0
+    Price: 15
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 6
+    UnlockDay: 5
   - Icon: {fileID: 21300000, guid: db85ece96322be3458ede3f4603e23c8, type: 3}
     Name: wrapper1
     Id: wp_1
-    Price: 0
+    Price: 15
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 13
   - Icon: {fileID: 21300000, guid: 836b4681770bec240a6316ec7db7489c, type: 3}
     Name: wrapper2
     Id: wp_2
-    Price: 0
+    Price: 15
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 17
   - Icon: {fileID: 21300000, guid: 83dfea964573ea24d90f18c485562b17, type: 3}
     Name: wrapper3
     Id: wp_3
-    Price: 0
+    Price: 20
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 21
   - Icon: {fileID: 21300000, guid: 49761f6690db1884c98439e2f677c9ed, type: 3}
     Name: wrapper4
     Id: wp_4
-    Price: 0
+    Price: 20
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 25
   - Icon: {fileID: 21300000, guid: ef5c80316dfcbd2458361b1e5a83f400, type: 3}
     Name: wrapper5
     Id: wp_5
-    Price: 0
+    Price: 20
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 29
   - Icon: {fileID: 21300000, guid: 8fe043a4a7b62c34ca51390db761549f, type: 3}
     Name: wrapper6
     Id: wp_6
-    Price: 0
+    Price: 25
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 31
   - Icon: {fileID: 21300000, guid: a826f6c5d9e468447865638bfe820f3a, type: 3}
     Name: wrapper8
     Id: wp_8
-    Price: 0
+    Price: 25
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 33
   - Icon: {fileID: 21300000, guid: 05a6c9205f327ee4bbc2dd844591d441, type: 3}
     Name: wrapper10
     Id: wp_10
-    Price: 0
+    Price: 25
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 35
   - Icon: {fileID: 21300000, guid: 7cc39c37dbfae8e45b8f30a5b82805e3, type: 3}
     Name: wrapper11
     Id: wp_11
-    Price: 0
+    Price: 10
     IsSelectable: 0
-    DefaultItemState: 1
-    UnlockDay: 0
+    DefaultItemState: 0
+    UnlockDay: 2
   - Icon: {fileID: 21300000, guid: 0e8281c6c12fe8b4ab985e4c9f038aef, type: 3}
     Name: wrapper12
     Id: wp_12
-    Price: 0
+    Price: 10
     IsSelectable: 0
-    DefaultItemState: 1
-    UnlockDay: 0
+    DefaultItemState: 0
+    UnlockDay: 9
   RibbonItems:
   - Icon: {fileID: 21300000, guid: 52e674f7144428a4593f6740b1e8383a, type: 3}
     Name: ribbon3
@@ -279,56 +279,60 @@ MonoBehaviour:
   - Icon: {fileID: 21300000, guid: f9dda01d2837774428dd25f65e706b5d, type: 3}
     Name: ribbon5
     Id: r_5
-    Price: 0
+    Price: 10
     IsSelectable: 0
     DefaultItemState: 0
     UnlockDay: 4
   - Icon: {fileID: 21300000, guid: ac4383188d9dcc4499816ac4f60b354f, type: 3}
     Name: ribbon1
     Id: r_1
-    Price: 0
+    Price: 15
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 11
   - Icon: {fileID: 21300000, guid: 5b014294ccbbbba4286984c64950b85e, type: 3}
     Name: ribbon2
     Id: r_2
-    Price: 0
+    Price: 15
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 15
   - Icon: {fileID: 21300000, guid: ba44b42c6984e5443980e1a9e7c658bb, type: 3}
     Name: ribbon4
     Id: r_4
-    Price: 0
+    Price: 15
     IsSelectable: 0
     DefaultItemState: 0
     UnlockDay: 7
   - Icon: {fileID: 21300000, guid: a882971446e93a94684e43f9bca85ef8, type: 3}
     Name: ribbon6
     Id: r_6
-    Price: 0
+    Price: 15
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 19
   - Icon: {fileID: 21300000, guid: 5b014294ccbbbba4286984c64950b85e, type: 3}
     Name: ribbon7
     Id: r_7
-    Price: 0
+    Price: 20
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 23
   - Icon: {fileID: 21300000, guid: 6fd473eda8c4bfa44bd1e7a0fd959e3f, type: 3}
     Name: ribbon8
     Id: r_8
-    Price: 0
+    Price: 20
     IsSelectable: 0
     DefaultItemState: 0
-    UnlockDay: 100
+    UnlockDay: 27
   UpgradeItems:
   - Icon: {fileID: 21300000, guid: b431d7a9a9f2f0347b053e256acab1b0, type: 3}
     Name: Kurye
     Id: u_1
+    PurchaseDisabled: 1
+    NameLocalizationKey: upgrade_courier
+    UpgradeEffect: 0
+    UpgradeValue: 1
     Price: 0
     IsSelectable: 0
     DefaultItemState: 1
@@ -336,10 +340,13 @@ MonoBehaviour:
   - Icon: {fileID: 21300000, guid: 8880dc426c31c11488d33818a737b02f, type: 3}
     Name: Yaz saati
     Id: u_2
-    Price: 0
+    NameLocalizationKey: upgrade_summer_time
+    UpgradeEffect: 2
+    UpgradeValue: 1.2
+    Price: 150
     IsSelectable: 0
-    DefaultItemState: 1
-    UnlockDay: 0
+    DefaultItemState: 0
+    UnlockDay: 51
   SpeechBubbleItems: []
   SpeechBubbleButtonItems: []
   DecorationItems:
@@ -356,26 +363,26 @@ MonoBehaviour:
     - Icon: {fileID: 21300000, guid: ef4e51d3df5dbde42868ceccd09c633b, type: 3}
       Name: Çiçek Avize
       Id: decor_chandelier_flower
-      Price: 0
+      Price: 40
       IsSelectable: 1
-      DefaultItemState: 2
+      DefaultItemState: 1
       UnlockDay: 0
       DecorationSprite: {fileID: 21300000, guid: ef4e51d3df5dbde42868ceccd09c633b, type: 3}
     - Icon: {fileID: 21300000, guid: 6466cc89a13728e4eb9f8a88dfb57f84, type: 3}
       Name: Kağıt Avize
       Id: decor_chandelier_paper
-      Price: 0
+      Price: 45
       IsSelectable: 1
-      DefaultItemState: 2
-      UnlockDay: 0
+      DefaultItemState: 0
+      UnlockDay: 1
       DecorationSprite: {fileID: 21300000, guid: 6466cc89a13728e4eb9f8a88dfb57f84, type: 3}
     - Icon: {fileID: 21300000, guid: 6e31187cdd529d64b9d42ffed4e0cdad, type: 3}
       Name: Retro Avize
       Id: decor_chandelier_retro
-      Price: 0
+      Price: 50
       IsSelectable: 1
-      DefaultItemState: 2
-      UnlockDay: 0
+      DefaultItemState: 0
+      UnlockDay: 2
       DecorationSprite: {fileID: 21300000, guid: 6e31187cdd529d64b9d42ffed4e0cdad, type: 3}
   - Type: 1
     Items:
@@ -390,18 +397,18 @@ MonoBehaviour:
     - Icon: {fileID: 21300000, guid: c3cf9e4264fd93d42bd905bd1af58e72, type: 3}
       Name: Yeşil Duvar
       Id: decor_wall_green
-      Price: 0
+      Price: 55
       IsSelectable: 1
-      DefaultItemState: 2
+      DefaultItemState: 1
       UnlockDay: 0
       DecorationSprite: {fileID: 21300000, guid: b05c0348481109e4d9bd932fda9e61b9, type: 3}
     - Icon: {fileID: 21300000, guid: ce3d5c641a9bc5e43ac3f8fa9b3feb50, type: 3}
       Name: Pembe Duvar
       Id: decor_wall_pink
-      Price: 0
+      Price: 60
       IsSelectable: 1
-      DefaultItemState: 2
-      UnlockDay: 0
+      DefaultItemState: 0
+      UnlockDay: 3
       DecorationSprite: {fileID: 21300000, guid: de37836680e7e814c8686c8b2e06d2b9, type: 3}
   - Type: 2
     Items:
@@ -416,18 +423,18 @@ MonoBehaviour:
     - Icon: {fileID: 21300000, guid: 8c53c81e159d4884baa4956e8e441069, type: 3}
       Name: Dantelli Perde
       Id: decor_curtain_lace
-      Price: 0
+      Price: 65
       IsSelectable: 1
-      DefaultItemState: 2
+      DefaultItemState: 1
       UnlockDay: 0
       DecorationSprite: {fileID: 21300000, guid: 8c53c81e159d4884baa4956e8e441069, type: 3}
     - Icon: {fileID: 21300000, guid: 22efd7f208d9beb45a4727ad5308d9b6, type: 3}
       Name: Koyu Perde
       Id: decor_curtain_dark
-      Price: 0
+      Price: 70
       IsSelectable: 1
-      DefaultItemState: 2
-      UnlockDay: 0
+      DefaultItemState: 0
+      UnlockDay: 4
       DecorationSprite: {fileID: 21300000, guid: 22efd7f208d9beb45a4727ad5308d9b6, type: 3}
   - Type: 3
     Items:
@@ -442,10 +449,10 @@ MonoBehaviour:
     - Icon: {fileID: 21300000, guid: 0166c27ec8f0aaa40b7052e0a7654615, type: 3}
       Name: Çift Raf
       Id: decor_shelf_double
-      Price: 0
+      Price: 75
       IsSelectable: 1
-      DefaultItemState: 2
-      UnlockDay: 0
+      DefaultItemState: 0
+      UnlockDay: 5
       DecorationSprite: {fileID: 21300000, guid: 0166c27ec8f0aaa40b7052e0a7654615, type: 3}
   - Type: 4
     Items:
@@ -460,10 +467,10 @@ MonoBehaviour:
     - Icon: {fileID: 21300000, guid: d8e30149f9f85ce4680fc338da7df9a3, type: 3}
       Name: Çiçek Tablosu
       Id: decor_painting_flower
-      Price: 0
+      Price: 80
       IsSelectable: 1
-      DefaultItemState: 2
-      UnlockDay: 0
+      DefaultItemState: 0
+      UnlockDay: 6
       DecorationSprite: {fileID: 21300000, guid: d8e30149f9f85ce4680fc338da7df9a3, type: 3}
   - Type: 5
     Items:
@@ -478,16 +485,16 @@ MonoBehaviour:
     - Icon: {fileID: 21300000, guid: 1c02d1bb3191ffa4e84313e3de4e804d, type: 3}
       Name: Yeşil Şerit
       Id: decor_trim_green
-      Price: 0
+      Price: 85
       IsSelectable: 1
-      DefaultItemState: 2
-      UnlockDay: 0
+      DefaultItemState: 0
+      UnlockDay: 7
       DecorationSprite: {fileID: 21300000, guid: 33221a1430d19924bac56d959c1cdaa8, type: 3}
     - Icon: {fileID: 21300000, guid: 49c536e31ece11f4cb329fef56b42a7d, type: 3}
       Name: Sade Şerit
       Id: decor_trim_plain
-      Price: 0
+      Price: 90
       IsSelectable: 1
-      DefaultItemState: 2
-      UnlockDay: 0
+      DefaultItemState: 0
+      UnlockDay: 8
       DecorationSprite: {fileID: 0}

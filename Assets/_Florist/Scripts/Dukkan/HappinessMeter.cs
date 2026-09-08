@@ -12,6 +12,9 @@ public class HappinessMeter : MonoBehaviour
     [SerializeField] private List<Sprite> _emojiSprites;
     private int _totalTicksForCustomer, _currentTick = 0;
     private float _happinessValue = 100f;
+    private bool _isDecorationPaused;
+
+    public void SetDecorationPaused(bool paused) => _isDecorationPaused = paused;
 
     private void OnEnable()
     {
@@ -67,6 +70,14 @@ public class HappinessMeter : MonoBehaviour
         Timer.TimeTickMiliseconds -= TimeTickHandler;
     }
 
+    public void SetOrderSatisfaction(int satisfaction)
+    {
+        StopHappinessCountdown();
+        _happinessValue = Mathf.Clamp(satisfaction, 0, 100);
+        _happinessText.text = $"{_happinessValue}%";
+        SetEmojiText();
+    }
+
     public void ChangeHappinessAfterOrderReceived(float happinessValue)
     {
         Debug.Log("happinessValue: " + happinessValue);
@@ -78,6 +89,9 @@ public class HappinessMeter : MonoBehaviour
 
     private void TimeTickHandler()
     {
+        if (_isDecorationPaused)
+            return;
+
         _currentTick++;
         _happinessValue = 100 - (int)((float)_currentTick / _totalTicksForCustomer * 100);
         _happinessText.text = $"{_happinessValue}%";

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e231bd6b4077eab45a7e71ae6dafd584, type: 3}
+  m_Name: ToprakData
+  m_EditorClassIdentifier:
+  ItemType: 2
+  Sprites:
+  - {fileID: 21300000, guid: 959de9b27519d84438482f260e70cd84, type: 3}
+  - {fileID: 21300000, guid: 29063be7b599be74fac18547a38905ad, type: 3}
+  - {fileID: 21300000, guid: ba8f2108a93554a4b965095077872dbb, type: 3}
+  - {fileID: 21300000, guid: f4e7211c88f30414291264f1641ed875, type: 3}
+  - {fileID: 21300000, guid: dd8117ee562017745a3ba70d5eccfe99, type: 3}
+  SpawnChances:
+  - 90
+  - 10
+  - 0
+  - 0
+  - 0
+  ProducerSprite: {fileID: 21300000, guid: a205278091fb3da479c4ef43cb6e0be6, type: 3}
+  FixedSprites:
+  - {fileID: 21300000, guid: ecec07f61ddedc14598f93c094d4e743, type: 3}
+  - {fileID: 21300000, guid: 0c55f544b46c3a540be0a249cd7e3132, type: 3}
+  - {fileID: 21300000, guid: db9d46ee4303b0d44bc56054adeb468c, type: 3}
+  - {fileID: 21300000, guid: 84f19263f7c67f44a92e8032774823bf, type: 3}
+  - {fileID: 21300000, guid: 8355c501e84917f41bf5e7b459b85dcf, type: 3}

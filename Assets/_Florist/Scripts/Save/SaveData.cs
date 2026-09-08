@@ -40,6 +40,7 @@ public class DukkanParams
     public int CurrentTick;
     public float HappinessValue;
     public float TotalTimePassed;
+    public float CustomerServiceSeconds;
 }
 
 [Serializable]
@@ -81,7 +82,7 @@ public class SaveData
         else if (LastPage == PageType.EndDay)
         {
             DukkanParams = null;
-            EarningsInfo = References.DukkanPage.EarningsInfo;
+            // EndDayPage stores the settled snapshot; do not overwrite it after a reload.
         }
         else if (LastPage == PageType.Workshop)
         {
@@ -108,7 +109,7 @@ public class SaveData
         }
         else if (LastPage == PageType.EndDay)
         {
-            // References.EndDayPage.SetData(EarningsInfo);
+            References.EndDayPage.Restore(EarningsInfo);
             References.MainPage.gameObject.SetActive(false);
             References.EndDayPage.Open();
         }
@@ -132,6 +133,7 @@ public class SaveData
         DukkanParams = new DukkanParams
         {
             CurrentCustomerInfo = References.DukkanPage.CurrentCustomerInfo,
+            CustomerServiceSeconds = References.DukkanPage.CustomerServiceSeconds,
             CurrentOrder = References.DukkanPage.CurrentOrder,
             DeliveredBouquet = References.DukkanPage.DeliveredBouquet,
             ConvoHistory = References.DukkanPage.ConvoHistory,

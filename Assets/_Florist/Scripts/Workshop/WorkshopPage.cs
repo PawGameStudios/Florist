@@ -93,13 +93,13 @@ public class WorkshopPage : Page
     private readonly List<FlowerBox> _flowerBoxes = new();
     private readonly List<BouquetModel> _finishedBouquetModels = new();
     private const int TUT_MAX_FLOWER_COUNT = 2;
-    private const int HINT_WAIT_TIME = 12;
     private const float DURATION = .8f;
     private const Ease SCROLL_INIT_EASE = Ease.OutBack;
     private const Ease MACHINE_EASE = Ease.OutQuint;
 
     void OnEnable()
     {
+        _scrollRect.onValueChanged.AddListener(OnWorkshopScrolled);
         for (int i = 0; i < _initialPaperRefs.Count; i++)
         {
             _paperAreas[i].transform.SetPositionAndRotation(_initialPaperRefs[i].position, _initialPaperRefs[i].rotation);
@@ -110,8 +110,10 @@ public class WorkshopPage : Page
 
     void OnDisable()
     {
+        _scrollRect.onValueChanged.RemoveListener(OnWorkshopScrolled);
         CancelInvoke();
         _scrollTween?.Kill();
+        _tutorial.FinishTutorial();
     }
 
     public override void Close(PageParams pageData = null, Action onCompleted = null)
@@ -265,7 +267,7 @@ public class WorkshopPage : Page
                 }
                 else
                 {
-                    PrepareHint(specificHintType: HintType.Machine);
+                    StopHints();
                 }
 
                 break;
@@ -402,7 +404,7 @@ public class WorkshopPage : Page
         targetPosX += _tableLayout.spacing * 2f;
         targetPosX -= Screen.width / 2f;
 
-        _tutorial.FinishTutorial();
+        StopHints();
 
         HapticsController.PlayLightHaptic();
         _wrappingMachine.TakeBouquet(paperArea);
@@ -418,7 +420,6 @@ public class WorkshopPage : Page
             else
             {
                 _wrappingMachine.StartMachine(paperArea);
-                PrepareHint(specificHintType: HintType.RibbonTable);
             }
         });
 
@@ -444,6 +445,7 @@ public class WorkshopPage : Page
 
     public void OnFlowerGivenToRibbon(PaperArea paperArea)
     {
+        StopHints();
         Debug.Log("Flower given to ribbon area.");
         _ribbonTable.AddFlowerToRibbonArea(paperArea, _totalOrderCount, _unfinishedOrderCount - 1);
 
@@ -460,7 +462,7 @@ public class WorkshopPage : Page
             {
                 OnRibbonIntro();
             }
-            else
+            else if (_ribbonTable.CanSelectRibbon)
             {
                 PrepareHint(specificHintType: HintType.Ribbon);
             }
@@ -482,6 +484,10 @@ public class WorkshopPage : Page
 
             Close();
             References.DukkanPage.OnFlowerReady(orderInfo, bouquetObject);
+        }
+        else
+        {
+            PrepareHint(specificHintType: HintType.PaperSelect);
         }
     }
 
@@ -525,7 +531,12 @@ public class WorkshopPage : Page
             _flowerBoxes.Add(flowerBox);
         }
 
-        TableParams tableParams = _flowerTableParamsByFlowerCount[flowerInfos.Count];
+        if (!_flowerTableParamsByFlowerCount.TryGetValue(flowerInfos.Count, out TableParams tableParams))
+        {
+            // The original six positions/table settings stay intact; extra prefab columns hold the extended catalog.
+            tableParams = _flowerTableParamsByFlowerCount[6];
+            tableParams.Width += Mathf.Ceil((flowerInfos.Count - 6) / 2f) * 325f;
+        }
 
         _flowerTable.sizeDelta = new Vector2(tableParams.Width, _flowerTable.sizeDelta.y);
 
@@ -862,7 +873,8 @@ public class WorkshopPage : Page
 
         _wrappingMachine.StartMachine(_tutPaperArea);
 
-        float delay = Configs.WorkshopConfig.MachineInfo.CalculateDuration(SaveSystem.Inst.GeneralData.MachineLevel) + .75f;
+        int machineLevel = SaveSystem.Inst.GeneralData.MachineLevel + Configs.ShopConfig.GetMachineLevelBonus(SaveSystem.Inst.ShopData);
+        float delay = Configs.WorkshopConfig.MachineInfo.CalculateDuration(machineLevel) + .75f;
 
         _tutorial.Init()
             .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp)
@@ -906,6 +918,52 @@ public class WorkshopPage : Page
 
 
     #region Hints
+    private void CancelHintInvokes()
+    {
+        CancelInvoke(nameof(ShowPaperSelectHint));
+        CancelInvoke(nameof(ShowFlowerSelectHint));
+        CancelInvoke(nameof(ShowScissorHint));
+        CancelInvoke(nameof(ShowMachineHint));
+        CancelInvoke(nameof(ShowRibbonTableHint));
+        CancelInvoke(nameof(ShowRibbonHint));
+    }
+
+    private void StopHints()
+    {
+        CancelHintInvokes();
+        _currentHintType = HintType.None;
+        _tutorial.FinishTutorial();
+    }
+
+    private void OnWorkshopScrolled(Vector2 position)
+    {
+        _tutorial.RefreshHandPosition();
+    }
+
+    public void OnRibbonSelectionStarted()
+    {
+        StopHints();
+    }
+
+    public void OnBouquetCut()
+    {
+        PrepareHint(specificHintType: HintType.Machine);
+    }
+
+    public void OnBouquetMachineDone()
+    {
+        PrepareHint(specificHintType: HintType.RibbonTable);
+    }
+
+    public void OnUncutBouquetGivenToMachine()
+    {
+        if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
+            return;
+        StopHints();
+        _currentHintType = HintType.Scissor;
+        ShowScissorHint();
+    }
+
     private void PrepareHint(bool isNext = false, HintType specificHintType = HintType.None)
     {
         if (!SaveSystem.Inst.SaveData.IsTutorialFinished)
@@ -914,7 +972,8 @@ public class WorkshopPage : Page
         }
 
         _tutorial.FinishTutorial();
-        CancelInvoke();
+        CancelHintInvokes();
+        float delay = Configs.WorkshopConfig.GetHintDelay(SaveSystem.Inst.GeneralData.CurrentDayIndex);
 
         if (isNext)
         {
@@ -928,22 +987,22 @@ public class WorkshopPage : Page
         switch (_currentHintType)
         {
             case HintType.PaperSelect:
-                Invoke(nameof(ShowPaperSelectHint), HINT_WAIT_TIME);
+                Invoke(nameof(ShowPaperSelectHint), delay);
                 break;
             case HintType.FlowerSelect:
-                Invoke(nameof(ShowFlowerSelectHint), HINT_WAIT_TIME);
+                Invoke(nameof(ShowFlowerSelectHint), delay);
                 break;
             case HintType.Scissor:
-                Invoke(nameof(ShowScissorHint), HINT_WAIT_TIME);
+                Invoke(nameof(ShowScissorHint), delay);
                 break;
             case HintType.Machine:
-                Invoke(nameof(ShowMachineHint), HINT_WAIT_TIME);
+                Invoke(nameof(ShowMachineHint), delay);
                 break;
             case HintType.RibbonTable:
-                Invoke(nameof(ShowRibbonTableHint), HINT_WAIT_TIME);
+                Invoke(nameof(ShowRibbonTableHint), delay);
                 break;
             case HintType.Ribbon:
-                Invoke(nameof(ShowRibbonHint), HINT_WAIT_TIME);
+                Invoke(nameof(ShowRibbonHint), delay);
                 break;
         }
     }
@@ -952,6 +1011,7 @@ public class WorkshopPage : Page
     {
         FirebaseController.Instance.SendCustomEvent($"hint_workshop_paper_select");
         _tutorial.Init()
+                .SetHandCoordinateSpace(_scrollContent)
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
                 .PointTo(_paperBox.FirstPaperPos, Tutorial.PointDirection.Right)
                 .StartTutorial();
@@ -961,6 +1021,7 @@ public class WorkshopPage : Page
     {
         FirebaseController.Instance.SendCustomEvent($"hint_workshop_flower_select");
         _tutorial.Init()
+                .SetHandCoordinateSpace(_scrollContent)
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
                 .PointTo(_flowerBoxes[0].transform.position, Tutorial.PointDirection.Right)
                 .StartTutorial();
@@ -970,36 +1031,55 @@ public class WorkshopPage : Page
     {
         FirebaseController.Instance.SendCustomEvent($"hint_workshop_scissor");
         _tutorial.Init()
+                .SetHandCoordinateSpace(_scrollContent)
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
-                .PointTo(_scissor.position - new Vector3(0, _scissor.GetComponent<RectTransform>().sizeDelta.x / 2f, 0), Tutorial.PointDirection.Right)
+                .PointTo(_scissor.position - new Vector3(0, ((RectTransform)_scissor).sizeDelta.x / 2f, 0), Tutorial.PointDirection.Right)
                 .StartTutorial();
     }
 
     private void ShowMachineHint()
     {
+        PaperArea paper = GetHintPaper(PaperArea.State.ScissorUsed);
+        if (paper == null) return;
         FirebaseController.Instance.SendCustomEvent($"hint_workshop_machine");
         _tutorial.Init()
+                .SetHandCoordinateSpace(_scrollContent)
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
-                .SwipeBetween(_paperAreas[0].transform.position, _machineTable.transform.position)
+                .SwipeBetween(paper.transform.position, _machineTable.transform.position)
                 .StartTutorial();
     }
 
     private void ShowRibbonTableHint()
     {
+        PaperArea paper = GetHintPaper(PaperArea.State.MachineDone);
+        if (paper == null) return;
         FirebaseController.Instance.SendCustomEvent($"hint_workshop_ribbon_table");
         _tutorial.Init()
+                .SetHandCoordinateSpace(_scrollContent)
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
-                .SwipeBetween(_paperAreas[0].transform.position, _ribbonTable.transform.position)
+                .SwipeBetween(paper.transform.position, _ribbonTable.transform.position)
                 .StartTutorial();
     }
 
     private void ShowRibbonHint()
     {
+        if (!_ribbonTable.CanSelectRibbon) return;
         FirebaseController.Instance.SendCustomEvent($"hint_workshop_ribbon");
         _tutorial.Init()
+                .SetHandCoordinateSpace(_scrollContent)
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand)
                 .PointTo(_ribbonTable.FirstRibbonTransform.position, Tutorial.PointDirection.Right)
                 .StartTutorial();
+    }
+
+    private PaperArea GetHintPaper(PaperArea.State state)
+    {
+        foreach (PaperArea paper in _paperAreas)
+        {
+            if (paper.gameObject.activeInHierarchy && paper.PaperState == state)
+                return paper;
+        }
+        return null;
     }
     #endregion
 

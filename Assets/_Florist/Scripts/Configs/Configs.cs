@@ -1,6 +1,7 @@
 using UnityEngine;
 using Config;
 
+[DefaultExecutionOrder(-600)]
 public class Configs : MonoBehaviour
 {
     private static Configs s_instance;
@@ -11,6 +12,7 @@ public class Configs : MonoBehaviour
     [SerializeField] private WorkshopConfig _workshopConfig = null;
     [SerializeField] private ProfileConfig _profileConfig = null;
     [SerializeField] private AdsConfig _adsConfig = null;
+    [SerializeField] private EconomyConfig _economyConfig;
 
     public static ShopConfig ShopConfig => s_instance._shopConfig;
     public static LevelConfig LevelConfig => s_instance._levelConfig;
@@ -18,6 +20,7 @@ public class Configs : MonoBehaviour
     public static WorkshopConfig WorkshopConfig => s_instance._workshopConfig;
     public static ProfileConfig ProfileConfig => s_instance._profileConfig;
     public static AdsConfig AdsConfig => s_instance._adsConfig;
+    public static EconomyConfig EconomyConfig => s_instance._economyConfig;
 
     private void Awake() => s_instance = this;
 }

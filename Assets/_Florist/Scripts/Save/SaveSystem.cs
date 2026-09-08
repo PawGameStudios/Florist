@@ -86,6 +86,10 @@ public class SaveSystem : MonoBehaviour
     {
         Debug.Log("FirstTime");
         GeneralData = new();
+        GeneralData.Money = Mathf.Max(0, Configs.EconomyConfig.StartingMoney);
+        GeneralData.Diamonds = Mathf.Max(0, Configs.EconomyConfig.StartingDiamonds);
+        GeneralData.Life = Mathf.Clamp(Configs.EconomyConfig.StartingLife, 0, Configs.ProfileConfig.MaxLife);
+        GeneralData.MachineLevel = Mathf.Max(0, Configs.EconomyConfig.StartingMachineLevel);
         ShopData = new();
         SaveData = new();
         PlayerPrefs.SetInt("FirstTime", 1);

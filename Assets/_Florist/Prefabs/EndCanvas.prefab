@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8167874783532963695}
   - component: {fileID: 8246473073453639072}
   m_Layer: 5
-  m_Name: Text_Refund
+  m_Name: Text_Change
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Refund
+  m_text: Change Given
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a58e7c4df1764604ba73a92a5f70f405, type: 2}
   m_sharedMaterial: {fileID: -5343687344240231900, guid: a58e7c4df1764604ba73a92a5f70f405, type: 2}
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textType: 3
-  textName: refunds
+  textName: change_given
 --- !u!1 &749267041209616494
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Revenue
+  m_text: Cash Received
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a58e7c4df1764604ba73a92a5f70f405, type: 2}
   m_sharedMaterial: {fileID: -5343687344240231900, guid: a58e7c4df1764604ba73a92a5f70f405, type: 2}
@@ -617,7 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textType: 3
-  textName: revenue
+  textName: cash_received
 --- !u!1 &3497676166986982816
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 8162872322582185036}
   - component: {fileID: 2521122345085543227}
   m_Layer: 5
-  m_Name: Text_Refund_Value
+  m_Name: Text_Change_Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2397,7 +2397,7 @@ MonoBehaviour:
   _revenueText: {fileID: 4913445835966759827}
   _tipText: {fileID: 5505250854999472414}
   _rentText: {fileID: 1704901708754818307}
-  _refundText: {fileID: 2521122345085543227}
+  _changeText: {fileID: 2521122345085543227}
   _flowerCostText: {fileID: 387376052902016032}
   _profitText: {fileID: 2165050609779732295}
 --- !u!1 &8113486835591610391

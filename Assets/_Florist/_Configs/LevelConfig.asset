@@ -11,12 +11,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7828c32f1ac41164fa91ef928b8c36d2, type: 3}
   m_Name: LevelConfig
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   serializationData:
     SerializedFormat: 0
-    SerializedBytes: 
+    SerializedBytes:
     ReferencedUnityObjects: []
-    SerializedBytesString: 
+    SerializedBytesString:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
@@ -66,7 +66,7 @@ MonoBehaviour:
     - IsEvent: 1
       EventType: 1
       CustomerType: 0
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 3
       IntroducedFlowerColor: 1
       PaperType: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
     - IsEvent: 1
       EventType: 4
       CustomerType: 0
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 0
       IntroducedFlowerColor: 0
       PaperType: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
     - IsEvent: 1
       EventType: 1
       CustomerType: 0
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 3
       IntroducedFlowerColor: 3
       PaperType: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
     - IsEvent: 0
       EventType: 0
       CustomerType: 0
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 0
       IntroducedFlowerColor: 0
       PaperType: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
     - IsEvent: 1
       EventType: 3
       CustomerType: 0
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 0
       IntroducedFlowerColor: 0
       PaperType: 0
@@ -319,6 +319,15 @@ MonoBehaviour:
       PaperType: 0
       RibbonType: 0
       TriggerAnimation: 0
+    - IsEvent: 1
+      EventType: 2
+      CustomerType: 0
+      CustomerName:
+      IntroducedFlowerType: 0
+      IntroducedFlowerColor: 0
+      PaperType: 9
+      RibbonType: 0
+      TriggerAnimation: 0
   - Events:
     - IsEvent: 0
       EventType: 0
@@ -375,18 +384,9 @@ MonoBehaviour:
       RibbonType: 0
       TriggerAnimation: 0
     - IsEvent: 1
-      EventType: 2
-      CustomerType: 0
-      CustomerName: 
-      IntroducedFlowerType: 0
-      IntroducedFlowerColor: 0
-      PaperType: 9
-      RibbonType: 0
-      TriggerAnimation: 0
-    - IsEvent: 1
       EventType: 1
       CustomerType: 0
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 3
       IntroducedFlowerColor: 2
       PaperType: 0
@@ -441,7 +441,7 @@ MonoBehaviour:
     - IsEvent: 1
       EventType: 3
       CustomerType: 0
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 0
       IntroducedFlowerColor: 0
       PaperType: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
     - IsEvent: 0
       EventType: 0
       CustomerType: 1
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 0
       IntroducedFlowerColor: 0
       PaperType: 0
@@ -461,7 +461,7 @@ MonoBehaviour:
     - IsEvent: 0
       EventType: 0
       CustomerType: 1
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 0
       IntroducedFlowerColor: 0
       PaperType: 0
@@ -470,7 +470,7 @@ MonoBehaviour:
     - IsEvent: 0
       EventType: 0
       CustomerType: 1
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 0
       IntroducedFlowerColor: 0
       PaperType: 0
@@ -479,7 +479,7 @@ MonoBehaviour:
     - IsEvent: 0
       EventType: 0
       CustomerType: 1
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 0
       IntroducedFlowerColor: 0
       PaperType: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
     - IsEvent: 0
       EventType: 0
       CustomerType: 1
-      CustomerName: 
+      CustomerName:
       IntroducedFlowerType: 0
       IntroducedFlowerColor: 0
       PaperType: 0

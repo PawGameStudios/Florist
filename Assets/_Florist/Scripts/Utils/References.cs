@@ -8,6 +8,7 @@ public class References : MonoBehaviour
     public static TopCanvas TopCanvas => s_instance._topCanvas;
     public static PosController PosController => s_instance._posController;
     public static MainPage MainPage => s_instance._mainPage;
+    public static MergeScenePortal MergeScenePortal => s_instance._mergeScenePortal;
     public static OpeningPage OpeningPage => s_instance._openingPage;
     public static DukkanPage DukkanPage => s_instance._dukkanPage;
     public static ShopPage ShopPage => s_instance._shopPage;
@@ -21,6 +22,7 @@ public class References : MonoBehaviour
     [SerializeField] private TopCanvas _topCanvas = null;
     [SerializeField] private PosController _posController = null;
     [SerializeField] private MainPage _mainPage = null;
+    [SerializeField] private MergeScenePortal _mergeScenePortal;
     [SerializeField] private OpeningPage _openingPage = null;
     [SerializeField] private DukkanPage _dukkanPage = null;
     [SerializeField] private ShopPage _shopPage = null;

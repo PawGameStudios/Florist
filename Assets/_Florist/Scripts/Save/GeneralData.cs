@@ -12,6 +12,7 @@ public class GeneralData
     public float Money;
     public float Diamonds;
     public int CurrentDayIndex;
+    public int LastSettledDayNumber;
     public int CurrentDayConfigIndex;
     public int SelectedAvatarIndexInConfig;
     public int SelectedFrameIndexInConfig;
@@ -49,14 +50,13 @@ public class GeneralData
 
     public void ChangeLife(int amount)
     {
-        Life += amount;
-        Life = Mathf.Clamp(Life, 0, Configs.ProfileConfig.MaxLife);
-        LifeAmountChanged?.Invoke();
-
-        if (Life < Configs.ProfileConfig.MaxLife)
-        {
+        SetLife();
+        bool wasFull = Life >= Configs.ProfileConfig.MaxLife;
+        Life = Mathf.Clamp(Life + amount, 0, Configs.ProfileConfig.MaxLife);
+        if (wasFull && Life < Configs.ProfileConfig.MaxLife)
             LifeRefreshTime = Timer.CurrentTotalSeconds;
-        }
+        SetLife();
+        LifeAmountChanged?.Invoke();
     }
 
     public void ChangeMoney(long amount)
@@ -124,81 +124,30 @@ public class GeneralData
 
     public void SetLife()
     {
-        Debug.Log($"Life set to {Life} with maxlife {Configs.ProfileConfig.MaxLife} and refresh time {LifeRefreshTime}");
-        if (Life == Configs.ProfileConfig.MaxLife)
-        {
-            return;
-        }
-
-        if (LifeRefreshTime <= 0)
-        {
-            LifeRefreshTime = Timer.CurrentTotalSeconds;
-            Debug.Log("LifeRefreshTime initialized to current time.");
-        }
-
-        int safe = 0;
-        float lifeGainSeconds = Configs.ProfileConfig.LifeGainMinutes * 60;
-        while (LifeRefreshTime + lifeGainSeconds < Timer.CurrentTotalSeconds)
-        {
-            if (safe++ > 500)
-            {
-                LifeRefreshTime = Timer.CurrentTotalSeconds;
-                Life = Configs.ProfileConfig.MaxLife;
-                Debug.LogError("Infinite loop detected in SetLife method.");
-                break;
-            }
-
-            LifeRefreshTime += lifeGainSeconds;
-            Life++;
-            Life = Mathf.Clamp(Life, 0, Configs.ProfileConfig.MaxLife);
-        }
-
-        if (Life < Configs.ProfileConfig.MaxLife)
-        {
-            _currentRefreshTime = Timer.CurrentTotalSeconds;
-            Timer.TimeTickSeconds += TimeTickHandler;
-        }
-    }
-
-    public void StopTimeTick()
-    {
         Timer.TimeTickSeconds -= TimeTickHandler;
-    }
-
-    public double GetRemainingLifeTime()
-    {
-        if (Life == Configs.ProfileConfig.MaxLife)
+        int maxLife = Configs.ProfileConfig.MaxLife;
+        Life = Mathf.Clamp(Life, 0, maxLife);
+        double now = Timer.CurrentTotalSeconds;
+        double interval = Math.Max(1, Configs.ProfileConfig.LifeGainMinutes * 60);
+        if (Life < maxLife)
         {
-            return 0;
+            if (LifeRefreshTime <= 0 || LifeRefreshTime > now) LifeRefreshTime = now;
+            int gained = (int)Math.Min(maxLife - Life, Math.Floor((now - LifeRefreshTime) / interval));
+            if (gained > 0)
+            {
+                Life += gained;
+                LifeRefreshTime += gained * interval;
+                LifeAmountChanged?.Invoke();
+            }
         }
-
-        double nextRefreshTime = LifeRefreshTime + (Configs.ProfileConfig.LifeGainMinutes * 60);
-        return nextRefreshTime - Timer.CurrentTotalSeconds;
+        if (Life >= maxLife) LifeRefreshTime = -1;
+        else Timer.TimeTickSeconds += TimeTickHandler;
     }
 
-    private void TimeTickHandler()
-    {
-        float lifeGainSeconds = Configs.ProfileConfig.LifeGainMinutes * 60;
-        double nextRefreshTime = LifeRefreshTime + lifeGainSeconds;
+    public void StopTimeTick() => Timer.TimeTickSeconds -= TimeTickHandler;
 
-        _currentRefreshTime++;
-        if (_currentRefreshTime >= nextRefreshTime)
-        {
-            Life++;
-            Life = Mathf.Clamp(Life, 0, Configs.ProfileConfig.MaxLife);
-            LifeRefreshTime = _currentRefreshTime;
+    public double GetRemainingLifeTime() => Life >= Configs.ProfileConfig.MaxLife ? 0 :
+        Math.Max(0, LifeRefreshTime + Math.Max(1, Configs.ProfileConfig.LifeGainMinutes * 60) - Timer.CurrentTotalSeconds);
 
-            if (Life == Configs.ProfileConfig.MaxLife)
-            {
-                Timer.TimeTickSeconds -= TimeTickHandler;
-                Debug.Log("Life is full, stopping time tick.");
-            }
-            else
-            {
-                nextRefreshTime = _currentRefreshTime + lifeGainSeconds;
-            }
-
-            LifeAmountChanged?.Invoke();
-        }
-    }
+    private void TimeTickHandler() => SetLife();
 }

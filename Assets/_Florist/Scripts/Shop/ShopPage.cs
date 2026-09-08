@@ -27,11 +27,12 @@ public class ShopPage : Page
         OnDiamondAmountChanged();
     }
 
-    private void Start()
+    public override void Open(PageParams pageData = null, Action onCompleted = null)
     {
-        _currentButton = _flowersButton;
-        _currentButton.OnButtonClicked();
-        _currentButtonType = ShopButtonType.Flowers;
+        base.Open(pageData, onCompleted);
+        // Initialize synchronously: end-of-day navigation runs before Unity calls Start.
+        if (_currentButton == null)
+            _flowersButton.OnButtonClicked();
     }
 
     private void OnDisable()
@@ -49,12 +50,13 @@ public class ShopPage : Page
 
     public void OnButtonClicked(ShopButtonType type)
     {
-        if (_currentButtonType == type)
+        if (_currentButton != null && _currentButtonType == type)
         {
             return;
         }
 
-        _currentButton.CloseScroll();
+        if (_currentButton != null)
+            _currentButton.CloseScroll();
         _currentButtonType = type;
 
         _currentButton = _currentButtonType switch
@@ -73,34 +75,34 @@ public class ShopPage : Page
     public void SimulateFlowerButtonClick(FlowerType flowerType, FlowerColor flowerColor, Action<Transform> onScrollSet)
     {
         _flowersButton.OnButtonClicked();
-        _flowersButton.SetScrollToItem(scrollIndex: 0, itemIndex: Configs.WorkshopConfig.GetFlowerItemIndex(flowerType, flowerColor), onItemSelected: onScrollSet);
+        _flowersButton.SetScrollToItem(scrollIndex: 0, itemIndex: Configs.ShopConfig.FlowerItems.FindIndex(item => item.Id == Configs.WorkshopConfig.GetFlowerId(flowerType, flowerColor)), onItemSelected: onScrollSet);
     }
 
     public void SimulateWrapperButtonClick(WrappingPaperType paperType, Action<Transform> onScrollSet)
     {
         _bouquetsButton.OnButtonClicked();
-        _bouquetsButton.SetScrollToItem(scrollIndex: 0, itemIndex: Configs.WorkshopConfig.GetWrappingPaperItemIndex(paperType), onItemSelected: onScrollSet);
+        _bouquetsButton.SetScrollToItem(scrollIndex: 0, itemIndex: Configs.ShopConfig.WrapperItems.FindIndex(item => item.Id == Configs.WorkshopConfig.GetWrappingPaperId(paperType)), onItemSelected: onScrollSet);
     }
 
     public void SimulateRibbonButtonClick(RibbonType ribbonType, Action<Transform> onScrollSet)
     {
         _bouquetsButton.OnButtonClicked();
-        _bouquetsButton.SetScrollToItem(scrollIndex: 1, itemIndex: Configs.WorkshopConfig.GetRibbonItemIndex(ribbonType), onItemSelected: onScrollSet);
+        _bouquetsButton.SetScrollToItem(scrollIndex: 1, itemIndex: Configs.ShopConfig.RibbonItems.FindIndex(item => item.Id == Configs.WorkshopConfig.GetRibbonId(ribbonType)), onItemSelected: onScrollSet);
     }
 
-    public void SimulateFlowerBuyButtonClick(FlowerType flowerType, FlowerColor flowerColor)
+    public bool SimulateFlowerBuyButtonClick(FlowerType flowerType, FlowerColor flowerColor, Action onFeedbackCompleted = null)
     {
-        _flowersButton.SimulateItemButtonClick(scrollIndex: 0, itemIndex: Configs.WorkshopConfig.GetFlowerItemIndex(flowerType, flowerColor));
+        return _flowersButton.SimulateItemButtonClick(scrollIndex: 0, itemIndex: Configs.ShopConfig.FlowerItems.FindIndex(item => item.Id == Configs.WorkshopConfig.GetFlowerId(flowerType, flowerColor)), onFeedbackCompleted: onFeedbackCompleted);
     }
 
-    public void SimulateWrapperBuyButtonClick(WrappingPaperType paperType)
+    public bool SimulateWrapperBuyButtonClick(WrappingPaperType paperType, Action onFeedbackCompleted = null)
     {
-        _bouquetsButton.SimulateItemButtonClick(scrollIndex: 0, itemIndex: Configs.WorkshopConfig.GetWrappingPaperItemIndex(paperType));
+        return _bouquetsButton.SimulateItemButtonClick(scrollIndex: 0, itemIndex: Configs.ShopConfig.WrapperItems.FindIndex(item => item.Id == Configs.WorkshopConfig.GetWrappingPaperId(paperType)), onFeedbackCompleted: onFeedbackCompleted);
     }
 
-    public void SimulateRibbonBuyButtonClick(RibbonType ribbonType)
+    public bool SimulateRibbonBuyButtonClick(RibbonType ribbonType, Action onFeedbackCompleted = null)
     {
-        _bouquetsButton.SimulateItemButtonClick(scrollIndex: 1, itemIndex: Configs.WorkshopConfig.GetRibbonItemIndex(ribbonType));
+        return _bouquetsButton.SimulateItemButtonClick(scrollIndex: 1, itemIndex: Configs.ShopConfig.RibbonItems.FindIndex(item => item.Id == Configs.WorkshopConfig.GetRibbonId(ribbonType)), onFeedbackCompleted: onFeedbackCompleted);
     }
     #endregion
 

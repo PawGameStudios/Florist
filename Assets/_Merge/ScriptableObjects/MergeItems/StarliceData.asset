@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e231bd6b4077eab45a7e71ae6dafd584, type: 3}
+  m_Name: StarliceData
+  m_EditorClassIdentifier:
+  ItemType: 4
+  Sprites:
+  - {fileID: 21300000, guid: d013265f3208447499ae02c2ff3649ab, type: 3}
+  - {fileID: 21300000, guid: 24b58328f3c8071438f4567032e65401, type: 3}
+  - {fileID: 21300000, guid: 0499f452ef209d04a8c21af026471855, type: 3}
+  - {fileID: 21300000, guid: 07c83e1795ce8974293322ffc04f4cdc, type: 3}
+  SpawnChances:
+  - 90
+  - 10
+  - 0
+  - 0
+  ProducerSprite: {fileID: 21300000, guid: 8e59d9a101753bb42a5d0555800e49e0, type: 3}
+  FixedSprites:
+  - {fileID: 21300000, guid: d013265f3208447499ae02c2ff3649ab, type: 3}
+  - {fileID: 21300000, guid: 24b58328f3c8071438f4567032e65401, type: 3}
+  - {fileID: 21300000, guid: 0499f452ef209d04a8c21af026471855, type: 3}
+  - {fileID: 21300000, guid: 07c83e1795ce8974293322ffc04f4cdc, type: 3}

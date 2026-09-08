@@ -67,6 +67,7 @@ public class ShopButton : MonoBehaviour
             if (i == index)
             {
                 References.ShopPage.OnButtonClicked(_type);
+                _isOpen = true;
                 _scrolls[i].Open();
                 _arrowObjects[i].SetActive(true);
             }
@@ -80,6 +81,7 @@ public class ShopButton : MonoBehaviour
 
     public void CloseScroll()
     {
+        _isOpen = false;
         if (_subButtons != null && _subButtons.Count > 0)
         {
             for (int i = 0; i < _subButtons.Count; i++)
@@ -110,7 +112,7 @@ public class ShopButton : MonoBehaviour
             return;
         }
 
-        Debug.LogError($"Setting scroll to item. Scroll index: {scrollIndex}, Item index: {itemIndex}");
+        if (_subButtons != null && _subButtons.Count > 0) OnSubButtonClicked(scrollIndex);
         _scrolls[scrollIndex].SetItemUnlocked(itemIndex);
         _scrolls[scrollIndex].SetScrollToItem(itemIndex, onComplete: () =>
         {
@@ -118,9 +120,10 @@ public class ShopButton : MonoBehaviour
         });
     }
 
-    public void SimulateItemButtonClick(int scrollIndex, int itemIndex)
+    public bool SimulateItemButtonClick(int scrollIndex, int itemIndex, Action onFeedbackCompleted = null)
     {
-        _scrolls[scrollIndex].SimulateButtonClick(itemIndex);
+        if (scrollIndex < 0 || scrollIndex >= _scrolls.Count) return false;
+        return _scrolls[scrollIndex].SimulateButtonClick(itemIndex, onFeedbackCompleted);
     }
 
     private void ToggleSubButtons()

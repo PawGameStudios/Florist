@@ -1,6 +1,7 @@
 using UnityEngine;
 using GoogleMobileAds.Api;
 using System;
+using System.Threading;
 using GoogleMobileAds.Ump.Api;
 
 namespace Ads
@@ -9,7 +10,7 @@ namespace Ads
     {
         public static Action OnRewardedLoaded, OnRewardedWathed;
 
-        public bool IsRewardedAdLoaded => _rewardedAd != null && _rewardedAd.CanShowAd();
+        public bool IsRewardedAdLoaded => !_rewardShowing && _rewardedAd != null && _rewardedAd.CanShowAd();
 
         [SerializeField] private GameObject _bannerPanel;
         private InterstitialAd _interstitialAd;
@@ -22,7 +23,12 @@ namespace Ads
         private bool _isInitialized = false;
         private bool _isBannerLoaded = false;
         private Action<bool> _onInterClosed, _onRewardedClosed;
-        private bool _interCallback = false, _rewardedCallback = false, _rewardLoadedCallback = false;
+        private bool _interCallback = false, _rewardLoadedCallback = false;
+        private bool _rewardShowing, _rewardGranted;
+        private SynchronizationContext _unityContext;
+
+        protected override void VirtualAwake() => _unityContext = SynchronizationContext.Current;
+        private void OnUnityThread(Action action) => _unityContext.Post(_ => action(), null);
 
         private void OnDisable()
         {
@@ -141,24 +147,11 @@ namespace Ads
                 _onInterClosed = null;
             }
 
-            if (_rewardedCallback)
-            {
-                if (_onRewardedClosed != null)
-                {
-                    OnRewardedWathed?.Invoke();
-                    _onRewardedClosed?.Invoke(true);
-                    _onRewardedClosed = null;
-
-                    // Reload the ad so that we can show another as soon as possible.
-                    LoadRewardedAd();
-                }
-            }
-
             if (_rewardLoadedCallback)
             {
                 _rewardLoadedCallback = false;
                 OnRewardedLoaded?.Invoke();
-                OnRewardedLoaded = null;
+
             }
         }
 
@@ -425,18 +418,33 @@ namespace Ads
                 return;
             }
 
-            if (_rewardedAd != null && _rewardedAd.CanShowAd())
+            if (IsRewardedAdLoaded)
             {
                 _onRewardedClosed = callback;
-                _rewardedAd.Show((Reward reward) =>
+                _rewardShowing = true;
+                _rewardGranted = false;
+                var shown = _rewardedAd;
+                shown.Show(reward => OnUnityThread(() =>
                 {
-                    _rewardedCallback = true;
-                });
+                    if (!_rewardShowing || shown != _rewardedAd || _rewardGranted) return;
+                    _rewardGranted = true;
+                    var completed = _onRewardedClosed;
+                    _onRewardedClosed = null;
+                    completed?.Invoke(true);
+                    OnRewardedWathed?.Invoke();
+                }));
             }
-            else
-            {
-                callback?.Invoke(false);
-            }
+            else callback?.Invoke(false);
+        }
+
+        private void FinishRewarded(RewardedAd shown)
+        {
+            if (shown != _rewardedAd || !_rewardShowing) return;
+            _rewardShowing = false;
+            var completed = _onRewardedClosed;
+            _onRewardedClosed = null;
+            completed?.Invoke(false); // Closing/failure without the SDK reward event is not success.
+            LoadRewardedAd();
         }
 
         private void LoadRewardedAd()
@@ -516,15 +524,14 @@ namespace Ads
             ad.OnAdFullScreenContentClosed += () =>
             {
                 // Debug.Log("#ads# Rewarded ad full screen content closed.");
-                _rewardedCallback = true;
+                OnUnityThread(() => FinishRewarded(ad));
             };
             // Raised when the ad failed to open full screen content.
             ad.OnAdFullScreenContentFailed += (AdError error) =>
             {
                 // Debug.LogError("#ads# Rewarded ad failed to open full screen content " + "with error : " + error);
 
-                // Reload the ad so that we can show another as soon as possible.
-                LoadRewardedAd();
+                OnUnityThread(() => FinishRewarded(ad));
             };
         }
 

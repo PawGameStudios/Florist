@@ -54,7 +54,7 @@ public class PosController : MonoBehaviour
         _posText.text = $"{price}F";
         _priceText.text = $"{price}F";
 
-        _confirmButton.interactable = false;
+        CheckChange();
 
         _posImage.sprite = _posOpenSprite;
 
@@ -94,6 +94,7 @@ public class PosController : MonoBehaviour
     {
         _confirmButton.interactable = _currentChange >= _targetChange;
         _currentChangeText.text = $"{_currentChange}F";
-        _currentChangeText.color = _currentChange >= _targetChange ? Color.green : Color.red;
+        _currentChangeText.color = _currentChange < _targetChange ? Color.red
+            : _currentChange == _targetChange ? Color.green : new Color(1f, 0.6f, 0.15f);
     }
 }

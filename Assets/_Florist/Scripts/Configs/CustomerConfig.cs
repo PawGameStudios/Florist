@@ -16,6 +16,7 @@ namespace Config
     [Serializable]
     public class CustomerInfo
     {
+        public CustomerInfo RuntimeCopy() => (CustomerInfo)MemberwiseClone();
         [TableColumnWidth(100, Resizable = false)]
         [PreviewField(Height = 150, Alignment = ObjectFieldAlignment.Center)]
         public Sprite Sprite;
@@ -56,6 +57,7 @@ namespace Config
     [Serializable]
     public class OrderHappiness
     {
+        [Range(0, 100)] public int InitialSatisfaction = 50;
         [VerticalGroup("Happiness")]
         public SerializedDictionary<HappinessState, int> HappinessChange;
         [VerticalGroup("Happiness")]
@@ -87,20 +89,9 @@ namespace Config
                 }
             }
 
-            CustomerInfo customerInfo = customerList[Random.Range(0, customerList.Count)];
+            CustomerInfo customerInfo = customerList[Random.Range(0, customerList.Count)].RuntimeCopy();
             if (customerInfo.CustomerType == CustomerType.Random)
-            {
                 customerInfo.Sprite = Customers[Random.Range(0, Customers.Count)].Sprite;
-                customerInfo.Orders = new List<Order>()
-                {
-                    new Order()
-                    {
-                        BouquetType = (BouquetType)Random.Range(2, Enum.GetNames(typeof(BouquetType)).Length),
-                        WrappingPaperType = (WrappingPaperType)Random.Range(0, Enum.GetNames(typeof(WrappingPaperType)).Length),
-                        RibbonType = (RibbonType)Random.Range(0, Enum.GetNames(typeof(RibbonType)).Length)
-                    }
-                };
-            }
             return customerInfo;
         }
 
@@ -110,7 +101,7 @@ namespace Config
             {
                 if (customer.Name == name)
                 {
-                    return customer;
+                    return customer.RuntimeCopy();
                 }
             }
             return null;

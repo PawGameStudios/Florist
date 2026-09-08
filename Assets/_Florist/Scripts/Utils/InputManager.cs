@@ -10,6 +10,7 @@ public interface ITouchable
 
 public class InputManager : MonoBehaviour
 {
+    public static event System.Action PointerReleased;
     [SerializeField] private Camera _camera;
     private bool _isInput = false;
 
@@ -22,6 +23,7 @@ public class InputManager : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
+            PointerReleased?.Invoke();
             CheckTouchEnd(Input.mousePosition);
             _isInput = false;
         }

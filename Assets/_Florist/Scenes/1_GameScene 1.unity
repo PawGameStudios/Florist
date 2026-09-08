@@ -1091,6 +1091,7 @@ MonoBehaviour:
   _workshopConfig: {fileID: 11400000, guid: 712168ef9816d534b9be99e1f6754358, type: 2}
   _profileConfig: {fileID: 11400000, guid: dd92c908dab3bf848a2d198476ae1a33, type: 2}
   _adsConfig: {fileID: 11400000, guid: 273957fa61c06ea43a760e794f71f426, type: 2}
+  _economyConfig: {fileID: 11400000, guid: c61952b133ff4d01bb2fe069cfb13359, type: 2}
 --- !u!4 &425748724
 Transform:
   m_ObjectHideFlags: 0
@@ -4653,6 +4654,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 710100000000000001}
   - component: {fileID: 1311227299}
   - component: {fileID: 1311227298}
   m_Layer: 0
@@ -4686,6 +4688,7 @@ MonoBehaviour:
   _happinessMeter: {fileID: 3761997916474182447}
   _profileMenu: {fileID: 1248793803}
   _decorationManager: {fileID: 9100000000000000001}
+  _mergeScenePortal: {fileID: 710100000000000001}
 --- !u!4 &1311227299
 Transform:
   m_ObjectHideFlags: 0
@@ -430768,6 +430771,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6c62e3da58441a7b4fdcf03ef3b6c1, type: 3}
   m_Name:
   m_EditorClassIdentifier:
+--- !u!114 &710100000000000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311227297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b9dd446d58943eeaebc55af0e8b8ab3, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  _mergeScenePath: Assets/_Florist/Scenes/MergeGame.unity
+  _floristCanvases:
+  - {fileID: 349438598}
+  - {fileID: 1556292146}
+  _floristInputAndCamera:
+  - {fileID: 519420028}
+  - {fileID: 591089852}
+  - {fileID: 813075956}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

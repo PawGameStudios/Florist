@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class RibbonTable : SerializedMonoBehaviour
 {
     public Transform FirstRibbonTransform => _ribbonImages[0].transform;
+    public bool CanSelectRibbon => _paper != null && _paper.PaperState == PaperArea.State.InRibbonArea && !_isRibbonUsed;
     [SerializeField] private List<Image> _ribbonImages;
     [SerializeField] private GameObject _ribbonRodBottom;
     [SerializeField] private Sprite _lockSprite;
@@ -105,7 +106,7 @@ public class RibbonTable : SerializedMonoBehaviour
 
     public void OnRibbonClicked(int index)
     {
-        if (index >= _ribbons.Count)
+        if (index < 0 || index >= _ribbons.Count || !CanSelectRibbon)
         {
             return;
         }
@@ -116,6 +117,7 @@ public class RibbonTable : SerializedMonoBehaviour
         }
 
         _isRibbonUsed = true;
+        References.WorkshopPage.OnRibbonSelectionStarted();
 
         HapticsController.PlayMediumHaptic();
 

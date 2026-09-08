@@ -574,6 +574,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  EarlyDayHintDelay: 4
+  LaterDayHintDelay: 12
   FlowerInfo:
   - Sprite: {fileID: 21300000, guid: 2549810d1db61ed43b899d71c4048e25, type: 3}
     Id: f_1
@@ -602,8 +604,53 @@ MonoBehaviour:
     FlowerType: 3
     Color: 1
     Prefab: {fileID: 7479493555679902690, guid: d7bba213e37a94f4db6f3176c1b29cdf, type: 3}
-  - Sprite: {fileID: 21300000, guid: 073e3e69907d80e4b90c5479d741879b, type: 3}
+  - Sprite: {fileID: 21300000, guid: d856fe2328bd11a46b24103a5d646126, type: 3}
     Id: f_4
+    Cost: 10
+    Price: 15
+    FlowerInBoxImage: {fileID: 21300000, guid: 117d579482a3d6a439bfd4ef4b27b59f, type: 3}
+    Name: rose
+    FlowerType: 3
+    Color: 3
+    Prefab: {fileID: 2911881862433956072, guid: 5d0e8acd38d6411fb4a8615f6ed9adf0, type: 3}
+  - Sprite: {fileID: 21300000, guid: b91cfb305092ba34cb4d059a49f4c108, type: 3}
+    Id: f_5
+    Cost: 10
+    Price: 15
+    FlowerInBoxImage: {fileID: 21300000, guid: 907af1bfdb6cf4e4fb1d94560a10f228, type: 3}
+    Name: rose
+    FlowerType: 3
+    Color: 2
+    Prefab: {fileID: 2911881862433966488, guid: 9e52b63dad4d48a78cd0f1c0f6a4d313, type: 3}
+  - Sprite: {fileID: 21300000, guid: 62ca99e83d64b5b4993722e2fcf29dfd, type: 3}
+    Id: f_6
+    Cost: 10
+    Price: 15
+    FlowerInBoxImage: {fileID: 21300000, guid: fc312c668f8606b47a339c2cd345a899, type: 3}
+    Name: rose
+    FlowerType: 3
+    Color: 4
+    Prefab: {fileID: 2911881862433986184, guid: fcf2b56874fa48ab86d002e38a95fdcb, type: 3}
+  - Sprite: {fileID: 21300000, guid: 6a019ef77594b8947ad660ae0c6d325b, type: 3}
+    Id: f_7
+    Cost: 10
+    Price: 15
+    FlowerInBoxImage: {fileID: 21300000, guid: 3e7a5409f422c4747b6760eb1a8bdaaa, type: 3}
+    Name: anemone
+    FlowerType: 4
+    Color: 1
+    Prefab: {fileID: 2911881862433996728, guid: 9ed419bfa8d24f44aed8b12fc2519c57, type: 3}
+  - Sprite: {fileID: 21300000, guid: d0c4139fa483ecc49a86f6c2cc5a10b2, type: 3}
+    Id: f_8
+    Cost: 10
+    Price: 15
+    FlowerInBoxImage: {fileID: 21300000, guid: ba08307d2344a1a41b76dc11522e6552, type: 3}
+    Name: anemone
+    FlowerType: 4
+    Color: 6
+    Prefab: {fileID: 2911881862433866920, guid: 4686985ff4df4328a9951c0fe684b444, type: 3}
+  - Sprite: {fileID: 21300000, guid: 073e3e69907d80e4b90c5479d741879b, type: 3}
+    Id: f_9
     Cost: 10
     Price: 15
     FlowerInBoxImage: {fileID: 21300000, guid: 066f0772d2b243b4eb4745636fefb363, type: 3}
@@ -611,148 +658,274 @@ MonoBehaviour:
     FlowerType: 4
     Color: 2
     Prefab: {fileID: 597790434215436763, guid: bc359495b2b3e2a4aac7512cef9d9d78, type: 3}
+  - Sprite: {fileID: 21300000, guid: a1faa3cadbccda545bb5cbeb0ecbc96f, type: 3}
+    Id: f_10
+    Cost: 12
+    Price: 18
+    FlowerInBoxImage: {fileID: 21300000, guid: e50dc92059cd7684d860e233030fe0f3, type: 3}
+    Name: gladiolus
+    FlowerType: 5
+    Color: 3
+    Prefab: {fileID: 2911881862433884744, guid: 85034c621f4e4f45b4be281a87345dba, type: 3}
+  - Sprite: {fileID: 21300000, guid: 309ac2ef76e336949a2176677a1ba0ff, type: 3}
+    Id: f_11
+    Cost: 12
+    Price: 18
+    FlowerInBoxImage: {fileID: 21300000, guid: a2d9adc4701c56244937cc72dbd685b2, type: 3}
+    Name: gladiolus
+    FlowerType: 5
+    Color: 1
+    Prefab: {fileID: 2911881862433903480, guid: 71a09c318f59482987f01e6d0cfad522, type: 3}
+  - Sprite: {fileID: 21300000, guid: 699afc06b52dd2240b6ed65e0954b8b6, type: 3}
+    Id: f_12
+    Cost: 12
+    Price: 18
+    FlowerInBoxImage: {fileID: 21300000, guid: 9a951ec1c3fcd4f4c8e7eccf7d15a43e, type: 3}
+    Name: gladiolus
+    FlowerType: 5
+    Color: 6
+    Prefab: {fileID: 2911881862433912936, guid: 699bd1fa8c574e6ab820c381e96942f7, type: 3}
+  - Sprite: {fileID: 21300000, guid: 56cbdde9cc45e764d8753120838b1a90, type: 3}
+    Id: f_13
+    Cost: 12
+    Price: 18
+    FlowerInBoxImage: {fileID: 21300000, guid: d713cf1a3cf7e01438d8b4953c14715c, type: 3}
+    Name: gladiolus
+    FlowerType: 5
+    Color: 2
+    Prefab: {fileID: 2911881862433915160, guid: fe4d114ff2844f8eb3873ab5ea81c56f, type: 3}
+  - Sprite: {fileID: 21300000, guid: 2f7053ad5468bf249a63e3ae1a72b1e2, type: 3}
+    Id: f_14
+    Cost: 12
+    Price: 18
+    FlowerInBoxImage: {fileID: 21300000, guid: b659770148538b84c899fcab42801b68, type: 3}
+    Name: gladiolus
+    FlowerType: 5
+    Color: 4
+    Prefab: {fileID: 2911881862433926664, guid: 3dd357e36fd4427f8a22f69e4c911322, type: 3}
+  - Sprite: {fileID: 21300000, guid: b3578e5ca7de96b40aceb37d53cfd24a, type: 3}
+    Id: f_15
+    Cost: 9
+    Price: 14
+    FlowerInBoxImage: {fileID: 21300000, guid: 5597b5b2e565f0649a13e9e19c43df7a, type: 3}
+    Name: carnation
+    FlowerType: 6
+    Color: 3
+    Prefab: {fileID: 2911881862433814328, guid: 575f75235b6c4fa38b0535d8373d6288, type: 3}
+  - Sprite: {fileID: 21300000, guid: da8789acf7addbb48aa24d5607dbc6f4, type: 3}
+    Id: f_16
+    Cost: 9
+    Price: 14
+    FlowerInBoxImage: {fileID: 21300000, guid: 33a2bd03e9161644f9806b6f366fde84, type: 3}
+    Name: carnation
+    FlowerType: 6
+    Color: 1
+    Prefab: {fileID: 2911881862433823784, guid: 174ecc8996e74a09b46826c4e6aa8466, type: 3}
+  - Sprite: {fileID: 21300000, guid: d39f5c19974bf454fb343290d6c28c96, type: 3}
+    Id: f_17
+    Cost: 9
+    Price: 14
+    FlowerInBoxImage: {fileID: 21300000, guid: 921c2c780a31eae4fbe5da2947fe1f8f, type: 3}
+    Name: carnation
+    FlowerType: 6
+    Color: 2
+    Prefab: {fileID: 2911881862433826008, guid: 74233e54a2914c6ba217d9d0577025a4, type: 3}
+  - Sprite: {fileID: 21300000, guid: c7275aeaa3e8b5f44a4d327ed102685e, type: 3}
+    Id: f_18
+    Cost: 9
+    Price: 14
+    FlowerInBoxImage: {fileID: 21300000, guid: 409ffab722ce7514aabf5270850e2ac6, type: 3}
+    Name: carnation
+    FlowerType: 6
+    Color: 4
+    Prefab: {fileID: 2911881862433836488, guid: e3aa050f265e4bcebc85bac38ae0af0a, type: 3}
+  - Sprite: {fileID: 21300000, guid: d10c3666bad5f3d428cbefc18dd02e43, type: 3}
+    Id: f_19
+    Cost: 11
+    Price: 17
+    FlowerInBoxImage: {fileID: 21300000, guid: 9d32d7b613a68214da550228729154dc, type: 3}
+    Name: tulip
+    FlowerType: 7
+    Color: 3
+    Prefab: {fileID: 2911881862433843960, guid: ffc26d7b512343e18fec3528b7fe5da0, type: 3}
+  - Sprite: {fileID: 21300000, guid: be99ed4ae1e0102428575f14d61d7af8, type: 3}
+    Id: f_20
+    Cost: 11
+    Price: 17
+    FlowerInBoxImage: {fileID: 21300000, guid: 79fc411d876226f43a55fe9af3700982, type: 3}
+    Name: tulip
+    FlowerType: 7
+    Color: 1
+    Prefab: {fileID: 2911881862433862632, guid: 212dcf56a0ac49dcac1d1658d1d97464, type: 3}
+  - Sprite: {fileID: 21300000, guid: c27ec26f5a69f9540b47355e07faa8a3, type: 3}
+    Id: f_21
+    Cost: 11
+    Price: 17
+    FlowerInBoxImage: {fileID: 21300000, guid: 2e52600fd8f35fe468579d3948e69927, type: 3}
+    Name: tulip
+    FlowerType: 7
+    Color: 2
+    Prefab: {fileID: 2911881862433740952, guid: c63bf94a4ee04d9c848bad270d67e7b2, type: 3}
+  - Sprite: {fileID: 21300000, guid: 89331037906461f488e1a4448b6c7603, type: 3}
+    Id: f_22
+    Cost: 11
+    Price: 17
+    FlowerInBoxImage: {fileID: 21300000, guid: 6542e83c4f0e2da4b86fdb78d5071870, type: 3}
+    Name: tulip
+    FlowerType: 7
+    Color: 4
+    Prefab: {fileID: 2911881862433743240, guid: 0f9192c767ee405abfc302564960275c, type: 3}
+  - Sprite: {fileID: 21300000, guid: 59e6ca4980b738149b890110fffe2446, type: 3}
+    Id: f_23
+    Cost: 7
+    Price: 11
+    FlowerInBoxImage: {fileID: 21300000, guid: 2122e0a29c351244c91d560b8dc20712, type: 3}
+    Name: daisy
+    FlowerType: 2
+    Color: 0
+    Prefab: {fileID: 2911881862433754808, guid: 180266056d534e85bf5e2f37d2c73ab7, type: 3}
   RibbonInfo:
   - Sprite: {fileID: 21300000, guid: ac4383188d9dcc4499816ac4f60b354f, type: 3}
     Id: r_1
-    Cost: 0
-    Price: 0
+    Cost: 1
+    Price: 2
     RibbonType: 1
     RibbonAnimator: {fileID: 1185301575773585700, guid: fc7f44d7b7c6ec94c8e40b68361b6e8f, type: 3}
   - Sprite: {fileID: 21300000, guid: 5b014294ccbbbba4286984c64950b85e, type: 3}
     Id: r_2
-    Cost: 0
-    Price: 0
+    Cost: 2
+    Price: 3
     RibbonType: 2
     RibbonAnimator: {fileID: 1185301575773585700, guid: 0ff660e60e542e145b0c3a9d49bdfc8a, type: 3}
   - Sprite: {fileID: 21300000, guid: 52e674f7144428a4593f6740b1e8383a, type: 3}
     Id: r_3
-    Cost: 0
-    Price: 0
+    Cost: 1
+    Price: 2
     RibbonType: 3
     RibbonAnimator: {fileID: 1185301575773585700, guid: a7dd0a15c4aaba54ab77cfe430a1c169, type: 3}
   - Sprite: {fileID: 21300000, guid: ba44b42c6984e5443980e1a9e7c658bb, type: 3}
     Id: r_4
-    Cost: 0
-    Price: 0
+    Cost: 1
+    Price: 2
     RibbonType: 4
     RibbonAnimator: {fileID: 1185301575773585700, guid: 5db94f6024f5bf144acba11a7ac377f5, type: 3}
   - Sprite: {fileID: 21300000, guid: f9dda01d2837774428dd25f65e706b5d, type: 3}
     Id: r_5
-    Cost: 0
-    Price: 0
+    Cost: 1
+    Price: 2
     RibbonType: 5
     RibbonAnimator: {fileID: 1185301575773585700, guid: f4e442a0e48285149aff84891dd3a655, type: 3}
   - Sprite: {fileID: 21300000, guid: a882971446e93a94684e43f9bca85ef8, type: 3}
     Id: r_6
-    Cost: 0
-    Price: 0
+    Cost: 2
+    Price: 3
     RibbonType: 6
     RibbonAnimator: {fileID: 1185301575773585700, guid: 0daa7467872cdd244bbbf7d0dbb50dfd, type: 3}
   - Sprite: {fileID: 21300000, guid: 006bb8cb4facb274c9bd11021cc9078c, type: 3}
     Id: r_7
-    Cost: 0
-    Price: 0
+    Cost: 2
+    Price: 3
     RibbonType: 7
     RibbonAnimator: {fileID: 1185301575773585700, guid: 80e0237cf02827e4ea3af089d5b6460a, type: 3}
   - Sprite: {fileID: 21300000, guid: 6fd473eda8c4bfa44bd1e7a0fd959e3f, type: 3}
     Id: r_8
-    Cost: 0
-    Price: 0
+    Cost: 2
+    Price: 3
     RibbonType: 8
     RibbonAnimator: {fileID: 1185301575773585700, guid: 0daa7467872cdd244bbbf7d0dbb50dfd, type: 3}
   WrappingPaperInfo:
   - Sprite: {fileID: 21300000, guid: db85ece96322be3458ede3f4603e23c8, type: 3}
     Id: wp_1
-    Cost: 0
-    Price: 0
+    Cost: 2
+    Price: 4
     WrappingPaperType: 1
     PaperSprite: {fileID: 21300000, guid: dd34c2878c86d364c8e9c6268e83d2c5, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: c42c737fe870973428034b542074ebab, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: 0c8d8503ff06d3d4aacbc83bdbbf96c2, type: 3}
   - Sprite: {fileID: 21300000, guid: 836b4681770bec240a6316ec7db7489c, type: 3}
     Id: wp_2
-    Cost: 0
-    Price: 0
+    Cost: 3
+    Price: 5
     WrappingPaperType: 2
     PaperSprite: {fileID: 21300000, guid: 0efef45a8d20fed4984dd2beb97b0522, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: 53835807d7ead2440bc15e35a0852ad7, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: 90246754aa894a9498a97511c15d5ff1, type: 3}
   - Sprite: {fileID: 21300000, guid: 83dfea964573ea24d90f18c485562b17, type: 3}
     Id: wp_3
-    Cost: 0
-    Price: 0
+    Cost: 3
+    Price: 5
     WrappingPaperType: 3
     PaperSprite: {fileID: 21300000, guid: 9dab13e64922eb543a77f5e7f2c66fb4, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: 5c7d02b6f072c3d438022d7774d947d4, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: 15bf4ba3b39ec4b4c89a06e9a53bdb94, type: 3}
   - Sprite: {fileID: 21300000, guid: 49761f6690db1884c98439e2f677c9ed, type: 3}
     Id: wp_4
-    Cost: 0
-    Price: 0
+    Cost: 3
+    Price: 5
     WrappingPaperType: 4
     PaperSprite: {fileID: 21300000, guid: dec10090f8ffba6459891dad48457f54, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: 99664000025a5384887329cdb6825960, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: 700b4eba18c967b4d8d6eca996e2cfe2, type: 3}
   - Sprite: {fileID: 21300000, guid: ef5c80316dfcbd2458361b1e5a83f400, type: 3}
     Id: wp_5
-    Cost: 0
-    Price: 0
+    Cost: 3
+    Price: 5
     WrappingPaperType: 5
     PaperSprite: {fileID: 21300000, guid: 34044a65d426f2b439d26509bb227160, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: 9ec0f944c9c40c547a26c29ef3237115, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: f7234b228d0040c45ade4d4899e271b5, type: 3}
   - Sprite: {fileID: 21300000, guid: 8fe043a4a7b62c34ca51390db761549f, type: 3}
     Id: wp_6
-    Cost: 0
-    Price: 0
+    Cost: 4
+    Price: 6
     WrappingPaperType: 6
     PaperSprite: {fileID: 21300000, guid: aa4a2a8669546174d92889b8ba58a7db, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: aa48075361f1da24082bf9ecfa17392c, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: c31f9bb5a9d151244a117471d1de046c, type: 3}
   - Sprite: {fileID: 21300000, guid: 48b22dd9bb1c668468bf161ab50d70ad, type: 3}
     Id: wp_7
-    Cost: 0
-    Price: 0
+    Cost: 2
+    Price: 4
     WrappingPaperType: 7
     PaperSprite: {fileID: 21300000, guid: d21b369dae980dd4dab78ba59823cfbb, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: d8d82c3ede2677947b0f1e77b7866d0f, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: 1243b7193f56dec4bbcb9ca0001067e3, type: 3}
   - Sprite: {fileID: 21300000, guid: a826f6c5d9e468447865638bfe820f3a, type: 3}
     Id: wp_8
-    Cost: 0
-    Price: 0
+    Cost: 4
+    Price: 6
     WrappingPaperType: 8
     PaperSprite: {fileID: 21300000, guid: 96250b0680a80144e8ce8f834fb916d3, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: 2e8c3bad852fbda4ca47c713e0127a4b, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: 1e801680049b8484e988c304c8e3825f, type: 3}
   - Sprite: {fileID: 21300000, guid: 949ccc512fdc89c459c1d7b05db97e97, type: 3}
     Id: wp_9
-    Cost: 0
-    Price: 0
+    Cost: 2
+    Price: 4
     WrappingPaperType: 9
     PaperSprite: {fileID: 21300000, guid: 49112fc646730c145a587d534def0367, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: 64799a4db6710bf4babf8d885097dd54, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: 0afe0fc2fe0aec247a538717cce9c2d5, type: 3}
   - Sprite: {fileID: 21300000, guid: 05a6c9205f327ee4bbc2dd844591d441, type: 3}
     Id: wp_10
-    Cost: 0
-    Price: 0
+    Cost: 4
+    Price: 6
     WrappingPaperType: 10
     PaperSprite: {fileID: 21300000, guid: 81076b8401e060f45af75b9cb56ee5de, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: f1a0533119e216943802083aab2b0302, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: 19ecf490ea7ed7c428c9a0dab343e9e1, type: 3}
   - Sprite: {fileID: 21300000, guid: 7cc39c37dbfae8e45b8f30a5b82805e3, type: 3}
     Id: wp_11
-    Cost: 0
-    Price: 0
+    Cost: 2
+    Price: 4
     WrappingPaperType: 11
     PaperSprite: {fileID: 21300000, guid: 60adda891d36d6e4e95dafa9447a1f10, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: 5c55d5bd60f9c3841adacc7823014004, type: 3}
     PaperClosedSprite: {fileID: 21300000, guid: d7af104518f89534ebb658e94b64778e, type: 3}
   - Sprite: {fileID: 21300000, guid: 0e8281c6c12fe8b4ab985e4c9f038aef, type: 3}
     Id: wp_12
-    Cost: 0
-    Price: 0
+    Cost: 2
+    Price: 4
     WrappingPaperType: 12
     PaperSprite: {fileID: 21300000, guid: 98d5e22ea86d19545b14b0219e720aa8, type: 3}
     PaperRollSprite: {fileID: 21300000, guid: e8af3def369f79b4b98cb7d1bc4d737a, type: 3}

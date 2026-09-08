@@ -56,7 +56,7 @@ public class WrappingMachine : MonoBehaviour
 
         CloseMachine(() =>
         {
-            int level = SaveSystem.Inst.GeneralData.MachineLevel;
+            int level = SaveSystem.Inst.GeneralData.MachineLevel + Configs.ShopConfig.GetMachineLevelBonus(SaveSystem.Inst.ShopData);
             float duration = Configs.WorkshopConfig.MachineInfo.CalculateDuration(level);
             _progressImage.fillAmount = 0f;
 

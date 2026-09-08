@@ -64,7 +64,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
     private GameObject _scissorObject, _ribbonObject;
     private readonly List<Flower> _allFlowers = new();
     private readonly List<Flower> _unCutFlowers = new();
-    private const float PAPER_OPEN_DURATION = 1f;
+    private const float PAPER_OPEN_DURATION = .6f;
     private const float ANGLE_LIMIT = 40f, Y_POS_LIMIT = 400;
 
     void OnDisable()
@@ -284,6 +284,8 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
 
         if (_state == State.AddingFlowers)
         {
+            if (References.WorkshopPage.CheckIfInMachineArea(transform.position))
+                References.WorkshopPage.OnUncutBouquetGivenToMachine();
             transform.localPosition = _startPosition;
         }
         else if (_state == State.ScissorUsed && _unCutFlowers.Count == 0)
@@ -325,6 +327,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
         _paperImage.gameObject.SetActive(false);
         _paperClosedImage.gameObject.SetActive(true);
         _paperMaskObject.SetActive(true);
+        References.WorkshopPage.OnBouquetMachineDone();
     }
 
     public void OnRibbonSelected(RibbonType ribbonType, GameObject ribbonObject)
@@ -394,6 +397,7 @@ public class PaperArea : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,
 
             _scissorObject.SetActive(false);
             _state = State.ScissorUsed;
+            References.WorkshopPage.OnBouquetCut();
         }));
     }
 

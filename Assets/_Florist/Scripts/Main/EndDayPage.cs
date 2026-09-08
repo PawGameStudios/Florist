@@ -19,7 +19,9 @@ public class EndDayPage : Page
     [SerializeField] private TextMeshProUGUI _revenueText;
     [SerializeField] private TextMeshProUGUI _tipText;
     [SerializeField] private TextMeshProUGUI _rentText;
-    [SerializeField] private TextMeshProUGUI _refundText;
+    // Reuse the existing receipt row and preserve serialized prefab references.
+    [UnityEngine.Serialization.FormerlySerializedAs("_refundText")]
+    [SerializeField] private TextMeshProUGUI _changeText;
     [SerializeField] private TextMeshProUGUI _flowerCostText;
     [SerializeField] private TextMeshProUGUI _profitText;
     [SerializeField] private Tutorial _tutorial;
@@ -27,6 +29,7 @@ public class EndDayPage : Page
     [SerializeField] private Sprite _nextDayButtonSprite;
     private Sequence _sequence;
     private DayEvent _newItemIntroductionEvent = null;
+    private bool _purchaseInProgress;
 
     private void OnDisable()
     {
@@ -38,7 +41,7 @@ public class EndDayPage : Page
     {
         base.Open(pageData, onCompleted);
 
-        SaveSystem.Inst.GeneralData.IncreaseDayIndex();
+        _nextDayButtonObject.SetActive(true);
 
         _endDayPanel.SetActive(true);
 
@@ -77,28 +80,48 @@ public class EndDayPage : Page
     {
         _endDayPanel.SetActive(true);
         _fadeImage.gameObject.SetActive(false);
-        _newItemIntroductionEvent = newItemIntroductionEvent;
+        var data = SaveSystem.Inst.GeneralData;
+        int completedDay = earningsInfo.DayNumber > 0 ? earningsInfo.DayNumber - 1 : data.CurrentDayIndex;
+        if (data.LastSettledDayNumber < completedDay + 1)
+        {
+            data.LastSettledDayNumber = completedDay + 1;
+            data.ChangeMoney(earningsInfo.Profit);
+            data.IncreaseDayIndex();
+        }
+        SaveSystem.Inst.SaveData.EarningsInfo = earningsInfo.Copy();
+        DisplayEarnings(earningsInfo, completedDay);
+    }
 
-        _dayText.text = $"{LocalizationManager.GetLocalizedText("day")}: {SaveSystem.Inst.GeneralData.CurrentDayIndex + 1}";
-        _revenueText.text = (earningsInfo.GivenMoney - earningsInfo.Change).ToString("0.00");
+    public void Restore(EarningsInfo earningsInfo)
+    {
+        DisplayEarnings(earningsInfo ?? new EarningsInfo(), Mathf.Max(0, SaveSystem.Inst.GeneralData.CurrentDayIndex - 1));
+    }
+
+    private void DisplayEarnings(EarningsInfo earningsInfo, int completedDay)
+    {
+        _newItemIntroductionEvent = GetDailyIntroduction();
+
+        _dayText.text = $"{LocalizationManager.GetLocalizedText("day")}: {completedDay + 1}";
+        _revenueText.text = earningsInfo.GivenMoney.ToString("0.00");
         _tipText.text = earningsInfo.Tip.ToString("0.00");
         _rentText.text = $"-{earningsInfo.Rent:0.00}";
-        _refundText.text = $"-{earningsInfo.Refund:0.00}";
+        _changeText.text = $"-{earningsInfo.Change:0.00}";
         _flowerCostText.text = $"-{earningsInfo.Cost:0.00}";
         _profitText.text = earningsInfo.Profit.ToString("0.00");
 
-        SaveSystem.Inst.GeneralData.ChangeMoney(earningsInfo.Profit);
+
     }
 
     public void OnNextDayButtonClicked()
     {
         HapticsController.PlayButtonHaptic();
+        // Purchases or balance changes may have happened since displaying the receipt.
+        _newItemIntroductionEvent = GetDailyIntroduction();
 
         if (_newItemIntroductionEvent != null)
         {
             if (_newItemIntroductionEvent.TriggerAnimation)
             {
-                References.ShopPage.Open();
                 PlayEvent();
             }
             else
@@ -141,11 +164,12 @@ public class EndDayPage : Page
     private void OnScrollSet(Transform itemTransform)
     {
         Debug.Log($"#endday# OnScrollSet, itemTransform: {itemTransform}");
+        var itemRect = (RectTransform)itemTransform;
 
         _tutorial.Init()
                 .SetObjectActivation(Tutorial.ObjectActivationOptions.Hand, Tutorial.ObjectActivationOptions.PopUp, Tutorial.ObjectActivationOptions.Bg)
                 .SetClickableState(Tutorial.ClickableState.HighlightArea)
-                .PointTo(itemTransform.position, Tutorial.PointDirection.Right)
+                .PointTo(itemRect.TransformPoint(itemRect.rect.center), Tutorial.PointDirection.Right)
                 .Highlight(_shopItemSprite, itemTransform)
                 .SetExplanation(LocalizationManager.GetLocalizedText("tut_new_item_explanation"))
                 .SetClickCallback(OnScrollBuyClicked)
@@ -154,53 +178,81 @@ public class EndDayPage : Page
 
     private void OnScrollBuyClicked()
     {
+        if (_purchaseInProgress || _newItemIntroductionEvent == null) return;
         Debug.Log($"#endday# OnScrollBuyClicked, _newItemIntroductionEvent: {_newItemIntroductionEvent}");
 
+        _purchaseInProgress = true;
+        bool purchased;
         if (_newItemIntroductionEvent.EventType == SpecialEvents.InroduceFlower)
         {
-            References.ShopPage.SimulateFlowerBuyButtonClick(_newItemIntroductionEvent.IntroducedFlowerType, _newItemIntroductionEvent.IntroducedFlowerColor);
+            purchased = References.ShopPage.SimulateFlowerBuyButtonClick(_newItemIntroductionEvent.IntroducedFlowerType, _newItemIntroductionEvent.IntroducedFlowerColor, OnPurchaseFeedbackCompleted);
         }
         else if (_newItemIntroductionEvent.EventType == SpecialEvents.IntroducePaper)
         {
-            References.ShopPage.SimulateWrapperBuyButtonClick(_newItemIntroductionEvent.PaperType);
+            purchased = References.ShopPage.SimulateWrapperBuyButtonClick(_newItemIntroductionEvent.PaperType, OnPurchaseFeedbackCompleted);
         }
         else // if (_newItemIntroductionEvent.EventType == SpecialEvents.IntroduceRibbon)
         {
-            References.ShopPage.SimulateRibbonBuyButtonClick(_newItemIntroductionEvent.RibbonType);
+            purchased = References.ShopPage.SimulateRibbonBuyButtonClick(_newItemIntroductionEvent.RibbonType, OnPurchaseFeedbackCompleted);
         }
 
+        if (!purchased)
+        {
+            _purchaseInProgress = false;
+            return;
+        }
+
+        _tutorial.FinishTutorial();
+    }
+
+    private void OnPurchaseFeedbackCompleted()
+    {
+        _purchaseInProgress = false;
+        if (!isActiveAndEnabled) return;
         References.ShopPage.Close();
 
         _newItemIntroductionEvent = null;
         _nextDayButtonObject.SetActive(true);
-        _tutorial.FinishTutorial();
     }
 
     private void EnableNewItem()
     {
-        if (_newItemIntroductionEvent.EventType == SpecialEvents.InroduceFlower)
-        {
-            string itemId = Configs.WorkshopConfig.GetFlowerId(_newItemIntroductionEvent.IntroducedFlowerType, _newItemIntroductionEvent.IntroducedFlowerColor);
-            ShopConfig.ShopItemInfo itemInfo = Configs.ShopConfig.GetItemById(ItemType.Flower, itemId);
+        // Introductions reveal a product. Only the explicit Shop purchase spends money.
+        _newItemIntroductionEvent = null;
+    }
 
-            SaveSystem.Inst.GeneralData.ChangeMoney(-itemInfo.Price);
-            SaveSystem.Inst.ShopData.SetPurchasedState(itemInfo.Id);
-        }
-        else if (_newItemIntroductionEvent.EventType == SpecialEvents.IntroducePaper)
+    private DayEvent GetDailyIntroduction()
+    {
+        int day = SaveSystem.Inst.GeneralData.CurrentDayIndex;
+        var workshop = Configs.WorkshopConfig;
+        foreach (var item in Configs.ShopConfig.FlowerItems)
         {
-            string itemId = Configs.WorkshopConfig.GetWrappingPaperId(_newItemIntroductionEvent.PaperType);
-            ShopConfig.ShopItemInfo itemInfo = Configs.ShopConfig.GetItemById(ItemType.Wrapper, itemId);
-
-            SaveSystem.Inst.GeneralData.ChangeMoney(-itemInfo.Price);
-            SaveSystem.Inst.ShopData.SetPurchasedState(itemInfo.Id);
+            if (!CanIntroduceItem(item, day)) continue;
+            var flower = workshop.FlowerInfo.Find(f => f.Id == item.Id);
+            if (flower != null) return new DayEvent { IsEvent = true, EventType = SpecialEvents.InroduceFlower,
+                IntroducedFlowerType = flower.FlowerType, IntroducedFlowerColor = flower.Color, TriggerAnimation = true };
         }
-        else // if (_newItemIntroductionEvent.EventType == SpecialEvents.IntroduceRibbon)
+        foreach (var item in Configs.ShopConfig.WrapperItems)
         {
-            string itemId = Configs.WorkshopConfig.GetRibbonId(_newItemIntroductionEvent.RibbonType);
-            ShopConfig.ShopItemInfo itemInfo = Configs.ShopConfig.GetItemById(ItemType.Ribbon, itemId);
-
-            SaveSystem.Inst.GeneralData.ChangeMoney(-itemInfo.Price);
-            SaveSystem.Inst.ShopData.SetPurchasedState(itemInfo.Id);
+            if (!CanIntroduceItem(item, day)) continue;
+            var paper = workshop.WrappingPaperInfo.Find(p => p.Id == item.Id);
+            if (paper != null) return new DayEvent { IsEvent = true, EventType = SpecialEvents.IntroducePaper,
+                PaperType = paper.WrappingPaperType, TriggerAnimation = true };
         }
+        foreach (var item in Configs.ShopConfig.RibbonItems)
+        {
+            if (!CanIntroduceItem(item, day)) continue;
+            var ribbon = workshop.RibbonInfo.Find(r => r.Id == item.Id);
+            if (ribbon != null) return new DayEvent { IsEvent = true, EventType = SpecialEvents.IntroduceRibbon,
+                RibbonType = ribbon.RibbonType, TriggerAnimation = true };
+        }
+        return null;
+    }
+
+    private static bool CanIntroduceItem(ShopConfig.ShopItemInfo item, int day)
+    {
+        return item != null && item.UnlockDay == day && !item.PurchaseDisabled &&
+            item.Price >= 0 && SaveSystem.Inst.GeneralData.Money >= item.Price &&
+            SaveSystem.Inst.ShopData.GetItemState(item.Id, item.UnlockDay) == ShopData.ItemState.Purchasable;
     }
 }
