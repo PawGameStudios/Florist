@@ -6,6 +6,8 @@ using UnityEngine;
 public class ProductionItemData : ScriptableObject
 {
     public string itemName;
+    public string localizationKey;
+    public string DisplayName => MergeLocalization.Name(localizationKey, itemName);
     public Sprite itemSprite;
     public string description;
     public int maxLevel = 1;

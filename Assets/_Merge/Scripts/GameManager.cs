@@ -31,10 +31,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_EnergyTimerText;
     [SerializeField] private Image m_FeedbackImagePrefab;
     [SerializeField] private RectTransform m_InventoryFeedbackTarget;
-    [SerializeField] private TextMeshProUGUI m_FeedbackText;
     private readonly List<Image> m_FlyingImages = new List<Image>();
     private readonly List<Tween> m_FlightTweens = new List<Tween>();
-    private Tween m_DragTween, m_NoticeTween, m_EnergyTween, m_InventoryTween;
+    private Tween m_DragTween, m_EnergyTween, m_InventoryTween;
     private Vector3 m_DragScale, m_EnergyScale, m_InventoryScale;
     private Cell m_HoverCell;
 
@@ -64,7 +63,6 @@ public class GameManager : MonoBehaviour
         m_DragScale = m_DragImage.transform.localScale;
         m_EnergyScale = m_EnergyText.transform.localScale;
         if (m_InventoryFeedbackTarget != null) m_InventoryScale = m_InventoryFeedbackTarget.localScale;
-        if (m_FeedbackText != null) m_FeedbackText.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -155,7 +153,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateEnergyUI()
     {
-        m_EnergyText.text = $"Enerji: {m_Energy}/{c_MaxEnergy}";
+        m_EnergyText.text = $"{m_Energy} <sprite=0>";
         OnEnergyChanged?.Invoke();
         int remaining = Mathf.CeilToInt(c_EnergyRechargeTime - m_EnergyTimer);
         m_EnergyTimerText.text = m_Energy >= c_MaxEnergy ? "" : $"{remaining / 60:00}:{remaining % 60:00}";
@@ -362,7 +360,6 @@ public class GameManager : MonoBehaviour
         if (!producerCell.IsProducer()) return;
         if (m_Energy < Mathf.Max(0, m_EconomyConfig.ProducerEnergyCost))
         {
-            ShowNotice("Enerji yetersiz");
             m_EnergyTween?.Kill();
             m_EnergyText.transform.localScale = m_EnergyScale;
             m_EnergyTween = m_EnergyText.transform.DOPunchScale(m_EnergyScale * .06f, .20f, 1, .1f).SetUpdate(true);
@@ -376,7 +373,6 @@ public class GameManager : MonoBehaviour
 
         if (availableCells.Count == 0)
         {
-            ShowNotice("Tahtada boş yer yok");
             return;
         }
 
@@ -469,17 +465,6 @@ public class GameManager : MonoBehaviour
         m_HoverCell = null;
     }
 
-    private void ShowNotice(string message)
-    {
-        if (m_FeedbackText == null) return;
-        m_NoticeTween?.Kill();
-        m_FeedbackText.gameObject.SetActive(true);
-        m_FeedbackText.text = message;
-        m_FeedbackText.alpha = 1f;
-        m_NoticeTween = m_FeedbackText.DOFade(0f, .18f).SetDelay(1.1f).SetUpdate(true)
-            .OnComplete(() => m_FeedbackText.gameObject.SetActive(false));
-    }
-
     private void FlyToInventory(Cell cell, Vector3 origin, RectTransform destination)
     {
         if (m_FeedbackImagePrefab == null || destination == null) return;
@@ -509,12 +494,10 @@ public class GameManager : MonoBehaviour
         CancelDrag(m_DragSourceCell);
         ClearHover();
         m_DragTween?.Kill();
-        m_NoticeTween?.Kill();
         m_EnergyTween?.Kill();
         m_InventoryTween?.Kill();
         if (m_EnergyText != null) m_EnergyText.transform.localScale = m_EnergyScale;
         if (m_InventoryFeedbackTarget != null) m_InventoryFeedbackTarget.localScale = m_InventoryScale;
-        if (m_FeedbackText != null) m_FeedbackText.gameObject.SetActive(false);
         foreach (var tween in m_FlightTweens) tween.Kill();
         m_FlightTweens.Clear();
         foreach (var visual in m_FlyingImages) if (visual != null) Destroy(visual.gameObject);
@@ -616,6 +599,9 @@ public class GameManager : MonoBehaviour
             }
 
             var job = new ProductionJob(recipe, kioskId);
+            // Legacy timed plants have already paid their recipe; retain a free harvest.
+            job.growthStage = Mathf.Clamp(PlayerPrefs.GetInt($"{baseKey}_GrowthStage", recipe.growthStages != null ? recipe.growthStages.Count : 0),
+                0, recipe.growthStages != null ? recipe.growthStages.Count : 0);
             job.startTime = startTime.ToUniversalTime();
             job.endTime = job.startTime.AddSeconds(recipe.productionTime);
             job.isCollected = isCollected == 1;
@@ -760,6 +746,7 @@ public class GameManager : MonoBehaviour
             string baseKey = SavePrefix + $"Production_{i}";
             PlayerPrefs.SetString($"{baseKey}_RecipeName", productions[i].recipe.recipeName);
             PlayerPrefs.SetString($"{baseKey}_StartTime", productions[i].startTime.ToString("O"));
+            PlayerPrefs.SetInt($"{baseKey}_GrowthStage", productions[i].growthStage);
             PlayerPrefs.SetInt($"{baseKey}_IsCollected", productions[i].isCollected ? 1 : 0);
             PlayerPrefs.SetString($"{baseKey}_KioskId", productions[i].kioskId);
         }

@@ -10,6 +10,7 @@ namespace Florist.Merge
         [SerializeField] private Image statusIcon;
         [SerializeField] private Sprite checkmarkSprite;
         [SerializeField] private Sprite crossSprite;
+        [SerializeField] private Image backgroundImage;
         private RecipeIngredient ingredient;
         private ProductionManager productionManager;
         private InventoryManager inventoryManager;
@@ -29,12 +30,14 @@ namespace Florist.Merge
             foreach (var item in inventoryManager.GetInventory())
                 if (item.IsRegularItem && item.itemData == ingredient.itemData && item.level >= ingredient.requiredLevel)
                     currentCount += item.count;
-            if (requirementText != null) requirementText.text = $"Sv.{ingredient.requiredLevel}+\n{currentCount}/{ingredient.requiredCount}";
+            if (requirementText != null) requirementText.text = $"{currentCount}/{ingredient.requiredCount}";
+            bool hasEnough = productionManager.HasEnoughIngredient(ingredient);
+            if (backgroundImage != null) backgroundImage.color = hasEnough ? new Color(.78f, .93f, .47f) : new Color(1f, .89f, .85f);
             if (statusIcon != null)
             {
-                bool hasEnough = productionManager.HasEnoughIngredient(ingredient);
                 statusIcon.sprite = hasEnough ? checkmarkSprite : crossSprite;
-                statusIcon.color = hasEnough ? Color.green : Color.red;
+                statusIcon.enabled = statusIcon.sprite != null;
+                statusIcon.color = Color.white;
             }
         }
     }

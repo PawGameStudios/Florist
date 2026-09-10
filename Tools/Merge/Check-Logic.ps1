@@ -4,26 +4,30 @@ $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $source = @'
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 namespace UnityEngine {
- public class MonoBehaviour { protected object gameObject; protected void Destroy(object value) {} }
+ public class MonoBehaviour { protected object gameObject; public bool isActiveAndEnabled; protected void Destroy(object value) {} protected Coroutine StartCoroutine(IEnumerator value) { return null; } protected void StopAllCoroutines() {} }
+ public class Coroutine {}
+ public class WaitForSecondsRealtime { public WaitForSecondsRealtime(float seconds) {} }
  public class ScriptableObject {}
  public class Sprite {}
  public class SerializeField : Attribute {}
  public class HideInInspector : Attribute {}
  public class MinAttribute : Attribute { public MinAttribute(float value) {} }
  public class RangeAttribute : Attribute { public RangeAttribute(float min,float max) {} }
- public class CreateAssetMenuAttribute : Attribute { public string fileName; public string menuName; }
+ public class CreateAssetMenuAttribute : Attribute { public string fileName; public string menuName; public int order; }
  public static class Debug { public static void LogWarning(object value) {} }
- public static class Mathf { public static int Clamp(int v,int min,int max) { return Math.Min(max,Math.Max(min,v)); } }
+ public static class Mathf { public static float Max(float a,float b) { return Math.Max(a,b); } public static float Clamp01(float v) { return Math.Max(0,Math.Min(1,v)); } public static int Clamp(int v,int min,int max) { return Math.Min(max,Math.Max(min,v)); } }
 }
 namespace Florist.Merge {
  public class ItemData { public Sprite[] Sprites = new Sprite[6]; public int ItemType; }
- public class ProductionItemData { public int maxLevel=1; public int baseValue; public string itemName; public Sprite itemSprite; }
+ public class ProductionItemData { public bool isUnlocked=true; public int minimumCompletedOrders; public int maxLevel=1; public int baseValue; public string itemName; public Sprite itemSprite; }
  public class CustomerData {}
  public class MergeEconomyConfig { public int InventoryCapacity=24; }
- public class RecipeIngredient { public ItemData itemData; public int requiredLevel; public int requiredCount; }
+ public static class MergeLocalization { public static string Text(string key) { return key; } public static string Name(string key,string fallback) { return fallback; } }
+ public class OrderManager { public int CompletedOrders; }
  public static class LogicChecks {
   static int passed;
   static void Check(bool value,string name) { if(!value) throw new Exception(name); passed++; }
@@ -60,12 +64,38 @@ namespace Florist.Merge {
    var cfg=new MergeProgressionConfig();foreach(int n in new[]{0,4,10,20,35}) cfg.Stages.Add(new MergeOrderStage{CompletedOrders=n,Name=n.ToString()});
    Check(cfg.GetStage(3).CompletedOrders==0 && cfg.GetStage(4).CompletedOrders==4 && cfg.GetStage(10).CompletedOrders==10,"unlock boundaries");
    Check(cfg.GetNextThreshold(4)==10 && cfg.GetNextThreshold(35)==-1,"next progress threshold");
+   inv.ClearInventory();
+   var plant=new RecipeData { isUnlocked=true, resultItem=p, resultCount=1, resultLevel=1,
+    ingredients=new List<RecipeIngredient>{new RecipeIngredient{itemData=raw,requiredLevel=2,requiredCount=1}},
+    growthStages=new List<GardenStage>{
+     new GardenStage{ingredients=new List<RecipeIngredient>{new RecipeIngredient{itemData=raw,requiredLevel=2,requiredCount=2}}},
+     new GardenStage{ingredients=new List<RecipeIngredient>{new RecipeIngredient{itemData=raw,requiredLevel=3,requiredCount=1}}}} };
+   var garden=new ProductionManager();
+   typeof(ProductionManager).GetField("inventoryManager",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance).SetValue(garden,inv);
+   inv.AddItem(raw,2);
+   Check(garden.StartProduction(plant,"A") && inv.GetInventory().Count==0,"plant consumes seed recipe");
+   var job=garden.GetProductionInKiosk("A");
+   job.endTime=DateTime.UtcNow.AddDays(-1);
+   Check(!job.IsReadyToCollect && job.growthStage==0,"elapsed time cannot bypass growth materials");
+   inv.AddItem(raw,2);
+   Check(!garden.AdvanceGrowth(job) && job.growthStage==0 && inv.GetInventory()[0].count==1,"missing growth materials are atomic");
+   inv.AddItem(raw,2);
+   Check(garden.AdvanceGrowth(job) && job.growthStage==1 && !job.IsReadyToCollect && inv.GetInventory().Count==0,"first paid growth step");
+   inv.AddItem(raw,3);
+   Check(garden.AdvanceGrowth(job) && job.IsReadyToCollect && job.growthStage==2,"second paid step reaches harvest");
+   Check(!garden.AdvanceGrowth(job),"ready plants cannot pay another growth cost");
+   for(int i=0;i<24;i++) inv.AddItem(new ItemData(),1);
+   garden.CollectProduction(job);
+   Check(garden.GetProductionInKiosk("A")==job && !job.isCollected,"full inventory preserves harvest");
+   inv.ClearInventory();garden.CollectProduction(job);garden.CollectProduction(job);
+   Check(garden.GetProductionInKiosk("A")==null && inv.HasProductionItem(p,1) && inv.GetInventory()[0].count==1,"harvest awarded once and frees plot");
+   Check(!garden.AdvanceGrowth(new ProductionJob(plant,"B")),"foreign growth job rejected");
    return passed+" logic checks passed";
   }
  }
 }
 '@
-foreach ($name in @('InventoryManager','InventoryItem','Order','MergeProgressionConfig')) {
+foreach ($name in @('InventoryManager','InventoryItem','Order','MergeProgressionConfig','RecipeData','ProductionJob','ProductionManager')) {
  $code=[IO.File]::ReadAllText((Join-Path $root ('Assets/_Merge/Scripts/'+$name+'.cs')))
  $source += [regex]::Replace($code,'(?m)^using [^;]+;\r?\n','')
 }

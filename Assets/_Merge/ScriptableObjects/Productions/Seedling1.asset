@@ -20,3 +20,4 @@ MonoBehaviour:
   baseValue: 25
   isRare: 0
   minimumCompletedOrders: 0
+  localizationKey: merge_product_seedling1

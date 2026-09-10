@@ -15,26 +15,31 @@ MonoBehaviour:
   LatestProductChance: 0.6
   Stages:
   - Name: "Yeni yeti\u015ftirici"
+    LocalizationKey: merge_stage_0
     CompletedOrders: 0
     MaxProductTypes: 1
     MaxCountPerProduct: 1
     MaxTotalProducts: 1
   - Name: "Saks\u0131 ustas\u0131"
+    LocalizationKey: merge_stage_1
     CompletedOrders: 4
     MaxProductTypes: 1
     MaxCountPerProduct: 2
     MaxTotalProducts: 2
   - Name: "\u00c7i\u00e7ek at\u00f6lyesi"
+    LocalizationKey: merge_stage_2
     CompletedOrders: 10
     MaxProductTypes: 2
     MaxCountPerProduct: 1
     MaxTotalProducts: 2
   - Name: "Koleksiyoncu"
+    LocalizationKey: merge_stage_3
     CompletedOrders: 20
     MaxProductTypes: 2
     MaxCountPerProduct: 2
     MaxTotalProducts: 3
   - Name: "Sipari\u015f ustas\u0131"
+    LocalizationKey: merge_stage_4
     CompletedOrders: 35
     MaxProductTypes: 2
     MaxCountPerProduct: 3

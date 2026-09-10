@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Florist.Merge
 {
@@ -12,11 +13,14 @@ namespace Florist.Merge
         [SerializeField] private Button _returnButton;
         [SerializeField] private GameObject _mergeInput;
         [SerializeField] private TextMeshProUGUI _moneyText;
+        [SerializeField] private string _standaloneFloristScenePath = "Assets/_Florist/Scenes/1_GameScene.unity";
+        private bool _returning;
 
         private void OnEnable()
         {
             _returnButton.onClick.AddListener(ReturnToFlorist);
-            _returnButton.interactable = ReturnRequested != null;
+            _returning = false;
+            _returnButton.interactable = ReturnRequested != null || Application.CanStreamedLevelBeLoaded(_standaloneFloristScenePath);
             GeneralData.MoneyAmountChanged += RefreshMoney;
             RefreshMoney();
         }
@@ -31,17 +35,37 @@ namespace Florist.Merge
         {
             if (_moneyText != null)
                 _moneyText.text = SaveSystem.Inst != null
-                    ? $"Altın: {SaveSystem.Inst.GeneralData.Money:0.##}"
+                    ? $"<sprite=0> {SaveSystem.Inst.GeneralData.Money:0.##}"
                     : "";
         }
 
         private void ReturnToFlorist()
         {
-            if (ReturnRequested == null) return;
+            if (_returning) return;
+            if (ReturnRequested == null && !Application.CanStreamedLevelBeLoaded(_standaloneFloristScenePath)) return;
+            _returning = true;
             _returnButton.interactable = false;
-            _mergeInput.SetActive(false);
-            _gameManager.PrepareForExit();
-            ReturnRequested.Invoke();
+            if (ReturnRequested != null)
+            {
+                _gameManager.PrepareForExit();
+                _mergeInput.SetActive(false);
+                ReturnRequested.Invoke();
+                return;
+            }
+            // Direct Merge entry has no suspended Florist session to restore.
+            try
+            {
+                var load = SceneManager.LoadSceneAsync(_standaloneFloristScenePath, LoadSceneMode.Single);
+                if (load != null)
+                {
+                    _gameManager.PrepareForExit();
+                    _mergeInput.SetActive(false);
+                    return;
+                }
+            }
+            catch (Exception exception) { Debug.LogException(exception, this); }
+            _returning = false;
+            _returnButton.interactable = true;
         }
     }
 }

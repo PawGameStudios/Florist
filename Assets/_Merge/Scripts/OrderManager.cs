@@ -17,9 +17,6 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private MergeEconomyConfig economyConfig;
     [SerializeField] private MergeProgressionConfig progressionConfig;
     public int CompletedOrders { get; private set; }
-    public string ProgressDescription => progressionConfig == null ? $"Teslimat: {CompletedOrders}" :
-        $"{progressionConfig.GetStage(CompletedOrders).Name} | Teslimat: {CompletedOrders}" +
-        (progressionConfig.GetNextThreshold(CompletedOrders) < 0 ? "" : $" / {progressionConfig.GetNextThreshold(CompletedOrders)}");
     public event Action OnProgressChanged;
     private int OrderLimit => economyConfig != null ? Mathf.Max(1, economyConfig.MaxActiveOrders) : maxActiveOrders;
     [SerializeField, HideInInspector] private float orderGenerationInterval = 30f;

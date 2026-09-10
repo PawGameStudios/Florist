@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 19
   m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
@@ -342,6 +342,7 @@ MonoBehaviour:
   statusIcon: {fileID: 5549562141051886600}
   checkmarkSprite: {fileID: 0}
   crossSprite: {fileID: 0}
+  backgroundImage: {fileID: 8392716612562780161}
 --- !u!222 &6223369820862648355
 CanvasRenderer:
   m_ObjectHideFlags: 0

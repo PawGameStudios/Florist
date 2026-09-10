@@ -25,7 +25,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
                 // Normal ItemData için
                 itemImage.sprite = item.itemData.Sprites[item.level - 1];
                 itemImage.enabled = true;
-                countText.text = item.IsRegularItem ? $"Sv.{item.level} ×{item.count}" : $"×{item.count}";
+                countText.text = item.IsRegularItem ? MergeLocalization.Format("merge_inventory_stack", item.level, item.count) : $"×{item.count}";
                 countText.enabled = true;
             }
             else if (item.IsProductionItem && item.productionItemData != null)
@@ -33,7 +33,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
                 // ProductionItemData için
                 itemImage.sprite = item.productionItemData.itemSprite;
                 itemImage.enabled = true;
-                countText.text = item.IsRegularItem ? $"Sv.{item.level} ×{item.count}" : $"×{item.count}";
+                countText.text = item.IsRegularItem ? MergeLocalization.Format("merge_inventory_stack", item.level, item.count) : $"×{item.count}";
                 countText.enabled = true;
             }
             else

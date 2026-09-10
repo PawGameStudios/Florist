@@ -9,11 +9,9 @@ namespace Florist.Merge
     public sealed class MergeEnergyAds : MonoBehaviour
     {
         [SerializeField] private GameManager gameManager;
-        [SerializeField] private OrderManager orderManager;
         [SerializeField] private MergeEconomyConfig economyConfig;
         [SerializeField] private Button watchButton;
         [SerializeField] private TextMeshProUGUI buttonText;
-        [SerializeField] private TextMeshProUGUI progressText;
         private bool pending;
         private string feedback;
         private const string Prefix = "Florist.Merge.EnergyAd.";
@@ -22,7 +20,6 @@ namespace Florist.Merge
         {
             watchButton.onClick.AddListener(Watch);
             gameManager.OnEnergyChanged += Refresh;
-            orderManager.OnProgressChanged += Refresh;
             Ads.AdManager.OnRewardedLoaded += Refresh;
             Refresh();
         }
@@ -30,7 +27,6 @@ namespace Florist.Merge
         {
             watchButton.onClick.RemoveListener(Watch);
             gameManager.OnEnergyChanged -= Refresh;
-            orderManager.OnProgressChanged -= Refresh;
             Ads.AdManager.OnRewardedLoaded -= Refresh;
             CancelInvoke();
         }
@@ -47,15 +43,14 @@ namespace Florist.Merge
         }
         private void Refresh()
         {
-            progressText.text = orderManager.ProgressDescription;
             bool capped = gameManager.Energy >= gameManager.MaxEnergy;
             bool limited = UsedToday >= economyConfig.EnergyAdsPerUtcDay;
             bool waiting = Cooldown > 0;
             bool loaded = Ads.AdManager.Instance != null && Ads.AdManager.Instance.IsRewardedAdLoaded;
             watchButton.interactable = economyConfig.EnableEnergyAds && !pending && !capped && !limited && !waiting && loaded;
-            buttonText.text = feedback ?? (pending ? "Reklam açılıyor…" : capped ? "Enerji dolu" : limited ? "Günlük reklam limiti" :
-                waiting ? $"Enerji reklamı: {Math.Ceiling(Cooldown)} sn" : !loaded ? "Reklam hazırlanıyor" :
-                $"Reklam izle: +{Math.Min(economyConfig.RewardedEnergy, gameManager.MaxEnergy - gameManager.Energy)} enerji ({UsedToday}/{economyConfig.EnergyAdsPerUtcDay})");
+            buttonText.text = feedback ?? (pending ? MergeLocalization.Text("merge_ad_opening") : capped ? MergeLocalization.Text("merge_energy_full") : limited ? MergeLocalization.Text("merge_ad_limit") :
+                waiting ? MergeLocalization.Format("merge_ad_cooldown", Math.Ceiling(Cooldown)) : !loaded ? MergeLocalization.Text("merge_ad_loading") :
+                MergeLocalization.Format("merge_watch_ad", Math.Min(economyConfig.RewardedEnergy, gameManager.MaxEnergy - gameManager.Energy), UsedToday, economyConfig.EnergyAdsPerUtcDay));
         }
         private void Watch()
         {
@@ -79,7 +74,7 @@ namespace Florist.Merge
                 }
                 else
                 {
-                    feedback = "Ödül alınmadı; tekrar deneyebilirsin";
+                    feedback = MergeLocalization.Text("merge_ad_no_reward");
                     Invoke(nameof(ClearFeedback), 3);
                 }
                 Refresh();

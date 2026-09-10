@@ -35,3 +35,25 @@ MonoBehaviour:
   productionStage1Sprite: {fileID: 21300000, guid: 0c55152f63fadf549b164094c8f543ac, type: 3}
   productionStage2Sprite: {fileID: 21300000, guid: 0242e38b4f47fd846ad39c3c78a6785e, type: 3}
   productionStage3Sprite: {fileID: 21300000, guid: 9a3e49bf2585a364fa234b3a1f29a558, type: 3}
+  growthStages:
+  - ingredients:
+    - itemData: {fileID: 11400000, guid: 626b24682eed4dd43a500a3707e742b9, type: 2}
+      requiredLevel: 6
+      requiredCount: 1
+    - itemData: {fileID: 11400000, guid: fcfba891ba29e1a4aa7f6a31820f3ea9, type: 2}
+      requiredLevel: 5
+      requiredCount: 1
+    - itemData: {fileID: 11400000, guid: 327fe429942d2a7449d32d5a4abbd2e3, type: 2}
+      requiredLevel: 5
+      requiredCount: 1
+  - ingredients:
+    - itemData: {fileID: 11400000, guid: 626b24682eed4dd43a500a3707e742b9, type: 2}
+      requiredLevel: 6
+      requiredCount: 1
+    - itemData: {fileID: 11400000, guid: fcfba891ba29e1a4aa7f6a31820f3ea9, type: 2}
+      requiredLevel: 5
+      requiredCount: 1
+    - itemData: {fileID: 11400000, guid: 327fe429942d2a7449d32d5a4abbd2e3, type: 2}
+      requiredLevel: 5
+      requiredCount: 1
+  localizationKey: merge_product_saksipapatya

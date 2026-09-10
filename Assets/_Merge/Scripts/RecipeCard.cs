@@ -28,11 +28,11 @@ namespace Florist.Merge
             inventoryManager = inventory;
             if (isActiveAndEnabled) Subscribe();
             if (recipeIcon != null) recipeIcon.sprite = recipe.recipeIcon;
-            if (recipeName != null) recipeName.text = recipe.recipeName;
+            if (recipeName != null) recipeName.text = recipe.DisplayName;
             if (productionTime != null)
             {
                 int seconds = Mathf.CeilToInt(recipe.productionTime);
-                productionTime.text = seconds < 60 ? $"{seconds} sn" : seconds < 3600 ? $"{Mathf.CeilToInt(seconds / 60f)} dk" : $"{seconds / 3600f:0.#} saat";
+                productionTime.text = recipe.growthStages != null && recipe.growthStages.Count > 0 ? MergeLocalization.Format("merge_stage_count", 3) : seconds < 60 ? MergeLocalization.Format("merge_seconds", seconds) : seconds < 3600 ? MergeLocalization.Format("merge_minutes", Mathf.CeilToInt(seconds / 60f)) : MergeLocalization.Format("merge_hours", seconds / 3600f);
             }
             foreach (var item in requirementItems) if (item != null) Destroy(item.gameObject);
             requirementItems.Clear();

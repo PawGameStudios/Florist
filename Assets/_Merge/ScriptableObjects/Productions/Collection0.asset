@@ -20,3 +20,4 @@ MonoBehaviour:
   baseValue: 220
   isRare: 0
   minimumCompletedOrders: 10
+  localizationKey: merge_product_collection0

@@ -34,8 +34,8 @@ namespace Florist.Merge
             if (isActiveAndEnabled) Subscribe();
             if (customerImage != null) customerImage.sprite = order.customer.customerSprite;
             if (itemImage != null) itemImage.sprite = order.requestedItem.itemSprite;
-            if (requestText != null) requestText.text = $"{order.customer.displayName}\n{order.GetOrderDescription()}";
-            if (rewardText != null) rewardText.text = $"+{order.reward}";
+            if (requestText != null) requestText.text = string.Join("\n", order.GetRequests().ConvertAll(request => $"{request.count} × {request.item.DisplayName}"));
+            if (rewardText != null) rewardText.text = $"<sprite=0> {order.reward}";
             UpdateCompleteButton();
         }
         private void OnEnable()
@@ -59,7 +59,7 @@ namespace Florist.Merge
         {
             bool canComplete = !retiring && currentOrder != null && inventoryManager != null && currentOrder.CanBeCompleted(inventoryManager);
             if (completeButton != null) completeButton.interactable = canComplete;
-            if (completeButtonImage != null) completeButtonImage.color = canComplete ? Color.green : Color.gray;
+            if (completeButtonImage != null) completeButtonImage.color = Color.white;
         }
         private void OnCompleteButtonClicked()
         {

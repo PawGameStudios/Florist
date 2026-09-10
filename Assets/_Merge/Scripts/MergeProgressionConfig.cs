@@ -8,6 +8,7 @@ namespace Florist.Merge
     public class MergeOrderStage
     {
         public string Name;
+        public string LocalizationKey;
         [Min(0)] public int CompletedOrders;
         [Range(1, 2)] public int MaxProductTypes = 1;
         [Range(1, 3)] public int MaxCountPerProduct = 1;
@@ -26,7 +27,7 @@ namespace Florist.Merge
             foreach (var stage in Stages)
                 if (stage != null && stage.CompletedOrders <= completed &&
                     (result == null || stage.CompletedOrders > result.CompletedOrders)) result = stage;
-            return result ?? new MergeOrderStage { Name = "Başlangıç" };
+            return result ?? new MergeOrderStage { Name = "Başlangıç", LocalizationKey = "merge_stage_0" };
         }
 
         public int GetNextThreshold(int completed)

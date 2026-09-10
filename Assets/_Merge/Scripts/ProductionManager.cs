@@ -29,12 +29,12 @@ public class ProductionManager : MonoBehaviour
     public void Initialize() { EnsureProgressTimer(); }
     private void EnsureProgressTimer()
     {
-        if (isActiveAndEnabled && progressRoutine == null && activeProductions.Any(x => !x.IsCompleted))
+        if (isActiveAndEnabled && progressRoutine == null && activeProductions.Any(x => !x.UsesGrowthStages && !x.IsCompleted))
             progressRoutine = StartCoroutine(ProgressTimer());
     }
     private IEnumerator ProgressTimer()
     {
-        while (activeProductions.Any(x => !x.IsCompleted))
+        while (activeProductions.Any(x => !x.UsesGrowthStages && !x.IsCompleted))
         {
             yield return new WaitForSecondsRealtime(1f);
             OnProductionChanged?.Invoke();
@@ -62,6 +62,16 @@ public class ProductionManager : MonoBehaviour
         activeProductions.Add(new ProductionJob(recipe, kioskId));
         inventoryManager.NotifyInventoryChanged();
         NotifyChanged(kioskId);
+        return true;
+    }
+    public bool AdvanceGrowth(ProductionJob job)
+    {
+        if (job == null || !activeProductions.Contains(job) || job.isCollected || job.IsCompleted ||
+            !job.UsesGrowthStages || inventoryManager == null ||
+            !inventoryManager.TryConsumeIngredients(job.CurrentIngredients, false)) return false;
+        job.growthStage++;
+        inventoryManager.NotifyInventoryChanged();
+        NotifyChanged(job.kioskId);
         return true;
     }
     private void NotifyChanged(string kioskId)

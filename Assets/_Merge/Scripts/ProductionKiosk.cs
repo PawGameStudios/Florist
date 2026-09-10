@@ -16,6 +16,14 @@ public class ProductionKiosk : MonoBehaviour
     [SerializeField] private Button collectButton; // Topla butonu
     [SerializeField] public string kioskId = "Kiosk_1"; // Her kiosk için benzersiz ID
 
+    [SerializeField] private Transform requirementsContainer;
+    [SerializeField] private RequirementItem requirementItemPrefab;
+    [SerializeField] private TextMeshProUGUI feedbackText;
+    private readonly System.Collections.Generic.List<RequirementItem> requirements = new System.Collections.Generic.List<RequirementItem>();
+    private ProductionJob displayedJob;
+    private int displayedStage = -1;
+    private Tween feedbackTween;
+    private Vector2 feedbackPosition;
     private RecipeModal currentModal;
     [SerializeField] private ProductionManager productionManager;
     [SerializeField] private InventoryManager inventoryManager;
@@ -26,6 +34,7 @@ public class ProductionKiosk : MonoBehaviour
 
     private void Awake()
     {
+        if (feedbackText != null) { feedbackPosition = feedbackText.rectTransform.anchoredPosition; feedbackText.gameObject.SetActive(false); }
         if (collectButton != null) collectScale = collectButton.transform.localScale;
     }
 
@@ -38,23 +47,14 @@ public class ProductionKiosk : MonoBehaviour
             productionManager.OnProductionChanged += UpdateKioskVisual;
             productionManager.OnKioskProductionChanged += OnKioskProductionChanged;
         }
+        if (inventoryManager != null) inventoryManager.OnInventoryChanged += UpdateRequirements;
         UpdateKioskVisual();
     }
 
     public void OnKioskClicked()
     {
-        // Eğer üretim tamamlanmış ve toplanabilir durumdaysa, topla butonuna tıkla
-        if (currentProductionJob != null && currentProductionJob.IsReadyToCollect)
-        {
-            OnCollectButtonClicked();
-            return;
-        }
-
-        // Aksi halde tarif modalını aç
-        if (currentModal == null)
-        {
-            OpenRecipeModal();
-        }
+        // Only empty plots open the planting picker. The flower itself has no action.
+        if (currentProductionJob == null && currentModal == null) OpenRecipeModal();
     }
 
     private void OpenRecipeModal()
@@ -82,10 +82,47 @@ public class ProductionKiosk : MonoBehaviour
 
     private void OnCollectButtonClicked()
     {
-        if (productionManager != null && currentProductionJob != null && currentProductionJob.IsReadyToCollect)
+        if (productionManager == null || currentProductionJob == null) return;
+        if (currentProductionJob.IsReadyToCollect) productionManager.CollectProduction(currentProductionJob);
+        else if (currentProductionJob.UsesGrowthStages && !productionManager.AdvanceGrowth(currentProductionJob))
+            ShowMissingMaterials();
+    }
+
+    private void ShowMissingMaterials()
+    {
+        if (feedbackText == null) return;
+        feedbackTween?.Kill();
+        feedbackText.rectTransform.anchoredPosition = feedbackPosition;
+        feedbackText.text = MergeLocalization.Text("merge_not_enough_materials");
+        feedbackText.alpha = 0f;
+        feedbackText.gameObject.SetActive(true);
+        feedbackTween = DOTween.Sequence().SetUpdate(true)
+            .Append(feedbackText.DOFade(1f, .15f))
+            .Join(feedbackText.rectTransform.DOAnchorPosY(feedbackPosition.y + 24f, .8f))
+            .AppendInterval(.45f).Append(feedbackText.DOFade(0f, .25f))
+            .OnComplete(() => feedbackText.gameObject.SetActive(false));
+    }
+
+    private void UpdateRequirements()
+    {
+        if (requirementsContainer == null) return;
+        if (displayedJob != currentProductionJob || displayedStage != (currentProductionJob != null ? currentProductionJob.growthStage : -1))
         {
-            productionManager.CollectProduction(currentProductionJob);
+            foreach (var item in requirements) if (item != null) { item.gameObject.SetActive(false); Destroy(item.gameObject); }
+            requirements.Clear();
+            displayedJob = currentProductionJob;
+            displayedStage = currentProductionJob != null ? currentProductionJob.growthStage : -1;
+            var ingredients = currentProductionJob != null ? currentProductionJob.CurrentIngredients : null;
+            if (ingredients != null && requirementItemPrefab != null)
+                foreach (var ingredient in ingredients)
+                {
+                    var item = Instantiate(requirementItemPrefab, requirementsContainer);
+                    item.Initialize(ingredient, productionManager, inventoryManager);
+                    requirements.Add(item);
+                }
         }
+        requirementsContainer.gameObject.SetActive(requirements.Count > 0);
+        foreach (var item in requirements) item.UpdateStatus();
     }
 
     private void UpdateKioskVisual()
@@ -103,6 +140,7 @@ public class ProductionKiosk : MonoBehaviour
                 }
 
                 currentProductionJob = productionInThisKiosk;
+                UpdateRequirements();
                 ShowTimeDisplay(productionInThisKiosk);
                 UpdateCollectButton(productionInThisKiosk);
             }
@@ -114,6 +152,7 @@ public class ProductionKiosk : MonoBehaviour
                 }
 
                 currentProductionJob = null;
+                UpdateRequirements();
                 HideTimeDisplay();
                 HideCollectButton();
             }
@@ -135,7 +174,7 @@ public class ProductionKiosk : MonoBehaviour
         float progress = productionJob.GetProgress();
 
         // 3 aşamaya böl
-        int stage = Mathf.FloorToInt(progress * 3);
+        int stage = productionJob.UsesGrowthStages ? productionJob.growthStage : Mathf.FloorToInt(progress * 3);
         stage = Mathf.Clamp(stage, 0, 2); // 0, 1, 2 aşamaları
 
         switch (stage)
@@ -174,7 +213,7 @@ public class ProductionKiosk : MonoBehaviour
         if (collectButton != null)
         {
             bool ready = productionJob.IsReadyToCollect;
-            collectButton.gameObject.SetActive(ready);
+            collectButton.gameObject.SetActive(ready || productionJob.UsesGrowthStages);
             if (ready && !wasReady)
             {
                 readyTween?.Kill();
@@ -200,12 +239,15 @@ public class ProductionKiosk : MonoBehaviour
     {
         if (timeText != null)
         {
-            timeText.text = productionJob.GetRemainingTime();
+            timeText.text = productionJob.UsesGrowthStages ? (productionJob.IsReadyToCollect ? MergeLocalization.Text("merge_collect") : MergeLocalization.Format("merge_grow_stage", productionJob.growthStage + 1, 3)) : productionJob.GetRemainingTime();
         }
     }
 
     private void OnDisable()
     {
+        feedbackTween?.Kill();
+        if (feedbackText != null) feedbackText.gameObject.SetActive(false);
+        if (inventoryManager != null) inventoryManager.OnInventoryChanged -= UpdateRequirements;
         readyTween?.Kill();
         if (collectButton != null) collectButton.transform.localScale = collectScale;
         wasReady = false;
